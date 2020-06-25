@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class MainController {
 
-    @GetMapping
-    public ResponseEntity getMain() {
-        return ResponseEntity.ok("Hello world");
-    }
+  @GetMapping
+  public ResponseEntity getMain() {
+    return ResponseEntity.ok("Hello world");
+  }
 }
