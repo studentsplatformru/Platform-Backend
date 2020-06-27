@@ -71,6 +71,7 @@
                         <version>8.33</version>
                     </dependency>
                 </dependencies>
+
                 <configuration>
                     <configLocation>/config/google_checks.xml</configLocation>
                     <encoding>UTF-8</encoding>
