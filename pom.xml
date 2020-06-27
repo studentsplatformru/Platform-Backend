@@ -27,6 +27,7 @@
         <module>endpoint</module>
         <module>system</module>
         <module>telegram-bot</module>
+        <module>entities</module>
     </modules>
 
     <dependencyManagement>
