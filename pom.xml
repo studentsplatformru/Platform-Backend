@@ -25,6 +25,7 @@
 
     <modules>
         <module>endpoint</module>
+        <module>system</module>
     </modules>
 
     <dependencyManagement>
