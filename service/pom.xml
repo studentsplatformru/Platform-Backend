@@ -11,10 +11,11 @@
 
     <packaging>pom</packaging>
 
-    <artifactId>telegram-bot</artifactId>
+    <groupId>ru.platformbackend</groupId>
+    <artifactId>service</artifactId>
     <version>1.0.0</version>
-    <name>telegram-bot</name>
-    <description>Telegram-bot module</description>
+    <name>service</name>
+    <description>Service module</description>
 
     <properties>
         <java.version>11</java.version>
@@ -33,9 +34,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.telegram</groupId>
-            <artifactId>telegrambots</artifactId>
-            <version>4.9</version>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.13.1</version>
         </dependency>
     </dependencies>
 

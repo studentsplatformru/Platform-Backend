@@ -1,4 +1,4 @@
-package com.telegrambot.parsers;
+package ru.platformbackend.service.parsers;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class SpbuScheduleParser {
+public class SpbuScheduleParser implements Parser {
     private Connection connection;
 
     public SpbuScheduleParser(String requestedUrl) {
