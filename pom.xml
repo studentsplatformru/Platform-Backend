@@ -29,6 +29,7 @@
         <module>telegram-bot</module>
         <module>entities</module>
         <module>university</module>
+        <module>vk-bot</module>
     </modules>
 
     <dependencyManagement>
