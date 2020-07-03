@@ -46,7 +46,6 @@ public class SpbuScheduleFinder {
         }
     }
 
-    //Поиск занятий в рамках определенного направления по названию группы
     private void findSchedulesOfDefiniteStudy(String groupName) {
         Element link = document.select("a[title*='" + groupName + "']").get(0);
         tempUrl = baseUrl + link.attr("href").substring(1);
