@@ -1,10 +1,11 @@
-package ru.platformbackend.service.parsers;
+package ru.platformbackend.service.parsers.spbu;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import ru.platformbackend.service.parsers.Parser;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,12 +19,6 @@ public class SpbuScheduleParser implements Parser {
         connection = Jsoup.connect(requestedUrl);
     }
 
-    /**
-     * summary.
-     *
-     * @param currentDay currentDay
-     * @return return
-     */
     public String getDailySchedule(String currentDay) {
         int index = getTitleIndex(currentDay);
 
@@ -82,11 +77,6 @@ public class SpbuScheduleParser implements Parser {
                 .select("div[class=col-sm-3 studyevent-locations]");
     }
 
-    /**
-     * summary.
-     *
-     * @return return
-     */
     private Elements getEducatorElements() {
         return getPanelGroup()
                 .select("div[class=col-sm-3 studyevent-educators]");
