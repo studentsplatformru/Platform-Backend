@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
 public class SpbuScheduleParser implements Parser {
     private Connection connection;
 
+    public SpbuScheduleParser() {
+    }
+
     public SpbuScheduleParser(String requestedUrl) {
         connection = Jsoup.connect(requestedUrl);
     }
