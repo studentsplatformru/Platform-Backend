@@ -28,6 +28,7 @@
         <module>system</module>
         <module>telegram-bot</module>
         <module>entities</module>
+        <module>university</module>
     </modules>
 
     <dependencyManagement>
