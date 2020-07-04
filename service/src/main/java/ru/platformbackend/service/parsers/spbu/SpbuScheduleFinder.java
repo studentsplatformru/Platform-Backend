@@ -26,9 +26,6 @@ public class SpbuScheduleFinder {
         return resultUrl;
     }
 
-
-
-
     private void setUpDocument() {
         try {
             document = Jsoup.connect(tempUrl).get();

@@ -1,6 +1,6 @@
 package ru.platformbackend.service.parsers;
 
-public interface Parser {
+public interface ScheduleParser {
 
     String getDailySchedule(String currentDay);
 }

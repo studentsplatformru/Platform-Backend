@@ -5,15 +5,16 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import ru.platformbackend.service.parsers.Parser;
+import ru.platformbackend.service.parsers.ScheduleParser;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class SpbuScheduleParser implements Parser {
+public class SpbuScheduleParser implements ScheduleParser {
     private Connection connection;
+    private Document document;
 
     public SpbuScheduleParser() {
     }
@@ -55,9 +56,13 @@ public class SpbuScheduleParser implements Parser {
     }
 
     private Element getPanelGroup() {
-        return getHtmlDocument()
+        if (document == null) {
+            getHtmlDocument();
+        }
+
+        return document
                 .select("div[class=panel-group]")
-                .get(0);
+                .first();
     }
 
     private Elements getTitleElements() {
@@ -85,13 +90,11 @@ public class SpbuScheduleParser implements Parser {
                 .select("div[class=col-sm-3 studyevent-educators]");
     }
 
-    private Document getHtmlDocument() {
+    private void getHtmlDocument() {
         try {
-            return connection.get();
+            document = connection.get();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
-        // TODO: необходимо придумать, что можно возвращать вместо нуля
     }
 }
