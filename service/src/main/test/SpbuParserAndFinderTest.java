@@ -2,8 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import ru.platformbackend.service.parsers.spbu.SpbuScheduleFinder;
-import ru.platformbackend.service.parsers.spbu.SpbuScheduleParser;
+import ru.studentsplatform.backend.service.parsers.spbu.SpbuScheduleFinder;
 
 public class SpbuParserAndFinderTest {
     private static SpbuScheduleFinder scheduleFinder;

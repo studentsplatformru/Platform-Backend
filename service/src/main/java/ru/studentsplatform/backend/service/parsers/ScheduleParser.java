@@ -1,4 +1,4 @@
-package ru.platformbackend.service.parsers;
+package ru.studentsplatform.backend.service.parsers;
 
 public interface ScheduleParser {
 

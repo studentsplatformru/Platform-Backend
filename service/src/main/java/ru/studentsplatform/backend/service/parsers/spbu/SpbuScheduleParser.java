@@ -1,17 +1,18 @@
-package ru.platformbackend.service.parsers.spbu;
+package ru.studentsplatform.backend.service.parsers.spbu;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import ru.platformbackend.service.parsers.ScheduleParser;
+import org.springframework.stereotype.Service;
+import ru.studentsplatform.backend.service.parsers.ScheduleParser;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Service
 public class SpbuScheduleParser implements ScheduleParser {
     private Connection connection;
     private Document document;
