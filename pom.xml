@@ -3,24 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
-        <relativePath/>
-    </parent>
-
     <packaging>pom</packaging>
 
     <groupId>ru.studentsplatform</groupId>
     <artifactId>backend</artifactId>
     <version>1.0.0</version>
-    <name>backend</name>
 
     <properties>
         <java.version>11</java.version>
         <lombok.version>1.18.12</lombok.version>
         <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
+        <micrometer-registry-prometheus.version>1.5.2</micrometer-registry-prometheus.version>
     </properties>
 
     <modules>
@@ -30,7 +23,16 @@
         <module>entities</module>
         <module>university</module>
         <module>vk-bot</module>
+        <module>domain</module>
+        <module>service</module>
     </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.1.RELEASE</version>
+        <relativePath/>
+    </parent>
 
     <dependencyManagement>
         <dependencies>
@@ -39,6 +41,13 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -53,17 +62,16 @@
                 <type>pom</type>
             </dependency>
 
-
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-prometheus</artifactId>
+                <version>${micrometer-registry-prometheus.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -77,7 +85,7 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <configLocation>/config/google_checks.xml</configLocation>
+                    <configLocation>/config/codestyle_check_config.xml</configLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
@@ -114,7 +122,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.1</version>
                 <configuration>
-                    <configLocation>config/google_checks.xml</configLocation>
+                    <configLocation>config/codestyle_check_config.xml</configLocation>
                     <headerLocation>/config/LICENSE.txt</headerLocation>
                 </configuration>
             </plugin>
