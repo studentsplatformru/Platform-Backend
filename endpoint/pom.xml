@@ -11,14 +11,19 @@
 
     <artifactId>endpoint</artifactId>
     <version>1.0.0</version>
-    <name>endpoint</name>
-    <description>Endpoint module</description>
 
     <properties>
         <java.version>11</java.version>
     </properties>
 
     <dependencies>
+        <!-- Modules App -->
+        <dependency>
+            <groupId>university</groupId>
+            <artifactId>university</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -28,17 +33,16 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-            <version>2.3.1.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
-            <version>1.5.2</version>
         </dependency>
-
     </dependencies>
 
     <build>

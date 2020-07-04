@@ -5,11 +5,11 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: 
+    branches:
       - 1.0.0
-      - dev 
+      - dev
   pull_request:
-    branches: 
+    branches:
       - dev
       - 1.0.0
 
