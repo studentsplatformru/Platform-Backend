@@ -1,6 +1,6 @@
 package ru.studentsplatform.backend.entities.model;
 
-public enum  UnuniversityEnum {
+public enum UnuniversityEnum {
 	SPBU("Санкт-Петербургский государственный университет");
 
 	private String name;
