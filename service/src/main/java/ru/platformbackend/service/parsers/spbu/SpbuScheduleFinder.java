@@ -22,17 +22,22 @@ public class SpbuScheduleFinder {
      * @return Ссылка на расписание конкретной группы.
      */
     public String findScheduleLink(String studyName, String groupName) {
-        loadProperties();
-        setUpDocument();
+        try {
+            loadProperties();
+            setUpDocument();
 
-        findFieldOfStudy(studyName);
-        setUpDocument();
+            findFieldOfStudy(studyName);
+            setUpDocument();
 
-        findSchedulesOfDefiniteStudy(groupName);
-        setUpDocument();
+            findSchedulesOfDefiniteStudy(groupName);
+            setUpDocument();
 
-        findScheduleForCurrentGroup(groupName);
-        return resultUrl;
+            findScheduleForCurrentGroup(groupName);
+            return resultUrl;
+        } catch (Exception e) {
+            return "URL not found!";
+        }
+
     }
 
     /**
