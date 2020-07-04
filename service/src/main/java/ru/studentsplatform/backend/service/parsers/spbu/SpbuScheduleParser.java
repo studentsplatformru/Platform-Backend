@@ -7,7 +7,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.parsers.ScheduleParser;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +19,8 @@ public class SpbuScheduleParser implements ScheduleParser {
     public SpbuScheduleParser() {
     }
 
-    public SpbuScheduleParser(String requestedUrl) {
-        connection = Jsoup.connect(requestedUrl);
+    public void setConnection(String url){
+        this.connection = Jsoup.connect(url);
     }
 
     public String getDailySchedule(String currentDay) {

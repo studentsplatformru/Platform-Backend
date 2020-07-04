@@ -21,7 +21,7 @@
 
         <dependency>
             <groupId>ru.studentsplatform</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>telegram-bot</artifactId>
             <version>1.0.0</version>
         </dependency>
 
