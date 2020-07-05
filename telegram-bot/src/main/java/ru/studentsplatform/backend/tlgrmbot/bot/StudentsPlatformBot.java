@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.studentsplatform.backend.service.parsers.ScheduleImplementationSwitcher;
 import ru.studentsplatform.backend.service.parsers.UniversityScheduleResolver;
 import ru.studentsplatform.backend.tlgrmbot.config.BotCommands;
 import ru.studentsplatform.backend.tlgrmbot.dataStorage.RunningCommand;
@@ -20,10 +21,12 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
         ApiContextInitializer.init();
     }
 
-    private final UniversityScheduleResolver scheduleResolver;
+    private UniversityScheduleResolver scheduleResolver;
 
-    public StudentsPlatformBot(UniversityScheduleResolver scheduleResolver) {
-        this.scheduleResolver = scheduleResolver;
+    private final ScheduleImplementationSwitcher scheduleImplementationSwitcher;
+
+    public StudentsPlatformBot(ScheduleImplementationSwitcher scheduleImplementationSwitcher) {
+        this.scheduleImplementationSwitcher = scheduleImplementationSwitcher;
     }
 
     /**
@@ -169,9 +172,17 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
      */
     private void printSchedule(long chatId) {
         LinkedList<String> data = RunningCommand.getData(chatId);
-        data.remove(); //TODO: необходимо реализовать переключение реализваций для разных университетов!
+        changeInterfaceRealisation(data.remove());
         String schedule = scheduleResolver.getSchedule(data);
         sendMessageToUser(schedule,chatId);
+    }
+
+    /**
+     * Динамически переключает реализацию на основе заданного пользователем названия ВУЗа.
+     * @param universityName Сокращённое имя университета.
+     */
+    private void changeInterfaceRealisation(String universityName){
+        scheduleResolver = scheduleImplementationSwitcher.setRealisation(universityName);
     }
 
     @Override
