@@ -1,5 +1,8 @@
 package ru.studentsplatform.backend.service.parsers;
 
+import java.util.LinkedList;
+
 public interface UniversityScheduleResolver {
-    public String getSchedule(String... keyWords);
+
+    String getSchedule(LinkedList<String> keyWords);
 }

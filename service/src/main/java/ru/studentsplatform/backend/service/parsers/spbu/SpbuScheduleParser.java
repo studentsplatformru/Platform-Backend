@@ -19,7 +19,7 @@ public class SpbuScheduleParser implements ScheduleParser {
     public SpbuScheduleParser() {
     }
 
-    public void setConnection(String url){
+    public void setConnection(String url) throws IllegalArgumentException{
         this.connection = Jsoup.connect(url);
     }
 
