@@ -7,3 +7,16 @@ management:
   endpoint:
     health:
       show-details: always
+
+#properties form EMailSender
+spring:
+  mail:
+    host: smtp.yandex.ru
+    #    here must be application password
+    password:
+    #    here must be application username
+    username:
+    port: 465
+    protocol: smtps
+
+mail.debug: true
