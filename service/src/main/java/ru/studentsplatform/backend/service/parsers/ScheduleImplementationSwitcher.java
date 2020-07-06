@@ -41,7 +41,6 @@ public class ScheduleImplementationSwitcher {
      * Внутренний механизм переключения реализации на основе switch, в который передается имя ВУЗа.
      */
     private void switchRealisation() {
-        //Должно работать, если снова сломается - вышли мне логи @Archie-Vian
         switch (realisationForUniversity) {
             case "СПБГУ":
                 universityScheduleResolver = spbuScheduleResolver;
