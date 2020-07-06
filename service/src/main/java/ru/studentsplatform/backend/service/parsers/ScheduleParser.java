@@ -1,9 +1,9 @@
 package ru.studentsplatform.backend.service.parsers;
 
-import ru.studentsplatform.backend.service.parsers.entities.Schedule;
+import ru.studentsplatform.backend.service.parsers.entities.DaySchedule;
 
 public interface ScheduleParser {
 
-    Schedule getDailySchedule(String currentDay);
+    DaySchedule getDailySchedule(String currentDay);
     void setConnection(String url);
 }

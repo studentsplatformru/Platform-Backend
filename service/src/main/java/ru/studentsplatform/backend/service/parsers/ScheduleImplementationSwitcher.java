@@ -40,7 +40,7 @@ public class ScheduleImplementationSwitcher {
     private void switchRealisation(){
         switch (realisationForUniversity){
             case "СПБГУ":
-                universityScheduleResolver = spbuScheduleResolver;
+                // universityScheduleResolver = spbuScheduleResolver; TODO к сожалению не знаю, почему, но это сломалось
                 break;
         }
     }

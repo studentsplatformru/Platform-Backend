@@ -1,13 +1,13 @@
 package ru.studentsplatform.backend.service.parsers.entities;
 
-public class Schedule {
+public class DaySchedule {
     private final String title;
     private final String[] times;
     private final String[] disciplines;
     private final String[] locations;
     private final String[] educators;
 
-    public Schedule(String title, String[] times, String[] disciplines, String[] locations, String[] educators) {
+    public DaySchedule(String title, String[] times, String[] disciplines, String[] locations, String[] educators) {
         this.title = title;
         this.times = times;
         this.disciplines = disciplines;

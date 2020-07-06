@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.parsers.ScheduleParser;
-import ru.studentsplatform.backend.service.parsers.entities.Schedule;
+import ru.studentsplatform.backend.service.parsers.entities.DaySchedule;
 
 import java.io.IOException;
 
@@ -17,12 +17,20 @@ import java.io.IOException;
  * <p>
  * Класс использует библиотеку {@link Jsoup},
  * рекомендуются к ознакомлению классы {@link Element} и {@link Elements} этой библиотеки.
+ * Для подключения к удалённому URL используются классы {@link Document} и {@link Connection}
+ * </p>
  *
  * @author spaulqr
  */
 @Service
 public class SpbuScheduleHtmlParser implements ScheduleParser {
+    /**
+     * Соединение с URL
+     */
     private Connection connection;
+    /**
+     * Объект, представляющий html-страницу
+     */
     private Document document;
 
     /**
@@ -35,13 +43,13 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     }
 
     /**
-     * Возвращает {@code Schedule}.
+     * Возвращает Schedule.
      *
-     * @param requestedDay день, на основе которого строится {@link Schedule}
-     * @return {@code Schedule} или
-     * {@code null}, если requestedDay не найден на странице.
+     * @param requestedDay день, на основе которого строится {@link DaySchedule}
+     * @return Schedule или
+     * null, если requestedDay не найден на странице.
      */
-    public Schedule getDailySchedule(String requestedDay) {
+    public DaySchedule getDailySchedule(String requestedDay) {
         int index = getTitleIndex(requestedDay);
 
         if (index == -1) {
@@ -52,7 +60,7 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     }
 
     /**
-     * Возвращает {@code int} порядковый номер, соответствующий дню недели, представленной на странице.
+     * Возвращает порядковый номер, соответствующий дню недели, представленной на странице.
      * <p>
      * Например, если на странице присутствует 3 дня расписания:
      * Monday,
@@ -62,6 +70,7 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
      * 1,
      * 2,
      * 3
+     * </p>
      *
      * @param requestedDay день, индекс которого необходимо найти
      * @return -1, если день на странице не найден (или передана произвольная строка).
@@ -81,10 +90,10 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     }
 
     /**
-     * Возвращает {@code Elements}, содержащий названия
+     * Возвращает Elements, содержащий названия
      * дней, представленных на странице.
      *
-     * @return {@code Elements}
+     * @return Elements
      */
     private Elements getDayNameElements() {
         return getPanelGroupElement()
@@ -92,12 +101,12 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     }
 
     /**
-     * Строит объект {@code Schedule}, исходя из передаваемого значения {@code index}
+     * Строит объект Schedule, исходя из передаваемого значения index
      *
      * @param index порядковый номер дня на странице
-     * @return сконфигурированный объект {@code Schedule}
+     * @return сконфигурированный объект Schedule
      */
-    private Schedule buildSchedule(int index) {
+    private DaySchedule buildSchedule(int index) {
         Elements elements = getLessonsElements(index);
         int length = elements.size();
         String title = getDayNameElements()
@@ -115,7 +124,7 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
             educators[i] = getEducatorName(elements.get(i));
         }
 
-        return new Schedule(title,
+        return new DaySchedule(title,
                 times,
                 disciplines,
                 locations,
@@ -123,12 +132,12 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     }
 
     /**
-     * Сужает поиск по странице от {@code Element}, представляющего день расписания,
-     * до списка {@code Element}, представляющего информацию
+     * Сужает поиск по странице от Element, представляющего день расписания,
+     * до списка Element, представляющего информацию
      * о каждом предмете в этот день.
      *
      * @param index пробрасывается для вызова другого метода
-     * @return {@code Elements} предметов заданного дня
+     * @return Elements предметов заданного дня
      */
     private Elements getLessonsElements(int index) {
         return getDayElement(index)
@@ -136,11 +145,11 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     }
 
     /**
-     * Сужает поиск по странице от {@code Element}, представляющего всю неделю расписания,
-     * до {@code Element}, представляющего конкретный день.
+     * Сужает поиск по странице от Element, представляющего всю неделю расписания,
+     * до Element, представляющего конкретный день.
      *
      * @param index порядковый номер дня расписания
-     * @return {@code Element} конкретного дня расписания
+     * @return Element конкретного дня расписания
      */
     private Element getDayElement(int index) {
         return getPanelGroupElement()
@@ -150,7 +159,7 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     /**
      * Сужает поиск по странице до панели с расписанием за неделю.
      *
-     * @return {@code Element}, представляющий расписание за неделю
+     * @return Element, представляющий расписание за неделю
      */
     private Element getPanelGroupElement() {
         if (document == null) {
@@ -163,7 +172,7 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     }
 
     /**
-     * Создаёт {@link Document} из html-страницы, используя {@code connection}
+     * Создаёт {@link Document} из html-страницы, используя connection
      */
     private void getHtmlDocument() {
         try {
@@ -175,9 +184,9 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
 
     /**
      * Согласно заданной инструкции извлекает {@link String} из переданного
-     * {@code Element}.
+     * Element}.
      *
-     * @param element {@code Element} может содержать несколько тегов с указанным
+     * @param element Element может содержать несколько тегов с указанным
      *                аттрибутом. Тогда метод вернёт соединённую
      *                через пробел строку с контентом, извлечённым
      *                из каждого элемента.
@@ -190,9 +199,9 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
 
     /**
      * Согласно заданной инструкции извлекает {@link String} из переданного
-     * {@code Element}.
+     * Element.
      *
-     * @param element {@code Element} может содержать несколько тегов с указанным
+     * @param element Element может содержать несколько тегов с указанным
      *                аттрибутом. Тогда метод вернёт соединённую
      *                через пробел строку с контентом, извлечённым
      *                из каждого элемента.
@@ -205,9 +214,9 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
 
     /**
      * Согласно заданной инструкции извлекает {@link String} из переданного
-     * {@code Element}.
+     * Element.
      *
-     * @param element {@code Element} может содержать несколько тегов с указанным
+     * @param element Element может содержать несколько тегов с указанным
      *                аттрибутом. Тогда метод вернёт соединённую
      *                через пробел строку с контентом, извлечённым
      *                из каждого элемента.
@@ -220,9 +229,9 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
 
     /**
      * Согласно заданной инструкции извлекает {@link String} из переданного
-     * {@code Element}.
+     * Element.
      *
-     * @param element {@code Element} может содержать несколько тегов с указанным
+     * @param element Element может содержать несколько тегов с указанным
      *                аттрибутом. Тогда метод вернёт соединённую
      *                через пробел строку с контентом, извлечённым
      *                из каждого элемента.

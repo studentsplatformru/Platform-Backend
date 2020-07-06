@@ -3,11 +3,11 @@ package ru.studentsplatform.backend.service.parsers.spbu;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.studentsplatform.backend.service.parsers.entities.Schedule;
+import ru.studentsplatform.backend.service.parsers.entities.DaySchedule;
 
 public class SpbuScheduleHtmlParserTest {
     SpbuScheduleHtmlParser parser = new SpbuScheduleHtmlParser();
-    Schedule schedule;
+    DaySchedule daySchedule;
 
     @BeforeEach
     void setParser() {
@@ -16,7 +16,7 @@ public class SpbuScheduleHtmlParserTest {
 
     @Test
     void testDailyScheduleTitleMustReturnCurrentString() {
-        schedule = parser.getDailySchedule("Monday");
-        Assertions.assertEquals(schedule.getTitle(), "Monday, May 25");
+        daySchedule = parser.getDailySchedule("Monday");
+        Assertions.assertEquals(daySchedule.getTitle(), "Monday, May 25");
     }
 }
