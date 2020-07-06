@@ -5,12 +5,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
+import ru.studentsplatform.backend.service.parsers.ScheduleFinder;
 
 import java.io.IOException;
 import java.util.Properties;
 
 @Component
-public class SpbuScheduleFinder {
+public class SpbuScheduleFinder implements ScheduleFinder {
 
     private String baseUrl;
     private String tempUrl;
@@ -19,6 +20,7 @@ public class SpbuScheduleFinder {
 
     /**
      * Метод выполняет несколько шагов, включающих переход по вебстраницам, в поисках ссылки на расписание.
+     *
      * @param studyName Название направления подготовки на английском.
      * @param groupName Полное имя группы.
      * @return Ссылка на расписание конкретной группы.
@@ -39,7 +41,6 @@ public class SpbuScheduleFinder {
         } catch (Exception e) {
             return "URL not found!";
         }
-
     }
 
     /**
@@ -69,6 +70,7 @@ public class SpbuScheduleFinder {
 
     /**
      * Метод обнаруживает ссылку на страницу, соответствующую направлению подготовки, и присваивает её полю tempUrl.
+     *
      * @param studyName Название направления подготовки на английском.
      */
     private void findFieldOfStudy(String studyName) {
@@ -82,6 +84,7 @@ public class SpbuScheduleFinder {
 
     /**
      * Метод обнаруживает ссылку на форму обучения, соответствующую имени группы, и присваивает её полю tempUrl.
+     *
      * @param groupName Полное имя группы.
      */
     private void findSchedulesOfDefiniteStudy(String groupName) {
@@ -92,15 +95,16 @@ public class SpbuScheduleFinder {
     /**
      * Метод обнаруживает ссылку на конкретное расписание, соответствующую имени группы,
      * и, после небольшого форматирования, присваивает её полю resultUrl.
+     *
      * @param groupName Полное имя группы.
      */
     private void findScheduleForCurrentGroup(String groupName) {
-        final int startOfCheduleUrlInParam = 23;
+        final int startOfScheduleUrlInParam = 23;
         tempUrl = baseUrl + document.getElementsContainingOwnText(groupName)
                 .get(0)
                 .parent()
                 .attr("onclick")
-                .substring(startOfCheduleUrlInParam);
+                .substring(startOfScheduleUrlInParam);
         resultUrl = tempUrl.substring(0, tempUrl.length() - 1);
     }
 }

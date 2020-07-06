@@ -9,9 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"ru.studentsplatform.backend.*"})
 @EntityScan(basePackages = {"ru.studentsplatform.backend.*"})
 public class EndpointApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(EndpointApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(EndpointApplication.class, args);
+    }
 }
