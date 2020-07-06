@@ -34,5 +34,11 @@
             <artifactId>telegrambots</artifactId>
             <version>4.9</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

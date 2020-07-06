@@ -14,9 +14,8 @@ public class RunningCommand {
     /**
      * Устанавливает команду, которая будет исполняться для текущего чата.
      */
-    public static boolean establishRunningCommand(long chatId, BotCommands command) {
+    public static void establishRunningCommand(long chatId, BotCommands command) {
         currentCommandResolving.put(chatId, command);
-        return command.isRequiredParameters();
     }
 
     /**
@@ -34,5 +33,4 @@ public class RunningCommand {
         currentCommandResolving.putIfAbsent(chatId, BotCommands.UNKNOWN);
         return currentCommandResolving.get(chatId);
     }
-
 }
