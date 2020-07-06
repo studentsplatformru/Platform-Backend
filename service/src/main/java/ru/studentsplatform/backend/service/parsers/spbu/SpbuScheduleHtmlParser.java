@@ -25,16 +25,16 @@ import java.io.IOException;
 @Service
 public class SpbuScheduleHtmlParser implements ScheduleParser {
     /**
-     * Соединение с URL
+     * Соединение с URL.
      */
     private Connection connection;
     /**
-     * Объект, представляющий html-страницу
+     * Объект, представляющий html-страницу.
      */
     private Document document;
 
     /**
-     * Устанавливает соединение со страницей
+     * Устанавливает соединение со страницей.
      *
      * @param requestedUrl запрашиваемый URL
      */
@@ -101,7 +101,7 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     }
 
     /**
-     * Строит объект Schedule, исходя из передаваемого значения index
+     * Строит объект Schedule, исходя из передаваемого значения index.
      *
      * @param index порядковый номер дня на странице
      * @return сконфигурированный объект Schedule
@@ -172,7 +172,7 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     }
 
     /**
-     * Создаёт {@link Document} из html-страницы, используя connection
+     * Создаёт {@link Document} из html-страницы, используя connection.
      */
     private void getHtmlDocument() {
         try {

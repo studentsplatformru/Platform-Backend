@@ -2,8 +2,6 @@ package ru.studentsplatform.backend.service.parsers.spbu;
 
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.parsers.ScheduleParser;
-import ru.studentsplatform.backend.service.parsers.UniversityScheduleResolver;
-import java.util.LinkedList;
 
 @Service
 public class SpbuScheduleResolver {
@@ -12,7 +10,7 @@ public class SpbuScheduleResolver {
     private final SpbuScheduleFinder finder;
 
     public SpbuScheduleResolver(ScheduleParser parser,
-                                SpbuScheduleFinder finder){
+                                SpbuScheduleFinder finder) {
         this.parser = parser;
         this.finder = finder;
     }

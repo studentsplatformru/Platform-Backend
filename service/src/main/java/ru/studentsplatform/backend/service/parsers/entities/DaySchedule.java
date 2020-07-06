@@ -7,6 +7,16 @@ public class DaySchedule {
     private final String[] locations;
     private final String[] educators;
 
+    /**
+     * Класс, представляющий объект распиания. Размер любого из массивов (например, times),
+     * отражает количество занятий в этот день.
+     *
+     * @param title       хранит день недели, представленный объектом класса
+     * @param times       хранит время каждой дисциплины в этот день
+     * @param disciplines хранит название каждой дисциплины в этот день
+     * @param locations   хранит местонахождение каждой дисциплины в этот день
+     * @param educators   хранит фамилию и инициалы преподавателя каждой дисциплины в этот день
+     */
     public DaySchedule(String title, String[] times, String[] disciplines, String[] locations, String[] educators) {
         this.title = title;
         this.times = times;
