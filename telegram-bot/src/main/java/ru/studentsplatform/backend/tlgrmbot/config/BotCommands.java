@@ -14,7 +14,7 @@ public enum BotCommands {
         availableCommands.put(SCHEDULE.getCommandMessage(), SCHEDULE);
     }
 
-    BotCommands(String commandMessage, boolean reqiresDataEntry){
+    BotCommands(String commandMessage, boolean reqiresDataEntry) {
         this.commandMessage = commandMessage;
         this.requiresDataEntry = reqiresDataEntry;
     }
@@ -23,7 +23,7 @@ public enum BotCommands {
         return commandMessage;
     }
 
-    public boolean isRequiredParameters(){
+    public boolean isRequiredParameters() {
         return requiresDataEntry;
     }
 
@@ -32,7 +32,7 @@ public enum BotCommands {
      * @param commandMessage Текст команды.
      * @return объект команды
      */
-    public static BotCommands transformMessageToCommand(String commandMessage){
+    public static BotCommands transformMessageToCommand(String commandMessage) {
         return availableCommands.get(commandMessage);
     }
 

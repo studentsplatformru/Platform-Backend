@@ -37,10 +37,9 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            if(RunningCommand.seeRunningCommand(getChatId(update)).isRequiredParameters()) {
+            if (RunningCommand.seeRunningCommand(getChatId(update)).isRequiredParameters()) {
                 resolveCommand(update);
-            }
-            else {
+            } else {
                 startCommand(getChatId(update), getText(update));
             }
         }
@@ -49,16 +48,18 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
     /**
      * Возвращает текст сообщения.
      * @param update сообщение от пользователя.
+     * @return Текст сообщения.
      */
-    private String getText(Update update){
+    private String getText(Update update) {
         return update.getMessage().getText();
     }
 
     /**
      * Возвращает Id чата, из которого было отправлено сообщение.
      * @param update сообщение от пользователя.
+     * @return Id чата.
      */
-    private long getChatId(Update update){
+    private long getChatId(Update update) {
         return update.getMessage().getChatId();
     }
 
@@ -66,11 +67,12 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
      * Выполняет команду на основе полученных параметров.
      * @param update сообщение от пользователя.
      */
-    private void resolveCommand(Update update){
-        switch (RunningCommand.pullRunningCommand(getChatId(update))){
+    private void resolveCommand(Update update) {
+        switch (RunningCommand.pullRunningCommand(getChatId(update))) {
             case SCHEDULE:
                 printSchedule(update);
                 break;
+            default: sendHintMessages(getChatId(update));
         }
     }
 
@@ -86,11 +88,12 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
 
     /**
      * Создаёт на основе текста объект команды и прикрепляет её к чату.
+     * @param chatId Id чата, от которого была получена команда.
      * @param command Текст сообщения от пользователя.
      */
-    private void transformMessageToCommandObject(long chatId, String command){
+    private void transformMessageToCommandObject(long chatId, String command) {
         BotCommands botCommand = BotCommands.transformMessageToCommand(command);
-        if(botCommand == null){
+        if (botCommand == null) {
             botCommand = BotCommands.UNKNOWN;
         }
         RunningCommand.establishRunningCommand(chatId, botCommand);
@@ -99,12 +102,13 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
     private void sendHintMessages(long chatId) {
         switch (RunningCommand.seeRunningCommand(chatId)) {
             case SCHEDULE:
-                sendMessageToUser("Отлично! Теперь мне необходимо знать название твоего универа, направления и группы!" +
+                sendMessageToUser(
+                        "Отлично! Теперь мне необходимо знать название твоего универа, направления и группы!" +
                         " А также не забудь в конце указать интересующую тебя дату!" +
                         " Пожалуйста, отправь названия четырьмя разными сообщениями! К примеру:", chatId);
                 sendMessageToUser("СПБГУ; Biology; 19.Б01-Б; Friday", chatId);
                 break;
-            case UNKNOWN:
+            default:
                 sendMessageToUser("Извини, в ответах я ограничен - правильно задавай вопросы", chatId);
                 break;
         }
@@ -115,7 +119,7 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
      * @param message Сообщение для отправки пользователю.
      * @param chatId Id чата, в который будет отправлено сообщение.
      */
-    private void sendMessageToUser(String message, long chatId){
+    private void sendMessageToUser(String message, long chatId) {
         SendMessage sendMessage = new SendMessage().setChatId(chatId).setText(message);
         try {
             execute(sendMessage);
@@ -128,7 +132,7 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
      * Динамически переключает реализацию на основе заданного пользователем названия ВУЗа.
      * @param universityName Сокращённое имя университета.
      */
-    private void changeInterfaceRealisation(String universityName){
+    private void changeInterfaceRealisation(String universityName) {
         scheduleResolver = scheduleImplementationSwitcher.setRealisation(universityName);
     }
 
@@ -143,8 +147,8 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
         try {
             changeInterfaceRealisation(commandParameters[0].trim());
             String schedule = scheduleResolver.getSchedule(commandParameters[1].trim());
-            sendMessageToUser(schedule,getChatId(update));
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException e){
+            sendMessageToUser(schedule, getChatId(update));
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
             sendMessageToUser("Боюсь, по этим параметрам найти расписание не получится!", getChatId(update));
         }
     }
@@ -161,6 +165,9 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
         return "1334599795:AAG0yj3g1P5E4fwjpTADqoZ706OMNn-DlJQ";
     }
 
+    /**
+     * Регистрирует и запускает инстанс бота.
+     */
     @PostConstruct
     public void registerBot() {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();

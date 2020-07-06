@@ -20,10 +20,10 @@ public class SpbuScheduleResolver implements UniversityScheduleResolver {
     @Override
     public String getSchedule(String keywords) {
         String[] separatedKeywords = keywords.split(";");
-        String url = finder.findScheduleLink(separatedKeywords[0].trim(),separatedKeywords[1].trim());
-        try{
+        String url = finder.findScheduleLink(separatedKeywords[0].trim(), separatedKeywords[1].trim());
+        try {
             parser.setConnection(url);
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             return "Не могу найти расписание по этим данным :(";
         }
 
