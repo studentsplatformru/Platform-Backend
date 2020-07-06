@@ -13,9 +13,9 @@ spring:
   mail:
     host: smtp.yandex.ru
     #    here must be application password
-    password:
+    password: test1234
     #    here must be application username
-    username:
+    username: studentplatform
     port: 465
     protocol: smtps
 

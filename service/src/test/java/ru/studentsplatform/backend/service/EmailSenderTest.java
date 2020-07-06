@@ -1,4 +1,4 @@
-package java.ru.studentsplatform.backend.service;
+package ru.studentsplatform.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
