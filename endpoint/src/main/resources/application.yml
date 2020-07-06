@@ -13,7 +13,7 @@ spring:
   mail:
     host: smtp.yandex.ru
     #    here must be application password
-    password: test1234
+    password: 12627a582ef944d59b1e70a2f28218c5
     #    here must be application username
     username: studentplatform
     port: 465
