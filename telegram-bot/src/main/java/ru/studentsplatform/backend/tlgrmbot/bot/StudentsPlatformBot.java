@@ -12,7 +12,6 @@ import ru.studentsplatform.backend.service.parsers.UniversityScheduleResolver;
 import ru.studentsplatform.backend.tlgrmbot.config.BotCommands;
 import ru.studentsplatform.backend.tlgrmbot.dataStorage.RunningCommand;
 import javax.annotation.PostConstruct;
-import java.util.LinkedList;
 
 @Service
 public class StudentsPlatformBot extends TelegramLongPollingBot {
@@ -31,18 +30,18 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
 
     /**
      * Метод вызывается каждый раз, когда бот получает сообщение.
-     * Если бот находится в процессе выполнения команды - происходит ввод данных в пул данных.
-     * Если бот не находится в процессе выполнения команды - инициализирует выполнение команды или возвращает ответ о неизвестной команде.
-     * @param update Сообщение, приходящее от пользователя.
+     * Если команда уже выполняется и требуются параметры - выполняет команду с вошедшими параметрами.
+     * Иначе начинает выполнять новую команду (если она валидная).
+     * @param update Сообщение от пользователя с командой или параметрами команды.
      */
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            if(RunningCommand.isAwaitingData(getChatId(update))) {
-                attemptToResolveCommandByCurrentData(update);
+            if(RunningCommand.seeRunningCommand(getChatId(update)).isRequiredParameters()) {
+                resolveCommand(update);
             }
             else {
-                commandAnalyse(getText(update), getChatId(update));
+                startCommand(getChatId(update), getText(update));
             }
         }
     }
@@ -64,61 +63,50 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
     }
 
     /**
-     * Вводит данные. Если их хватает - исполняет текущую команду. В противном случае выходит из метода.
+     * Выполняет команду на основе полученных параметров.
      * @param update сообщение от пользователя.
      */
-    private void attemptToResolveCommandByCurrentData(Update update){
-        if(RunningCommand.enterData(getChatId(update), getText(update))){
-            return;
-        }
-        switch (transferCommandToEnum(RunningCommand.getRunningCommand(getChatId(update)))){
+    private void resolveCommand(Update update){
+        switch (RunningCommand.pullRunningCommand(getChatId(update))){
             case SCHEDULE:
-                printSchedule(getChatId(update));
+                printSchedule(update);
                 break;
         }
     }
 
     /**
-     * Создаёт на основе текста команды объект команды.
-     * @param command Текст сообщения от пользователя.
-     * @return Объект команды, содержащий текст команды и кол-во необходимых сообщений с данными.
-     */
-    private BotCommands transferCommandToEnum(String command){
-        BotCommands botCommand = BotCommands.getCommandObject(command);
-        if(botCommand == null){
-            return BotCommands.UNKNOWN;
-        }
-        return botCommand;
-    }
-
-    /**
-     * Метод производит анализ введённой команды, и, если такая команда доступна, начинает её выполнение.
+     * Создаёт объект команды и отправляет подсказку.
      * @param commandMessage Команда, отправленная пользователем.
-     * @param chatId Id чата, в который будет отправлен ответ.
+     * @param chatId Id чата, к которому будет привязана команда и в который будет отправлен ответ.
      */
-    private void commandAnalyse(String commandMessage, long chatId) {
-        BotCommands command = transferCommandToEnum(commandMessage);
-        switch (command) {
-            case SCHEDULE:
-                    initiateScheduleCommand(command, chatId);
-                break;
-            default: unknownCommandResponse(chatId);
-                break;
-        }
+    private void startCommand(long chatId, String commandMessage) {
+        transformMessageToCommandObject(chatId, commandMessage);
+        sendHintMessages(chatId);
     }
 
     /**
-     * Отправляет пользователю сообщение о вводе неизвестной команды.
-     * @param chatId Id чата, в который будет отправлено сообщение.
+     * Создаёт на основе текста объект команды и прикрепляет её к чату.
+     * @param command Текст сообщения от пользователя.
      */
-    private void unknownCommandResponse(long chatId){
-        SendMessage message = new SendMessage()
-                .setChatId(chatId)
-                .setText("Извини, в ответах я ограничен - правильно задавай вопросы");
-        try {
-            execute(message);
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void transformMessageToCommandObject(long chatId, String command){
+        BotCommands botCommand = BotCommands.transformMessageToCommand(command);
+        if(botCommand == null){
+            botCommand = BotCommands.UNKNOWN;
+        }
+        RunningCommand.establishRunningCommand(chatId, botCommand);
+    }
+
+    private void sendHintMessages(long chatId) {
+        switch (RunningCommand.seeRunningCommand(chatId)) {
+            case SCHEDULE:
+                sendMessageToUser("Отлично! Теперь мне необходимо знать название твоего универа, направления и группы!" +
+                        " А также не забудь в конце указать интересующую тебя дату!" +
+                        " Пожалуйста, отправь названия четырьмя разными сообщениями! К примеру:", chatId);
+                sendMessageToUser("СПБГУ; Biology; 19.Б01-Б; Friday", chatId);
+                break;
+            case UNKNOWN:
+                sendMessageToUser("Извини, в ответах я ограничен - правильно задавай вопросы", chatId);
+                break;
         }
     }
 
@@ -137,53 +125,31 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
     }
 
     /**
-     * Инициализирует начало выполнения команды отправки календаря. Отправляет сообщения с подсказкой в чат.
-     * @param command Объект команды.
-     * @param chatId Id чата, в который будет отправлено сообщение.
-     */
-    private void initiateScheduleCommand(BotCommands command, long chatId){
-        setUpCommandParameters(command, chatId);
-        sendScheduleHintMessages(chatId);
-    }
-
-    private void sendScheduleHintMessages(long chatId){
-        sendMessageToUser("Отлично! Теперь мне необходимо знать название твоего универа, направления и группы!" +
-                " А также не забудь в конце указать интересующую тебя дату!" +
-                " Пожалуйста, отправь названия четырьмя разными сообщениями! К примеру:", chatId);
-        sendMessageToUser("СПБГУ", chatId);
-        sendMessageToUser("Biology", chatId);
-        sendMessageToUser("19.Б01-Б" , chatId);
-        sendMessageToUser("Friday" , chatId);
-    }
-
-    /**
-     * Устанавливает текущую команду и кол-во необходимых сообщений с данными от чата.
-     * @param command Объект команды.
-     * @param chatId Id чата, в который будет отправлено сообщение.
-     */
-    private void setUpCommandParameters(BotCommands command, long chatId){
-        RunningCommand.establishRunningCommand(chatId,command.getCommandMessage());
-        RunningCommand.setAwaitingDataAmount(chatId, command.getRequiredDataNum());
-    }
-
-    /**
-     * Отправляет пользователю расписание на основе введённых им данных.
-     * @param chatId Id чата, в который будет отправлено сообщение.
-     */
-    private void printSchedule(long chatId) {
-        LinkedList<String> data = RunningCommand.getData(chatId);
-        changeInterfaceRealisation(data.remove());
-        String schedule = scheduleResolver.getSchedule(data);
-        sendMessageToUser(schedule,chatId);
-    }
-
-    /**
      * Динамически переключает реализацию на основе заданного пользователем названия ВУЗа.
      * @param universityName Сокращённое имя университета.
      */
     private void changeInterfaceRealisation(String universityName){
         scheduleResolver = scheduleImplementationSwitcher.setRealisation(universityName);
     }
+
+    //---------------------------------------Тела команд бота------------------------------------------//
+
+    /**
+     * Отправляет пользователю расписание на основе введённых им данных.
+     * @param update Сообщение от пользователя с параметрами для команды.
+     */
+    private void printSchedule(Update update) {
+        String[] commandParameters = getText(update).split(";", 2);
+        try {
+            changeInterfaceRealisation(commandParameters[0].trim());
+            String schedule = scheduleResolver.getSchedule(commandParameters[1].trim());
+            sendMessageToUser(schedule,getChatId(update));
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException e){
+            sendMessageToUser("Боюсь, по этим параметрам найти расписание не получится!", getChatId(update));
+        }
+    }
+
+    //---------------------------------------Служебные методы------------------------------------------//
 
     @Override
     public String getBotUsername() {

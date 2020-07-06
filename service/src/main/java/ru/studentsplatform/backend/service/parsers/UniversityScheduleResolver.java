@@ -4,5 +4,5 @@ import java.util.LinkedList;
 
 public interface UniversityScheduleResolver {
 
-    String getSchedule(LinkedList<String> keyWords);
+    String getSchedule(String keyWords);
 }

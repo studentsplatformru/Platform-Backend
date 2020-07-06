@@ -10,7 +10,7 @@ public class ScheduleImplementationSwitcher {
 
     private final SpbuScheduleResolver spbuScheduleResolver;
 
-    private String realisationForUniversity = "СПБГУ";
+    private String realisationForUniversity;
 
     public ScheduleImplementationSwitcher(SpbuScheduleResolver spbuScheduleResolver) {
         this.spbuScheduleResolver = spbuScheduleResolver;
@@ -41,9 +41,10 @@ public class ScheduleImplementationSwitcher {
      * Внутренний механизм переключения реализации на основе switch, в который передается имя ВУЗа.
      */
     private void switchRealisation() {
+        //Должно работать, если снова сломается - вышли мне логи @Archie-Vian
         switch (realisationForUniversity) {
             case "СПБГУ":
-                // universityScheduleResolver = spbuScheduleResolver; TODO к сожалению не знаю, почему, но это сломалось
+                universityScheduleResolver = spbuScheduleResolver;
                 break;
             default:
                 //TODO???

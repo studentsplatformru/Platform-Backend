@@ -3,29 +3,28 @@ package ru.studentsplatform.backend.tlgrmbot.config;
 import java.util.HashMap;
 
 public enum BotCommands {
-    SCHEDULE("/schedule", 4), UNKNOWN("unknown", 0);
+    SCHEDULE("/schedule", true), UNKNOWN("unknown", false);
 
     private String commandMessage;
-    private int requiredDataNum;
+    private boolean requiresDataEntry;
 
-    private static HashMap<String, BotCommands> commands = new HashMap<>();
+    private static HashMap<String, BotCommands> availableCommands = new HashMap<>();
 
     static {
-        commands.put(SCHEDULE.getCommandMessage(), SCHEDULE);
-        commands.put(UNKNOWN.getCommandMessage(), UNKNOWN);
+        availableCommands.put(SCHEDULE.getCommandMessage(), SCHEDULE);
     }
 
-    BotCommands(String commandMessage, int requiredDataNum){
+    BotCommands(String commandMessage, boolean reqiresDataEntry){
         this.commandMessage = commandMessage;
-        this.requiredDataNum = requiredDataNum;
+        this.requiresDataEntry = reqiresDataEntry;
     }
 
     public String getCommandMessage() {
         return commandMessage;
     }
 
-    public int getRequiredDataNum(){
-        return requiredDataNum;
+    public boolean isRequiredParameters(){
+        return requiresDataEntry;
     }
 
     /**
@@ -33,8 +32,10 @@ public enum BotCommands {
      * @param commandMessage Текст команды.
      * @return объект команды
      */
-    public static BotCommands getCommandObject(String commandMessage){
-        return commands.get(commandMessage);
+    public static BotCommands transformMessageToCommand(String commandMessage){
+        return availableCommands.get(commandMessage);
     }
+
+
 
 }
