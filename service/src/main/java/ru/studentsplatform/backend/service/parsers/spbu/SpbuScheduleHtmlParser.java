@@ -1,5 +1,8 @@
 package ru.studentsplatform.backend.service.parsers.spbu;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,6 +32,8 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
     /**
      * Объект, представляющий html-страницу.
      */
+    private static Logger log = LogManager.getLogger(SpbuScheduleHtmlParser.class);
+
     private Document document;
 
     /**
@@ -178,7 +183,7 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
                     .connect(requestedUrl)
                     .get();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.log(Level.FATAL, e);
         }
     }
 
