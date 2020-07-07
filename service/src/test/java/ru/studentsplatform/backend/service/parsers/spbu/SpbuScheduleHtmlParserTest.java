@@ -9,14 +9,11 @@ public class SpbuScheduleHtmlParserTest {
     SpbuScheduleHtmlParser parser = new SpbuScheduleHtmlParser();
     DaySchedule daySchedule;
 
-    @BeforeEach
-    void setParser() {
-        parser.setConnection("https://timetable.spbu.ru/MCSC/StudentGroupEvents/Primary/248162/2020-05-25");
-    }
-
     @Test
     void testDailyScheduleTitleMustReturnCurrentString() {
-        daySchedule = parser.getDailySchedule("Monday");
+        daySchedule = parser.getDailySchedule("Monday",
+                "https://timetable.spbu.ru/MCSC/StudentGroupEvents/Primary/248162/2020-05-25");
         Assertions.assertEquals(daySchedule.getTitle(), "Monday, May 25");
+        System.out.println(daySchedule);
     }
 }

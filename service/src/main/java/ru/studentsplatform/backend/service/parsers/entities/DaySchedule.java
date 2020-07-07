@@ -1,11 +1,13 @@
 package ru.studentsplatform.backend.service.parsers.entities;
 
+import java.util.List;
+
 public class DaySchedule {
     private final String title;
-    private final String[] times;
-    private final String[] disciplines;
-    private final String[] locations;
-    private final String[] educators;
+    private final List<String> times;
+    private final List<String> disciplines;
+    private final List<String> locations;
+    private final List<String> educators;
 
     /**
      * Класс, представляющий объект распиания. Размер любого из массивов (например, times),
@@ -17,7 +19,11 @@ public class DaySchedule {
      * @param locations   хранит местонахождение каждой дисциплины в этот день
      * @param educators   хранит фамилию и инициалы преподавателя каждой дисциплины в этот день
      */
-    public DaySchedule(String title, String[] times, String[] disciplines, String[] locations, String[] educators) {
+    public DaySchedule(String title,
+                       List<String> times,
+                       List<String> disciplines,
+                       List<String> locations,
+                       List<String> educators) {
         this.title = title;
         this.times = times;
         this.disciplines = disciplines;
@@ -29,19 +35,19 @@ public class DaySchedule {
         return title;
     }
 
-    public String[] getTimes() {
+    public List<String> getTimes() {
         return times;
     }
 
-    public String[] getDisciplines() {
+    public List<String> getDisciplines() {
         return disciplines;
     }
 
-    public String[] getLocations() {
+    public List<String> getLocations() {
         return locations;
     }
 
-    public String[] getEducators() {
+    public List<String> getEducators() {
         return educators;
     }
 
@@ -49,11 +55,11 @@ public class DaySchedule {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(title).append("\n");
 
-        for (int i = 0; i < times.length; i++) {
-            stringBuilder.append(times[i]).append("; ")
-                    .append(disciplines[i]).append("; ")
-                    .append(locations[i]).append("; ")
-                    .append(educators[i]).append("\n");
+        for (int i = 0; i < times.size(); i++) {
+            stringBuilder.append(times.get(i)).append("; ")
+                    .append(disciplines.get(i)).append("; ")
+                    .append(locations.get(i)).append("; ")
+                    .append(educators.get(i)).append("\n");
         }
         return String.valueOf(stringBuilder);
     }

@@ -21,15 +21,8 @@ public class SpbuScheduleResolver implements UniversityScheduleResolver {
     public String getSchedule(String keywords) {
         String[] separatedKeywords = keywords.split(";");
         String url = finder.findScheduleLink(separatedKeywords[0].trim(), separatedKeywords[1].trim());
-        try {
-            parser.setConnection(url);
-        } catch (IllegalArgumentException e) {
-            return "Не могу найти расписание по этим данным :(";
-        }
 
-        return parser.getDailySchedule(separatedKeywords[2].trim()).toString();
+        return parser.getDailySchedule(separatedKeywords[2].trim(), url).toString();
     }
  //TODO на данный момент метод парсера возвращает объект, а не строку.
-
-
 }

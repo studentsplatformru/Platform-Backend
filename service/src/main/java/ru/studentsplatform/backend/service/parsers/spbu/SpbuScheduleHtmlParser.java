@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.service.parsers.spbu;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,6 +9,8 @@ import ru.studentsplatform.backend.service.parsers.ScheduleParser;
 import ru.studentsplatform.backend.service.parsers.entities.DaySchedule;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Класс парсит определённую html-страницу университета СПБГУ.
@@ -17,39 +18,36 @@ import java.io.IOException;
  * <p>
  * Класс использует библиотеку {@link Jsoup},
  * рекомендуются к ознакомлению классы {@link Element} и {@link Elements} этой библиотеки.
- * Для подключения к удалённому URL используются классы {@link Document} и {@link Connection}
+ * Для подключения к удалённому URL используются класс {@link Document}
  * </p>
  *
  * @author spaulqr
  */
 @Service
 public class SpbuScheduleHtmlParser implements ScheduleParser {
-    /**
-     * Соединение с URL.
-     */
-    private Connection connection;
+
     /**
      * Объект, представляющий html-страницу.
      */
     private Document document;
 
     /**
-     * Устанавливает соединение со страницей.
-     *
-     * @param requestedUrl запрашиваемый URL
+     * Объект, представляющий элемент html-страницы.
      */
-    public void setConnection(String requestedUrl) {
-        this.connection = Jsoup.connect(requestedUrl);
-    }
+    private Element panelGroupElement;
+
 
     /**
      * Возвращает Schedule.
      *
      * @param requestedDay день, на основе которого строится {@link DaySchedule}
+     * @param requestedUrl адрес целевой страницы
      * @return Schedule или
      * null, если requestedDay не найден на странице.
      */
-    public DaySchedule getDailySchedule(String requestedDay) {
+    public DaySchedule getDailySchedule(String requestedDay, String requestedUrl) {
+        setPanelGroupElement(requestedUrl);
+
         int index = getTitleIndex(requestedDay);
 
         if (index == -1) {
@@ -75,7 +73,7 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
      * @param requestedDay день, индекс которого необходимо найти
      * @return -1, если день на странице не найден (или передана произвольная строка).
      */
-    public int getTitleIndex(String requestedDay) {
+    private int getTitleIndex(String requestedDay) {
         Elements elements = getDayNameElements();
         for (int index = 0; index < elements.size(); index++) {
             if (elements
@@ -96,7 +94,7 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
      * @return Elements
      */
     private Elements getDayNameElements() {
-        return getPanelGroupElement()
+        return panelGroupElement
                 .select("h4[class=panel-title]");
     }
 
@@ -108,20 +106,20 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
      */
     private DaySchedule buildSchedule(int index) {
         Elements elements = getLessonsElements(index);
-        int length = elements.size();
+
         String title = getDayNameElements()
                 .get(index)
                 .text();
-        String[] times = new String[length];
-        String[] disciplines = new String[length];
-        String[] locations = new String[length];
-        String[] educators = new String[length];
+        List<String> times = new ArrayList<>();
+        List<String> disciplines = new ArrayList<>();
+        List<String> locations = new ArrayList<>();
+        List<String> educators = new ArrayList<>();
 
-        for (int i = 0; i < elements.size(); i++) {
-            times[i] = getTime(elements.get(i));
-            disciplines[i] = getDisciplineName(elements.get(i));
-            locations[i] = getLocation(elements.get(i));
-            educators[i] = getEducatorName(elements.get(i));
+        for (Element element : elements) {
+            times.add(getTime(element));
+            disciplines.add(getDisciplineName(element));
+            locations.add(getLocation(element));
+            educators.add(getEducatorName(element));
         }
 
         return new DaySchedule(title,
@@ -152,31 +150,33 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
      * @return Element конкретного дня расписания
      */
     private Element getDayElement(int index) {
-        return getPanelGroupElement()
+        return panelGroupElement
                 .select("div[class=panel panel-default]").get(index);
     }
 
     /**
      * Сужает поиск по странице до панели с расписанием за неделю.
      *
-     * @return Element, представляющий расписание за неделю
+     * @param requestedUrl адрес целевой страницы
      */
-    private Element getPanelGroupElement() {
-        if (document == null) {
-            getHtmlDocument();
-        }
+    private void setPanelGroupElement(String requestedUrl) {
+        setHtmlDocument(requestedUrl);
 
-        return document
+        panelGroupElement = document
                 .select("div[class=panel-group]")
                 .first();
     }
 
     /**
-     * Создаёт {@link Document} из html-страницы, используя connection.
+     * Создаёт {@link Document} из html-страницы, используя Jsoup.connect.
+     *
+     * @param requestedUrl адрес целевой страницы
      */
-    private void getHtmlDocument() {
+    private void setHtmlDocument(String requestedUrl) {
         try {
-            document = connection.get();
+            document = Jsoup
+                    .connect(requestedUrl)
+                    .get();
         } catch (IOException e) {
             e.printStackTrace();
         }

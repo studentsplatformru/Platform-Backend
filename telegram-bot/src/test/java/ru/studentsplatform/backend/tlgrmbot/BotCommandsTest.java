@@ -1,3 +1,5 @@
+package ru.studentsplatform.backend.tlgrmbot;
+
 import org.junit.jupiter.api.Test;
 import ru.studentsplatform.backend.tlgrmbot.config.BotCommands;
 

@@ -3,12 +3,14 @@ package ru.studentsplatform.backend.service.parsers.entities;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class DayScheduleTest {
     DaySchedule daySchedule = new DaySchedule("Monday",
-            new String[]{"13", "14", "51"},
-            new String[]{"афыва", "фвыа", "афыва"},
-            new String[]{"фыва", "пфывп", "роеыапр"},
-            new String[]{"ичьыен", "пыаврйк", "пфывп"});
+            Arrays.asList("13", "14", "51"),
+            Arrays.asList("афыва", "фвыа", "афыва"),
+            Arrays.asList("фыва", "пфывп", "роеыапр"),
+            Arrays.asList("ичьыен", "пыаврйк", "пфывп"));
 
 
     @Test
