@@ -14,4 +14,6 @@ public class EndpointApplication {
 		SpringApplication.run(EndpointApplication.class, args);
 	}
 
+
+
 }

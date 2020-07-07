@@ -11,11 +11,11 @@ management:
 #properties form EMailSender
 spring:
   mail:
-    host: smtp.yandex.ru
+    host: smtp.gmail.com
     #    here must be application password
-    password: 12627a582ef944d59b1e70a2f28218c5
+    password: test789test
     #    here must be application username
-    username: studentplatform
+    username: studentplatform.no.reply@gmail.com
     port: 465
     protocol: smtps
 
