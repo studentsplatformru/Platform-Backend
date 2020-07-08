@@ -25,8 +25,6 @@ public class DayScheduleTest {
         ));
         daySchedule = new DaySchedule(DayOfWeek.MONDAY, lessons);
 
-
-        System.out.println(daySchedule.toString());
         Assertions.assertEquals("Monday", daySchedule
                 .getDayTitle()
                 .getDisplayName(TextStyle.FULL, Locale.ENGLISH));

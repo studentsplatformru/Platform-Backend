@@ -18,6 +18,5 @@ public class SpbuScheduleHtmlParserTest {
                 "https://timetable.spbu.ru/MCSC/StudentGroupEvents/Primary/248162/2020-05-25");
         Assertions.assertEquals(daySchedule.getDayTitle()
                 .getDisplayName(TextStyle.FULL, Locale.ENGLISH), "Monday");
-        System.out.println(daySchedule);
     }
 }
