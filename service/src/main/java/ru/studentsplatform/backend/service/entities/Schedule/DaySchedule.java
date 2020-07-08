@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service.parsers.entities.Schedule;
+package ru.studentsplatform.backend.service.entities.Schedule;
 
 import java.time.DayOfWeek;
 import java.time.format.TextStyle;

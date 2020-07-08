@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service.parsers.spbu;
+package ru.studentsplatform.backend.service.spbu;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -8,9 +8,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.service.parsers.ScheduleHtmlParser;
-import ru.studentsplatform.backend.service.parsers.entities.Schedule.DaySchedule;
-import ru.studentsplatform.backend.service.parsers.entities.Schedule.Lesson;
+import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
+import ru.studentsplatform.backend.service.entities.Schedule.Lesson;
+import ru.studentsplatform.backend.service.ScheduleHtmlParser;
 
 import java.io.IOException;
 import java.time.DayOfWeek;

@@ -1,6 +1,6 @@
-package ru.studentsplatform.backend.service.parsers;
+package ru.studentsplatform.backend.service;
 
-import ru.studentsplatform.backend.service.parsers.entities.Schedule.DaySchedule;
+import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
 
 import java.time.DayOfWeek;
 

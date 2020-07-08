@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service.parsers.spbu;
+package ru.studentsplatform.backend.service.spbu;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

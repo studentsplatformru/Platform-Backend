@@ -1,7 +1,7 @@
-package ru.studentsplatform.backend.service.parsers;
+package ru.studentsplatform.backend.service;
 
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.service.parsers.spbu.SpbuScheduleResolver;
+import ru.studentsplatform.backend.service.spbu.SpbuScheduleResolver;
 
 @Service
 public class ScheduleImplementationSwitcher {

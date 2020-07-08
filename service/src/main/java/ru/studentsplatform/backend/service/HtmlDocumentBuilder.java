@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service.parsers;
+package ru.studentsplatform.backend.service;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

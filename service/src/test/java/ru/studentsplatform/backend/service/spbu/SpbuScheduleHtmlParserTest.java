@@ -1,8 +1,8 @@
-package ru.studentsplatform.backend.service.parsers.spbu;
+package ru.studentsplatform.backend.service.spbu;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.studentsplatform.backend.service.parsers.entities.Schedule.DaySchedule;
+import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
 
 import java.time.DayOfWeek;
 import java.time.format.TextStyle;

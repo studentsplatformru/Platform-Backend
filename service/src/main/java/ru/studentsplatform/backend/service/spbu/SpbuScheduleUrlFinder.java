@@ -1,12 +1,12 @@
-package ru.studentsplatform.backend.service.parsers.spbu;
+package ru.studentsplatform.backend.service.spbu;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.service.parsers.HtmlDocumentBuilder;
-import ru.studentsplatform.backend.service.parsers.ScheduleFinder;
+import ru.studentsplatform.backend.service.ScheduleFinder;
+import ru.studentsplatform.backend.service.HtmlDocumentBuilder;
 
 @Service
 public class SpbuScheduleUrlFinder implements ScheduleFinder {

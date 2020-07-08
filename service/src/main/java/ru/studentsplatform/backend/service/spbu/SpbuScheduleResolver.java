@@ -1,9 +1,9 @@
-package ru.studentsplatform.backend.service.parsers.spbu;
+package ru.studentsplatform.backend.service.spbu;
 
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.service.parsers.ScheduleFinder;
-import ru.studentsplatform.backend.service.parsers.ScheduleHtmlParser;
-import ru.studentsplatform.backend.service.parsers.UniversityScheduleResolver;
+import ru.studentsplatform.backend.service.ScheduleHtmlParser;
+import ru.studentsplatform.backend.service.ScheduleFinder;
+import ru.studentsplatform.backend.service.UniversityScheduleResolver;
 
 import java.time.DayOfWeek;
 

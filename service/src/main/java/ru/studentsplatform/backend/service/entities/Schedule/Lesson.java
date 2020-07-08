@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service.parsers.entities.Schedule;
+package ru.studentsplatform.backend.service.entities.Schedule;
 
 /**
  * Класс, представляющий объект расписания урока.

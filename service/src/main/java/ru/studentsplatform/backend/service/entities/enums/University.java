@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service.parsers.entities.enums;
+package ru.studentsplatform.backend.service.entities.enums;
 
 public enum University {
     SPBU("СПБГУ"),
