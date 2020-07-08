@@ -9,7 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.parsers.ScheduleHtmlParser;
-import ru.studentsplatform.backend.service.parsers.entities.DaySchedule;
+import ru.studentsplatform.backend.service.parsers.entities.Schedule.DaySchedule;
+import ru.studentsplatform.backend.service.parsers.entities.Schedule.Lesson;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -53,7 +54,7 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
      * @return Schedule или
      * null, если requestedDay не найден на странице.
      */
-    public DaySchedule getDailySchedule(DayOfWeek requestedDay, String requestedUrl) {
+    public DaySchedule getDaySchedule(DayOfWeek requestedDay, String requestedUrl) {
         setPanelGroupElement(requestedUrl);
 
         int index = getTitleIndex(requestedDay
@@ -115,27 +116,26 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
      */
     private DaySchedule buildSchedule(int index) {
         Elements elements = getLessonsElements(index);
-
-        String title = getDayNameElements()
+        String dayNameString = getDayNameElements()
                 .get(index)
-                .text();
-        List<String> times = new ArrayList<>();
-        List<String> disciplines = new ArrayList<>();
-        List<String> locations = new ArrayList<>();
-        List<String> educators = new ArrayList<>();
+                .text()
+                .toUpperCase();
+
+        DayOfWeek title = DayOfWeek.valueOf(dayNameString.substring(0, dayNameString.indexOf(',')));
+
+        List<Lesson> lessons = new ArrayList<>();
 
         for (Element element : elements) {
-            times.add(getTime(element));
-            disciplines.add(getDisciplineName(element));
-            locations.add(getLocation(element));
-            educators.add(getEducatorName(element));
+            lessons.add(new Lesson(
+                    getTime(element),
+                    getDisciplineName(element),
+                    getLocation(element),
+                    getEducatorName(element)
+            ));
         }
 
         return new DaySchedule(title,
-                times,
-                disciplines,
-                locations,
-                educators);
+                lessons);
     }
 
     /**

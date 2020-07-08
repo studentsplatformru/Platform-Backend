@@ -2,22 +2,33 @@ package ru.studentsplatform.backend.service.parsers.entities;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.studentsplatform.backend.service.parsers.entities.Schedule.DaySchedule;
+import ru.studentsplatform.backend.service.parsers.entities.Schedule.Lesson;
 
-import java.util.Arrays;
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class DayScheduleTest {
-    DaySchedule daySchedule = new DaySchedule("Monday",
-            Arrays.asList("13", "14", "51"),
-            Arrays.asList("афыва", "фвыа", "афыва"),
-            Arrays.asList("фыва", "пфывп", "роеыапр"),
-            Arrays.asList("ичьыен", "пыаврйк", "пфывп"));
+    DaySchedule daySchedule;
 
 
     @Test
     void testToStringMethod() {
-        Assertions.assertEquals("Monday\n" +
-                "13; афыва; фыва; ичьыен\n" +
-                "14; фвыа; пфывп; пыаврйк\n" +
-                "51; афыва; роеыапр; пфывп\n", daySchedule.toString());
+        ArrayList<Lesson> lessons = new ArrayList<>();
+        lessons.add(new Lesson(
+                "1-4",
+                "Philosophy",
+                "Dom.street, 13",
+                "Bob"
+        ));
+        daySchedule = new DaySchedule(DayOfWeek.MONDAY, lessons);
+
+
+        System.out.println(daySchedule.toString());
+        Assertions.assertEquals("Monday", daySchedule
+                .getDayTitle()
+                .getDisplayName(TextStyle.FULL, Locale.ENGLISH));
     }
 }
