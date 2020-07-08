@@ -8,15 +8,18 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.service.parsers.ScheduleParser;
+import ru.studentsplatform.backend.service.parsers.ScheduleHtmlParser;
 import ru.studentsplatform.backend.service.parsers.entities.DaySchedule;
 
 import java.io.IOException;
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
- * Класс парсит определённую html-страницу университета СПБГУ.
+ * Класс парсит определённую html-страницу расписания университета СПБГУ.
  * Класс подразумевает работу с конкретными URL.
  * <p>
  * Класс использует библиотеку {@link Jsoup},
@@ -27,7 +30,7 @@ import java.util.List;
  * @author spaulqr
  */
 @Service
-public class SpbuScheduleHtmlParser implements ScheduleParser {
+public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
 
     /**
      * Объект, представляющий html-страницу.
@@ -50,10 +53,11 @@ public class SpbuScheduleHtmlParser implements ScheduleParser {
      * @return Schedule или
      * null, если requestedDay не найден на странице.
      */
-    public DaySchedule getDailySchedule(String requestedDay, String requestedUrl) {
+    public DaySchedule getDailySchedule(DayOfWeek requestedDay, String requestedUrl) {
         setPanelGroupElement(requestedUrl);
 
-        int index = getTitleIndex(requestedDay);
+        int index = getTitleIndex(requestedDay
+                .getDisplayName(TextStyle.FULL, Locale.ENGLISH));
 
         if (index == -1) {
             return null;

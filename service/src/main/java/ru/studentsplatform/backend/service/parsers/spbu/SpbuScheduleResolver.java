@@ -1,17 +1,21 @@
 package ru.studentsplatform.backend.service.parsers.spbu;
 
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.service.parsers.ScheduleParser;
+import ru.studentsplatform.backend.service.parsers.ScheduleFinder;
+import ru.studentsplatform.backend.service.parsers.ScheduleHtmlParser;
 import ru.studentsplatform.backend.service.parsers.UniversityScheduleResolver;
+
+import java.time.DayOfWeek;
+
 
 @Service
 public class SpbuScheduleResolver implements UniversityScheduleResolver {
 
-    private final ScheduleParser parser;
-    private final SpbuScheduleFinder finder;
+    private final ScheduleHtmlParser parser;
+    private final ScheduleFinder finder;
 
-    public SpbuScheduleResolver(ScheduleParser parser,
-                                SpbuScheduleFinder finder) {
+    public SpbuScheduleResolver(ScheduleHtmlParser parser,
+                                ScheduleFinder finder) {
         this.parser = parser;
         this.finder = finder;
     }
@@ -22,7 +26,7 @@ public class SpbuScheduleResolver implements UniversityScheduleResolver {
         String[] separatedKeywords = keywords.split(";");
         String url = finder.findScheduleLink(separatedKeywords[0].trim(), separatedKeywords[1].trim());
 
-        return parser.getDailySchedule(separatedKeywords[2].trim(), url).toString();
+        return parser.getDailySchedule(DayOfWeek.FRIDAY, url).toString();
     }
- //TODO на данный момент метод парсера возвращает объект, а не строку.
+    //TODO на данный момент метод парсера возвращает объект, а не строку.
 }
