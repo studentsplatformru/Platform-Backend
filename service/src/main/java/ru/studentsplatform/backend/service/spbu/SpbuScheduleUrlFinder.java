@@ -23,10 +23,10 @@ public class SpbuScheduleUrlFinder implements ScheduleFinder {
      * @return Ссылка на расписание конкретной группы.
      */
     public String findScheduleLink(String studyName, String groupName) {
-            document = HtmlDocumentBuilder.getHtmlDocument(baseUrl);
-            document = HtmlDocumentBuilder.getHtmlDocument(findFieldOfStudy(studyName));
-            document = HtmlDocumentBuilder.getHtmlDocument(findSchedulesOfDefiniteStudy(groupName));
-            return findScheduleForCurrentGroup(groupName);
+            return findScheduleForCurrentGroup(HtmlDocumentBuilder.getHtmlDocument(
+                    findSchedulesOfDefiniteStudy(HtmlDocumentBuilder.getHtmlDocument(
+                            findFieldOfStudy(HtmlDocumentBuilder.getHtmlDocument(
+                                    baseUrl),studyName)), groupName)), groupName);
     }
 
     /**
@@ -34,8 +34,8 @@ public class SpbuScheduleUrlFinder implements ScheduleFinder {
      *
      * @param studyName Название направления подготовки на английском.
      */
-    private String findFieldOfStudy(String studyName) {
-        Elements studyFields = document.select("li[class='list-group-item']");
+    private String findFieldOfStudy(Document htmlDoc, String studyName) {
+        Elements studyFields = htmlDoc.select("li[class='list-group-item']");
         for (Element fieldOfStudy : studyFields) {
             if (studyName.equals(fieldOfStudy.text())) {
                 return baseUrl + fieldOfStudy.select("a").attr("href").substring(1);
@@ -49,8 +49,8 @@ public class SpbuScheduleUrlFinder implements ScheduleFinder {
      *
      * @param groupName Полное имя группы.
      */
-    private String findSchedulesOfDefiniteStudy(String groupName) {
-        Element link = document.select("a[title*='" + groupName + "']").get(0);
+    private String findSchedulesOfDefiniteStudy(Document htmlDoc, String groupName) {
+        Element link = htmlDoc.select("a[title*='" + groupName + "']").get(0);
         return baseUrl + link.attr("href").substring(1);
     }
 
@@ -60,9 +60,9 @@ public class SpbuScheduleUrlFinder implements ScheduleFinder {
      *
      * @param groupName Полное имя группы.
      */
-    private String findScheduleForCurrentGroup(String groupName) {
+    private String findScheduleForCurrentGroup(Document htmlDoc, String groupName) {
         final int startOfScheduleUrlInParam = 23;
-        String tempUrl = baseUrl + document.getElementsContainingOwnText(groupName)
+        String tempUrl = baseUrl + htmlDoc.getElementsContainingOwnText(groupName)
                 .get(0)
                 .parent()
                 .attr("onclick")

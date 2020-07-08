@@ -133,7 +133,7 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
      * @param universityName Сокращённое имя университета.
      */
     private void changeInterfaceRealisation(String universityName) {
-        scheduleResolver = scheduleImplementationSwitcher.setRealisation(universityName);
+        scheduleResolver = scheduleImplementationSwitcher.switchRealisation(universityName);
     }
 
     //---------------------------------------Тела команд бота------------------------------------------//
