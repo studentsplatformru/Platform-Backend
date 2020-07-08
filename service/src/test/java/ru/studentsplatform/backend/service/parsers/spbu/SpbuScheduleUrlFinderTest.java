@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SpbuScheduleFinderTest {
-    private static SpbuScheduleFinder scheduleFinder;
+public class SpbuScheduleUrlFinderTest {
+    private static SpbuScheduleUrlFinder scheduleFinder;
 
     @BeforeAll
     public static void initAll() {
-        scheduleFinder = new SpbuScheduleFinder();
+        scheduleFinder = new SpbuScheduleUrlFinder();
     }
 
     @Test

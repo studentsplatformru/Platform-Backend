@@ -1,21 +1,18 @@
 package ru.studentsplatform.backend.service.parsers.spbu;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import ru.studentsplatform.backend.service.parsers.HtmlDocumentBuilder;
 import ru.studentsplatform.backend.service.parsers.ScheduleFinder;
 
-import java.io.IOException;
-import java.util.Properties;
+@Service
+public class SpbuScheduleUrlFinder implements ScheduleFinder {
 
-@Component
-public class SpbuScheduleFinder implements ScheduleFinder {
-
+    @Value("${spring.parser.baseUrl}")
     private String baseUrl;
-    private String tempUrl;
-    private String resultUrl;
     private Document document;
 
     /**
@@ -26,46 +23,10 @@ public class SpbuScheduleFinder implements ScheduleFinder {
      * @return Ссылка на расписание конкретной группы.
      */
     public String findScheduleLink(String studyName, String groupName) {
-        try {
-            loadProperties();
-            setUpDocument();
-
-            findFieldOfStudy(studyName);
-            setUpDocument();
-
-            findSchedulesOfDefiniteStudy(groupName);
-            setUpDocument();
-
-            findScheduleForCurrentGroup(groupName);
-            return resultUrl;
-        } catch (Exception e) {
-            return "URL not found!";
-        }
-    }
-
-    /**
-     * Присваивание значений полям baseUrl и tempUrl на основе значения поля baseUrl в файле config.yml.
-     */
-    private void loadProperties() {
-        Properties properties = new Properties();
-        try {
-            properties.load(getClass().getResourceAsStream("/config.yml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        baseUrl = properties.getProperty("baseUrl");
-        tempUrl = baseUrl;
-    }
-
-    /**
-     * Метод, загружающий веб-страницу по значению поля tempUrl.
-     */
-    private void setUpDocument() {
-        try {
-            document = Jsoup.connect(tempUrl).get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            document = HtmlDocumentBuilder.getHtmlDocument(baseUrl);
+            document = HtmlDocumentBuilder.getHtmlDocument(findFieldOfStudy(studyName));
+            document = HtmlDocumentBuilder.getHtmlDocument(findSchedulesOfDefiniteStudy(groupName));
+            return findScheduleForCurrentGroup(groupName);
     }
 
     /**
@@ -73,13 +34,14 @@ public class SpbuScheduleFinder implements ScheduleFinder {
      *
      * @param studyName Название направления подготовки на английском.
      */
-    private void findFieldOfStudy(String studyName) {
+    private String findFieldOfStudy(String studyName) {
         Elements studyFields = document.select("li[class='list-group-item']");
         for (Element fieldOfStudy : studyFields) {
             if (studyName.equals(fieldOfStudy.text())) {
-                tempUrl = baseUrl + fieldOfStudy.select("a").attr("href").substring(1);
+                return baseUrl + fieldOfStudy.select("a").attr("href").substring(1);
             }
         }
+        return null;
     }
 
     /**
@@ -87,9 +49,9 @@ public class SpbuScheduleFinder implements ScheduleFinder {
      *
      * @param groupName Полное имя группы.
      */
-    private void findSchedulesOfDefiniteStudy(String groupName) {
+    private String findSchedulesOfDefiniteStudy(String groupName) {
         Element link = document.select("a[title*='" + groupName + "']").get(0);
-        tempUrl = baseUrl + link.attr("href").substring(1);
+        return baseUrl + link.attr("href").substring(1);
     }
 
     /**
@@ -98,13 +60,13 @@ public class SpbuScheduleFinder implements ScheduleFinder {
      *
      * @param groupName Полное имя группы.
      */
-    private void findScheduleForCurrentGroup(String groupName) {
+    private String findScheduleForCurrentGroup(String groupName) {
         final int startOfScheduleUrlInParam = 23;
-        tempUrl = baseUrl + document.getElementsContainingOwnText(groupName)
+        String tempUrl = baseUrl + document.getElementsContainingOwnText(groupName)
                 .get(0)
                 .parent()
                 .attr("onclick")
                 .substring(startOfScheduleUrlInParam);
-        resultUrl = tempUrl.substring(0, tempUrl.length() - 1);
+        return tempUrl.substring(0, tempUrl.length() - 1);
     }
 }
