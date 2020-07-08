@@ -26,7 +26,7 @@ public class SpbuScheduleResolver implements UniversityScheduleResolver {
         String[] separatedKeywords = keywords.split(";");
         String url = finder.findScheduleLink(separatedKeywords[0].trim(), separatedKeywords[1].trim());
 
-        return parser.getDailySchedule(DayOfWeek.FRIDAY, url).toString();
+        return parser.getDaySchedule(DayOfWeek.FRIDAY, url).toString();
     }
     //TODO на данный момент метод парсера возвращает объект, а не строку.
 }

@@ -9,7 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.parsers.ScheduleHtmlParser;
-import ru.studentsplatform.backend.service.parsers.entities.DaySchedule;
+import ru.studentsplatform.backend.service.parsers.entities.Schedule.DaySchedule;
+import ru.studentsplatform.backend.service.parsers.entities.Schedule.Lesson;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -31,18 +32,10 @@ import java.util.Locale;
  */
 @Service
 public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
-
     /**
-     * Объект, представляющий html-страницу.
+     * Логгер класса.
      */
     private static Logger log = LogManager.getLogger(SpbuScheduleHtmlParser.class);
-
-    private Document document;
-
-    /**
-     * Объект, представляющий элемент html-страницы.
-     */
-    private Element panelGroupElement;
 
 
     /**
@@ -53,17 +46,17 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
      * @return Schedule или
      * null, если requestedDay не найден на странице.
      */
-    public DaySchedule getDailySchedule(DayOfWeek requestedDay, String requestedUrl) {
-        setPanelGroupElement(requestedUrl);
+    public DaySchedule getDaySchedule(DayOfWeek requestedDay, String requestedUrl) {
+        Element panelGroupElement = getPanelGroupElement(requestedUrl);
 
-        int index = getTitleIndex(requestedDay
+        int index = getTitleIndex(panelGroupElement, requestedDay
                 .getDisplayName(TextStyle.FULL, Locale.ENGLISH));
 
         if (index == -1) {
             return null;
         }
 
-        return buildSchedule(index);
+        return buildSchedule(panelGroupElement, index);
     }
 
     /**
@@ -79,11 +72,12 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
      * 3
      * </p>
      *
-     * @param requestedDay день, индекс которого необходимо найти
+     * @param requestedDay      день, индекс которого необходимо найти
+     * @param panelGroupElement элемент, представляющий расписание за неделю
      * @return -1, если день на странице не найден (или передана произвольная строка).
      */
-    private int getTitleIndex(String requestedDay) {
-        Elements elements = getDayNameElements();
+    private int getTitleIndex(Element panelGroupElement, String requestedDay) {
+        Elements elements = getDayNameElements(panelGroupElement);
         for (int index = 0; index < elements.size(); index++) {
             if (elements
                     .get(index)
@@ -100,9 +94,10 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
      * Возвращает Elements, содержащий названия
      * дней, представленных на странице.
      *
-     * @return Elements
+     * @param panelGroupElement элемент, представляющий расписание за неделю
+     * @return элементы, содержащие название дней на панели
      */
-    private Elements getDayNameElements() {
+    private Elements getDayNameElements(Element panelGroupElement) {
         return panelGroupElement
                 .select("h4[class=panel-title]");
     }
@@ -110,32 +105,33 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
     /**
      * Строит объект Schedule, исходя из передаваемого значения index.
      *
-     * @param index порядковый номер дня на странице
+     * @param panelGroupElement элемент, представляющий расписание за неделю
+     * @param index             порядковый номер дня на странице
      * @return сконфигурированный объект Schedule
      */
-    private DaySchedule buildSchedule(int index) {
-        Elements elements = getLessonsElements(index);
-
-        String title = getDayNameElements()
+    private DaySchedule buildSchedule(Element panelGroupElement, int index) {
+        Elements elements = getLessonsElements(panelGroupElement, index);
+        String dayNameString = getDayNameElements(panelGroupElement)
                 .get(index)
-                .text();
-        List<String> times = new ArrayList<>();
-        List<String> disciplines = new ArrayList<>();
-        List<String> locations = new ArrayList<>();
-        List<String> educators = new ArrayList<>();
+                .text()
+                .toUpperCase();
+
+        DayOfWeek title = DayOfWeek
+                .valueOf(dayNameString.substring(0, dayNameString.indexOf(','))); //TODO подумать здесь
+
+        List<Lesson> lessons = new ArrayList<>();
 
         for (Element element : elements) {
-            times.add(getTime(element));
-            disciplines.add(getDisciplineName(element));
-            locations.add(getLocation(element));
-            educators.add(getEducatorName(element));
+            lessons.add(new Lesson(
+                    getTime(element),
+                    getDisciplineName(element),
+                    getLocation(element),
+                    getEducatorName(element)
+            ));
         }
 
         return new DaySchedule(title,
-                times,
-                disciplines,
-                locations,
-                educators);
+                lessons);
     }
 
     /**
@@ -143,11 +139,12 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
      * до списка Element, представляющего информацию
      * о каждом предмете в этот день.
      *
-     * @param index пробрасывается для вызова другого метода
+     * @param panelGroupElement элемент, представляющий расписание за неделю
+     * @param index             пробрасывается для вызова другого метода
      * @return Elements предметов заданного дня
      */
-    private Elements getLessonsElements(int index) {
-        return getDayElement(index)
+    private Elements getLessonsElements(Element panelGroupElement, int index) {
+        return getDayElement(panelGroupElement, index)
                 .select("li[class=common-list-item row]");
     }
 
@@ -155,10 +152,11 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
      * Сужает поиск по странице от Element, представляющего всю неделю расписания,
      * до Element, представляющего конкретный день.
      *
-     * @param index порядковый номер дня расписания
+     * @param panelGroupElement элемент, представляющий расписание за неделю
+     * @param index             порядковый номер дня расписания
      * @return Element конкретного дня расписания
      */
-    private Element getDayElement(int index) {
+    private Element getDayElement(Element panelGroupElement, int index) {
         return panelGroupElement
                 .select("div[class=panel panel-default]").get(index);
     }
@@ -167,28 +165,27 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
      * Сужает поиск по странице до панели с расписанием за неделю.
      *
      * @param requestedUrl адрес целевой страницы
+     * @return элемент страницы, представляющий расписание за неделю
      */
-    private void setPanelGroupElement(String requestedUrl) {
-        setHtmlDocument(requestedUrl);
-
-        panelGroupElement = document
-                .select("div[class=panel-group]")
-                .first();
+    private Element getPanelGroupElement(String requestedUrl) {
+        try {
+            return getHtmlDocument(requestedUrl)
+                    .select("div[class=panel-group]")
+                    .first();
+        } catch (IOException e) {
+            log.log(Level.FATAL, e);
+        }
+        return null;
     }
 
     /**
      * Создаёт {@link Document} из html-страницы, используя Jsoup.connect.
      *
      * @param requestedUrl адрес целевой страницы
+     * @return объект запрашиваемой html-страницы
      */
-    private void setHtmlDocument(String requestedUrl) {
-        try {
-            document = Jsoup
-                    .connect(requestedUrl)
-                    .get();
-        } catch (IOException e) {
-            log.log(Level.FATAL, e);
-        }
+    private Document getHtmlDocument(String requestedUrl) throws IOException {
+        return Jsoup.connect(requestedUrl).get();
     }
 
     /**
