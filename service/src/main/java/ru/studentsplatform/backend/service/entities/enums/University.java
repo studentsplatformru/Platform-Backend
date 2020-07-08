@@ -14,4 +14,18 @@ public enum University {
     public String getName() {
         return nameUniversity;
     }
+
+    /**
+     * Получаем университет из строки с его названием.
+     * @param universityName Строка с названием университета.
+     * @return Объект университета.
+     */
+    public static University getUniversityByName(String universityName){
+        for (University university: University.values()) {
+            if (university.getName().equals(universityName)){
+                return university;
+            }
+        }
+        return null;
+    }
 }

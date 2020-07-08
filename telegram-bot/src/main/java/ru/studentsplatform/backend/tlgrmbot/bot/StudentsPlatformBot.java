@@ -7,11 +7,14 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.studentsplatform.backend.service.ScheduleImplementationSwitcher;
-import ru.studentsplatform.backend.service.UniversityScheduleResolver;
+import ru.studentsplatform.backend.service.UniversityScheduleResolverImpl;
+import ru.studentsplatform.backend.service.entities.enums.University;
 import ru.studentsplatform.backend.tlgrmbot.config.BotCommands;
 import ru.studentsplatform.backend.tlgrmbot.dataStorage.RunningCommand;
 import javax.annotation.PostConstruct;
+import java.time.DayOfWeek;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 @Service
 public class StudentsPlatformBot extends TelegramLongPollingBot {
@@ -20,12 +23,10 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
         ApiContextInitializer.init();
     }
 
-    private UniversityScheduleResolver scheduleResolver;
+    private final UniversityScheduleResolverImpl universityScheduleResolverImpl;
 
-    private final ScheduleImplementationSwitcher scheduleImplementationSwitcher;
-
-    public StudentsPlatformBot(ScheduleImplementationSwitcher scheduleImplementationSwitcher) {
-        this.scheduleImplementationSwitcher = scheduleImplementationSwitcher;
+    public StudentsPlatformBot(UniversityScheduleResolverImpl universityScheduleResolverImpl) {
+        this.universityScheduleResolverImpl = universityScheduleResolverImpl;
     }
 
     /**
@@ -128,14 +129,6 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
         }
     }
 
-    /**
-     * Динамически переключает реализацию на основе заданного пользователем названия ВУЗа.
-     * @param universityName Сокращённое имя университета.
-     */
-    private void changeInterfaceRealisation(String universityName) {
-        scheduleResolver = scheduleImplementationSwitcher.switchRealisation(universityName);
-    }
-
     //---------------------------------------Тела команд бота------------------------------------------//
 
     /**
@@ -143,10 +136,13 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
      * @param update Сообщение от пользователя с параметрами для команды.
      */
     private void printSchedule(Update update) {
-        String[] commandParameters = getText(update).split(";", 2);
+        LinkedList<String> commandParameters = new LinkedList<>(Arrays.asList(getText(update).split(";")));
         try {
-            changeInterfaceRealisation(commandParameters[0].trim());
-            String schedule = scheduleResolver.getSchedule(commandParameters[1].trim());
+            String schedule = universityScheduleResolverImpl.
+                    getSchedule(University.getUniversityByName(commandParameters.get(0).trim()),
+                            commandParameters.get(1).trim(),
+                            commandParameters.get(2).trim(),
+                            DayOfWeek.valueOf(commandParameters.get(3).trim().toUpperCase())).toString();
             sendMessageToUser(schedule, getChatId(update));
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
             sendMessageToUser("Боюсь, по этим параметрам найти расписание не получится!", getChatId(update));
