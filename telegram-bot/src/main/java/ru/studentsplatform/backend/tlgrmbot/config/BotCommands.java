@@ -8,12 +8,6 @@ public enum BotCommands {
     private String commandMessage;
     private boolean requiresDataEntry;
 
-    private static HashMap<String, BotCommands> availableCommands = new HashMap<>();
-
-    static {
-        availableCommands.put(SCHEDULE.getCommandMessage(), SCHEDULE);
-    }
-
     BotCommands(String commandMessage, boolean reqiresDataEntry) {
         this.commandMessage = commandMessage;
         this.requiresDataEntry = reqiresDataEntry;
@@ -32,8 +26,13 @@ public enum BotCommands {
      * @param commandMessage Текст команды.
      * @return объект команды
      */
-    public static BotCommands transformMessageToCommand(String commandMessage) {
-        return availableCommands.get(commandMessage);
+    public static BotCommands getBotCommandByName(String commandMessage){
+        for (BotCommands command: BotCommands.values()) {
+            if(command.getCommandMessage().equals(commandMessage)){
+                return command;
+            }
+        }
+        return UNKNOWN;
     }
 
 

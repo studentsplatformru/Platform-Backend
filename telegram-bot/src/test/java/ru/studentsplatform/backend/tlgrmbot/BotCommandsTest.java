@@ -34,12 +34,12 @@ public class BotCommandsTest {
 
     @Test
     public void transformValidCommandToCommandObjectTest(){
-        assertEquals(BotCommands.transformMessageToCommand("/shedule"), BotCommands.SCHEDULE);
+        assertEquals(BotCommands.getBotCommandByName("/shedule"), BotCommands.SCHEDULE);
     }
 
     @Test
     public void transformInvalidCommandToCommandObjectTest(){
-        assertEquals(BotCommands.transformMessageToCommand("qrwrqwrqw"), BotCommands.UNKNOWN);
+        assertEquals(BotCommands.getBotCommandByName("qrwrqwrqw"), BotCommands.UNKNOWN);
     }
 
 

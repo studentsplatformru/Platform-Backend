@@ -92,7 +92,7 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
      * @param command Текст сообщения от пользователя.
      */
     private void transformMessageToCommandObject(long chatId, String command) {
-        BotCommands botCommand = BotCommands.transformMessageToCommand(command);
+        BotCommands botCommand = BotCommands.getBotCommandByName(command);
         if (botCommand == null) {
             botCommand = BotCommands.UNKNOWN;
         }
