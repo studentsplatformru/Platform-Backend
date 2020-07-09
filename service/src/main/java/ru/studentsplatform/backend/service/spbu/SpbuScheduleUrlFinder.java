@@ -5,11 +5,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.service.ScheduleFinder;
+import ru.studentsplatform.backend.service.ScheduleUrlFinder;
 import ru.studentsplatform.backend.service.HtmlDocumentBuilder;
 
 @Service
-public class SpbuScheduleUrlFinder implements ScheduleFinder {
+public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
 
     @Value("${spring.parser.baseUrl}")
     private String baseUrl;
