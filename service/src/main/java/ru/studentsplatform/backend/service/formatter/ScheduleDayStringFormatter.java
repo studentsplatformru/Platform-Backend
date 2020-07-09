@@ -17,6 +17,8 @@ public class ScheduleDayStringFormatter {
         formattedString = formattedString.replace("=", " = ");
         formattedString = formattedString.replace("'", "");
         formattedString = formattedString.replace("[", "");
+        formattedString = formattedString.replace("}", "");
+        formattedString = formattedString.replace("]", "");
         return formattedString;
     }
 
