@@ -20,9 +20,9 @@ public enum University {
      * @param universityName Строка с названием университета.
      * @return Объект университета.
      */
-    public static University getUniversityByName(String universityName){
+    public static University getUniversityByName(String universityName) {
         for (University university: University.values()) {
-            if (university.getName().equals(universityName)){
+            if (university.getName().equals(universityName)) {
                 return university;
             }
         }

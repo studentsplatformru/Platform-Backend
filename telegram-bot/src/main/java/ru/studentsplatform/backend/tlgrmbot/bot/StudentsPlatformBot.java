@@ -8,9 +8,12 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.studentsplatform.backend.service.UniversityScheduleResolverImpl;
+import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
 import ru.studentsplatform.backend.service.entities.enums.University;
 import ru.studentsplatform.backend.tlgrmbot.config.BotCommands;
 import ru.studentsplatform.backend.tlgrmbot.dataStorage.RunningCommand;
+import ru.studentsplatform.backend.service.formatter.ScheduleDayStringFormatter;
+
 import javax.annotation.PostConstruct;
 import java.time.DayOfWeek;
 import java.util.Arrays;
@@ -138,12 +141,13 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
     private void printSchedule(Update update) {
         LinkedList<String> commandParameters = new LinkedList<>(Arrays.asList(getText(update).split(";")));
         try {
-            String schedule = universityScheduleResolverImpl.
+            DaySchedule schedule = universityScheduleResolverImpl.
                     getSchedule(University.getUniversityByName(commandParameters.get(0).trim()),
                             commandParameters.get(1).trim(),
                             commandParameters.get(2).trim(),
-                            DayOfWeek.valueOf(commandParameters.get(3).trim().toUpperCase())).toString();
-            sendMessageToUser(schedule, getChatId(update));
+                            DayOfWeek.valueOf(commandParameters.get(3).trim().toUpperCase()));
+            String formattedSchedule = ScheduleDayStringFormatter.formatJson(schedule);
+            sendMessageToUser(formattedSchedule, getChatId(update));
         } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
             sendMessageToUser("Боюсь, по этим параметрам найти расписание не получится!", getChatId(update));
         }
