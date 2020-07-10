@@ -32,6 +32,5 @@ public class UniversityResolverFactory {
             default:
                 return null;
         }
-
     }
 }
