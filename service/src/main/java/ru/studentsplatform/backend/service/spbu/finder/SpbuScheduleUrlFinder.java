@@ -15,7 +15,7 @@ import java.io.IOException;
 @Service
 public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
 
-    @Value("${spring.parser.baseUrl:https://timetable.spbu.ru/}")
+    @Value("${spring.parser.baseUrl}")
     private String baseUrl;
 
     /**

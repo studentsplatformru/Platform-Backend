@@ -2,7 +2,6 @@ package ru.studentsplatform.backend.service.spbu.finder;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class SpbuScheduleUrlFinderTest {
     @Autowired
-    @Qualifier("finder")
     private ScheduleUrlFinder scheduleFinder;
 
     @Test
@@ -32,13 +30,10 @@ public class SpbuScheduleUrlFinderTest {
 
     @Configuration
     static class ServiceSpringTestConfiguration {
-        @Bean(name = "finder")
+        @Bean()
         public ScheduleUrlFinder getFinder() {
             return new SpbuScheduleUrlFinder();
         }
-
     }
 
 }
-
-//TODO: Spring не работает в тестах.

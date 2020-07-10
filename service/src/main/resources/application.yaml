@@ -1,0 +1,3 @@
+spring:
+  parser:
+    baseUrl: https://timetable.spbu.ru/
