@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service;
+package ru.studentsplatform.backend.service.spbu.parser;
 
 import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
 

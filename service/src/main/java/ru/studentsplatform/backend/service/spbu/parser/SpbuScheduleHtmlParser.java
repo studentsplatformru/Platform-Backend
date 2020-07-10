@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service.spbu;
+package ru.studentsplatform.backend.service.spbu.parser;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +10,6 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
 import ru.studentsplatform.backend.service.entities.Schedule.Lesson;
-import ru.studentsplatform.backend.service.ScheduleHtmlParser;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
@@ -28,7 +27,7 @@ import java.util.Locale;
  * Для подключения к удалённому URL используются класс {@link Document}
  * </p>
  *
- * @author spaulqr
+ * @author Perevalov Pavel (03.07.2020)
  */
 @Service
 public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
@@ -37,9 +36,8 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
      */
     private static Logger log = LogManager.getLogger(SpbuScheduleHtmlParser.class);
 
-
     /**
-     * Возвращает Schedule.
+     * Возвращает расписание на день.
      *
      * @param requestedDay день, на основе которого строится {@link DaySchedule}
      * @param requestedUrl адрес целевой страницы

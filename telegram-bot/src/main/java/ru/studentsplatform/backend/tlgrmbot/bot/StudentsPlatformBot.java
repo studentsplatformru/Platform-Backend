@@ -139,18 +139,6 @@ public class StudentsPlatformBot extends TelegramLongPollingBot {
      * @param update Сообщение от пользователя с параметрами для команды.
      */
     private void printSchedule(Update update) {
-        LinkedList<String> commandParameters = new LinkedList<>(Arrays.asList(getText(update).split(";")));
-        try {
-            DaySchedule schedule = universityScheduleResolverImpl.
-                    getSchedule(University.getUniversityByName(commandParameters.get(0).trim()),
-                            commandParameters.get(1).trim(),
-                            commandParameters.get(2).trim(),
-                            DayOfWeek.valueOf(commandParameters.get(3).trim().toUpperCase()));
-            String formattedSchedule = ScheduleDayStringFormatter.formatJson(schedule);
-            sendMessageToUser(formattedSchedule, getChatId(update));
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
-            sendMessageToUser("Боюсь, по этим параметрам найти расписание не получится!", getChatId(update));
-        }
     }
 
     //---------------------------------------Служебные методы------------------------------------------//

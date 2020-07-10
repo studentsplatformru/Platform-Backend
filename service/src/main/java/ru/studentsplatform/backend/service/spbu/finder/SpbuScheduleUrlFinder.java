@@ -1,11 +1,10 @@
-package ru.studentsplatform.backend.service.spbu;
+package ru.studentsplatform.backend.service.spbu.finder;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.service.ScheduleUrlFinder;
 import ru.studentsplatform.backend.service.HtmlDocumentBuilder;
 
 /**
@@ -28,16 +27,16 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
      * @return Ссылка на расписание для конкретной группы.
      */
     public String findScheduleLink(String studyName, String groupName) {
-            return findScheduleForCurrentGroup(HtmlDocumentBuilder.getHtmlDocument(
-                    findSchedulesOfDefiniteStudy(HtmlDocumentBuilder.getHtmlDocument(
-                            findFieldOfStudy(HtmlDocumentBuilder.getHtmlDocument(
-                                    baseUrl), studyName)), groupName)), groupName);
+        return findScheduleForCurrentGroup(HtmlDocumentBuilder.getHtmlDocument(
+                findSchedulesOfDefiniteStudy(HtmlDocumentBuilder.getHtmlDocument(
+                        findFieldOfStudy(HtmlDocumentBuilder.getHtmlDocument(
+                                baseUrl), studyName)), groupName)), groupName);
     }
 
     /**
      * Метод обнаруживает ссылку на страницу, соответствующую направлению подготовки.
      *
-     * @param htmlDoc документ веб-страницы.
+     * @param htmlDoc   документ веб-страницы.
      * @param studyName Название направления подготовки на английском.
      * @return Ссылка на страницу со списком форм обученя конкретного направления.
      */
@@ -54,7 +53,7 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
     /**
      * Метод обнаруживает ссылку на форму обучения, соответствующую имени группы.
      *
-     * @param htmlDoc документ веб-страницы.
+     * @param htmlDoc   документ веб-страницы.
      * @param groupName Полное имя группы.
      * @return Ссылка на страницу со списком групп на конкретной форме обучения.
      */
@@ -67,7 +66,7 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
      * Метод обнаруживает ссылку на конкретное расписание, соответствующую имени группы,
      * и, после небольшого форматирования возвращает значение.
      *
-     * @param htmlDoc документ веб-страницы.
+     * @param htmlDoc   документ веб-страницы.
      * @param groupName Полное имя группы.
      * @return Ссылка на страницу с расписанием для конкретной группы.
      */

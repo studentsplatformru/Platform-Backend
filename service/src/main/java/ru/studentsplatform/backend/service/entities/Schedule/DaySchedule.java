@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Класс, представляющий объект распиания за день. Включает
+ * Класс, представляющий объект распиания за день. Включает список объектов
+ * {@link Lesson}, представляющих расписание урока
+ *
+ * @author Perevalov Pavel (07.07.2020)
  */
 public class DaySchedule {
     private final DayOfWeek dayTitle;

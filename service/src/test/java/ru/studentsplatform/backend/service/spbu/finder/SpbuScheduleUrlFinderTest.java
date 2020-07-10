@@ -1,7 +1,8 @@
-package ru.studentsplatform.backend.service.spbu;
+package ru.studentsplatform.backend.service.spbu.finder;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import ru.studentsplatform.backend.service.spbu.finder.SpbuScheduleUrlFinder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
