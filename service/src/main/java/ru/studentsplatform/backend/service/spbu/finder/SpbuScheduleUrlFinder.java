@@ -29,12 +29,12 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
      * @return Ссылка на расписание для конкретной группы.
      */
     public String findScheduleLink(String studyName, String groupName) {
-        try{
+        try {
             return findScheduleForCurrentGroup(HtmlDocumentBuilder.getHtmlDocument(
                     findSchedulesOfDefiniteStudy(HtmlDocumentBuilder.getHtmlDocument(
                             findFieldOfStudy(HtmlDocumentBuilder.getHtmlDocument(
                                     baseUrl), studyName)), groupName)), groupName);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
