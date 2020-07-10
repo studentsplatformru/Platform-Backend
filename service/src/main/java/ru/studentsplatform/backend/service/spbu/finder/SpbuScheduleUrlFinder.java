@@ -25,7 +25,7 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
      * @param groupName Полное имя группы.
      * @return Ссылка на расписание для конкретной группы.
      */
-    public String findScheduleLink(String studyName, String groupName) {
+    public String findScheduleLink(String studyName, String groupName) throws IllegalArgumentException {
         Document document;
         try {
             document = HtmlDocumentBuilder.getHtmlDocument(baseUrl);
@@ -35,7 +35,7 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     /**
