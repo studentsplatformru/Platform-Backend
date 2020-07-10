@@ -46,5 +46,4 @@ public class UniversityScheduleResolverImpl implements UniversityScheduleResolve
 
         return parser.getDaySchedule(dayOfWeek, url);
     }
-
 }
