@@ -14,13 +14,8 @@ public class HtmlDocumentBuilder {
      * @param url Адрес веб-страницы.
      * @return Докусени искомой веб-страницы.
      */
-    public static Document getHtmlDocument(String url) {
-        try {
+    public static Document getHtmlDocument(String url) throws IOException {
             return Jsoup.connect(url).get();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }

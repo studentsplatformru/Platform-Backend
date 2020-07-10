@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.HtmlDocumentBuilder;
 
+import java.io.IOException;
+
 /**
  * Класс представляет из себя реализацию интерфейса ScheduleUrlFinder для
  * университета СПБГУ. Класс необходим для обнаружения страницы с
@@ -27,10 +29,15 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
      * @return Ссылка на расписание для конкретной группы.
      */
     public String findScheduleLink(String studyName, String groupName) {
-        return findScheduleForCurrentGroup(HtmlDocumentBuilder.getHtmlDocument(
-                findSchedulesOfDefiniteStudy(HtmlDocumentBuilder.getHtmlDocument(
-                        findFieldOfStudy(HtmlDocumentBuilder.getHtmlDocument(
-                                baseUrl), studyName)), groupName)), groupName);
+        try{
+            return findScheduleForCurrentGroup(HtmlDocumentBuilder.getHtmlDocument(
+                    findSchedulesOfDefiniteStudy(HtmlDocumentBuilder.getHtmlDocument(
+                            findFieldOfStudy(HtmlDocumentBuilder.getHtmlDocument(
+                                    baseUrl), studyName)), groupName)), groupName);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
