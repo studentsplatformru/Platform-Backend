@@ -33,7 +33,7 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
             document = findSchedulesOfDefiniteStudy(document, groupName);
             return findScheduleForCurrentGroup(document, groupName);
         } catch (IOException | NullPointerException e) {
-                //ToDo: по идее можно не обрабатывать, но под вопросом!
+            e.printStackTrace();
         }
         throw new IllegalArgumentException();
     }
