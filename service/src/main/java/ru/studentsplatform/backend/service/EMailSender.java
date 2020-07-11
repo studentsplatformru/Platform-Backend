@@ -27,6 +27,7 @@ public interface EMailSender {
      * @param subject Заголовок сообщения
      * @param body основной текст сообщения.
      * @param contentPath Адрес контета(файла) сообщения
+     * @throws IOException в случае неправильного пути файла
      * */
     void send(@NonNull String to, String subject, String body, String contentPath) throws IOException;
 
@@ -36,6 +37,7 @@ public interface EMailSender {
      * @param subject Заголовок сообщения
      * @param body основной текст сообщения.
      * @param contentPaths Адреса контета(файлов) сообщения
+     * @throws IOException в случае неправильного пути файла
      */
     void send(@NonNull String to, String subject, String body, List<String> contentPaths) throws IOException;
 
@@ -45,6 +47,7 @@ public interface EMailSender {
      * @param subject Заголовок сообщения
      * @param htmlPath основной текст сообщения. Может быть в формате html
      * @param contentPaths Адреса контета(файлов) сообщения
+     * @throws IOException в случае неправильного пути файла
      */
     void sendHtml(@NonNull String to, String subject, String htmlPath, @Nullable List<String> contentPaths) throws IOException;
 }

@@ -19,6 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
+
+/**
+ * Тесты для {@link ru.studentsplatform.backend.service.EMailSender}
+ */
 @SpringBootTest
 public class EMailSenderTest {
 
@@ -31,6 +35,9 @@ public class EMailSenderTest {
     @MockBean
     private MimeMessage mimeMessage;
 
+    /**
+     * Тест на простую отправку сообщения
+     */
     @Test
     public void sendMailTest() {
         String subject = "Some subject";
@@ -44,6 +51,10 @@ public class EMailSenderTest {
 
     }
 
+    /**
+     * Тест отправки сообщения со вложениями
+     * @throws IOException в случае неправильного пути файла
+     */
     @Test
     public void sendMailTestWithContent() throws IOException {
         String subject = "Some subject";
@@ -66,6 +77,9 @@ public class EMailSenderTest {
 
     }
 
+    /**
+     * Тест с выдачей {@link NoSuchFileException} т.к. не найдёт нужный файл
+     */
     @Test
     public void sendMailTestWithContentFail() {
         String subject = "Some subject";
@@ -88,7 +102,9 @@ public class EMailSenderTest {
     }
 
 
-
+    /**
+     * Необходимая добавка для поднятия контекста и подгрузки тестируемого бина
+     */
     @SpringBootApplication
     static class TestConfiguration{
 
