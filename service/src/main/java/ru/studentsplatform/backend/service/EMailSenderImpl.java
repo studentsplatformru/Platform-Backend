@@ -8,6 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import ru.studentsplatform.backend.service.emailinterface.EMailSender;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -22,14 +23,14 @@ import java.util.Scanner;
 
 /**
  * Реализация {@link EMailSender}
- * Адресс отправки устанавливается в конфигурациях
+ * Адресс отправки устанавливается в конфигурациях.
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  * */
 @Service
-public class EMailSenderImpl  implements EMailSender{
+public class EMailSenderImpl  implements EMailSender {
 
     /**
-     * Адрес отправки
+     * Адрес отправки.
      */
     @Value("${spring.mail.username}")
     private String from;
@@ -37,7 +38,7 @@ public class EMailSenderImpl  implements EMailSender{
     private final JavaMailSender javaMailSender;
 
     /**
-     * @param javaMailSender утлилитный сприногвяа реализация,
+     * @param javaMailSender утлилитный сприноговая реализация,
      * которая обеспечивает логику отправки сообщения на более низком уровне.
      */
     public EMailSenderImpl(JavaMailSender javaMailSender) {
@@ -48,7 +49,7 @@ public class EMailSenderImpl  implements EMailSender{
      * {@inheritDoc}
      */
     @Override
-    public void send(@NonNull String to, String subject, String body){
+    public void send(@NonNull String to, String subject, String body) {
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 
@@ -64,7 +65,9 @@ public class EMailSenderImpl  implements EMailSender{
      * {@inheritDoc}
      */
     @Override
-    public void send(@NonNull String to, String subject, String body, String contentPath) throws IOException{
+    public void send(
+            @NonNull String to, String subject,
+            String body, String contentPath) throws IOException {
 
         MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -80,7 +83,9 @@ public class EMailSenderImpl  implements EMailSender{
             Path path = Paths.get(contentPath);
             byte[] content = Files.readAllBytes(path);
 
-            helper.addAttachment(path.getFileName().toString(), new ByteArrayResource(content));
+            helper.addAttachment(
+                    path.getFileName().toString(),
+                    new ByteArrayResource(content));
 
             javaMailSender.send(message);
 
@@ -94,7 +99,9 @@ public class EMailSenderImpl  implements EMailSender{
      * {@inheritDoc}
      */
     @Override
-    public void send(@NonNull String to, String subject, String body, List<String> contentPaths) throws IOException{
+    public void send(
+            @NonNull String to, String subject,
+            String body, List<String> contentPaths) throws IOException {
 
         MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -111,7 +118,9 @@ public class EMailSenderImpl  implements EMailSender{
                 Path path = Paths.get(contentPath);
                 byte[] content = Files.readAllBytes(path);
 
-                helper.addAttachment(path.getFileName().toString(), new ByteArrayResource(content));
+                helper.addAttachment(
+                        path.getFileName().toString(),
+                        new ByteArrayResource(content));
             }
 
             javaMailSender.send(message);
@@ -128,7 +137,7 @@ public class EMailSenderImpl  implements EMailSender{
     @Override
     public void sendHtml(
             @NonNull String to, String subject,
-            String htmlPath, @Nullable List<String> contentPaths) throws IOException{
+            String htmlPath, @Nullable List<String> contentPaths) throws IOException {
 
         MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -137,8 +146,8 @@ public class EMailSenderImpl  implements EMailSender{
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
             Scanner scanner = new Scanner(
-                            Paths.get(htmlPath),
-                            StandardCharsets.UTF_8.name());
+                    Paths.get(htmlPath),
+                    StandardCharsets.UTF_8.name());
             //здесь мы можем использовать разделитель, например: "\\A", "\\Z" или "\\z"
             String html = scanner.useDelimiter("\\A").next();
             scanner.close();
@@ -149,12 +158,15 @@ public class EMailSenderImpl  implements EMailSender{
             helper.setFrom(from);
             helper.setTo(to);
 
-            if (contentPaths != null)
-            for (String contentPath : contentPaths){
-                Path path = Paths.get(contentPath);
-                byte[] content = Files.readAllBytes(path);
+            if (contentPaths != null) {
+                for (String contentPath : contentPaths) {
+                    Path path = Paths.get(contentPath);
+                    byte[] content = Files.readAllBytes(path);
 
-                helper.addAttachment(path.getFileName().toString(), new ByteArrayResource(content));
+                    helper.addAttachment(
+                            path.getFileName().toString(),
+                            new ByteArrayResource(content));
+                }
             }
 
             javaMailSender.send(message);

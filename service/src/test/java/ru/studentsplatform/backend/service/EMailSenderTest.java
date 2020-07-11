@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import ru.studentsplatform.backend.service.emailinterface.EMailSender;
 
 import javax.mail.internet.MimeMessage;
 
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.verify;
 
 
 /**
- * Тесты для {@link ru.studentsplatform.backend.service.EMailSender}
+ * Тесты для {@link EMailSender}
  */
 @SpringBootTest
 public class EMailSenderTest {
@@ -36,7 +37,7 @@ public class EMailSenderTest {
     private MimeMessage mimeMessage;
 
     /**
-     * Тест на простую отправку сообщения
+     * Тест на простую отправку сообщения.
      */
     @Test
     public void sendMailTest() {
@@ -52,8 +53,8 @@ public class EMailSenderTest {
     }
 
     /**
-     * Тест отправки сообщения со вложениями
-     * @throws IOException в случае неправильного пути файла
+     * Тест отправки сообщения со вложениями.
+     * @throws IOException в случае неправильного пути файла.
      */
     @Test
     public void sendMailTestWithContent() throws IOException {
@@ -78,7 +79,7 @@ public class EMailSenderTest {
     }
 
     /**
-     * Тест с выдачей {@link NoSuchFileException} т.к. не найдёт нужный файл
+     * Тест с выдачей {@link NoSuchFileException} т.к. не найдёт нужный файл.
      */
     @Test
     public void sendMailTestWithContentFail() {
@@ -103,7 +104,7 @@ public class EMailSenderTest {
 
 
     /**
-     * Необходимая добавка для поднятия контекста и подгрузки тестируемого бина
+     * Необходимая добавка для поднятия контекста и подгрузки тестируемого бина.
      */
     @SpringBootApplication
     static class TestConfiguration{
