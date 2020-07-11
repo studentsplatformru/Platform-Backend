@@ -61,7 +61,8 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
      * @param groupName Полное имя группы.
      * @return Документ, соответствующий ссылке со списком групп на конкретной форме обучения.
      */
-    private Document findSchedulesOfDefiniteStudy(Document htmlDoc, String groupName) throws IOException, NullPointerException {
+    private Document findSchedulesOfDefiniteStudy(Document htmlDoc,
+                                                  String groupName) throws IOException, NullPointerException {
         Element link = htmlDoc.select("a[title*='" + groupName + "']").first();
         return HtmlDocumentBuilder.getHtmlDocument(baseUrl + link.attr("href").substring(1));
     }
