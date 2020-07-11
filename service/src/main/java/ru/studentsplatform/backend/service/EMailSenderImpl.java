@@ -27,7 +27,7 @@ import java.util.Scanner;
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  * */
 @Service
-public class EMailSenderImpl  implements EMailSender {
+public class EMailSenderImpl implements EMailSender {
 
     /**
      * Адрес отправки.
@@ -114,7 +114,7 @@ public class EMailSenderImpl  implements EMailSender {
             helper.setSubject(subject);
             helper.setText(body);
 
-            for (String contentPath : contentPaths){
+            for (String contentPath : contentPaths) {
                 Path path = Paths.get(contentPath);
                 byte[] content = Files.readAllBytes(path);
 
