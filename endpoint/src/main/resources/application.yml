@@ -8,15 +8,4 @@ management:
     health:
       show-details: always
 
-#properties form EMailSender
-spring:
-  mail:
-    host: smtp.gmail.com
-    #    here must be application password
-    password: test789test
-    #    here must be application username
-    username: studentplatform.no.reply@gmail.com
-    port: 465
-    protocol: smtps
-
 mail.debug: true

@@ -1,43 +1,50 @@
 package ru.studentsplatform.backend.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Service;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 
+import java.io.IOException;
+import java.util.List;
 
 /**
- * Simple class for sending e-mail message.
- * Address "from" set up in configuration.
- * Can be extended in future by overloading methods
- * @author Danila K.
+ * Утилитный класс для отправки сообщения
+ * Адресс отправки устанавливается в конфигурациях
+ * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  * */
-
-@Service
-public class EMailSender {
-
-    @Value("${spring.mail.username}")
-    private String from;
-
-    @Autowired
-    private JavaMailSender javaMailSender;
+public interface EMailSender {
 
     /**
-     * Method to send email messages
-     * @param to is email to send
-     * @param subject is message subject
-     * @param body is main text of html
+     * Метод для отправки сообщений без вложенных файлов
+     * @param to адрес отправки
+     * @param subject Заголовок сообщения
+     * @param body основной текст сообщения. Может быть в формате html
      * */
-    public void send(String to, String subject, String body){
+    void send(@NonNull String to, String subject, String body);
 
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
+    /**
+     * Метод для отправки сообщений с контентом(файлом)
+     * @param to адрес отправки
+     * @param subject Заголовок сообщения
+     * @param body основной текст сообщения.
+     * @param contentPath Адрес контета(файла) сообщения
+     * */
+    void send(@NonNull String to, String subject, String body, String contentPath) throws IOException;
 
-        mailMessage.setFrom(from);
-        mailMessage.setTo(to);
-        mailMessage.setSubject(subject);
-        mailMessage.setText(body);
+    /**
+     Метод для отправки сообщений с множественным контентом(файлами)
+     * @param to адрес отправки
+     * @param subject Заголовок сообщения
+     * @param body основной текст сообщения.
+     * @param contentPaths Адреса контета(файлов) сообщения
+     */
+    void send(@NonNull String to, String subject, String body, List<String> contentPaths) throws IOException;
 
-        javaMailSender.send(mailMessage);
-    }
+    /**
+     Метод для отправки сообщений с множественным контентом(файлами)
+     * @param to адрес отправки
+     * @param subject Заголовок сообщения
+     * @param htmlPath основной текст сообщения. Может быть в формате html
+     * @param contentPaths Адреса контета(файлов) сообщения
+     */
+    void sendHtml(@NonNull String to, String subject, String htmlPath, @Nullable List<String> contentPaths) throws IOException;
 }

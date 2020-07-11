@@ -46,12 +46,20 @@
 
 
         <!-- https://mvnrepository.com/artifact/org.subethamail/subethasmtp -->
+        <!-- Test dependency -->
         <dependency>
             <groupId>org.subethamail</groupId>
             <artifactId>subethasmtp</artifactId>
             <version>3.1.7</version>
             <scope>test</scope>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>ru.studentsplatform</groupId>-->
+<!--            <artifactId>endpoint</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
 
     </dependencies>
