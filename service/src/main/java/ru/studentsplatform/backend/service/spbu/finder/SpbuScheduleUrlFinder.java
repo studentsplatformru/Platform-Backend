@@ -11,6 +11,8 @@ import java.io.IOException;
  * Класс представляет из себя реализацию интерфейса ScheduleUrlFinder для
  * университета СПБГУ. Класс необходим для обнаружения страницы с
  * расписанием интересующей нас группы.
+ *
+ * @author Artamonov Alexandr
  */
 @Service
 public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
