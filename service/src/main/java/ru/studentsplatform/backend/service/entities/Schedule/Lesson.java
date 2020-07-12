@@ -1,24 +1,34 @@
 package ru.studentsplatform.backend.service.entities.Schedule;
 
+import java.time.LocalTime;
+
 /**
  * Класс, представляющий объект расписания урока.
  */
 public class Lesson {
-    private String time;
+    private LocalTime lessonStartTime;
+    private LocalTime lessonEndTime;
     private String discipline;
     private String location;
     private String teacher;
 
+
     /**
      * Конструктор.
      *
-     * @param time       временной интервал, в который проходит урок
-     * @param discipline название урока
-     * @param location   место проведения урока
-     * @param teacher    имя преподавателя
+     * @param lessonStartTime время начала урока
+     * @param lessonEndTime   время конца урока
+     * @param discipline      название урока
+     * @param location        место проведения урока
+     * @param teacher         имя преподавателя
      */
-    public Lesson(String time, String discipline, String location, String teacher) {
-        this.time = time; //TODO вот тут должен быть объект а не строка
+    public Lesson(LocalTime lessonStartTime,
+                  LocalTime lessonEndTime,
+                  String discipline,
+                  String location,
+                  String teacher) {
+        this.lessonStartTime = lessonStartTime;
+        this.lessonEndTime = lessonEndTime;
         this.discipline = discipline;
         this.location = location;
         this.teacher = teacher;
@@ -26,11 +36,11 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return "Lesson{" +
-                "time='" + time + '\'' +
-                ", discipline='" + discipline + '\'' +
-                ", location='" + location + '\'' +
-                ", teacher='" + teacher + '\'' +
-                '}'; //TODO можно сделать лучше?
+        return String.format("Lesson: %s-%s; %s; %s; %s",
+                lessonStartTime,
+                lessonEndTime,
+                discipline,
+                location,
+                teacher);
     }
 }

@@ -3,246 +3,256 @@ package ru.studentsplatform.backend.service.spbu.parser;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.stereotype.Service;
+import ru.studentsplatform.backend.service.HtmlDocumentBuilder;
 import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
 import ru.studentsplatform.backend.service.entities.Schedule.Lesson;
 
 import java.io.IOException;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 /**
- * Класс парсит определённую html-страницу расписания университета СПБГУ.
- * Класс подразумевает работу с конкретными URL.
- * <p>
- * Класс использует библиотеку {@link Jsoup},
- * рекомендуются к ознакомлению классы {@link Element} и {@link Elements} этой библиотеки.
- * Для подключения к удалённому URL используются класс {@link Document}
- * </p>
- *
- * @author Perevalov Pavel (03.07.2020)
+ * Класс реализует интерфейс {@link ScheduleHtmlParser} и предлагает парсинг расписания
+ * конкретной страницы университета СПБГУ.
  */
-@Service
 public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
+
     /**
-     * Логгер класса.
+     * Логгер.
      */
     private static Logger log = LogManager.getLogger(SpbuScheduleHtmlParser.class);
 
     /**
-     * Возвращает расписание на день.
+     * Возвращает объект класса DaySchedule, представляющего расписание за конкрктный день.
      *
-     * @param requestedDay день, на основе которого строится {@link DaySchedule}
-     * @param requestedUrl адрес целевой страницы
-     * @return Schedule или
-     * null, если requestedDay не найден на странице.
+     * @param requestedDay день, расписание которого необъодимо получить
+     * @param requestedUrl адрес html-страницы с расписанием за неделю университета СПБГУ
+     * @return объект расписания за день
      */
+    @Override
     public DaySchedule getDaySchedule(DayOfWeek requestedDay, String requestedUrl) {
-        Element panelGroupElement = getPanelGroupElement(requestedUrl);
+        Element containerElement = getContainerElement(requestedUrl);
+        Element dayElement = getDayElement(requestedDay, containerElement);
 
-        int index = getTitleIndex(panelGroupElement, requestedDay
-                .getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+        String weekStartDate = getWeekStartDate(containerElement);
 
-        if (index == -1) {
-            return null;
-        }
-
-        return buildSchedule(panelGroupElement, index);
+        return buildSchedule(weekStartDate, dayElement);
     }
 
     /**
-     * Возвращает порядковый номер, соответствующий дню недели, представленной на странице.
-     * <p>
-     * Например, если на странице присутствует 3 дня расписания:
-     * Monday,
-     * Wednesday,
-     * Friday
-     * - то индексы каждого дня расписания будут соотвественно:
-     * 1,
-     * 2,
-     * 3
-     * </p>
+     * Возвращает список объектов класса DaySchedule.
      *
-     * @param requestedDay      день, индекс которого необходимо найти
-     * @param panelGroupElement элемент, представляющий расписание за неделю
-     * @return -1, если день на странице не найден (или передана произвольная строка).
+     * @param requestedUrl адрес html-страницы с расписанием за неделю университета СПБГУ
+     * @return список объектов, представляющих расписание за день
      */
-    private int getTitleIndex(Element panelGroupElement, String requestedDay) {
-        Elements elements = getDayNameElements(panelGroupElement);
-        for (int index = 0; index < elements.size(); index++) {
-            if (elements
-                    .get(index)
-                    .text()
-                    .startsWith(requestedDay)) {
-                return index;
+    @Override
+    public List<DaySchedule> getWeekSchedule(String requestedUrl) {
+        List<DaySchedule> daySchedules = new ArrayList<>();
+
+        Element containerElement = getContainerElement(requestedUrl);
+        Elements daysElements = getDaysElements(containerElement);
+
+        String weekStartDate = getWeekStartDate(containerElement);
+
+        daysElements
+                .stream()
+                .skip(1)
+                .forEach((dayElement) ->
+                        daySchedules.add(buildSchedule(weekStartDate, dayElement))
+                );
+
+        return daySchedules;
+    }
+
+    /**
+     * Получает элемент, хранящий всю необходимую информацию для парсинга расписания.
+     *
+     * @param requestedUrl конкретный адрес расписания за неделю на сайте Spbu
+     * @return элемент страницы
+     */
+    private Element getContainerElement(String requestedUrl) {
+        try {
+            return HtmlDocumentBuilder.getHtmlDocument(requestedUrl)
+                    .select("div[class=container]")
+                    .get(1);
+        } catch (IOException e) {
+            log.log(Level.FATAL, e);
+        }
+        throw new IllegalArgumentException();
+    }
+
+    /**
+     * Извлекает аттрибут из переданного элемента.
+     *
+     * @param containerElement элемент, хранящий информацию о дате
+     * @return строка в формате: yyyy-MM-dd
+     */
+    private String getWeekStartDate(Element containerElement) {
+        return containerElement
+                .getElementById("week")
+                .attr("data-weekmonday");
+    }
+
+    /**
+     * Возвращает элемент расписания запрашиваемого дня.
+     *
+     * @param requestedDay enum базового класса
+     * @param container    элемент, хранящий информацию о расписании за неделю
+     * @return элемент, представляющий расписание за день
+     */
+    private Element getDayElement(DayOfWeek requestedDay, Element container) {
+        Elements daysElements = getDaysElements(container);
+
+        String day = requestedDay
+                .getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+
+        for (Element dayElement : daysElements) {
+            String title = getDayTitle(dayElement);
+            if (title.equals(day)) {
+                return dayElement;
             }
         }
-
-        return -1;
+        throw new IllegalArgumentException();
     }
 
     /**
-     * Возвращает Elements, содержащий названия
-     * дней, представленных на странице.
+     * Возвращает все элементы контейнера, представляющие расписание за день.
      *
-     * @param panelGroupElement элемент, представляющий расписание за неделю
-     * @return элементы, содержащие название дней на панели
+     * @param container элемент, хранящий информацию о расписании за неделю
+     * @return список элементов
      */
-    private Elements getDayNameElements(Element panelGroupElement) {
-        return panelGroupElement
-                .select("h4[class=panel-title]");
+    private Elements getDaysElements(Element container) {
+        return container
+                .select("div[class=panel panel-default]");
     }
 
     /**
-     * Строит объект Schedule, исходя из передаваемого значения index.
+     * В зависимости от переданных параметров строит объект Schedule, представляющий расписание за день.
      *
-     * @param panelGroupElement элемент, представляющий расписание за неделю
-     * @param index             порядковый номер дня на странице
-     * @return сконфигурированный объект Schedule
+     * @param weekStartDate строка, представляющая дату занятий в формате: yyyy-MM-dd
+     * @param dayElement    элемент, на основе которого строится Schedule
+     * @return объект расписания за день
      */
-    private DaySchedule buildSchedule(Element panelGroupElement, int index) {
-        Elements elements = getLessonsElements(panelGroupElement, index);
-        String dayNameString = getDayNameElements(panelGroupElement)
-                .get(index)
-                .text()
-                .toUpperCase();
+    private DaySchedule buildSchedule(String weekStartDate, Element dayElement) {
+        String dayName = getDayTitle(dayElement);
+        DayOfWeek dayOfWeek = DayOfWeek.valueOf(dayName.toUpperCase());
+        LocalDate actualDate = getActualDate(weekStartDate, dayOfWeek);
 
-        DayOfWeek title = DayOfWeek
-                .valueOf(dayNameString.substring(0, dayNameString.indexOf(','))); //TODO подумать здесь
+        Elements lessonElements = getLessonElements(dayElement);
+        List<Lesson> lessons = buildLessons(lessonElements);
 
+        return new DaySchedule(dayOfWeek, actualDate, lessons);
+    }
+
+    /**
+     * Возвращает дату согласно переданным аргументам.
+     *
+     * @param weekStartDate дата начала недели
+     * @param dayOfWeek     день недели
+     * @return объект, представляющий конкретную дату на данной неделе
+     */
+    private LocalDate getActualDate(String weekStartDate, DayOfWeek dayOfWeek) {
+        return LocalDate
+                .parse(weekStartDate)
+                .plusDays(dayOfWeek.getValue() - 1);
+    }
+
+    /**
+     * Превращает список элементов в список объектов, представляющих отдельный урок.
+     *
+     * @param lessonElements список элементов, представляющих урок
+     * @return сконцтруированный список Lesson
+     */
+    private List<Lesson> buildLessons(Elements lessonElements) {
         List<Lesson> lessons = new ArrayList<>();
+        for (Element lesson : lessonElements) {
+            String[] time = getTime(lesson).split("–");
 
-        for (Element element : elements) {
-            lessons.add(new Lesson(
-                    getTime(element),
-                    getDisciplineName(element),
-                    getLocation(element),
-                    getEducatorName(element)
-            ));
+            lessons.add(
+                    new Lesson(
+                            LocalTime.parse(time[0]),
+                            LocalTime.parse(time[1]),
+                            getDisciplineName(lesson),
+                            getLocation(lesson),
+                            getEducatorName(lesson)
+                    ));
         }
-
-        return new DaySchedule(title,
-                lessons);
+        return lessons;
     }
 
     /**
-     * Сужает поиск по странице от Element, представляющего день расписания,
-     * до списка Element, представляющего информацию
-     * о каждом предмете в этот день.
+     * Сужает поиск по странице от элемента, представляющего день расписания,
+     * до списка Element, представляющего информацию о каждом предмете в этот день.
      *
-     * @param panelGroupElement элемент, представляющий расписание за неделю
-     * @param index             пробрасывается для вызова другого метода
+     * @param dayElement элемент дня расписания
      * @return Elements предметов заданного дня
      */
-    private Elements getLessonsElements(Element panelGroupElement, int index) {
-        return getDayElement(panelGroupElement, index)
+    private Elements getLessonElements(Element dayElement) {
+        return dayElement
                 .select("li[class=common-list-item row]");
     }
 
     /**
-     * Сужает поиск по странице от Element, представляющего всю неделю расписания,
-     * до Element, представляющего конкретный день.
+     * Согласно заданной инструкции извлекает {@link String} из переданного элемента.
      *
-     * @param panelGroupElement элемент, представляющий расписание за неделю
-     * @param index             порядковый номер дня расписания
-     * @return Element конкретного дня расписания
-     */
-    private Element getDayElement(Element panelGroupElement, int index) {
-        return panelGroupElement
-                .select("div[class=panel panel-default]").get(index);
-    }
-
-    /**
-     * Сужает поиск по странице до панели с расписанием за неделю.
-     *
-     * @param requestedUrl адрес целевой страницы
-     * @return элемент страницы, представляющий расписание за неделю
-     */
-    private Element getPanelGroupElement(String requestedUrl) {
-        try {
-            return getHtmlDocument(requestedUrl)
-                    .select("div[class=panel-group]")
-                    .first();
-        } catch (IOException e) {
-            log.log(Level.FATAL, e);
-        }
-        return null;
-    }
-
-    /**
-     * Создаёт {@link Document} из html-страницы, используя Jsoup.connect.
-     *
-     * @param requestedUrl адрес целевой страницы
-     * @return объект запрашиваемой html-страницы
-     */
-    private Document getHtmlDocument(String requestedUrl) throws IOException {
-        return Jsoup.connect(requestedUrl).get();
-    }
-
-    /**
-     * Согласно заданной инструкции извлекает {@link String} из переданного
-     * Element}.
-     *
-     * @param element Element может содержать несколько тегов с указанным
-     *                аттрибутом. Тогда метод вернёт соединённую
-     *                через пробел строку с контентом, извлечённым
-     *                из каждого элемента.
+     * @param dayElement элемент дня расписания
      * @return строка с временем занятия
      */
-    private String getTime(Element element) {
-        return element
+    private String getDayTitle(Element dayElement) {
+        return dayElement
+                .select("h4[class=panel-title]")
+                .text()
+                .split(",")[0];
+    }
+
+    /**
+     * Согласно заданной инструкции извлекает {@link String} из переданного элемента.
+     *
+     * @param dayElement элемент дня расписания
+     * @return строка с временем занятия
+     */
+    private String getTime(Element dayElement) {
+        return dayElement
                 .select("div[class=col-sm-2 studyevent-datetime]").text();
     }
 
     /**
-     * Согласно заданной инструкции извлекает {@link String} из переданного
-     * Element.
+     * Согласно заданной инструкции извлекает {@link String} из переданного элемента.
      *
-     * @param element Element может содержать несколько тегов с указанным
-     *                аттрибутом. Тогда метод вернёт соединённую
-     *                через пробел строку с контентом, извлечённым
-     *                из каждого элемента.
+     * @param dayElement элемент дня расписания
      * @return строка с названием дисциплины
      */
-    private String getDisciplineName(Element element) {
-        return element
+    private String getDisciplineName(Element dayElement) {
+        return dayElement
                 .select("div[class=col-sm-4 studyevent-subject]").text();
     }
 
     /**
-     * Согласно заданной инструкции извлекает {@link String} из переданного
-     * Element.
+     * Согласно заданной инструкции извлекает {@link String} из переданного элемента.
      *
-     * @param element Element может содержать несколько тегов с указанным
-     *                аттрибутом. Тогда метод вернёт соединённую
-     *                через пробел строку с контентом, извлечённым
-     *                из каждого элемента.
+     * @param dayElement элемент дня расписания
      * @return строка с местом проведения занятия
      */
-    private String getLocation(Element element) {
-        return element
+    private String getLocation(Element dayElement) {
+        return dayElement
                 .select("div[class=col-sm-3 studyevent-locations]").text();
     }
 
     /**
-     * Согласно заданной инструкции извлекает {@link String} из переданного
-     * Element.
+     * Согласно заданной инструкции извлекает {@link String} из переданного элемента.
      *
-     * @param element Element может содержать несколько тегов с указанным
-     *                аттрибутом. Тогда метод вернёт соединённую
-     *                через пробел строку с контентом, извлечённым
-     *                из каждого элемента.
+     * @param dayElement элемент дня расписания
      * @return строка с именем преподавателя
      */
-    private String getEducatorName(Element element) {
-        return element
+    private String getEducatorName(Element dayElement) {
+        return dayElement
                 .select("div[class=col-sm-3 studyevent-educators]").text();
     }
 }

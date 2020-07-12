@@ -5,7 +5,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.service.HtmlDocumentBuilder;
 
 /**
  * Класс представляет из себя реализацию интерфейса ScheduleUrlFinder для
@@ -27,10 +26,11 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
      * @return Ссылка на расписание для конкретной группы.
      */
     public String findScheduleLink(String studyName, String groupName) {
-        return findScheduleForCurrentGroup(HtmlDocumentBuilder.getHtmlDocument(
+/*        return findScheduleForCurrentGroup(HtmlDocumentBuilder.getHtmlDocument(
                 findSchedulesOfDefiniteStudy(HtmlDocumentBuilder.getHtmlDocument(
                         findFieldOfStudy(HtmlDocumentBuilder.getHtmlDocument(
-                                baseUrl), studyName)), groupName)), groupName);
+                                baseUrl), studyName)), groupName)), groupName);*/
+        return null; //TODO тута нужно что-то делать, комплиятор жалуется
     }
 
     /**
