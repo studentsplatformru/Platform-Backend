@@ -11,15 +11,15 @@ public class VkBotUtilTest {
     private final String HELLO_MSG;
 
     public VkBotUtilTest(
-            @Value("${GROUP_ID}") final int GROUP_ID,
-            @Value("${GROUP_ACCESS_TOKEN}") final String GROUP_ACCESS_TOKEN,
-            @Value("${HELLO_MSG}") String HELLO_MSG) {
-        this.HELLO_MSG = HELLO_MSG;
-        start(GROUP_ID, GROUP_ACCESS_TOKEN);
+            @Value("${GROUP_ID}") final int groupId,
+            @Value("${GROUP_ACCESS_TOKEN}") final String groupAccessToken,
+            @Value("${HELLO_MSG}") final String helloMsg) {
+        this.HELLO_MSG = helloMsg;
+        start(groupId, groupAccessToken);
     }
 
     /**
-     * Функция запуска бота
+     * Функция запуска бота.
      * @param groupId группа, к которой будет привязан бот, её айдишник смотрите в properties
      * @param groupAccessToken уникальный ключ для доступа к группе,
      *                         генерируется один раз разработчиком бота в управлении группой
