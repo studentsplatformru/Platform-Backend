@@ -1,18 +1,17 @@
 package ru.studentsplatform.backend.service;
 
+import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.test.util.ReflectionTestUtils;
 import ru.studentsplatform.backend.service.emailinterface.EMailSender;
 
 import javax.mail.internet.MimeMessage;
-
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 
@@ -24,17 +23,17 @@ import static org.mockito.Mockito.verify;
 /**
  * Тесты для {@link EMailSender}
  */
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class EMailSenderTest {
 
-    @Autowired
-    private EMailSender eMailSender;
-
-    @MockBean
+    @Mock
     private JavaMailSender javaMailSender;
 
-    @MockBean
+    @Mock
     private MimeMessage mimeMessage;
+
+    @InjectMocks
+    private EMailSenderImpl eMailSender;
 
     /**
      * Тест на простую отправку сообщения.
@@ -58,6 +57,8 @@ public class EMailSenderTest {
      */
     @Test
     public void sendMailTestWithContent() throws IOException {
+        ReflectionTestUtils.setField(eMailSender, "from", "someadress@gmail.com");
+
         String subject = "Some subject";
         String body = "Some contents.";
         String to = "test@test.com";
@@ -83,6 +84,7 @@ public class EMailSenderTest {
      */
     @Test
     public void sendMailTestWithContentFail() {
+        ReflectionTestUtils.setField(eMailSender, "from", "someadress@gmail.com");
         String subject = "Some subject";
         String body = "Some contents.";
         String to = "test@test.com";
@@ -101,14 +103,4 @@ public class EMailSenderTest {
         verify(javaMailSender, Mockito.times(0))
                 .send((MimeMessage) ArgumentMatchers.any());
     }
-
-
-    /**
-     * Необходимая добавка для поднятия контекста и подгрузки тестируемого бина.
-     */
-    @SpringBootApplication
-    static class TestConfiguration{
-
-    }
-
 }

@@ -35,6 +35,8 @@ public class EMailSenderImpl implements EMailSender {
     @Value("${spring.mail.username}")
     private String from;
 
+
+
     private final JavaMailSender javaMailSender;
 
     /**
