@@ -2,25 +2,25 @@ package ru.studentsplatform.backend.vkbot.util;
 
 import com.petersamokhin.bots.sdk.clients.Group;
 import com.petersamokhin.bots.sdk.objects.Message;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class VkBotUtilTest {
-    private final String HELLO_MSG;
+    private final String helloMsg;
 
     public VkBotUtilTest(
             @Value("${GROUP_ID}") final int groupId,
             @Value("${GROUP_ACCESS_TOKEN}") final String groupAccessToken,
             @Value("${HELLO_MSG}") final String helloMsg) {
-        this.HELLO_MSG = helloMsg;
+        this.helloMsg = helloMsg;
         start(groupId, groupAccessToken);
     }
 
     /**
      * Функция запуска бота.
-     * @param groupId группа, к которой будет привязан бот, её айдишник смотрите в properties
+     *
+     * @param groupId          группа, к которой будет привязан бот, её айдишник смотрите в properties
      * @param groupAccessToken уникальный ключ для доступа к группе,
      *                         генерируется один раз разработчиком бота в управлении группой
      */
@@ -60,7 +60,7 @@ public class VkBotUtilTest {
                 new Message()
                         .from(group)
                         .to(message.authorId())
-                        .text(HELLO_MSG)
+                        .text(helloMsg)
                         .send()
         );
     }
