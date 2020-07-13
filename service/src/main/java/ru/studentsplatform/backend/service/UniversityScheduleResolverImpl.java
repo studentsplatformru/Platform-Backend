@@ -7,9 +7,10 @@ import ru.studentsplatform.backend.service.spbu.finder.ScheduleUrlFinder;
 import ru.studentsplatform.backend.service.spbu.parser.ScheduleHtmlParser;
 
 import java.time.DayOfWeek;
+import java.util.List;
 
 /**
- * Объединяет в себе функционал интерфейсов ScheduleHtmlParser и ScheduleUrlFinder.
+ * {@inheritDoc}
  */
 @Service
 public class UniversityScheduleResolverImpl implements UniversityScheduleResolver {
@@ -29,21 +30,27 @@ public class UniversityScheduleResolverImpl implements UniversityScheduleResolve
     }
 
     /**
-     * Возвращает объект расписания для выбраного университета.
-     *
-     * @param university Университет, для которого необходимо получить расписание.
-     * @param direction  Направление подготовки, для которого необходимо получить расписание.
-     * @param groupName  Название группы, для которого необходимо получить расписание.
-     * @param dayOfWeek  День недели, для которого необходимо получить расписание.
-     * @return Объект расписания, содержащий поля с данными о расписании.
+     * {@inheritDoc}
      */
     @Override
-    public DaySchedule getSchedule(University university,
-                                   String direction,
-                                   String groupName,
-                                   DayOfWeek dayOfWeek) {
+    public DaySchedule getDaySchedule(University university,
+                                      String direction,
+                                      String groupName,
+                                      DayOfWeek dayOfWeek) {
         String url = finder.findScheduleLink(direction, groupName);
 
         return parser.getDaySchedule(dayOfWeek, url);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<DaySchedule> getSchedule(University university,
+                                         String direction,
+                                         String groupName) {
+        String url = finder.findScheduleLink(direction, groupName);
+
+        return parser.getWeekSchedule(url);
     }
 }

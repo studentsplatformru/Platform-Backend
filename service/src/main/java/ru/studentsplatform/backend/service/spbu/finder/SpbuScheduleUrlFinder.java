@@ -5,6 +5,7 @@ import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.HtmlDocumentBuilder;
+
 import java.io.IOException;
 
 /**
@@ -23,15 +24,15 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
     /**
      * Метод выполняет несколько шагов, включающих переход по вебстраницам, в поисках ссылки на расписание.
      *
-     * @param studyName Название направления подготовки на английском.
+     * @param direction Название направления подготовки на английском.
      * @param groupName Полное имя группы.
      * @return Ссылка на расписание для конкретной группы.
      */
-    public String findScheduleLink(String studyName, String groupName) throws IllegalArgumentException {
+    public String findScheduleLink(String direction, String groupName) {
         Document document;
         try {
             document = HtmlDocumentBuilder.getHtmlDocument(baseUrl);
-            document = findFieldOfStudy(document, studyName);
+            document = findFieldOfStudy(document, direction);
             document = findSchedulesOfDefiniteStudy(document, groupName);
             return findScheduleForCurrentGroup(document, groupName);
         } catch (IOException | NullPointerException e) {
@@ -51,9 +52,9 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
         return HtmlDocumentBuilder.getHtmlDocument(
                 baseUrl +
                         htmlDoc.getElementsContainingOwnText(studyName)
-                        .first()
-                        .attr("href")
-                        .substring(1));
+                                .first()
+                                .attr("href")
+                                .substring(1));
     }
 
     /**

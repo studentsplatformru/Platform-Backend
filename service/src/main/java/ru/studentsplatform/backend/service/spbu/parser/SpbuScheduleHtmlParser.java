@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.HtmlDocumentBuilder;
 import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
 import ru.studentsplatform.backend.service.entities.Schedule.Lesson;
@@ -22,6 +23,7 @@ import java.util.Locale;
  * Класс реализует интерфейс {@link ScheduleHtmlParser} и предлагает парсинг расписания
  * конкретной страницы университета СПБГУ.
  */
+@Service
 public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
 
     /**

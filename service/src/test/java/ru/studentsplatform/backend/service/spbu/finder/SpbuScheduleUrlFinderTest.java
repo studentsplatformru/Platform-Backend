@@ -18,8 +18,8 @@ public class SpbuScheduleUrlFinderTest {
 
     @Test
     public void getLinkByGroupNameTest() {
-        String Url = scheduleFinder.findScheduleLink("Biology", "19.Б01-Б");
-        assertEquals(Url, "https://timetable.spbu.ru/BIOL/StudentGroupEvents/Primary/247986");
+        String url = scheduleFinder.findScheduleLink("Biology", "19.Б01-Б");
+        assertEquals(url, "https://timetable.spbu.ru/BIOL/StudentGroupEvents/Primary/247986");
     }
 
     @Test(expected = IllegalArgumentException.class)

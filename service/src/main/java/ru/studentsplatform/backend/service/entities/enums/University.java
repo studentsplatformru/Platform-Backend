@@ -16,12 +16,13 @@ public enum University {
     }
 
     /**
-     * Получаем университет из строки с его названием.
+     * Получаем университет из строки с его аббревиатурой на русском языке.
+     *
      * @param universityName Строка с названием университета.
      * @return Объект университета.
      */
     public static University getUniversityByName(String universityName) {
-        for (University university: University.values()) {
+        for (University university : University.values()) {
             if (university.getName().equals(universityName)) {
                 return university;
             }
