@@ -3,8 +3,8 @@ package ru.studentsplatform.backend.service;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
 import ru.studentsplatform.backend.service.entities.enums.University;
-import ru.studentsplatform.backend.service.spbu.finder.ScheduleUrlFinder;
-import ru.studentsplatform.backend.service.spbu.parser.ScheduleHtmlParser;
+import ru.studentsplatform.backend.service.spbu.finder.SpbuScheduleUrlFinder;
+import ru.studentsplatform.backend.service.spbu.parser.SpbuScheduleHtmlParser;
 
 import java.time.DayOfWeek;
 import java.util.List;
@@ -13,18 +13,18 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-public class UniversityScheduleResolverImpl implements UniversityScheduleResolver {
+public class SpbuScheduleResolver implements UniversityScheduleResolver {
 
     /**
      * Объект, который парсит страницу и возвращает объект расписания на день.
      */
-    private final ScheduleHtmlParser parser;
+    private final SpbuScheduleHtmlParser parser;
     /**
      * Объект, который находит на сайте конкретную страницу расписания.
      */
-    private final ScheduleUrlFinder finder;
+    private final SpbuScheduleUrlFinder finder;
 
-    public UniversityScheduleResolverImpl(ScheduleHtmlParser parser, ScheduleUrlFinder finder) {
+    public SpbuScheduleResolver(SpbuScheduleHtmlParser parser, SpbuScheduleUrlFinder finder) {
         this.parser = parser;
         this.finder = finder;
     }
