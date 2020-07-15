@@ -32,7 +32,6 @@
         <dependency>
             <groupId>com.petersamokhin</groupId>
             <artifactId>vk-bot-java-sdk</artifactId>
-            <version>0.1.3</version>
         </dependency>
     </dependencies>
 </project>
