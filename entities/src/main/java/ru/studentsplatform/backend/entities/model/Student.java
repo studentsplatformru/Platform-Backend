@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.entities.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "student")
@@ -18,8 +19,6 @@ public class Student {
     @JoinColumn(name = "group_name",nullable = false)
     private Group group;
 
-    /*
-    TODO оценки
     @OneToMany(mappedBy = "student",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Mark> marks;
 
@@ -30,21 +29,6 @@ public class Student {
     public void setMarks(Set<Mark> marks) {
         this.marks = marks;
     }
-     */
-
-    /*
-    TODO предметы
-    @OneToMany(mappedBy = "student",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<Subject> subjects;
-
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
-     */
 
     public Student(Group group) {
         this.group = group;

@@ -7,9 +7,12 @@ import java.util.Set;
 @Table(name = "subject")
 public class Subject {
     @Id
-    @Column(name = "subject_name")
+    @Column(name = "subject_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long subjectId;
+
+    @Column(name = "subject_name",nullable = false)
+    private String subjectName;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
@@ -20,6 +23,14 @@ public class Subject {
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "subject")
     private Set<Material> materials;
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
 
     public Long getSubjectId() {
         return subjectId;

@@ -6,9 +6,9 @@ import javax.persistence.*;
 @Table(name = "material")
 public class Material {
     @Id
-    @Column(name = "material_name")
+    @Column(name = "material_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long MaterialId;
+    private Long materialId;
 
     @Column(name = "link",nullable = false)
     private String link;
@@ -22,11 +22,11 @@ public class Material {
     private Subject subject;
 
     public Long getMaterialId() {
-        return MaterialId;
+        return materialId;
     }
 
     public void setMaterialId(Long materialId) {
-        MaterialId = materialId;
+        materialId = materialId;
     }
 
     public String getLink() {

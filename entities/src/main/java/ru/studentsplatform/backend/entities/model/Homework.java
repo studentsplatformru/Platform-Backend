@@ -6,16 +6,58 @@ import javax.persistence.*;
 @Table(name = "homework")
 public class Homework {
     @Id
-    @Column(name = "homework_name")
+    @Column(name = "homework_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long homeworkId;
-
-    @Column(name = "homework_for_students",nullable = false)
-    private String homeworkForStudents;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "lesson_id")
     private Lesson lesson;
+
+    // Хранение дз. Под вопросом...
+    @Column(name = "file_name",nullable = false)
+    private String fileName;
+
+    @Column(name = "file_type",nullable = false)
+    private String fileType;
+
+    @Column(name = "file",nullable = false)
+    private Byte[] file;
+
+    @Column(name = "note")
+    private String note;
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
+    public Byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(Byte[] file) {
+        this.file = file;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public Long getHomeworkId() {
         return homeworkId;
@@ -25,13 +67,6 @@ public class Homework {
         this.homeworkId = homeworkId;
     }
 
-    public String getHomeworkForStudents() {
-        return homeworkForStudents;
-    }
-
-    public void setHomeworkForStudents(String homeworkForStudents) {
-        this.homeworkForStudents = homeworkForStudents;
-    }
 
     public Lesson getLesson() {
         return lesson;

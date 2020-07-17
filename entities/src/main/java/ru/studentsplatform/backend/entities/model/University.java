@@ -5,14 +5,12 @@ import java.util.Set;
 
 public class University {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "university_name")
     private String universityName;
 
     @OneToMany(mappedBy = "university",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Faculty> faculties;
-    /*
-    TODO библиотека
+
     @OneToMany(mappedBy = "university",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Library> libraries;
 
@@ -23,7 +21,6 @@ public class University {
     public void setLibraries(Set<Library> libraries) {
         this.libraries = libraries;
     }
-     */
     public String getUniversityName() {
         return universityName;
     }

@@ -7,9 +7,15 @@ import java.util.Set;
 @Table(name = "direction")
 public class Direction {
     @Id
-    @Column(name = "direction_name")
+    @Column(name = "direction_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long directionId;
+
+    @Column(name = "direction_name",nullable = false)
+    private String directionName;
+
+    @Column(name = "direction_code",nullable = false)
+    private String directionCode;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "faculty_id")
@@ -17,6 +23,22 @@ public class Direction {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "direction")
     private Set<Group> groups;
+
+    public String getDirectionName() {
+        return directionName;
+    }
+
+    public void setDirectionName(String directionName) {
+        this.directionName = directionName;
+    }
+
+    public String getDirectionCode() {
+        return directionCode;
+    }
+
+    public void setDirectionCode(String directionCode) {
+        this.directionCode = directionCode;
+    }
 
     public Long getDirectionId() {
         return directionId;

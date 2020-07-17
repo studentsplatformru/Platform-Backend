@@ -4,12 +4,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Set;
 
 @Entity
-@Table(name = "lessonUnit")
+@Table(name = "lesson_unit")
 public class LessonUnit {
     @Id
-    @Column(name = "lessonUnit_name")
+    @Column(name = "lesson_unit_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lessonUnitId;
 
@@ -27,8 +28,43 @@ public class LessonUnit {
     @Column(name = "type",nullable = false)
     private String type;
 
-    @Column(name = "note",nullable = false)
+    @Column(name = "note")
     private String note;
+
+    @OneToMany(mappedBy = "lessonUnit",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    Set<Lesson> lessons;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+
+    public Set<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(Set<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
 
     public Long getLessonUnitId() {
         return lessonUnitId;

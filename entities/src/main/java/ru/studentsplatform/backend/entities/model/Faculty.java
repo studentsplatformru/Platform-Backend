@@ -7,21 +7,41 @@ import java.util.Set;
 @Table(name = "faculty")
 public class Faculty {
     @Id
-    @Column(name = "faculty_name")
+    @Column(name = "faculty_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long facultyId;
+
+    @Column(name = "faculty_name",nullable = false)
+    private String facultyName;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "university_name")
     private University university;
 
-    //TODO кафедры
+    @OneToMany(mappedBy = "faculty",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Set<Department> departments;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "faculty")
     private Set<StudentCouncil> studentCouncils;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "faculty")
     private Set<JobAd> jobAds;
+
+    public String getFacultyName() {
+        return facultyName;
+    }
+
+    public void setFacultyName(String facultyName) {
+        this.facultyName = facultyName;
+    }
+
+    public Set<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(Set<Department> departments) {
+        this.departments = departments;
+    }
 
     public Set<StudentCouncil> getStudentCouncils() {
         return studentCouncils;

@@ -10,10 +10,10 @@ public class TeachersFeedback {
     @Column(name = "teachers_feedback_id")
     private Long teachersFeedbackId;
 
-    @Column(name = "header")
+    @Column(name = "header",nullable = false)
     private String header;
 
-    @Column(name = "content")
+    @Column(name = "content",nullable = false)
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -63,4 +63,5 @@ public class TeachersFeedback {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+
 }

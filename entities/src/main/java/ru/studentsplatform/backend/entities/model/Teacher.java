@@ -20,8 +20,6 @@ public class Teacher {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "teacher")
     private Set<TeachersFeedback> tFeedbacks;
 
-    /*
-    TODO lesson_unit
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "teacher")
     private Set<LessonUnit> lessonUnits;
 
@@ -32,7 +30,6 @@ public class Teacher {
     public void setLessonUnits(Set<LessonUnit> lessonUnits) {
         this.lessonUnits = lessonUnits;
     }
-     */
 
     public Set<TeachersFeedback> gettFeedbacks() {
         return tFeedbacks;

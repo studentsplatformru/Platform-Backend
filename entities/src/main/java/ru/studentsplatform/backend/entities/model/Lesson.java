@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "lesson")
 public class Lesson {
     @Id
-    @Column(name = "lesson_name")
+    @Column(name = "lesson_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lessonId;
 
@@ -19,13 +19,13 @@ public class Lesson {
     private Date date;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "lesson")
-    private Set<Homework> homework;
+    private Set<Homework> homeworkSet;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "lesson")
     private Set<Mark> marks;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "lesson")
-    private Set<Attendance> attendance;
+    private Set<Attendance> attendanceSet;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
@@ -51,12 +51,20 @@ public class Lesson {
         this.date = date;
     }
 
-    public Set<Homework> getHomework() {
-        return homework;
+    public Set<Homework> getHomeworkSet() {
+        return homeworkSet;
     }
 
-    public void setHomework(Set<Homework> homework) {
-        this.homework = homework;
+    public void setHomeworkSet(Set<Homework> homeworkSet) {
+        this.homeworkSet = homeworkSet;
+    }
+
+    public Set<Attendance> getAttendanceSet() {
+        return attendanceSet;
+    }
+
+    public void setAttendanceSet(Set<Attendance> attendanceSet) {
+        this.attendanceSet = attendanceSet;
     }
 
     public Set<Mark> getMarks() {
@@ -65,14 +73,6 @@ public class Lesson {
 
     public void setMarks(Set<Mark> marks) {
         this.marks = marks;
-    }
-
-    public Set<Attendance> getAttendance() {
-        return attendance;
-    }
-
-    public void setAttendance(Set<Attendance> attendance) {
-        this.attendance = attendance;
     }
 
     public Group getGroup() {

@@ -11,7 +11,7 @@ public class StudentCouncil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_council_id")
-    private Long student;
+    private Long studentCouncilId;
 
     @Column(name = "phone",nullable = false)
     private String phone;
@@ -29,12 +29,12 @@ public class StudentCouncil {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-    public Long getStudent() {
-        return student;
+    public Long getStudentCouncilId() {
+        return studentCouncilId;
     }
 
-    public void setStudent(Long student) {
-        this.student = student;
+    public void setStudentCouncilId(Long studentCouncilId) {
+        this.studentCouncilId = studentCouncilId;
     }
 
     public String getPhone() {

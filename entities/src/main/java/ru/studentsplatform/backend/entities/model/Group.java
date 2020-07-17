@@ -8,19 +8,40 @@ import java.util.Set;
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "group_name")
+    @Column(name = "group_id")
     private Long groupId;
 
     @Column(name = "course",nullable = false)
     private int course;
 
+    @Column(name = "group_name",nullable = false)
+    private int groupName;
+
     @OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL , mappedBy = "group")
     private Set<Student> students;
 
-    /*
-    TODO пары
     @OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL , mappedBy = "group")
     private Set<Lesson> lessons;
+
+    @OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL , mappedBy = "group")
+    private Set<Subject> subjects;
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public int getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(int groupName) {
+        this.groupName = groupName;
+    }
+
     public Set<Lesson> getLessons() {
         return lessons;
     }
@@ -28,7 +49,6 @@ public class Group {
     public void setLessons(Set<Lesson> lessons) {
         this.lessons = lessons;
     }
-     */
 
     public Long getGroupId() {
         return groupId;
@@ -37,7 +57,6 @@ public class Group {
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
     }
-
 
     public int getCourse() {
         return course;

@@ -7,7 +7,7 @@ import java.util.Set;
 @Table(name = "library")
 public class Library {
     @Id
-    @Column(name = "library_name")
+    @Column(name = "library_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long libraryId;
 

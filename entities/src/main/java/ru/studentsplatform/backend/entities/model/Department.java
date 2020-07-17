@@ -6,13 +6,24 @@ import javax.persistence.*;
 @Table(name = "department")
 public class Department {
     @Id
-    @Column(name = "department_name")
+    @Column(name = "department_id",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long departmentId;
+
+    @Column(name = "department_name",nullable = false)
+    private String departmentName;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
 
     public Long getDepartmentId() {
         return departmentId;
