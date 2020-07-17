@@ -26,6 +26,18 @@ public class Group {
     @OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL , mappedBy = "group")
     private Set<Subject> subjects;
 
+    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @JoinColumn(name = "direction_id")
+    private Direction direction;
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
     public Set<Subject> getSubjects() {
         return subjects;
     }

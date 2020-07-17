@@ -16,11 +16,23 @@ public class Student {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "group_name",nullable = false)
+    @JoinColumn(name = "group_id",nullable = false)
     private Group group;
+
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "direction_id",nullable = true)
+    private Direction direction;
 
     @OneToMany(mappedBy = "student",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Set<Mark> marks;
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
 
     public Set<Mark> getMarks() {
         return marks;

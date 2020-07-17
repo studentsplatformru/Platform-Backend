@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.entities.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "department")
@@ -16,6 +17,28 @@ public class Department {
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "department")
+    private Set<Student> students;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "department")
+    private Set<Teacher> teachers;
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
+    public Set<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(Set<Teacher> teachers) {
+        this.teachers = teachers;
+    }
 
     public String getDepartmentName() {
         return departmentName;

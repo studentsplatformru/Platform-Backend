@@ -15,8 +15,6 @@ public class Homework {
     private Lesson lesson;
 
     // Хранение дз. Под вопросом...
-    @Column(name = "file_name",nullable = false)
-    private String fileName;
 
     @Column(name = "file_type",nullable = false)
     private String fileType;
@@ -26,14 +24,6 @@ public class Homework {
 
     @Column(name = "note")
     private String note;
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
 
     public String getFileType() {
         return fileType;

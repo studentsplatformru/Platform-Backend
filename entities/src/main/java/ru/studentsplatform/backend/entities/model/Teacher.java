@@ -23,6 +23,18 @@ public class Teacher {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "teacher")
     private Set<LessonUnit> lessonUnits;
 
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,optional = true)
+    @JoinColumn(name = "direction_id",nullable = true)
+    private Direction direction;
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
     public Set<LessonUnit> getLessonUnits() {
         return lessonUnits;
     }

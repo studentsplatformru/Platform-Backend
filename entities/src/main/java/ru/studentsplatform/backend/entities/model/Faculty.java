@@ -27,6 +27,17 @@ public class Faculty {
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "faculty")
     private Set<JobAd> jobAds;
 
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "direction")
+    private Set<Direction> directions;
+
+    public Set<Direction> getDirections() {
+        return directions;
+    }
+
+    public void setDirections(Set<Direction> directions) {
+        this.directions = directions;
+    }
+
     public String getFacultyName() {
         return facultyName;
     }
