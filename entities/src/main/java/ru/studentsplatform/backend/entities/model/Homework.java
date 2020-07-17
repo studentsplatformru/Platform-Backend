@@ -67,7 +67,6 @@ public class Homework {
         this.homeworkId = homeworkId;
     }
 
-
     public Lesson getLesson() {
         return lesson;
     }
