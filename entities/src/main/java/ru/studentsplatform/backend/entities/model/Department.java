@@ -28,10 +28,10 @@ public class Department {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL , mappedBy = "department")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "department")
     private Set<Student> students;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL , mappedBy = "department")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "department")
     private Set<Teacher> teachers;
 
     public Set<Student> getStudents() {

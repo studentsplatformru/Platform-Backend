@@ -31,7 +31,7 @@ public class Direction {
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL , mappedBy = "direction")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "direction")
     private Set<Group> groups;
 
     public String getDirectionName() {

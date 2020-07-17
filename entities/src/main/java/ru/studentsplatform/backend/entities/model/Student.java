@@ -26,11 +26,11 @@ public class Student {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "group_id",nullable = false)
+    @JoinColumn(name = "group_id", nullable = false)
     private Group group;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = true)
-    @JoinColumn(name = "direction_id",nullable = true)
+    @JoinColumn(name = "direction_id", nullable = true)
     private Direction direction;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
