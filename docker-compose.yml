@@ -1,0 +1,27 @@
+version: '3.2'
+services:
+  database:
+    build:
+      context: .
+      dockerfile: database.Dockerfile
+    restart: "no"
+    environment:
+      - POSTGRES_PASSWORD= password
+    volumes:
+      - type: volume
+        source: myData
+        target: /var/lib/postgresql/data
+    ports:
+      - 5050:5432
+
+
+  endpoint:
+    build:
+      context: .
+      dockerfile: endpoint.Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  myData:
+    external: true
