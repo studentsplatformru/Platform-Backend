@@ -1,6 +1,16 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
@@ -11,22 +21,22 @@ public class Group {
     @Column(name = "group_id")
     private Long groupId;
 
-    @Column(name = "course",nullable = false)
+    @Column(name = "course", nullable = false)
     private int course;
 
-    @Column(name = "group_name",nullable = false)
+    @Column(name = "group_name", nullable = false)
     private int groupName;
 
-    @OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL , mappedBy = "group")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "group")
     private Set<Student> students;
 
-    @OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL , mappedBy = "group")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "group")
     private Set<Lesson> lessons;
 
-    @OneToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL , mappedBy = "group")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "group")
     private Set<Subject> subjects;
 
-    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "direction_id")
     private Direction direction;
 

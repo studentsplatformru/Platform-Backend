@@ -1,6 +1,16 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
@@ -10,7 +20,7 @@ public class Teacher {
     @Column(name = "teacher_id")
     private Long teacherId;
 
-    @Column(name = "personal_page",nullable = false)
+    @Column(name = "personal_page", nullable = false)
     private String personalPage;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -23,8 +33,8 @@ public class Teacher {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "teacher")
     private Set<LessonUnit> lessonUnits;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,optional = true)
-    @JoinColumn(name = "direction_id",nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = true)
+    @JoinColumn(name = "direction_id", nullable = true)
     private Direction direction;
 
     public Direction getDirection() {

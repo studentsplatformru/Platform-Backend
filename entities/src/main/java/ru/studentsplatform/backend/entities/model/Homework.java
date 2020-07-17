@@ -1,6 +1,15 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "homework")
@@ -10,16 +19,16 @@ public class Homework {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long homeworkId;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "lesson_id")
     private Lesson lesson;
 
     // Хранение дз. Под вопросом...
 
-    @Column(name = "file_type",nullable = false)
+    @Column(name = "file_type", nullable = false)
     private String fileType;
 
-    @Column(name = "file",nullable = false)
+    @Column(name = "file", nullable = false)
     private Byte[] file;
 
     @Column(name = "note")

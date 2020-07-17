@@ -1,6 +1,15 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
@@ -11,22 +20,22 @@ public class User {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "first_name",nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "patronymic",nullable = false)
+    @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
-    @Column(name = "phone",nullable = false)
+    @Column(name = "phone", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "email",nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password",nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
@@ -36,7 +45,7 @@ public class User {
     private Student student;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "author")
-    Set<TeachersFeedback> tFeedback;
+    private Set<TeachersFeedback> tFeedback;
 
     public Set<TeachersFeedback> gettFeedback() {
         return tFeedback;

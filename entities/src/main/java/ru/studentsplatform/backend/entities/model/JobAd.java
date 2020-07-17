@@ -1,6 +1,15 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "job_ad")
@@ -10,19 +19,19 @@ public class JobAd {
     @Column(name = "job_ad_id")
     private Long jobAdId;
 
-    @Column(name = "category",nullable = false)
+    @Column(name = "category", nullable = false)
     private String category;
 
-    @Column(name = "job_name",nullable = false)
+    @Column(name = "job_name", nullable = false)
     private String jobName;
 
-    @Column(name = "description",nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "link",nullable = false)
+    @Column(name = "link", nullable = false)
     private String link;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 

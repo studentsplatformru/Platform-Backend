@@ -2,7 +2,17 @@ package ru.studentsplatform.backend.entities.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.sql.Time;
 import java.util.Set;
 
@@ -14,31 +24,31 @@ public class LessonUnit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lessonUnitId;
 
-    @Column(name = "start_time",nullable = false)
+    @Column(name = "start_time", nullable = false)
     @DateTimeFormat(pattern = "HH:mm")
     private Time startTime;
 
-    @Column(name = "end_time",nullable = false)
+    @Column(name = "end_time", nullable = false)
     @DateTimeFormat(pattern = "HH:mm")
     private Time endTime;
 
-    @Column(name = "audience",nullable = false)
+    @Column(name = "audience", nullable = false)
     private String audience;
 
-    @Column(name = "type",nullable = false)
+    @Column(name = "type", nullable = false)
     private String type;
 
     @Column(name = "note")
     private String note;
 
-    @OneToMany(mappedBy = "lessonUnit",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    Set<Lesson> lessons;
+    @OneToMany(mappedBy = "lessonUnit", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Lesson> lessons;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
     private Subject subject;
 

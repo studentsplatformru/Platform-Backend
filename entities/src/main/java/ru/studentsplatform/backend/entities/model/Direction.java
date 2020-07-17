@@ -1,6 +1,16 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Set;
 
 @Entity
@@ -11,17 +21,17 @@ public class Direction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long directionId;
 
-    @Column(name = "direction_name",nullable = false)
+    @Column(name = "direction_name", nullable = false)
     private String directionName;
 
-    @Column(name = "direction_code",nullable = false)
+    @Column(name = "direction_code", nullable = false)
     private String directionCode;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "direction")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL , mappedBy = "direction")
     private Set<Group> groups;
 
     public String getDirectionName() {

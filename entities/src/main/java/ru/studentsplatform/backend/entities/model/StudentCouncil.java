@@ -1,9 +1,15 @@
 package ru.studentsplatform.backend.entities.model;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.GeneratorType;
-
-import javax.annotation.processing.Generated;
-import javax.persistence.*;
 
 @Entity
 @Table(name = "student_council")
@@ -13,19 +19,19 @@ public class StudentCouncil {
     @Column(name = "student_council_id")
     private Long studentCouncilId;
 
-    @Column(name = "phone",nullable = false)
+    @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "email",nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "audience",nullable = false)
+    @Column(name = "audience", nullable = false)
     private String audience;
 
-    @Column(name = "vk_group",nullable = false)
+    @Column(name = "vk_group", nullable = false)
     private String vkGroup;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
