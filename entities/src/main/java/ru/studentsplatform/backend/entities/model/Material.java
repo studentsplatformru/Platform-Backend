@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "material")
-public class Material extends BaseEntity{
+public class Material extends BaseEntity {
 
     @Column(name = "link", nullable = false)
     private String link;

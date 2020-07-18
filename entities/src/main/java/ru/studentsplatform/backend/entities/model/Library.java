@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "library")
-public class Library extends BaseEntity{
+public class Library extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "university_name")

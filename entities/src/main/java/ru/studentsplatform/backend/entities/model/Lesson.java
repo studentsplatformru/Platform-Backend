@@ -2,13 +2,9 @@ package ru.studentsplatform.backend.entities.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "lesson")
-public class Lesson extends BaseEntity{
+public class Lesson extends BaseEntity {
 
     @Column(name = "date", nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")

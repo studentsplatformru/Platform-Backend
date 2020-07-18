@@ -15,7 +15,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "lesson_unit")
-public class LessonUnit extends BaseEntity{
+public class LessonUnit extends BaseEntity {
 
     @Column(name = "start_time", nullable = false)
     @DateTimeFormat(pattern = "HH:mm")

@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "teacher")
-public class Teacher{
+public class Teacher {
     @Id
     @Column(name = "teacher_id")
     private Long teacherId;

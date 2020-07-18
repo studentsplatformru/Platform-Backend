@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "subject")
-public class Subject extends BaseEntity{
+public class Subject extends BaseEntity {
 
     @Column(name = "subject_name", nullable = false)
     private String subjectName;

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "attendance")
-public class Attendance extends BaseEntity{
+public class Attendance extends BaseEntity {
 
     @Column(name = "present")
     private boolean present;

@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "direction")
-public class Direction extends BaseEntity{
+public class Direction extends BaseEntity {
 
     @Column(name = "direction_name", nullable = false)
     private String directionName;

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "job_ad")
-public class JobAd extends BaseEntity{
+public class JobAd extends BaseEntity {
 
     @Column(name = "category", nullable = false)
     private String category;
