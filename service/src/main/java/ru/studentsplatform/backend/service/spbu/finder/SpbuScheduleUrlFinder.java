@@ -1,5 +1,8 @@
 package ru.studentsplatform.backend.service.spbu.finder;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +20,12 @@ import java.io.IOException;
  */
 @Service
 public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
+
+    /**
+     * Логгер.
+     */
+    private static Logger logger = LogManager.getLogger(SpbuScheduleUrlFinder.class);
+
 
     @Value("${spring.parser.baseUrl}")
     private String baseUrl;
@@ -36,7 +45,7 @@ public class SpbuScheduleUrlFinder implements ScheduleUrlFinder {
             document = findSchedulesOfDefiniteStudy(document, groupName);
             return findScheduleForCurrentGroup(document, groupName);
         } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
+            logger.log(Level.FATAL, e);
         }
         throw new IllegalArgumentException();
     }

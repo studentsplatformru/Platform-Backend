@@ -29,7 +29,7 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
     /**
      * Логгер.
      */
-    private static Logger log = LogManager.getLogger(SpbuScheduleHtmlParser.class);
+    private static Logger logger = LogManager.getLogger(SpbuScheduleHtmlParser.class);
 
     /**
      * Возвращает объект класса DaySchedule, представляющего расписание за конкрктный день.
@@ -85,7 +85,7 @@ public class SpbuScheduleHtmlParser implements ScheduleHtmlParser {
                     .select("div[class=container]")
                     .get(1);
         } catch (IOException e) {
-            log.log(Level.FATAL, e);
+            logger.log(Level.FATAL, e);
         }
         throw new IllegalArgumentException();
     }

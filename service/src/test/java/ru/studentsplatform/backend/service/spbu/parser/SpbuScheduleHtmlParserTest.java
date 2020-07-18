@@ -47,6 +47,5 @@ public class SpbuScheduleHtmlParserTest {
     void getWeekScheduleShouldWork() {
         weekSchedule = parser.getWeekSchedule(rightUrl);
         Assertions.assertFalse(weekSchedule.isEmpty());
-        System.out.println(weekSchedule);
     }
 }

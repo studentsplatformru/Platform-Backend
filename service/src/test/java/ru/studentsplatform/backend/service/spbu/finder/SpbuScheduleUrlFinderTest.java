@@ -35,5 +35,4 @@ public class SpbuScheduleUrlFinderTest {
             return new SpbuScheduleUrlFinder();
         }
     }
-
 }

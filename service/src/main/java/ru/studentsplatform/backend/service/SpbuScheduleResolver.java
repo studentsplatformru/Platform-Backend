@@ -1,8 +1,8 @@
 package ru.studentsplatform.backend.service;
 
 import org.springframework.stereotype.Service;
+import ru.studentsplatform.backend.service.entities.Respondent;
 import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
-import ru.studentsplatform.backend.service.entities.enums.University;
 import ru.studentsplatform.backend.service.spbu.finder.SpbuScheduleUrlFinder;
 import ru.studentsplatform.backend.service.spbu.parser.SpbuScheduleHtmlParser;
 
@@ -10,17 +10,17 @@ import java.time.DayOfWeek;
 import java.util.List;
 
 /**
- * {@inheritDoc}
+ * {@inheritDoc}.
  */
 @Service
 public class SpbuScheduleResolver implements UniversityScheduleResolver {
 
     /**
-     * Объект, который парсит страницу и возвращает объект расписания на день.
+     * Парсит страницу и возвращает объект расписания на день.
      */
     private final SpbuScheduleHtmlParser parser;
     /**
-     * Объект, который находит на сайте конкретную страницу расписания.
+     * Находит на сайте конкретную страницу расписания.
      */
     private final SpbuScheduleUrlFinder finder;
 
@@ -33,11 +33,9 @@ public class SpbuScheduleResolver implements UniversityScheduleResolver {
      * {@inheritDoc}
      */
     @Override
-    public DaySchedule getDaySchedule(University university,
-                                      String direction,
-                                      String groupName,
-                                      DayOfWeek dayOfWeek) {
-        String url = finder.findScheduleLink(direction, groupName);
+    public DaySchedule getDaySchedule(Respondent respondent, DayOfWeek dayOfWeek) {
+        String url = finder.findScheduleLink(respondent.getDirection(),
+                respondent.getGroupName());
 
         return parser.getDaySchedule(dayOfWeek, url);
     }
@@ -46,10 +44,9 @@ public class SpbuScheduleResolver implements UniversityScheduleResolver {
      * {@inheritDoc}
      */
     @Override
-    public List<DaySchedule> getSchedule(University university,
-                                         String direction,
-                                         String groupName) {
-        String url = finder.findScheduleLink(direction, groupName);
+    public List<DaySchedule> getSchedule(Respondent respondent) {
+        String url = finder.findScheduleLink(respondent.getDirection(),
+                respondent.getGroupName());
 
         return parser.getWeekSchedule(url);
     }
