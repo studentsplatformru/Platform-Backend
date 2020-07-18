@@ -1,12 +1,8 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -15,29 +11,25 @@ import java.util.Set;
 
 @Entity
 @Table(name = "faculty")
-public class Faculty {
-    @Id
-    @Column(name = "faculty_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long facultyId;
+public class Faculty extends BaseEntity{
 
     @Column(name = "faculty_name", nullable = false)
     private String facultyName;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "university_name")
     private University university;
 
-    @OneToMany(mappedBy = "faculty", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "faculty", fetch = FetchType.LAZY)
     private Set<Department> departments;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "faculty")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "faculty")
     private Set<StudentCouncil> studentCouncils;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "faculty")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "faculty")
     private Set<JobAd> jobAds;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "direction")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
     private Set<Direction> directions;
 
     public Set<Direction> getDirections() {
@@ -78,14 +70,6 @@ public class Faculty {
 
     public void setJobAds(Set<JobAd> jobAds) {
         this.jobAds = jobAds;
-    }
-
-    public Long getFacultyId() {
-        return facultyId;
-    }
-
-    public void setFacultyId(Long facultyId) {
-        this.facultyId = facultyId;
     }
 
     public University getUniversity() {

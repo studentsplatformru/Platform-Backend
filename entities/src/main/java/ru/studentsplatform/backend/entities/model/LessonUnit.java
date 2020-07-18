@@ -6,9 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,11 +15,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "lesson_unit")
-public class LessonUnit {
-    @Id
-    @Column(name = "lesson_unit_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long lessonUnitId;
+public class LessonUnit extends BaseEntity{
 
     @Column(name = "start_time", nullable = false)
     @DateTimeFormat(pattern = "HH:mm")
@@ -74,14 +67,6 @@ public class LessonUnit {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
-    }
-
-    public Long getLessonUnitId() {
-        return lessonUnitId;
-    }
-
-    public void setLessonUnitId(Long lessonUnitId) {
-        this.lessonUnitId = lessonUnitId;
     }
 
     public Time getStartTime() {

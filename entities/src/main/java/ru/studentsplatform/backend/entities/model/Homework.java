@@ -1,29 +1,21 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "homework")
-public class Homework {
-    @Id
-    @Column(name = "homework_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long homeworkId;
+public class Homework extends BaseEntity{
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lesson_id")
     private Lesson lesson;
 
-    // Хранение дз. Под вопросом...
+    // draft версия хранения дз
 
     @Column(name = "file_type", nullable = false)
     private String fileType;
@@ -56,14 +48,6 @@ public class Homework {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public Long getHomeworkId() {
-        return homeworkId;
-    }
-
-    public void setHomeworkId(Long homeworkId) {
-        this.homeworkId = homeworkId;
     }
 
     public Lesson getLesson() {

@@ -1,23 +1,15 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "teachers_feedback")
-public class TeachersFeedback {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "teachers_feedback_id")
-    private Long teachersFeedbackId;
+public class TeachersFeedback extends BaseEntity {
 
     @Column(name = "header", nullable = false)
     private String header;
@@ -25,21 +17,13 @@ public class TeachersFeedback {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private User author;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
-
-    public Long getTeachersFeedbackId() {
-        return teachersFeedbackId;
-    }
-
-    public void setTeachersFeedbackId(Long teachersFeedbackId) {
-        this.teachersFeedbackId = teachersFeedbackId;
-    }
 
     public String getHeader() {
         return header;

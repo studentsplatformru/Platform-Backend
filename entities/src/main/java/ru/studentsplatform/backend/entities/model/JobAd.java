@@ -1,23 +1,15 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "job_ad")
-public class JobAd {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "job_ad_id")
-    private Long jobAdId;
+public class JobAd extends BaseEntity{
 
     @Column(name = "category", nullable = false)
     private String category;
@@ -31,17 +23,9 @@ public class JobAd {
     @Column(name = "link", nullable = false)
     private String link;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
-
-    public Long getJobAdId() {
-        return jobAdId;
-    }
-
-    public void setJobAdId(Long jobAdId) {
-        this.jobAdId = jobAdId;
-    }
 
     public String getCategory() {
         return category;

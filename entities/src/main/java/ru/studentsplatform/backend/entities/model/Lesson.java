@@ -18,40 +18,28 @@ import java.util.Set;
 
 @Entity
 @Table(name = "lesson")
-public class Lesson {
-    @Id
-    @Column(name = "lesson_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long lessonId;
+public class Lesson extends BaseEntity{
 
     @Column(name = "date", nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date date;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "lesson")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson")
     private Set<Homework> homeworkSet;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "lesson")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson")
     private Set<Mark> marks;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "lesson")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson")
     private Set<Attendance> attendanceSet;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private Group group;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lesson_unit_id")
     private LessonUnit lessonUnit;
-
-    public Long getLessonId() {
-        return lessonId;
-    }
-
-    public void setLessonId(Long lessonId) {
-        this.lessonId = lessonId;
-    }
 
     public Date getDate() {
         return date;

@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.entities.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,25 +14,26 @@ import java.util.Set;
 
 @Entity
 @Table(name = "student")
-public class Student {
+public class Student{
 
     @Id
     @Column(name = "student_id")
     private Long studentsId;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
     @MapsId
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", nullable = false)
     private Group group;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "direction_id", nullable = true)
     private Direction direction;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     private Set<Mark> marks;
 
     public Direction getDirection() {
