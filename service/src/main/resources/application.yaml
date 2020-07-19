@@ -1,1 +1,13 @@
+#properties form EMailSender
+spring:
+  mail:
+    host: smtp.gmail.com
+    #    here must be application mail password
+    password: test789test
+    #    here must be application mail username
+    username: studentplatform.no.reply@gmail.com
+    port: 465
+    protocol: smtps
 
+#must be false in production
+mail.debug: true
