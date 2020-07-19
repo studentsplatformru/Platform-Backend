@@ -1,3 +1,4 @@
 language: java
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t 5f2e2443-8aa9-4c00-9d28-7edd157b1c1d
+  - export CODECOV_TOKEN=8dfd2746-cc69-4ca3-869f-d9ec17fccb56
+  - bash <(curl -s https://codecov.io/bash)
