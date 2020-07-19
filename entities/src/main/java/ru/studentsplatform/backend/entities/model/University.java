@@ -3,25 +3,26 @@ package ru.studentsplatform.backend.entities.model;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.Set;
 
+/**
+ * Класс университета
+ */
 public class University extends BaseEntity {
+
+    /** Поле название университета */
     @Column(name = "university_name")
     private String universityName;
 
+    /** Связь "один-ко-многим" - Факультет */
     @OneToMany(mappedBy = "university", fetch = FetchType.LAZY)
     private Set<Faculty> faculties;
 
+    /** Связь "один-ко-многим" - Библиотека */
     @OneToMany(mappedBy = "university", fetch = FetchType.LAZY)
-    private Set<Library> libraries;
+    private List<Library> libraries;
 
-    public Set<Library> getLibraries() {
-        return libraries;
-    }
-
-    public void setLibraries(Set<Library> libraries) {
-        this.libraries = libraries;
-    }
     public String getUniversityName() {
         return universityName;
     }
@@ -38,5 +39,11 @@ public class University extends BaseEntity {
         this.faculties = faculties;
     }
 
+    public List<Library> getLibraries() {
+        return libraries;
+    }
 
+    public void setLibraries(List<Library> libraries) {
+        this.libraries = libraries;
+    }
 }

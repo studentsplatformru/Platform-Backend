@@ -10,29 +10,40 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.List;
 import java.util.Set;
 
+/**
+ * Класс преподавателей в университете
+ */
 @Entity
 @Table(name = "teacher")
-public class Teacher {
+public class Teacher extends BaseEntity {
+
+    /** Поле id преподавателя */
     @Id
     @Column(name = "teacher_id")
     private Long teacherId;
 
+    /** Поле персональная страница */
     @Column(name = "personal_page", nullable = false)
     private String personalPage;
 
+    /** Связь "один-к-одному" - Пользователь */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     @MapsId
     private User user;
 
+    /** Связь "один-ко-многим" - Обратная связь с преподавателем */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
-    private Set<TeachersFeedback> tFeedbacks;
+    private Set<TeachersFeedback> teachersFeedback;
 
+    /** Связь "один-ко-многим" - Конкретная пара (её расписание) */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
-    private Set<LessonUnit> lessonUnits;
+    private List<LessonUnit> lessonUnits;
 
+    /** Связь "многие-к-одному" - Направление */
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "direction_id", nullable = true)
     private Direction direction;
@@ -45,20 +56,20 @@ public class Teacher {
         this.direction = direction;
     }
 
-    public Set<LessonUnit> getLessonUnits() {
+    public Set<TeachersFeedback> getTeachersFeedback() {
+        return teachersFeedback;
+    }
+
+    public void setTeachersFeedback(Set<TeachersFeedback> teachersFeedback) {
+        this.teachersFeedback = teachersFeedback;
+    }
+
+    public List<LessonUnit> getLessonUnits() {
         return lessonUnits;
     }
 
-    public void setLessonUnits(Set<LessonUnit> lessonUnits) {
+    public void setLessonUnits(List<LessonUnit> lessonUnits) {
         this.lessonUnits = lessonUnits;
-    }
-
-    public Set<TeachersFeedback> gettFeedbacks() {
-        return tFeedbacks;
-    }
-
-    public void settFeedbacks(Set<TeachersFeedback> tFeedbacks) {
-        this.tFeedbacks = tFeedbacks;
     }
 
     public Long getTeacherId() {

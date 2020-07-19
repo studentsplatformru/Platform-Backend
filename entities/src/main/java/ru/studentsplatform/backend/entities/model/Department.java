@@ -7,40 +7,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Set;
+import java.util.List;
 
+/**
+ * Класс кафедр, находящихся в университете
+ */
 @Entity
 @Table(name = "department")
 public class Department extends BaseEntity {
 
+    /** Поле название кафедры */
     @Column(name = "department_name", nullable = false)
     private String departmentName;
 
+    /** Связь "многие-к-одному" - Факультет */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
+    /** Связь "один-ко-многим" - Студент */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
-    private Set<Student> students;
+    private List<Student> students;
 
+    /** Связь "один-ко-многим" - Преподаватель */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
-    private Set<Teacher> teachers;
-
-    public Set<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<Student> students) {
-        this.students = students;
-    }
-
-    public Set<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(Set<Teacher> teachers) {
-        this.teachers = teachers;
-    }
+    private List<Teacher> teachers;
 
     public String getDepartmentName() {
         return departmentName;
@@ -56,5 +47,21 @@ public class Department extends BaseEntity {
 
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
     }
 }

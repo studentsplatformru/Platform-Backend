@@ -7,20 +7,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Класс обратной связи с преподавателями
+ */
 @Entity
 @Table(name = "teachers_feedback")
 public class TeachersFeedback extends BaseEntity {
 
+    /** Поле заголовок */
     @Column(name = "header", nullable = false)
     private String header;
 
+    /** Поле содержимое */
     @Column(name = "content", nullable = false)
     private String content;
 
+    /** Связь "многие-к-одному" - Пользователь */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private User author;
 
+    /** Связь "многие-к-одному" - Преподаватель */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;

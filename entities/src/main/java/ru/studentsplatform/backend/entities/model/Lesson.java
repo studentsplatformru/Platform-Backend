@@ -9,64 +9,73 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Date;
-import java.util.Set;
+import java.time.OffsetDateTime;
+import java.util.List;
 
+/**
+ * Класс занятий в универеситете, для которых день уникален
+ */
 @Entity
 @Table(name = "lesson")
 public class Lesson extends BaseEntity {
 
+    /** Поле дата занятия */
     @Column(name = "date", nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date date;
+    private OffsetDateTime date;
 
+    /** Связь "один-ко-многим" - Домашнее задание */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson")
-    private Set<Homework> homeworkSet;
+    private List<Homework> homeworkList;
 
+    /** Связь "один-ко-многим" - Оценка */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson")
-    private Set<Mark> marks;
+    private List<Mark> marks;
 
+    /** Связь "один-ко-многим" - Посещаемость */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson")
-    private Set<Attendance> attendanceSet;
+    private List<Attendance> attendanceList;
 
+    /** Связь "многие-к-одному" - Группа */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private Group group;
 
+    /** Связь "многие-к-одному" - Конкретная пара (её расписание) */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lesson_unit_id")
     private LessonUnit lessonUnit;
 
-    public Date getDate() {
+    public OffsetDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(OffsetDateTime date) {
         this.date = date;
     }
 
-    public Set<Homework> getHomeworkSet() {
-        return homeworkSet;
+    public List<Homework> getHomeworkList() {
+        return homeworkList;
     }
 
-    public void setHomeworkSet(Set<Homework> homeworkSet) {
-        this.homeworkSet = homeworkSet;
+    public void setHomeworkList(List<Homework> homeworkList) {
+        this.homeworkList = homeworkList;
     }
 
-    public Set<Attendance> getAttendanceSet() {
-        return attendanceSet;
-    }
-
-    public void setAttendanceSet(Set<Attendance> attendanceSet) {
-        this.attendanceSet = attendanceSet;
-    }
-
-    public Set<Mark> getMarks() {
+    public List<Mark> getMarks() {
         return marks;
     }
 
-    public void setMarks(Set<Mark> marks) {
+    public void setMarks(List<Mark> marks) {
         this.marks = marks;
+    }
+
+    public List<Attendance> getAttendanceList() {
+        return attendanceList;
+    }
+
+    public void setAttendanceList(List<Attendance> attendanceList) {
+        this.attendanceList = attendanceList;
     }
 
     public Group getGroup() {

@@ -10,18 +10,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * Базовый класс, от которого наследуются все сущности
+ */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
+    /** Поле id */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /** Поле создано */
     @Column(name = "created_by")
     @CreatedBy
     private String createdBy;
 
+    /** Поле модифицирован */
     @Column(name = "modified_by")
     @LastModifiedBy
     private String modifiedBy;

@@ -7,28 +7,38 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 import java.util.Set;
 
+/**
+ * Класс факультетов, находящихся в университете
+ */
 @Entity
 @Table(name = "faculty")
 public class Faculty extends BaseEntity {
 
+    /** Поле название факультета */
     @Column(name = "faculty_name", nullable = false)
     private String facultyName;
 
+    /** Связь "многие-к-одному" - Университет */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "university_name")
     private University university;
 
+    /** Связь "один-ко-многим" - Кафедра */
     @OneToMany(mappedBy = "faculty", fetch = FetchType.LAZY)
     private Set<Department> departments;
 
+    /** Связь "один-ко-многим" - Студенческий совет */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "faculty")
     private Set<StudentCouncil> studentCouncils;
 
+    /** Связь "один-ко-многим" - Объявление о работе */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "faculty")
-    private Set<JobAd> jobAds;
+    private List<JobAd> jobAds;
 
+    /** Связь "один-ко-многим" - Направление */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
     private Set<Direction> directions;
 
@@ -64,11 +74,11 @@ public class Faculty extends BaseEntity {
         this.studentCouncils = studentCouncils;
     }
 
-    public Set<JobAd> getJobAds() {
+    public List<JobAd> getJobAds() {
         return jobAds;
     }
 
-    public void setJobAds(Set<JobAd> jobAds) {
+    public void setJobAds(List<JobAd> jobAds) {
         this.jobAds = jobAds;
     }
 

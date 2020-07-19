@@ -7,45 +7,46 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Set;
+import java.util.List;
 
+/**
+ * Класс групп в университете
+ */
 @Entity
 @Table(name = "group")
 public class Group extends BaseEntity {
 
+    /** Поле курс */
     @Column(name = "course", nullable = false)
     private int course;
 
+    /** Поле название группы */
     @Column(name = "group_name", nullable = false)
     private int groupName;
 
+    /** Связь "один-ко-многим" - Студент */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
-    private Set<Student> students;
+    private List<Student> students;
 
+    /** Связь "один-ко-многим" - Занятие, для которого день уникален */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
-    private Set<Lesson> lessons;
+    private List<Lesson> lessons;
 
+    /** Связь "один-ко-многим" - Предмет */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
-    private Set<Subject> subjects;
+    private List<Subject> subjects;
 
+    /** Связь "многие-к-одному" - Направление*/
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "direction_id")
     private Direction direction;
 
-    public Direction getDirection() {
-        return direction;
+    public int getCourse() {
+        return course;
     }
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }
-
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
+    public void setCourse(int course) {
+        this.course = course;
     }
 
     public int getGroupName() {
@@ -56,27 +57,35 @@ public class Group extends BaseEntity {
         this.groupName = groupName;
     }
 
-    public Set<Lesson> getLessons() {
-        return lessons;
-    }
-
-    public void setLessons(Set<Lesson> lessons) {
-        this.lessons = lessons;
-    }
-
-    public int getCourse() {
-        return course;
-    }
-
-    public void setCourse(int course) {
-        this.course = course;
-    }
-
-    public Set<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Set<Student> students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 }

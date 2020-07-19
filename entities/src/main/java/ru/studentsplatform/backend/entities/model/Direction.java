@@ -9,20 +9,27 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
+/**
+ * Класс направлений подготовки в университете
+ */
 @Entity
 @Table(name = "direction")
 public class Direction extends BaseEntity {
 
+    /** Поле название направления подготовки */
     @Column(name = "direction_name", nullable = false)
     private String directionName;
 
+    /** Поле код напрвления подготовки*/
     @Column(name = "direction_code", nullable = false)
     private String directionCode;
 
+    /** Связь "многие-к-одному" - Факультет */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
+    /** Связь "один-ко-многим" - Группа */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
     private Set<Group> groups;
 

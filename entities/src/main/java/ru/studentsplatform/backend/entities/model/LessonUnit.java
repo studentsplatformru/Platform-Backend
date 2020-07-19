@@ -10,46 +10,57 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.sql.Time;
-import java.util.Set;
+import java.time.OffsetTime;
+import java.util.List;
 
+/**
+ * Класс конкретных занятий в университете (их распиание)
+ */
 @Entity
 @Table(name = "lesson_unit")
 public class LessonUnit extends BaseEntity {
 
+    /** Поле начало занятия */
     @Column(name = "start_time", nullable = false)
     @DateTimeFormat(pattern = "HH:mm")
-    private Time startTime;
+    private OffsetTime startTime;
 
+    /** Поле окончание занятия */
     @Column(name = "end_time", nullable = false)
     @DateTimeFormat(pattern = "HH:mm")
-    private Time endTime;
+    private OffsetTime endTime;
 
+    /** Поле аудитория */
     @Column(name = "audience", nullable = false)
     private String audience;
 
+    /** Поле тип занятия */
     @Column(name = "type", nullable = false)
     private String type;
 
+    /** Поле примечание */
     @Column(name = "note")
     private String note;
 
+    /** Связь "один-ко-многим" - Занятие, для которого день уникален */
     @OneToMany(mappedBy = "lessonUnit", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Lesson> lessons;
+    private List<Lesson> lessons;
 
+    /** Связь "многие-к-одному" - Преподаватель */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
+    /** Связь "многие-к-одному" - Предмет */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    public Set<Lesson> getLessons() {
+    public List<Lesson> getLessons() {
         return lessons;
     }
 
-    public void setLessons(Set<Lesson> lessons) {
+    public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
     }
 
@@ -69,19 +80,19 @@ public class LessonUnit extends BaseEntity {
         this.subject = subject;
     }
 
-    public Time getStartTime() {
+    public OffsetTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time startTime) {
+    public void setStartTime(OffsetTime startTime) {
         this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public OffsetTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(OffsetTime endTime) {
         this.endTime = endTime;
     }
 
