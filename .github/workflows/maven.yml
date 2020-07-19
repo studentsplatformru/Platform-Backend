@@ -27,6 +27,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
+    - uses: actions/checkout@master
     - name: Upload coverage to Codecov
     - uses: codecov/codecov-action@v1
       with:
