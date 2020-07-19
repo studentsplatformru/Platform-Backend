@@ -7,3 +7,5 @@ management:
   endpoint:
     health:
       show-details: always
+
+mail.debug: true
