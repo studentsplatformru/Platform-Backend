@@ -14,41 +14,47 @@ import javax.persistence.Table;
 @Table(name = "material")
 public class Material extends BaseEntity {
 
-    /** Поле ссылка. */
-    @Column(name = "link", nullable = false)
-    private String link;
+	/**
+	 * Поле ссылка.
+	 */
+	@Column(name = "link", nullable = false)
+	private String link;
 
-    /** Связь "многие-к-одному" - Библиотека. */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "library_id")
-    private Library library;
+	/**
+	 * Связь "многие-к-одному" - Библиотека.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "library_id")
+	private Library library;
 
-    /** Связь "многие-к-одному" - Предмет. */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id")
-    private Subject subject;
+	/**
+	 * Связь "многие-к-одному" - Предмет.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "subject_id")
+	private Subject subject;
 
-    public String getLink() {
-        return link;
-    }
+	public String getLink() {
+		return link;
+	}
 
-    public void setLink(String link) {
-        this.link = link;
-    }
+	public void setLink(String link) {
+		this.link = link;
+	}
 
-    public Library getLibrary() {
-        return library;
-    }
+	public Library getLibrary() {
+		return library;
+	}
 
-    public void setLibrary(Library library) {
-        this.library = library;
-    }
+	public void setLibrary(Library library) {
+		this.library = library;
+	}
 
-    public Subject getSubject() {
-        return subject;
-    }
+	public Subject getSubject() {
+		return subject;
+	}
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
 }

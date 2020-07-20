@@ -14,54 +14,62 @@ import javax.persistence.Table;
 @Table(name = "teachers_feedback")
 public class TeachersFeedback extends BaseEntity {
 
-    /** Поле заголовок. */
-    @Column(name = "header", nullable = false)
-    private String header;
+	/**
+	 * Поле заголовок.
+	 */
+	@Column(name = "header", nullable = false)
+	private String header;
 
-    /** Поле содержимое. */
-    @Column(name = "content", nullable = false)
-    private String content;
+	/**
+	 * Поле содержимое.
+	 */
+	@Column(name = "content", nullable = false)
+	private String content;
 
-    /** Связь "многие-к-одному" - Пользователь. */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id")
-    private User author;
+	/**
+	 * Связь "многие-к-одному" - Пользователь.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "author_id")
+	private User author;
 
-    /** Связь "многие-к-одному" - Преподаватель. */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
+	/**
+	 * Связь "многие-к-одному" - Преподаватель.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "teacher_id")
+	private Teacher teacher;
 
-    public String getHeader() {
-        return header;
-    }
+	public String getHeader() {
+		return header;
+	}
 
-    public void setHeader(String header) {
-        this.header = header;
-    }
+	public void setHeader(String header) {
+		this.header = header;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public User getAuthor() {
-        return author;
-    }
+	public User getAuthor() {
+		return author;
+	}
 
-    public void setAuthor(User author) {
-        this.author = author;
-    }
+	public void setAuthor(User author) {
+		this.author = author;
+	}
 
-    public Teacher getTeacher() {
-        return teacher;
-    }
+	public Teacher getTeacher() {
+		return teacher;
+	}
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 
 }

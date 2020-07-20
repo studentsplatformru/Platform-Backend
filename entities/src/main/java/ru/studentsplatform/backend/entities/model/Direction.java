@@ -16,52 +16,60 @@ import java.util.Set;
 @Table(name = "direction")
 public class Direction extends BaseEntity {
 
-    /** Поле название направления подготовки. */
-    @Column(name = "direction_name", nullable = false)
-    private String directionName;
+	/**
+	 * Поле название направления подготовки.
+	 */
+	@Column(name = "direction_name", nullable = false)
+	private String directionName;
 
-    /** Поле код напрвления подготовки. */
-    @Column(name = "direction_code", nullable = false)
-    private String directionCode;
+	/**
+	 * Поле код напрвления подготовки.
+	 */
+	@Column(name = "direction_code", nullable = false)
+	private String directionCode;
 
-    /** Связь "многие-к-одному" - Факультет. */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "faculty_id")
-    private Faculty faculty;
+	/**
+	 * Связь "многие-к-одному" - Факультет.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "faculty_id")
+	private Faculty faculty;
 
-    /** Связь "один-ко-многим" - Группа. */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
-    private Set<Group> groups;
+	/**
+	 * Связь "один-ко-многим" - Группа.
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
+	private Set<Team> teams;
 
-    public String getDirectionName() {
-        return directionName;
-    }
+	public String getDirectionName() {
+		return directionName;
+	}
 
-    public void setDirectionName(String directionName) {
-        this.directionName = directionName;
-    }
+	public void setDirectionName(String directionName) {
+		this.directionName = directionName;
+	}
 
-    public String getDirectionCode() {
-        return directionCode;
-    }
+	public String getDirectionCode() {
+		return directionCode;
+	}
 
-    public void setDirectionCode(String directionCode) {
-        this.directionCode = directionCode;
-    }
+	public void setDirectionCode(String directionCode) {
+		this.directionCode = directionCode;
+	}
 
-    public Faculty getFaculty() {
-        return faculty;
-    }
+	public Faculty getFaculty() {
+		return faculty;
+	}
 
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
-    }
+	public void setFaculty(Faculty faculty) {
+		this.faculty = faculty;
+	}
 
-    public Set<Group> getGroups() {
-        return groups;
-    }
+	public Set<Team> getTeams() {
+		return teams;
+	}
 
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
-    }
+	public void setTeams(Set<Team> teams) {
+		this.teams = teams;
+	}
 }

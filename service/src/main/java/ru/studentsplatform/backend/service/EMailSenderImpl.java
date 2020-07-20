@@ -24,159 +24,157 @@ import java.util.Scanner;
 /**
  * Реализация {@link EMailSender}
  * Адресс отправки устанавливается в конфигурациях.
+ *
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
- * */
+ */
 @Service
 public class EMailSenderImpl implements EMailSender {
 
-    /**
-     * Адрес отправки.
-     */
-    @Value("${spring.mail.username}")
-    private String from;
+	private final JavaMailSender javaMailSender;
+	/**
+	 * Адрес отправки.
+	 */
+	@Value("${spring.mail.username}")
+	private String from;
 
+	/**
+	 * @param javaMailSender утлилитный сприноговая реализация,
+	 *                       которая обеспечивает логику отправки сообщения на более низком уровне.
+	 */
+	public EMailSenderImpl(JavaMailSender javaMailSender) {
+		this.javaMailSender = javaMailSender;
+	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void send(@NonNull String to, String subject, String body) {
 
-    private final JavaMailSender javaMailSender;
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-    /**
-     * @param javaMailSender утлилитный сприноговая реализация,
-     * которая обеспечивает логику отправки сообщения на более низком уровне.
-     */
-    public EMailSenderImpl(JavaMailSender javaMailSender) {
-        this.javaMailSender = javaMailSender;
-    }
+		mailMessage.setFrom(from);
+		mailMessage.setTo(to);
+		mailMessage.setSubject(subject);
+		mailMessage.setText(body);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void send(@NonNull String to, String subject, String body) {
+		javaMailSender.send(mailMessage);
+	}
 
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void send(
+			@NonNull String to, String subject,
+			String body, String contentPath) throws IOException {
 
-        mailMessage.setFrom(from);
-        mailMessage.setTo(to);
-        mailMessage.setSubject(subject);
-        mailMessage.setText(body);
+		MimeMessage message = javaMailSender.createMimeMessage();
 
-        javaMailSender.send(mailMessage);
-    }
+		try {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void send(
-            @NonNull String to, String subject,
-            String body, String contentPath) throws IOException {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        MimeMessage message = javaMailSender.createMimeMessage();
+			helper.setFrom(from);
+			helper.setTo(to);
+			helper.setSubject(subject);
+			helper.setText(body);
 
-        try {
+			Path path = Paths.get(contentPath);
+			byte[] content = Files.readAllBytes(path);
 
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.addAttachment(
+					path.getFileName().toString(),
+					new ByteArrayResource(content));
 
-            helper.setFrom(from);
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(body);
+			javaMailSender.send(message);
 
-            Path path = Paths.get(contentPath);
-            byte[] content = Files.readAllBytes(path);
+		} catch (MessagingException e) {
 
-            helper.addAttachment(
-                    path.getFileName().toString(),
-                    new ByteArrayResource(content));
+			e.printStackTrace();
+		}
+	}
 
-            javaMailSender.send(message);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void send(
+			@NonNull String to, String subject,
+			String body, List<String> contentPaths) throws IOException {
 
-        } catch (MessagingException e) {
+		MimeMessage message = javaMailSender.createMimeMessage();
 
-            e.printStackTrace();
-        }
-    }
+		try {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void send(
-            @NonNull String to, String subject,
-            String body, List<String> contentPaths) throws IOException {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        MimeMessage message = javaMailSender.createMimeMessage();
+			helper.setFrom(from);
+			helper.setTo(to);
+			helper.setSubject(subject);
+			helper.setText(body);
 
-        try {
+			for (String contentPath : contentPaths) {
+				Path path = Paths.get(contentPath);
+				byte[] content = Files.readAllBytes(path);
 
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+				helper.addAttachment(
+						path.getFileName().toString(),
+						new ByteArrayResource(content));
+			}
 
-            helper.setFrom(from);
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(body);
+			javaMailSender.send(message);
 
-            for (String contentPath : contentPaths) {
-                Path path = Paths.get(contentPath);
-                byte[] content = Files.readAllBytes(path);
+		} catch (MessagingException e) {
 
-                helper.addAttachment(
-                        path.getFileName().toString(),
-                        new ByteArrayResource(content));
-            }
+			e.printStackTrace();
+		}
+	}
 
-            javaMailSender.send(message);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void sendHtml(
+			@NonNull String to, String subject,
+			String htmlPath, @Nullable List<String> contentPaths) throws IOException {
 
-        } catch (MessagingException e) {
+		MimeMessage message = javaMailSender.createMimeMessage();
 
-            e.printStackTrace();
-        }
-    }
+		try {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void sendHtml(
-            @NonNull String to, String subject,
-            String htmlPath, @Nullable List<String> contentPaths) throws IOException {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        MimeMessage message = javaMailSender.createMimeMessage();
+			Scanner scanner = new Scanner(
+					Paths.get(htmlPath),
+					StandardCharsets.UTF_8.name());
+			//здесь мы можем использовать разделитель, например: "\\A", "\\Z" или "\\z"
+			String html = scanner.useDelimiter("\\A").next();
+			scanner.close();
 
-        try {
+			message.setSubject(subject, "UTF-8");
+			message.setContent(html, "text/html; charset=UTF-8");
 
-            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.setFrom(from);
+			helper.setTo(to);
 
-            Scanner scanner = new Scanner(
-                    Paths.get(htmlPath),
-                    StandardCharsets.UTF_8.name());
-            //здесь мы можем использовать разделитель, например: "\\A", "\\Z" или "\\z"
-            String html = scanner.useDelimiter("\\A").next();
-            scanner.close();
+			if (contentPaths != null) {
+				for (String contentPath : contentPaths) {
+					Path path = Paths.get(contentPath);
+					byte[] content = Files.readAllBytes(path);
 
-            message.setSubject(subject, "UTF-8");
-            message.setContent(html, "text/html; charset=UTF-8");
+					helper.addAttachment(
+							path.getFileName().toString(),
+							new ByteArrayResource(content));
+				}
+			}
 
-            helper.setFrom(from);
-            helper.setTo(to);
+			javaMailSender.send(message);
 
-            if (contentPaths != null) {
-                for (String contentPath : contentPaths) {
-                    Path path = Paths.get(contentPath);
-                    byte[] content = Files.readAllBytes(path);
+		} catch (MessagingException e) {
 
-                    helper.addAttachment(
-                            path.getFileName().toString(),
-                            new ByteArrayResource(content));
-                }
-            }
-
-            javaMailSender.send(message);
-
-        } catch (MessagingException e) {
-
-            e.printStackTrace();
-        }
-    }
+			e.printStackTrace();
+		}
+	}
 
 }
