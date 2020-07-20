@@ -11,10 +11,6 @@ public interface AbstractService<Entity extends BaseEntity> {
 
     Entity getById(Long id);
 
-    Entity getByCreator(String creator);
-
-    Entity getByLastModifier(String modificatedBy);
-
     List<Entity> getAll();
 
     Entity update(Entity updatedEntity, Long id);
