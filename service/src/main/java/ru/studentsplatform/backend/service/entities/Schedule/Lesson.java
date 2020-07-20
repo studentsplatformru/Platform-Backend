@@ -36,7 +36,7 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return String.format("Lesson: %s-%s; %s; %s; %s",
+        return String.format("Lesson:\n\t%s-%s\n\t%s\n\t%s\n\t%s",
                 lessonStartTime,
                 lessonEndTime,
                 discipline,

@@ -1,7 +1,10 @@
 package ru.studentsplatform.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.entities.enums.University;
+import ru.studentsplatform.backend.service.spbu_new.SpbuScheduleResolver;
+import ru.studentsplatform.backend.service.spbu_new.UniversityScheduleResolver;
 
 /**
  * Класс фабрики, предоставляющий выбор между разными реализациями
@@ -12,6 +15,7 @@ public class UniversityResolverFactory {
 
     private final SpbuScheduleResolver spbuResolver;
 
+    @Autowired
     public UniversityResolverFactory(SpbuScheduleResolver spbuResolver) {
         this.spbuResolver = spbuResolver;
     }

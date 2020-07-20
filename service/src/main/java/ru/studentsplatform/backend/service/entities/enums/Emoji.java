@@ -3,8 +3,8 @@ package ru.studentsplatform.backend.service.entities.enums;
 /**
  * @author Ruben Bermudez
  * @version 1.0
- * @brief Enumerate of emojis with unicode chars
- * @date 02 of July of 2015
+ * Enumerate of emojis with unicode chars.
+ * 02 of July of 2015
  */
 public enum Emoji {
     // Emoticones group
@@ -165,8 +165,8 @@ public enum Emoji {
     ROUND_PUSHPIN('\uD83D', '\uDCCD'),
     WAVING_HAND_SIGN('\uD83D', '\uDC4B');
 
-    Character firstChar;
-    Character secondChar;
+    private final Character firstChar;
+    private final Character secondChar;
 
     Emoji(Character firstChar, Character secondChar) {
         this.firstChar = firstChar;

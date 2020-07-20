@@ -16,12 +16,18 @@
         <dependency>
             <groupId>ru.studentsplatform</groupId>
             <artifactId>university</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>ru.studentsplatform</groupId>
             <artifactId>telegram-bot</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.studentsplatform</groupId>
+            <artifactId>service</artifactId>
             <version>${project.version}</version>
         </dependency>
 

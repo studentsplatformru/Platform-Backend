@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service;
+package ru.studentsplatform.backend.service.spbu;
 
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.service.entities.Respondent;
@@ -13,7 +13,7 @@ import java.util.List;
  * {@inheritDoc}.
  */
 @Service
-public class SpbuScheduleResolver implements UniversityScheduleResolver {
+public class OldSpbuScheduleResolver implements OldUniversityScheduleResolver {
 
     /**
      * Парсит страницу и возвращает объект расписания на день.
@@ -24,7 +24,7 @@ public class SpbuScheduleResolver implements UniversityScheduleResolver {
      */
     private final SpbuScheduleUrlFinder finder;
 
-    public SpbuScheduleResolver(SpbuScheduleHtmlParser parser, SpbuScheduleUrlFinder finder) {
+    public OldSpbuScheduleResolver(SpbuScheduleHtmlParser parser, SpbuScheduleUrlFinder finder) {
         this.parser = parser;
         this.finder = finder;
     }

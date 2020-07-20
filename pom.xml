@@ -19,6 +19,8 @@
         <log4j.version>2.13.3</log4j.version>
         <mockito.version>3.4.0</mockito.version>
         <telegrambot.version>4.9</telegrambot.version>
+        <json-version>20170516</json-version>
+        <jetbrains-annotations-version>13.0</jetbrains-annotations-version>
     </properties>
 
     <modules>
@@ -108,6 +110,18 @@
                 <groupId>org.telegram</groupId>
                 <artifactId>telegrambots-abilities</artifactId>
                 <version>${telegrambot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${json-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${jetbrains-annotations-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
