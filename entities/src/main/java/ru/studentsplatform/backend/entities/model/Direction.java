@@ -39,7 +39,7 @@ public class Direction extends BaseEntity {
 	 * Связь "один-ко-многим" - Группа.
 	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
-	private Set<Group> groups;
+	private Set<Team> teams;
 
 	public String getDirectionName() {
 		return directionName;
@@ -65,11 +65,11 @@ public class Direction extends BaseEntity {
 		this.faculty = faculty;
 	}
 
-	public Set<Group> getGroups() {
-		return groups;
+	public Set<Team> getTeams() {
+		return teams;
 	}
 
-	public void setGroups(Set<Group> groups) {
-		this.groups = groups;
+	public void setTeams(Set<Team> teams) {
+		this.teams = teams;
 	}
 }

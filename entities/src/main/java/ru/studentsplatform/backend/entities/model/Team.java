@@ -13,8 +13,8 @@ import java.util.List;
  * Класс групп в университете.
  */
 @Entity
-@Table(name = "group")
-public class Group extends BaseEntity {
+@Table(name = "team")
+public class Team extends BaseEntity {
 
 	/**
 	 * Поле курс.
@@ -25,25 +25,25 @@ public class Group extends BaseEntity {
 	/**
 	 * Поле название группы.
 	 */
-	@Column(name = "group_name", nullable = false)
-	private int groupName;
+	@Column(name = "team_name", nullable = false)
+	private int teamName;
 
 	/**
 	 * Связь "один-ко-многим" - Студент.
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
 	private List<Student> students;
 
 	/**
 	 * Связь "один-ко-многим" - Занятие, для которого день уникален.
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
 	private List<Lesson> lessons;
 
 	/**
 	 * Связь "один-ко-многим" - Предмет.
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
 	private List<Subject> subjects;
 
 	/**
@@ -61,12 +61,12 @@ public class Group extends BaseEntity {
 		this.course = course;
 	}
 
-	public int getGroupName() {
-		return groupName;
+	public int getTeamName() {
+		return teamName;
 	}
 
-	public void setGroupName(int groupName) {
-		this.groupName = groupName;
+	public void setTeamName(int teamName) {
+		this.teamName = teamName;
 	}
 
 	public List<Student> getStudents() {

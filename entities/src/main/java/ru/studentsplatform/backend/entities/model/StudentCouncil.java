@@ -35,7 +35,7 @@ public class StudentCouncil extends BaseEntity {
 	/**
 	 * Поле группа вк.
 	 */
-	@Column(name = "vk_group", nullable = false)
+	@Column(name = "vk_team", nullable = false)
 	private String vkGroup;
 
 	/**

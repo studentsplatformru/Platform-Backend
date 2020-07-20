@@ -49,7 +49,7 @@ public class Lesson extends BaseEntity {
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "group_id")
-	private Group group;
+	private Team team;
 
 	/**
 	 * Связь "многие-к-одному" - Конкретная пара (её расписание).
@@ -90,12 +90,12 @@ public class Lesson extends BaseEntity {
 		this.attendanceList = attendanceList;
 	}
 
-	public Group getGroup() {
-		return group;
+	public Team getTeam() {
+		return team;
 	}
 
-	public void setGroup(Group group) {
-		this.group = group;
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	public LessonUnit getLessonUnit() {

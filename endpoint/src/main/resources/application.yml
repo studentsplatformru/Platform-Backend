@@ -19,3 +19,8 @@ spring:
 
   jpa:
     generate-ddl: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true

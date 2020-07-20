@@ -12,7 +12,7 @@ import java.util.Set;
  * Класс всех пользователей.
  */
 @Entity
-@Table(name = "user")
+@Table(name = "usr")
 public class User extends BaseEntity {
 
 	/**

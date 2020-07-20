@@ -34,7 +34,7 @@ public class Student extends BaseEntity {
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "group_id", nullable = false)
-	private Group group;
+	private Team team;
 
 	/**
 	 * Связь "многие-к-одному" - Напрвление.
@@ -49,8 +49,8 @@ public class Student extends BaseEntity {
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
 	private List<Mark> marks;
 
-	public Student(Group group) {
-		this.group = group;
+	public Student(Team team) {
+		this.team = team;
 	}
 
 	public Direction getDirection() {
@@ -69,12 +69,12 @@ public class Student extends BaseEntity {
 		this.marks = marks;
 	}
 
-	public Group getGroup() {
-		return group;
+	public Team getTeam() {
+		return team;
 	}
 
-	public void setGroup(Group group) {
-		this.group = group;
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	public User getUser() {

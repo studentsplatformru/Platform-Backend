@@ -26,8 +26,8 @@ public class Subject extends BaseEntity {
 	 * Связь "многие-к-одному" - Группа.
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "group_id")
-	private Group group;
+	@JoinColumn(name = "team_id")
+	private Team team;
 
 	/**
 	 * Связь "один-ко-многим" - Конкретная пара (её расписание).
@@ -49,12 +49,12 @@ public class Subject extends BaseEntity {
 		this.subjectName = subjectName;
 	}
 
-	public Group getGroup() {
-		return group;
+	public Team getTeam() {
+		return team;
 	}
 
-	public void setGroup(Group group) {
-		this.group = group;
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 
 	public List<LessonUnit> getLessonUnits() {
