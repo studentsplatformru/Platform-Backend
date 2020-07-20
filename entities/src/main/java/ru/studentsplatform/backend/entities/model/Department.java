@@ -10,26 +10,26 @@ import javax.persistence.Table;
 import java.util.List;
 
 /**
- * Класс кафедр, находящихся в университете
+ * Класс кафедр, находящихся в университете.
  */
 @Entity
 @Table(name = "department")
 public class Department extends BaseEntity {
 
-    /** Поле название кафедры */
+    /** Поле название кафедры. */
     @Column(name = "department_name", nullable = false)
     private String departmentName;
 
-    /** Связь "многие-к-одному" - Факультет */
+    /** Связь "многие-к-одному" - Факультет. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
 
-    /** Связь "один-ко-многим" - Студент */
+    /** Связь "один-ко-многим" - Студент. */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
     private List<Student> students;
 
-    /** Связь "один-ко-многим" - Преподаватель */
+    /** Связь "один-ко-многим" - Преподаватель. */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
     private List<Teacher> teachers;
 

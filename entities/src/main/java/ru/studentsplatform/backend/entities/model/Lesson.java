@@ -13,35 +13,35 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
- * Класс занятий в универеситете, для которых день уникален
+ * Класс занятий в универеситете, для которых день уникален.
  */
 @Entity
 @Table(name = "lesson")
 public class Lesson extends BaseEntity {
 
-    /** Поле дата занятия */
+    /** Поле дата занятия. */
     @Column(name = "date", nullable = false)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private OffsetDateTime date;
 
-    /** Связь "один-ко-многим" - Домашнее задание */
+    /** Связь "один-ко-многим" - Домашнее задание. */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson")
     private List<Homework> homeworkList;
 
-    /** Связь "один-ко-многим" - Оценка */
+    /** Связь "один-ко-многим" - Оценка. */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson")
     private List<Mark> marks;
 
-    /** Связь "один-ко-многим" - Посещаемость */
+    /** Связь "один-ко-многим" - Посещаемость. */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "lesson")
     private List<Attendance> attendanceList;
 
-    /** Связь "многие-к-одному" - Группа */
+    /** Связь "многие-к-одному" - Группа. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private Group group;
 
-    /** Связь "многие-к-одному" - Конкретная пара (её расписание) */
+    /** Связь "многие-к-одному" - Конкретная пара (её расписание). */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lesson_unit_id")
     private LessonUnit lessonUnit;

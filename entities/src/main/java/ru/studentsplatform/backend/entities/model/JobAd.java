@@ -8,29 +8,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Класс объявлений о работе
+ * Класс объявлений о работе.
  */
 @Entity
 @Table(name = "job_ad")
 public class JobAd extends BaseEntity {
 
-    /** Поле категория */
+    /** Поле категория. */
     @Column(name = "category", nullable = false)
     private String category;
 
-    /** Поле название работы */
+    /** Поле название работы. */
     @Column(name = "job_name", nullable = false)
     private String jobName;
 
-    /** Поле описание работы */
+    /** Поле описание работы. */
     @Column(name = "description", nullable = false)
     private String description;
 
-    /** Поле ссылка */
+    /** Поле ссылка. */
     @Column(name = "link", nullable = false)
     private String link;
 
-    /** Связь "многие-к-одному" - Факультет */
+    /** Связь "многие-к-одному" - Факультет. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;

@@ -14,44 +14,44 @@ import java.time.OffsetTime;
 import java.util.List;
 
 /**
- * Класс конкретных занятий в университете (их распиание)
+ * Класс конкретных занятий в университете (их распиание).
  */
 @Entity
 @Table(name = "lesson_unit")
 public class LessonUnit extends BaseEntity {
 
-    /** Поле начало занятия */
+    /** Поле начало занятия. */
     @Column(name = "start_time", nullable = false)
     @DateTimeFormat(pattern = "HH:mm")
     private OffsetTime startTime;
 
-    /** Поле окончание занятия */
+    /** Поле окончание занятия. */
     @Column(name = "end_time", nullable = false)
     @DateTimeFormat(pattern = "HH:mm")
     private OffsetTime endTime;
 
-    /** Поле аудитория */
+    /** Поле аудитория. */
     @Column(name = "audience", nullable = false)
     private String audience;
 
-    /** Поле тип занятия */
+    /** Поле тип занятия. */
     @Column(name = "type", nullable = false)
     private String type;
 
-    /** Поле примечание */
+    /** Поле примечание. */
     @Column(name = "note")
     private String note;
 
-    /** Связь "один-ко-многим" - Занятие, для которого день уникален */
+    /** Связь "один-ко-многим" - Занятие, для которого день уникален. */
     @OneToMany(mappedBy = "lessonUnit", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Lesson> lessons;
 
-    /** Связь "многие-к-одному" - Преподаватель */
+    /** Связь "многие-к-одному" - Преподаватель. */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    /** Связь "многие-к-одному" - Предмет */
+    /** Связь "многие-к-одному" - Предмет. */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
     private Subject subject;

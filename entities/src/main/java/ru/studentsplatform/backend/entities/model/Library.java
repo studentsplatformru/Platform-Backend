@@ -9,18 +9,18 @@ import javax.persistence.Table;
 import java.util.List;
 
 /**
- * Класс библиотеки
+ * Класс библиотеки.
  */
 @Entity
 @Table(name = "library")
 public class Library extends BaseEntity {
 
-    /** Связь "многие-к-одному" - Университет */
+    /** Связь "многие-к-одному" - Университет. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "university_name")
     private University university;
 
-    /** Связь "один-ко-многим" - Материал */
+    /** Связь "один-ко-многим" - Материал. */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "library")
     private List<Material> materials;
 

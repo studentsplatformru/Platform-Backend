@@ -8,22 +8,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Класс материалов по различным предметам
+ * Класс материалов по различным предметам.
  */
 @Entity
 @Table(name = "material")
 public class Material extends BaseEntity {
 
-    /** Поле ссылка */
+    /** Поле ссылка. */
     @Column(name = "link", nullable = false)
     private String link;
 
-    /** Связь "многие-к-одному" - Библиотека */
+    /** Связь "многие-к-одному" - Библиотека. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "library_id")
     private Library library;
 
-    /** Связь "многие-к-одному" - Предмет */
+    /** Связь "многие-к-одному" - Предмет. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
     private Subject subject;

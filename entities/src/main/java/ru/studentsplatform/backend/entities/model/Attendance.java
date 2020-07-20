@@ -8,17 +8,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Класс посещаемости занятий
+ * Класс посещаемости занятий.
  */
 @Entity
 @Table(name = "attendance")
 public class Attendance extends BaseEntity {
 
-    /** Поле присутствие */
+    /** Поле присутствие. */
     @Column(name = "presence")
     private boolean presence;
 
-    /** Связь "многие-к-одному" - Занятие, для которого день уникален */
+    /** Связь "многие-к-одному" - Занятие, для которого день уникален. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lesson_id")
     private Lesson lesson;

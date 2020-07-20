@@ -14,36 +14,36 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Класс преподавателей в университете
+ * Класс преподавателей в университете.
  */
 @Entity
 @Table(name = "teacher")
 public class Teacher extends BaseEntity {
 
-    /** Поле id преподавателя */
+    /** Поле id преподавателя. */
     @Id
     @Column(name = "teacher_id")
     private Long teacherId;
 
-    /** Поле персональная страница */
+    /** Поле персональная страница. */
     @Column(name = "personal_page", nullable = false)
     private String personalPage;
 
-    /** Связь "один-к-одному" - Пользователь */
+    /** Связь "один-к-одному" - Пользователь. */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     @MapsId
     private User user;
 
-    /** Связь "один-ко-многим" - Обратная связь с преподавателем */
+    /** Связь "один-ко-многим" - Обратная связь с преподавателем. */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
     private Set<TeachersFeedback> teachersFeedback;
 
-    /** Связь "один-ко-многим" - Конкретная пара (её расписание) */
+    /** Связь "один-ко-многим" - Конкретная пара (её расписание). */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
     private List<LessonUnit> lessonUnits;
 
-    /** Связь "многие-к-одному" - Направление */
+    /** Связь "многие-к-одному" - Направление. */
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "direction_id", nullable = true)
     private Direction direction;

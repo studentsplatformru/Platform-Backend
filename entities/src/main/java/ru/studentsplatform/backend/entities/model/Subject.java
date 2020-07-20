@@ -10,26 +10,26 @@ import javax.persistence.Table;
 import java.util.List;
 
 /**
- * Класс предметов в университете
+ * Класс предметов в университете.
  */
 @Entity
 @Table(name = "subject")
 public class Subject extends BaseEntity {
 
-    /** Поле название предмета */
+    /** Поле название предмета. */
     @Column(name = "subject_name", nullable = false)
     private String subjectName;
 
-    /** Связь "многие-к-одному" - Группа */
+    /** Связь "многие-к-одному" - Группа. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private Group group;
 
-    /** Связь "один-ко-многим" - Конкретная пара (её расписание) */
+    /** Связь "один-ко-многим" - Конкретная пара (её расписание). */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private List<LessonUnit> lessonUnits;
 
-    /** Связь "один-ко-многим" - Материал */
+    /** Связь "один-ко-многим" - Материал. */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private List<Material> materials;
 

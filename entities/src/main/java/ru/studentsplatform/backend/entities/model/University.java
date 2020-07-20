@@ -7,19 +7,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Класс университета
+ * Класс университета.
  */
 public class University extends BaseEntity {
 
-    /** Поле название университета */
+    /** Поле название университета. */
     @Column(name = "university_name")
     private String universityName;
 
-    /** Связь "один-ко-многим" - Факультет */
+    /** Связь "один-ко-многим" - Факультет. */
     @OneToMany(mappedBy = "university", fetch = FetchType.LAZY)
     private Set<Faculty> faculties;
 
-    /** Связь "один-ко-многим" - Библиотека */
+    /** Связь "один-ко-многим" - Библиотека. */
     @OneToMany(mappedBy = "university", fetch = FetchType.LAZY)
     private List<Library> libraries;
 

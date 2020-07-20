@@ -8,28 +8,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Класс домашних заданий для студентов
+ * Класс домашних заданий для студентов.
  */
 @Entity
 @Table(name = "homework")
 public class Homework extends BaseEntity {
 
-    /** Связь "один-ко-многим" - Занятие, для которого день уникален */
+    /** Связь "один-ко-многим" - Занятие, для которого день уникален. */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lesson_id")
     private Lesson lesson;
 
     // draft версия хранения дз
 
-    /** Поле тип файла */
+    /** Поле тип файла. */
     @Column(name = "file_type", nullable = false)
     private String fileType;
 
-    /** Поле файла */
+    /** Поле файла. */
     @Column(name = "file", nullable = false)
     private Byte[] file;
 
-    /** Поле примечание */
+    /** Поле примечание. */
     @Column(name = "note")
     private String note;
 
