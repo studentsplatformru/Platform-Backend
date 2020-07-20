@@ -16,3 +16,6 @@ spring:
     url: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/testDB
     username: postgres
     password: password256
+
+  jpa:
+    generate-ddl: true

@@ -27,6 +27,12 @@
 
         <dependency>
             <groupId>ru.studentsplatform</groupId>
+            <artifactId>domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.studentsplatform</groupId>
             <artifactId>vk-bot</artifactId>
             <version>1.0.0</version>
         </dependency>
