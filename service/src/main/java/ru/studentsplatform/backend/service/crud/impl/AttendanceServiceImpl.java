@@ -1,8 +1,8 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import ru.studentsplatform.backend.entities.model.Attendance;
-import ru.studentsplatform.backend.domain.mapper.AttendanceMapper;
-import ru.studentsplatform.backend.domain.repository.AttendanceRepository;
+import ru.studentsplatform.backend.mapper.AttendanceMapper;
+import ru.studentsplatform.backend.repository.AttendanceRepository;
 import ru.studentsplatform.backend.service.crud.AttendanceService;
 
 import java.util.List;
