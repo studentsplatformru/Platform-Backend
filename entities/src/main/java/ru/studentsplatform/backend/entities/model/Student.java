@@ -49,6 +49,10 @@ public class Student extends BaseEntity {
 	@OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
 	private List<Mark> marks;
 
+	public Student(Group group) {
+		this.group = group;
+	}
+
 	public Direction getDirection() {
 		return direction;
 	}
@@ -63,10 +67,6 @@ public class Student extends BaseEntity {
 
 	public void setMarks(List<Mark> marks) {
 		this.marks = marks;
-	}
-
-	public Student(Group group) {
-		this.group = group;
 	}
 
 	public Group getGroup() {

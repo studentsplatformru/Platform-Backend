@@ -14,28 +14,32 @@ import javax.persistence.Table;
 @Table(name = "attendance")
 public class Attendance extends BaseEntity {
 
-    /** Поле присутствие. */
-    @Column(name = "presence")
-    private boolean presence;
+	/**
+	 * Поле присутствие.
+	 */
+	@Column(name = "presence")
+	private boolean presence;
 
-    /** Связь "многие-к-одному" - Занятие, для которого день уникален. */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lesson_id")
-    private Lesson lesson;
+	/**
+	 * Связь "многие-к-одному" - Занятие, для которого день уникален.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "lesson_id")
+	private Lesson lesson;
 
-    public boolean isPresence() {
-        return presence;
-    }
+	public boolean isPresence() {
+		return presence;
+	}
 
-    public void setPresence(boolean presence) {
-        this.presence = presence;
-    }
+	public void setPresence(boolean presence) {
+		this.presence = presence;
+	}
 
-    public Lesson getLesson() {
-        return lesson;
-    }
+	public Lesson getLesson() {
+		return lesson;
+	}
 
-    public void setLesson(Lesson lesson) {
-        this.lesson = lesson;
-    }
+	public void setLesson(Lesson lesson) {
+		this.lesson = lesson;
+	}
 }

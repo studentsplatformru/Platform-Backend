@@ -15,39 +15,45 @@ import java.util.Set;
 @Table(name = "university")
 public class University extends BaseEntity {
 
-    /** Поле название университета. */
-    @Column(name = "university_name")
-    private String universityName;
+	/**
+	 * Поле название университета.
+	 */
+	@Column(name = "university_name")
+	private String universityName;
 
-    /** Связь "один-ко-многим" - Факультет. */
-    @OneToMany(mappedBy = "university", fetch = FetchType.LAZY)
-    private Set<Faculty> faculties;
+	/**
+	 * Связь "один-ко-многим" - Факультет.
+	 */
+	@OneToMany(mappedBy = "university", fetch = FetchType.LAZY)
+	private Set<Faculty> faculties;
 
-    /** Связь "один-ко-многим" - Библиотека. */
-    @OneToMany(mappedBy = "university", fetch = FetchType.LAZY)
-    private List<Library> libraries;
+	/**
+	 * Связь "один-ко-многим" - Библиотека.
+	 */
+	@OneToMany(mappedBy = "university", fetch = FetchType.LAZY)
+	private List<Library> libraries;
 
-    public String getUniversityName() {
-        return universityName;
-    }
+	public String getUniversityName() {
+		return universityName;
+	}
 
-    public void setUniversityName(String universityName) {
-        this.universityName = universityName;
-    }
+	public void setUniversityName(String universityName) {
+		this.universityName = universityName;
+	}
 
-    public Set<Faculty> getFaculties() {
-        return faculties;
-    }
+	public Set<Faculty> getFaculties() {
+		return faculties;
+	}
 
-    public void setFaculties(Set<Faculty> faculties) {
-        this.faculties = faculties;
-    }
+	public void setFaculties(Set<Faculty> faculties) {
+		this.faculties = faculties;
+	}
 
-    public List<Library> getLibraries() {
-        return libraries;
-    }
+	public List<Library> getLibraries() {
+		return libraries;
+	}
 
-    public void setLibraries(List<Library> libraries) {
-        this.libraries = libraries;
-    }
+	public void setLibraries(List<Library> libraries) {
+		this.libraries = libraries;
+	}
 }

@@ -14,41 +14,47 @@ import javax.persistence.Table;
 @Table(name = "mark")
 public class Mark extends BaseEntity {
 
-    /** Поле значение оценки. */
-    @Column(name = "mark_value", nullable = false)
-    private String markValue;
+	/**
+	 * Поле значение оценки.
+	 */
+	@Column(name = "mark_value", nullable = false)
+	private String markValue;
 
-    /** Связь "многие-к-одному" - Студент. */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "student_id")
-    private Student student;
+	/**
+	 * Связь "многие-к-одному" - Студент.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "student_id")
+	private Student student;
 
-    /** Связь "многие-к-одному" - Занятие, для которого день уникален. */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lesson_id")
-    private Lesson lesson;
+	/**
+	 * Связь "многие-к-одному" - Занятие, для которого день уникален.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "lesson_id")
+	private Lesson lesson;
 
-    public Student getStudent() {
-        return student;
-    }
+	public Student getStudent() {
+		return student;
+	}
 
-    public String getMarkValue() {
-        return markValue;
-    }
+	public void setStudent(Student student) {
+		this.student = student;
+	}
 
-    public void setMarkValue(String markValue) {
-        this.markValue = markValue;
-    }
+	public String getMarkValue() {
+		return markValue;
+	}
 
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+	public void setMarkValue(String markValue) {
+		this.markValue = markValue;
+	}
 
-    public Lesson getLesson() {
-        return lesson;
-    }
+	public Lesson getLesson() {
+		return lesson;
+	}
 
-    public void setLesson(Lesson lesson) {
-        this.lesson = lesson;
-    }
+	public void setLesson(Lesson lesson) {
+		this.lesson = lesson;
+	}
 }

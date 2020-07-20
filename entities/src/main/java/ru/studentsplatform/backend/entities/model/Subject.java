@@ -16,52 +16,60 @@ import java.util.List;
 @Table(name = "subject")
 public class Subject extends BaseEntity {
 
-    /** Поле название предмета. */
-    @Column(name = "subject_name", nullable = false)
-    private String subjectName;
+	/**
+	 * Поле название предмета.
+	 */
+	@Column(name = "subject_name", nullable = false)
+	private String subjectName;
 
-    /** Связь "многие-к-одному" - Группа. */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id")
-    private Group group;
+	/**
+	 * Связь "многие-к-одному" - Группа.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "group_id")
+	private Group group;
 
-    /** Связь "один-ко-многим" - Конкретная пара (её расписание). */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
-    private List<LessonUnit> lessonUnits;
+	/**
+	 * Связь "один-ко-многим" - Конкретная пара (её расписание).
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
+	private List<LessonUnit> lessonUnits;
 
-    /** Связь "один-ко-многим" - Материал. */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
-    private List<Material> materials;
+	/**
+	 * Связь "один-ко-многим" - Материал.
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
+	private List<Material> materials;
 
-    public String getSubjectName() {
-        return subjectName;
-    }
+	public String getSubjectName() {
+		return subjectName;
+	}
 
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
 
-    public Group getGroup() {
-        return group;
-    }
+	public Group getGroup() {
+		return group;
+	}
 
-    public void setGroup(Group group) {
-        this.group = group;
-    }
+	public void setGroup(Group group) {
+		this.group = group;
+	}
 
-    public List<LessonUnit> getLessonUnits() {
-        return lessonUnits;
-    }
+	public List<LessonUnit> getLessonUnits() {
+		return lessonUnits;
+	}
 
-    public void setLessonUnits(List<LessonUnit> lessonUnits) {
-        this.lessonUnits = lessonUnits;
-    }
+	public void setLessonUnits(List<LessonUnit> lessonUnits) {
+		this.lessonUnits = lessonUnits;
+	}
 
-    public List<Material> getMaterials() {
-        return materials;
-    }
+	public List<Material> getMaterials() {
+		return materials;
+	}
 
-    public void setMaterials(List<Material> materials) {
-        this.materials = materials;
-    }
+	public void setMaterials(List<Material> materials) {
+		this.materials = materials;
+	}
 }

@@ -14,54 +14,62 @@ import javax.persistence.Table;
 @Table(name = "homework")
 public class Homework extends BaseEntity {
 
-    /** Связь "один-ко-многим" - Занятие, для которого день уникален. */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lesson_id")
-    private Lesson lesson;
+	/**
+	 * Связь "один-ко-многим" - Занятие, для которого день уникален.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "lesson_id")
+	private Lesson lesson;
 
-    // draft версия хранения дз
+	// draft версия хранения дз
 
-    /** Поле тип файла. */
-    @Column(name = "file_type", nullable = false)
-    private String fileType;
+	/**
+	 * Поле тип файла.
+	 */
+	@Column(name = "file_type", nullable = false)
+	private String fileType;
 
-    /** Поле файла. */
-    @Column(name = "file", nullable = false)
-    private Byte[] file;
+	/**
+	 * Поле файла.
+	 */
+	@Column(name = "file", nullable = false)
+	private Byte[] file;
 
-    /** Поле примечание. */
-    @Column(name = "note")
-    private String note;
+	/**
+	 * Поле примечание.
+	 */
+	@Column(name = "note")
+	private String note;
 
-    public String getFileType() {
-        return fileType;
-    }
+	public String getFileType() {
+		return fileType;
+	}
 
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
-    }
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
 
-    public Byte[] getFile() {
-        return file;
-    }
+	public Byte[] getFile() {
+		return file;
+	}
 
-    public void setFile(Byte[] file) {
-        this.file = file;
-    }
+	public void setFile(Byte[] file) {
+		this.file = file;
+	}
 
-    public String getNote() {
-        return note;
-    }
+	public String getNote() {
+		return note;
+	}
 
-    public void setNote(String note) {
-        this.note = note;
-    }
+	public void setNote(String note) {
+		this.note = note;
+	}
 
-    public Lesson getLesson() {
-        return lesson;
-    }
+	public Lesson getLesson() {
+		return lesson;
+	}
 
-    public void setLesson(Lesson lesson) {
-        this.lesson = lesson;
-    }
+	public void setLesson(Lesson lesson) {
+		this.lesson = lesson;
+	}
 }
