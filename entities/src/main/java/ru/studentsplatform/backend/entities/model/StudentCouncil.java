@@ -11,7 +11,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "student_council")
-public class StudentCouncil {
+public class StudentCouncil extends BaseEntity{
 
     /** Поле телефон. */
     @Column(name = "phone", nullable = false)

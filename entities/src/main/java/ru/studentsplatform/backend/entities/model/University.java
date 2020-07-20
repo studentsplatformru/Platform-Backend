@@ -1,14 +1,18 @@
 package ru.studentsplatform.backend.entities.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 import java.util.Set;
 
 /**
  * Класс университета.
  */
+@Entity
+@Table(name = "university")
 public class University extends BaseEntity {
 
     /** Поле название университета. */

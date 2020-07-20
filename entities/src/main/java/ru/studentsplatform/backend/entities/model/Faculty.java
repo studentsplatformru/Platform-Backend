@@ -39,7 +39,7 @@ public class Faculty extends BaseEntity {
     private List<JobAd> jobAds;
 
     /** Связь "один-ко-многим" - Направление. */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "faculty")
     private Set<Direction> directions;
 
     public Set<Direction> getDirections() {

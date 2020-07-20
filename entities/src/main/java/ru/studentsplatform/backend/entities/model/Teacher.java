@@ -3,7 +3,6 @@ package ru.studentsplatform.backend.entities.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -19,80 +18,88 @@ import java.util.Set;
 @Entity
 @Table(name = "teacher")
 public class Teacher extends BaseEntity {
+	/**
+	 * Поле персональная страница.
+	 */
+	@Column(name = "personal_page", nullable = false)
+	private String personalPage;
 
-    /** Поле id преподавателя. */
-    @Id
-    @Column(name = "teacher_id")
-    private Long teacherId;
+	/**
+	 * Связь "один-к-одному" - Пользователь.
+	 */
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
+	@MapsId
+	private User user;
 
-    /** Поле персональная страница. */
-    @Column(name = "personal_page", nullable = false)
-    private String personalPage;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "department_id", nullable = false)
+	private Department department;
 
-    /** Связь "один-к-одному" - Пользователь. */
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    @MapsId
-    private User user;
+	/**
+	 * Связь "один-ко-многим" - Обратная связь с преподавателем.
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
+	private Set<TeachersFeedback> teachersFeedback;
 
-    /** Связь "один-ко-многим" - Обратная связь с преподавателем. */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
-    private Set<TeachersFeedback> teachersFeedback;
+	/**
+	 * Связь "один-ко-многим" - Конкретная пара (её расписание).
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
+	private List<LessonUnit> lessonUnits;
 
-    /** Связь "один-ко-многим" - Конкретная пара (её расписание). */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
-    private List<LessonUnit> lessonUnits;
+	/**
+	 * Связь "многие-к-одному" - Направление.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "direction_id", nullable = true)
+	private Direction direction;
 
-    /** Связь "многие-к-одному" - Направление. */
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "direction_id", nullable = true)
-    private Direction direction;
+	public Direction getDirection() {
+		return direction;
+	}
 
-    public Direction getDirection() {
-        return direction;
-    }
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
 
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }
+	public Set<TeachersFeedback> getTeachersFeedback() {
+		return teachersFeedback;
+	}
 
-    public Set<TeachersFeedback> getTeachersFeedback() {
-        return teachersFeedback;
-    }
+	public void setTeachersFeedback(Set<TeachersFeedback> teachersFeedback) {
+		this.teachersFeedback = teachersFeedback;
+	}
 
-    public void setTeachersFeedback(Set<TeachersFeedback> teachersFeedback) {
-        this.teachersFeedback = teachersFeedback;
-    }
+	public List<LessonUnit> getLessonUnits() {
+		return lessonUnits;
+	}
 
-    public List<LessonUnit> getLessonUnits() {
-        return lessonUnits;
-    }
+	public void setLessonUnits(List<LessonUnit> lessonUnits) {
+		this.lessonUnits = lessonUnits;
+	}
 
-    public void setLessonUnits(List<LessonUnit> lessonUnits) {
-        this.lessonUnits = lessonUnits;
-    }
+	public String getPersonalPage() {
+		return personalPage;
+	}
 
-    public Long getTeacherId() {
-        return teacherId;
-    }
+	public void setPersonalPage(String personalPage) {
+		this.personalPage = personalPage;
+	}
 
-    public void setTeacherId(Long teacherId) {
-        this.teacherId = teacherId;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public String getPersonalPage() {
-        return personalPage;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public void setPersonalPage(String personalPage) {
-        this.personalPage = personalPage;
-    }
+	public Department getDepartment() {
+		return department;
+	}
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 }
