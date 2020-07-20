@@ -16,6 +16,9 @@
         <micrometer-registry-prometheus.version>1.5.2</micrometer-registry-prometheus.version>
         <vk-bot-java-sdk.version>0.1.3</vk-bot-java-sdk.version>
         <postgresql.version>42.2.14</postgresql.version>
+        <log4j.version>2.13.3</log4j.version>
+        <json-version>20170516</json-version>
+        <jetbrains-annotations-version>13.0</jetbrains-annotations-version>
     </properties>
 
     <modules>
@@ -87,6 +90,24 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${json-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${jetbrains-annotations-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
