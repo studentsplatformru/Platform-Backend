@@ -35,17 +35,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public Attendance update(Attendance updatedEntity, Long id) {
-        Attendance attendance = attendanceRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        attendance.setLesson(updatedEntity.getLesson());
-        attendance.setPresence(updatedEntity.isPresence());
-        return attendanceRepository.saveAndFlush(attendance);
+        updatedEntity.setId(id);
+        return attendanceRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if (attendanceRepository.findById(id).isEmpty()){
-            return false;
-        }
         attendanceRepository.deleteById(id);
         return true;
     }

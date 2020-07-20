@@ -32,19 +32,12 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department update(Department updatedEntity, Long id) {
-        Department department = departmentRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        department.setDepartmentName(updatedEntity.getDepartmentName());
-        department.setFaculty(updatedEntity.getFaculty());
-        department.setStudents(updatedEntity.getStudents());
-        department.setTeachers(updatedEntity.getTeachers());
-        return departmentRepository.saveAndFlush(department);
+       updatedEntity.setId(id);
+        return departmentRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if(departmentRepository.findById(id).isEmpty()) {
-            return false;
-        }
         departmentRepository.deleteById(id);
         return true;
     }
