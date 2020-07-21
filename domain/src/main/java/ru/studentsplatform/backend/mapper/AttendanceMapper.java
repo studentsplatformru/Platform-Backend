@@ -6,6 +6,8 @@ import org.mapstruct.Mappings;
 import ru.studentsplatform.backend.dto.AttendanceDTO;
 import ru.studentsplatform.backend.entities.model.Attendance;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface AttendanceMapper {
     @Mappings({
@@ -25,4 +27,8 @@ public interface AttendanceMapper {
             @Mapping(target = "lesson", source = "dto.lesson")
     })
     Attendance attendanceDTOtoAttendance(AttendanceDTO dto);
+
+    List<AttendanceDTO> listAttendanceToAttendanceDTO(List<Attendance> entity);
+
+    List<Attendance> listAttendanceDTOtoAttendance(List<AttendanceDTO> dto);
 }
