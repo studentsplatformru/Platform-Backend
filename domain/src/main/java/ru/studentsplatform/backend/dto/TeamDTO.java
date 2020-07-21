@@ -7,13 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import ru.studentsplatform.backend.entities.model.Direction;
-import ru.studentsplatform.backend.entities.model.Lesson;
-import ru.studentsplatform.backend.entities.model.Student;
-import ru.studentsplatform.backend.entities.model.Subject;
 
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @SuperBuilder

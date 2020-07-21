@@ -6,12 +6,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.studentsplatform.backend.entities.model.Material;
 import ru.studentsplatform.backend.entities.model.University;
 
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @SuperBuilder

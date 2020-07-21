@@ -6,16 +6,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.studentsplatform.backend.entities.model.Department;
-import ru.studentsplatform.backend.entities.model.JobAd;
-import ru.studentsplatform.backend.entities.model.StudentCouncil;
 import ru.studentsplatform.backend.entities.model.University;
-import ru.studentsplatform.backend.entities.model.Direction;
-
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
 
 @Data
 @SuperBuilder
