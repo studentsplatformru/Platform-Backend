@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.Lesson;
 import ru.studentsplatform.backend.repository.LessonRepository;
 import ru.studentsplatform.backend.service.crud.LessonService;
@@ -32,22 +33,17 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public Lesson update(Lesson updatedEntity, Long id) {
-        Lesson lesson = lessonRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        lesson.setAttendanceList(updatedEntity.getAttendanceList());
-        lesson.setDate(updatedEntity.getDate());
-        lesson.setHomeworkList(updatedEntity.getHomeworkList());
-        lesson.setLessonUnit(updatedEntity.getLessonUnit());
-        lesson.setMarks(updatedEntity.getMarks());
-        lesson.setTeam(updatedEntity.getTeam());
-        return lessonRepository.saveAndFlush(lesson);
+        updatedEntity.setId(id);
+        return lessonRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if (lessonRepository.findById(id).isEmpty()) {
+        try {
+            lessonRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
-        lessonRepository.deleteById(id);
         return true;
     }
 }

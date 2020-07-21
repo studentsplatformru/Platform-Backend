@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.Faculty;
 import ru.studentsplatform.backend.repository.FacultyRepository;
 import ru.studentsplatform.backend.service.crud.FacultyService;
@@ -17,8 +18,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public Faculty create(Faculty newEntity) {
-        facultyRepository.saveAndFlush(newEntity);
-        return newEntity;
+        return facultyRepository.saveAndFlush(newEntity);
     }
 
     @Override
@@ -33,22 +33,17 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public Faculty update(Faculty updatedEntity, Long id) {
-        Faculty faculty = facultyRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        faculty.setDepartments(updatedEntity.getDepartments());
-        faculty.setDirections(updatedEntity.getDirections());
-        faculty.setFacultyName(updatedEntity.getFacultyName());
-        faculty.setJobAds(updatedEntity.getJobAds());
-        faculty.setStudentCouncils(updatedEntity.getStudentCouncils());
-        faculty.setUniversity(updatedEntity.getUniversity());
-        return facultyRepository.saveAndFlush(faculty);
+        updatedEntity.setId(id);
+        return facultyRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if (facultyRepository.findById(id).isEmpty()){
+        try {
+            facultyRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
-        facultyRepository.deleteById(id);
         return true;
     }
 }

@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.Library;
 import ru.studentsplatform.backend.repository.LibraryRepository;
 import ru.studentsplatform.backend.service.crud.LibraryService;
@@ -32,18 +33,17 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public Library update(Library updatedEntity, Long id) {
-        Library library = libraryRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        library.setMaterials(updatedEntity.getMaterials());
-        library.setUniversity(updatedEntity.getUniversity());
-        return libraryRepository.saveAndFlush(library);
+        updatedEntity.setId(id);
+        return libraryRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if (libraryRepository.findById(id).isEmpty()){
+        try {
+            libraryRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
-        libraryRepository.deleteById(id);
         return true;
     }
 }

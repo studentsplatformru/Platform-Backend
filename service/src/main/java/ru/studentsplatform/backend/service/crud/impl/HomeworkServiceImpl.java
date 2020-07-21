@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.Homework;
 import ru.studentsplatform.backend.repository.HomeworkRepository;
 import ru.studentsplatform.backend.service.crud.HomeworkService;
@@ -32,20 +33,17 @@ public class HomeworkServiceImpl implements HomeworkService {
 
     @Override
     public Homework update(Homework updatedEntity, Long id) {
-        Homework homework = homeworkRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        homework.setFile(updatedEntity.getFile());
-        homework.setFileType(updatedEntity.getFileType());
-        homework.setLesson(updatedEntity.getLesson());
-        homework.setNote(updatedEntity.getNote());
-        return homeworkRepository.saveAndFlush(homework);
+        updatedEntity.setId(id);
+        return homeworkRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if (homeworkRepository.findById(id).isEmpty()) {
+        try {
+            homeworkRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
-        homeworkRepository.deleteById(id);
         return true;
     }
 }

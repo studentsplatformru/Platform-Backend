@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.Department;
 import ru.studentsplatform.backend.repository.DepartmentRepository;
 import ru.studentsplatform.backend.service.crud.DepartmentService;
@@ -32,13 +33,17 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department update(Department updatedEntity, Long id) {
-       updatedEntity.setId(id);
+        updatedEntity.setId(id);
         return departmentRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        departmentRepository.deleteById(id);
+        try {
+            departmentRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
         return true;
     }
 }

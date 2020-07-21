@@ -1,6 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
-import ru.studentsplatform.backend.entities.model.Lesson;
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.LessonUnit;
 import ru.studentsplatform.backend.repository.LessonUnitRepository;
 import ru.studentsplatform.backend.service.crud.LessonUnitService;
@@ -33,24 +33,17 @@ public class LessonUnitServiceImpl implements LessonUnitService {
 
     @Override
     public LessonUnit update(LessonUnit updatedEntity, Long id) {
-        LessonUnit lessonUnit = lessonUnitRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        lessonUnit.setAudience(updatedEntity.getAudience());
-        lessonUnit.setEndTime(updatedEntity.getEndTime());
-        lessonUnit.setLessons(updatedEntity.getLessons());
-        lessonUnit.setNote(updatedEntity.getNote());
-        lessonUnit.setStartTime(updatedEntity.getStartTime());
-        lessonUnit.setSubject(updatedEntity.getSubject());
-        lessonUnit.setTeacher(updatedEntity.getTeacher());
-        lessonUnit.setType(updatedEntity.getType());
-        return lessonUnitRepository.saveAndFlush(lessonUnit);
+        updatedEntity.setId(id);
+        return lessonUnitRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if (lessonUnitRepository.findById(id).isEmpty()){
+        try {
+            lessonUnitRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
-        lessonUnitRepository.deleteById(id);
         return true;
     }
 }

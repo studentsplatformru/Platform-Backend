@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.Student;
 import ru.studentsplatform.backend.repository.StudentRepository;
 import ru.studentsplatform.backend.service.crud.StudentService;
@@ -32,14 +33,17 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student update(Student updatedEntity, Long id) {
-        Student student = studentRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        student.setDepartment(updatedEntity.getDepartment());
-        student.setDirection(updatedEntity.getDirection());
-        return null;
+        updatedEntity.setId(id);
+        return studentRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        try {
+            studentRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
+        return true;
     }
 }

@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.Attendance;
 import ru.studentsplatform.backend.repository.AttendanceRepository;
@@ -25,7 +26,6 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Override
     public Attendance getById(Long id) {
         return attendanceRepository.findById(id).orElseThrow(NoSuchElementException::new);
-
     }
 
     @Override
@@ -41,7 +41,12 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public boolean delete(Long id) {
-        attendanceRepository.deleteById(id);
+        try {
+            attendanceRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            return false;
+        }
         return true;
     }
+
 }

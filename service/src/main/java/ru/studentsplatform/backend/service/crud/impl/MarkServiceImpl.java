@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.Mark;
 import ru.studentsplatform.backend.repository.MarkRepository;
 import ru.studentsplatform.backend.service.crud.MarkService;
@@ -8,8 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class MarkServiceImpl implements MarkService {
-
-    MarkRepository markRepository;
+    private final MarkRepository markRepository;
 
     public MarkServiceImpl(MarkRepository markRepository) {
         this.markRepository = markRepository;
@@ -32,19 +32,17 @@ public class MarkServiceImpl implements MarkService {
 
     @Override
     public Mark update(Mark updatedEntity, Long id) {
-        Mark mark = markRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        mark.setLesson(updatedEntity.getLesson());
-        mark.setMarkValue(updatedEntity.getMarkValue());
-        mark.setStudent(updatedEntity.getStudent());
-        return markRepository.saveAndFlush(mark);
+        updatedEntity.setId(id);
+        return markRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if (markRepository.findById(id).isEmpty()){
+        try {
+            markRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
-        markRepository.deleteById(id);
         return true;
     }
 }

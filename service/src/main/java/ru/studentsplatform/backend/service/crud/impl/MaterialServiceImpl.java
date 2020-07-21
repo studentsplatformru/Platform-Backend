@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.Material;
 import ru.studentsplatform.backend.repository.MaterialRepository;
 import ru.studentsplatform.backend.service.crud.MaterialService;
@@ -32,19 +33,17 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public Material update(Material updatedEntity, Long id) {
-        Material material = materialRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        material.setLibrary(updatedEntity.getLibrary());
-        material.setLink(updatedEntity.getLink());
-        material.setSubject(updatedEntity.getSubject());
-        return materialRepository.saveAndFlush(material);
+        updatedEntity.setId(id);
+        return materialRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if (materialRepository.findById(id).isEmpty()){
+        try {
+            materialRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
-        materialRepository.deleteById(id);
         return true;
     }
 }

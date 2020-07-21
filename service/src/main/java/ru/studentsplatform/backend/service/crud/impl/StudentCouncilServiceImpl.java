@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.StudentCouncil;
 import ru.studentsplatform.backend.repository.StudentCouncilRepository;
 import ru.studentsplatform.backend.service.crud.StudentCouncilService;
@@ -32,21 +33,17 @@ public class StudentCouncilServiceImpl implements StudentCouncilService {
 
     @Override
     public StudentCouncil update(StudentCouncil updatedEntity, Long id) {
-        StudentCouncil studentCouncil = studentCouncilRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        studentCouncil.setAudience(updatedEntity.getAudience());
-        studentCouncil.setEmail(updatedEntity.getEmail());
-        studentCouncil.setFaculty(updatedEntity.getFaculty());
-        studentCouncil.setPhone(updatedEntity.getPhone());
-        studentCouncil.setVkGroup(updatedEntity.getVkGroup());
-        return studentCouncilRepository.saveAndFlush(studentCouncil);
+        updatedEntity.setId(id);
+        return studentCouncilRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if (studentCouncilRepository.findById(id).isEmpty()){
+        try {
+            studentCouncilRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
-        studentCouncilRepository.deleteById(id);
         return true;
     }
 }

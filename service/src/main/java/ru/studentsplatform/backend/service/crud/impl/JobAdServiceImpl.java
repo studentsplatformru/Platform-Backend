@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.JobAd;
 import ru.studentsplatform.backend.repository.JobAdRepository;
 import ru.studentsplatform.backend.service.crud.JobAdService;
@@ -32,21 +33,17 @@ public class JobAdServiceImpl implements JobAdService {
 
     @Override
     public JobAd update(JobAd updatedEntity, Long id) {
-        JobAd jobAd = jobAdRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        jobAd.setCategory(updatedEntity.getCategory());
-        jobAd.setDescription(updatedEntity.getDescription());
-        jobAd.setFaculty(updatedEntity.getFaculty());
-        jobAd.setJobName(updatedEntity.getJobName());
-        jobAd.setLink(updatedEntity.getLink());
-        return jobAdRepository.saveAndFlush(jobAd);
+        updatedEntity.setId(id);
+        return jobAdRepository.saveAndFlush(updatedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
-        if (jobAdRepository.findById(id).isEmpty()) {
+        try {
+            jobAdRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
             return false;
         }
-        jobAdRepository.deleteById(id);
         return true;
     }
 }
