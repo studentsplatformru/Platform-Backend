@@ -41,10 +41,10 @@ public interface UserMapper {
             @Mapping(target = "student", source = "dto.student"),
             @Mapping(target = "teachersFeedback", source = "dto.teachersFeedback")
     })
-    User directionDTOtoDirection(UserDTO dto);
+    User userDTOtoUser(UserDTO dto);
 
-    List<UserDTO> listDepartmentToDepartmentDTO(List<User> entity);
+    List<UserDTO> listUserToUserDTO(List<User> entity);
 
-    List<User> listDepartmentDTOtoDepartment(List<UserDTO> dto);
+    List<User> listUserDTOtoUser(List<UserDTO> dto);
 
 }

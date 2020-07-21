@@ -13,10 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class GroupDTO extends BaseDTO implements Serializable {
+public class TeamDTO extends BaseDTO implements Serializable {
 
     private int course;
-    private int groupName;
+    private int teamName;
     private List<Student> students;
     private List<Lesson> lessons;
     private List<Subject> subjects;
