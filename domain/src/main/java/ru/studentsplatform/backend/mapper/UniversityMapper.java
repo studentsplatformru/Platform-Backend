@@ -19,7 +19,7 @@ public interface UniversityMapper {
             @Mapping(target = "faculties", source = "entity.faculties"),
             @Mapping(target = "libraries", source = "entity.libraries")
     })
-    UniversityDTO directionToDirectionDTO(University entity);
+    UniversityDTO universityToUniversityDTO(University entity);
 
     @Mappings({
             @Mapping(target = "id", source = "dto.id"),
@@ -30,10 +30,10 @@ public interface UniversityMapper {
             @Mapping(target = "libraries", source = "dto.libraries")
 
     })
-    University directionDTOtoDirection(UniversityDTO dto);
+    University universityDTOtoUniversity(UniversityDTO dto);
 
-    List<UniversityDTO> listDepartmentToDepartmentDTO(List<University> entity);
+    List<UniversityDTO> listUniversityToUniversityDTO(List<University> entity);
 
-    List<University> listDepartmentDTOtoDepartment(List<UniversityDTO> dto);
+    List<University> listUniversityDTOtoUniversity(List<UniversityDTO> dto);
 
 }
