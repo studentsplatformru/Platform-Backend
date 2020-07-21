@@ -4,7 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.dto.JobAdDTO;
-import ru.studentsplatform.backend.endpoint.crud.AttendanceController;
 import ru.studentsplatform.backend.endpoint.crud.JobAdController;
 import ru.studentsplatform.backend.entities.model.JobAd;
 import ru.studentsplatform.backend.mapper.JobAdMapper;
@@ -13,7 +12,7 @@ import ru.studentsplatform.backend.service.crud.JobAdService;
 import java.util.List;
 
 @RestController
-@RequestMapping(AttendanceController.BASE_URL)
+@RequestMapping(JobAdController.BASE_URL)
 public class JobAdControllerImpl implements JobAdController {
 
     private final JobAdService jobAdService;
