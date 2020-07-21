@@ -40,16 +40,20 @@ public class AttendanceControllerImpl implements AttendanceController {
 
     @Override
     public ResponseEntity<List<AttendanceDTO>> getAll() {
-        return null;
+        List<Attendance> attendanceList = attendanceService.getAll();
+        List<AttendanceDTO> attendanceDTOList = mapper.listAttendanceToAttendanceDTO(attendanceList);
+        return ResponseEntity.ok(attendanceDTOList);
     }
 
     @Override
     public ResponseEntity<AttendanceDTO> update(AttendanceDTO updatedInstanceRequest, Long id) {
-        return null;
+        Attendance attendance = mapper.attendanceDTOtoAttendance(updatedInstanceRequest);
+        attendance = attendanceService.update(attendance, id);
+        return ResponseEntity.ok(mapper.attendanceToAttendanceDTO(attendance));
     }
 
     @Override
     public ResponseEntity<Boolean> delete(Long id) {
-        return null;
+        return ResponseEntity.ok(attendanceService.delete(id));
     }
 }
