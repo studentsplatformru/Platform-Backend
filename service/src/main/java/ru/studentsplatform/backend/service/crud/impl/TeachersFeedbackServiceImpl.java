@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.TeachersFeedback;
 import ru.studentsplatform.backend.repository.TeachersFeedbackRepository;
 import ru.studentsplatform.backend.service.crud.TeachersFeedbackService;
@@ -8,6 +9,7 @@ import ru.studentsplatform.backend.service.crud.TeachersFeedbackService;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class TeachersFeedbackServiceImpl implements TeachersFeedbackService {
     private final TeachersFeedbackRepository teachersFeedbackRepository;
 

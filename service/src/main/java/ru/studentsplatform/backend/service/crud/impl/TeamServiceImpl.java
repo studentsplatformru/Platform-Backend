@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.Team;
 import ru.studentsplatform.backend.repository.TeamRepository;
 import ru.studentsplatform.backend.service.crud.TeamService;
@@ -8,6 +9,7 @@ import ru.studentsplatform.backend.service.crud.TeamService;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class TeamServiceImpl implements TeamService {
     private final TeamRepository teamRepository;
 

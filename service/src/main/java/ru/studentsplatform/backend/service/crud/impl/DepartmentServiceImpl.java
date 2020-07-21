@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.Department;
 import ru.studentsplatform.backend.repository.DepartmentRepository;
 import ru.studentsplatform.backend.service.crud.DepartmentService;
@@ -8,6 +9,7 @@ import ru.studentsplatform.backend.service.crud.DepartmentService;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;

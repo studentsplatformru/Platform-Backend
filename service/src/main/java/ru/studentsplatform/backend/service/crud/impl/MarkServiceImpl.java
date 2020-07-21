@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.Mark;
 import ru.studentsplatform.backend.repository.MarkRepository;
 import ru.studentsplatform.backend.service.crud.MarkService;
@@ -8,6 +9,7 @@ import ru.studentsplatform.backend.service.crud.MarkService;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class MarkServiceImpl implements MarkService {
     private final MarkRepository markRepository;
 

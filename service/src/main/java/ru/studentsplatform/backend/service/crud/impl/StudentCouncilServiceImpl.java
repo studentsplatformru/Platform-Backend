@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.StudentCouncil;
 import ru.studentsplatform.backend.repository.StudentCouncilRepository;
 import ru.studentsplatform.backend.service.crud.StudentCouncilService;
@@ -8,6 +9,7 @@ import ru.studentsplatform.backend.service.crud.StudentCouncilService;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class StudentCouncilServiceImpl implements StudentCouncilService {
 
     private final StudentCouncilRepository studentCouncilRepository;

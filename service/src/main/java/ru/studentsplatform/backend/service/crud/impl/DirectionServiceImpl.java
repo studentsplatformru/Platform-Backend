@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.Direction;
 import ru.studentsplatform.backend.repository.DirectionRepository;
 import ru.studentsplatform.backend.service.crud.DirectionService;
@@ -8,6 +9,7 @@ import ru.studentsplatform.backend.service.crud.DirectionService;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class DirectionServiceImpl implements DirectionService {
 
     private final DirectionRepository directionRepository;

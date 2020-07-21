@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.Material;
 import ru.studentsplatform.backend.repository.MaterialRepository;
 import ru.studentsplatform.backend.service.crud.MaterialService;
@@ -8,6 +9,7 @@ import ru.studentsplatform.backend.service.crud.MaterialService;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class MaterialServiceImpl implements MaterialService {
 
     private final MaterialRepository materialRepository;

@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.User;
 import ru.studentsplatform.backend.repository.UserRepository;
 import ru.studentsplatform.backend.service.crud.UserService;
@@ -8,6 +9,7 @@ import ru.studentsplatform.backend.service.crud.UserService;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 

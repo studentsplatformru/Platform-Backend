@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.Student;
 import ru.studentsplatform.backend.repository.StudentRepository;
 import ru.studentsplatform.backend.service.crud.StudentService;
@@ -8,6 +9,7 @@ import ru.studentsplatform.backend.service.crud.StudentService;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Service
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
