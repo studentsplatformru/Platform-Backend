@@ -24,5 +24,4 @@ public class LessonUnitDTO extends BaseDTO implements Serializable {
     private List<Lesson> lessons;
     private Teacher teacher;
     private Subject subject;
-
 }

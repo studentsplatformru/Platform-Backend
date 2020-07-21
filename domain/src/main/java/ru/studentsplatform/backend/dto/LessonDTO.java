@@ -22,5 +22,4 @@ public class LessonDTO extends BaseDTO implements Serializable {
     private List<Attendance> attendanceList;
     private Team team;
     private LessonUnit lessonUnit;
-
 }
