@@ -1,11 +1,16 @@
 package ru.studentsplatform.backend.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import ru.studentsplatform.backend.entities.model.Student;
 import ru.studentsplatform.backend.entities.model.Teacher;
 import ru.studentsplatform.backend.entities.model.TeachersFeedback;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Data
@@ -14,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class UserDTO {
+public class UserDTO extends BaseDTO implements Serializable {
 
     private String firstName;
     private String lastName;

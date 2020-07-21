@@ -7,7 +7,6 @@ import ru.studentsplatform.backend.dto.UserDTO;
 import ru.studentsplatform.backend.entities.model.User;
 
 import java.util.List;
-import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {

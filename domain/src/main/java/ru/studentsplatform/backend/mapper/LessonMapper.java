@@ -35,7 +35,7 @@ public interface LessonMapper {
             @Mapping(target = "team", source = "dto.team"),
             @Mapping(target = "lessonUnit", source = "dto.lessonUnit")
     })
-    Lesson LessonDTOtoLesson(LessonDTO dto);
+    Lesson lessonDTOtoLesson(LessonDTO dto);
 
     List<LessonDTO> listLessonToLessonDTO(List<Lesson> entity);
     List<Lesson> listLessonDTOtoLesson(List<LessonDTO> dto);

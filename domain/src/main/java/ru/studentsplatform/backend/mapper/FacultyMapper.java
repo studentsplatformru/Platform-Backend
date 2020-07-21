@@ -18,6 +18,7 @@ public interface FacultyMapper {
             @Mapping(target = "facultyName", source = "entity.facultyName"),
             @Mapping(target = "university", source = "entity.university"),
             @Mapping(target = "departments", source = "entity.departments"),
+            @Mapping(target = "studentCouncils", source = "entity.studentCouncils"),
             @Mapping(target = "jobAds", source = "entity.jobAds"),
             @Mapping(target = "directions", source = "entity.directions")
     })
@@ -30,6 +31,7 @@ public interface FacultyMapper {
             @Mapping(target = "facultyName", source = "dto.facultyName"),
             @Mapping(target = "university", source = "dto.university"),
             @Mapping(target = "departments", source = "dto.departments"),
+            @Mapping(target = "studentCouncils", source = "dto.studentCouncils"),
             @Mapping(target = "jobAds", source = "dto.jobAds"),
             @Mapping(target = "directions", source = "dto.directions")
     })

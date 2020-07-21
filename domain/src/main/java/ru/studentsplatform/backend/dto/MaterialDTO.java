@@ -1,8 +1,13 @@
 package ru.studentsplatform.backend.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.studentsplatform.backend.entities.model.*;
+import ru.studentsplatform.backend.entities.model.Library;
+import ru.studentsplatform.backend.entities.model.Subject;
 
 import java.io.Serializable;
 
