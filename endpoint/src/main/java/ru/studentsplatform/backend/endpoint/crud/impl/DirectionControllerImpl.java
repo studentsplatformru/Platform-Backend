@@ -26,26 +26,34 @@ public class DirectionControllerImpl implements DirectionController {
 
     @Override
     public ResponseEntity<DirectionDTO> create(DirectionDTO newInstanceRequest) {
-        return null;
+        Direction direction = mapper.directionDTOtoDirection(newInstanceRequest);
+        direction = directionService.create(direction);
+        return ResponseEntity.ok(mapper.directionToDirectionDTO(direction));
     }
 
     @Override
     public ResponseEntity<DirectionDTO> getById(Long id) {
-        return null;
+        Direction direction = directionService.getById(id);
+        DirectionDTO directionDTO = mapper.directionToDirectionDTO(direction);
+        return ResponseEntity.ok(directionDTO);
     }
 
     @Override
     public ResponseEntity<List<DirectionDTO>> getAll() {
-        return null;
+        List<Direction> directionList = directionService.getAll();
+        List<DirectionDTO> directionDTOList = mapper.listDirectionToDirectionDTO(directionList);
+        return ResponseEntity.ok(directionDTOList);
     }
 
     @Override
     public ResponseEntity<DirectionDTO> update(DirectionDTO updatedInstanceRequest, Long id) {
-        return null;
+        Direction direction = mapper.directionDTOtoDirection(updatedInstanceRequest);
+        direction = directionService.update(direction, id);
+        return ResponseEntity.ok(mapper.directionToDirectionDTO(direction));
     }
 
     @Override
     public ResponseEntity<Boolean> delete(Long id) {
-        return null;
+        return ResponseEntity.ok(directionService.delete(id));
     }
 }
