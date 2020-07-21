@@ -27,8 +27,5 @@ public class FacultyDTO extends BaseDTO implements Serializable {
 
     private String facultyName;
     private University university;
-    private Set<Department> departments;
-    private Set<StudentCouncil> studentCouncils;
-    private List<JobAd> jobAds;
-    private Set<Direction> directions;
+
 }

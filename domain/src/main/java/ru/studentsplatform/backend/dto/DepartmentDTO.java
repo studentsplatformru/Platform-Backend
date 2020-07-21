@@ -23,7 +23,5 @@ public class DepartmentDTO extends BaseDTO implements Serializable {
 
     private String departmentName;
     private Faculty faculty;
-    private List<Student> students;
-    private List<Teacher> teachers;
 
 }

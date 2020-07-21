@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.TeachersFeedback;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {UserMapper.class, TeacherMapper.class})
 public interface TeachersFeedbackMapper {
 
     @Mappings({

@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.StudentCouncil;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {FacultyMapper.class})
 public interface StudentCouncilMapper {
 
     @Mappings({

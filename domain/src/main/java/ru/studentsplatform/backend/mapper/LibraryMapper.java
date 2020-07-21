@@ -8,15 +8,14 @@ import ru.studentsplatform.backend.entities.model.Library;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {UniversityMapper.class})
 public interface LibraryMapper {
 
     @Mappings({
             @Mapping(target = "id", source = "entity.id"),
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
-            @Mapping(target = "university", source = "entity.university"),
-            @Mapping(target = "materials", source = "entity.materials")
+            @Mapping(target = "university", source = "entity.university")
     })
     LibraryDTO libraryToLibraryDTO(Library entity);
 
@@ -24,8 +23,7 @@ public interface LibraryMapper {
             @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
-            @Mapping(target = "university", source = "dto.university"),
-            @Mapping(target = "materials", source = "dto.materials")
+            @Mapping(target = "university", source = "dto.university")
 
     })
     Library libraryDTOToLibrary(LibraryDTO dto);

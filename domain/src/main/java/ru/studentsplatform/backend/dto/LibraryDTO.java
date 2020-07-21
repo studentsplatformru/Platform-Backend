@@ -22,5 +22,5 @@ import java.util.List;
 public class LibraryDTO extends BaseDTO implements Serializable {
 
     private University university;
-    private List<Material> materials;
+
 }

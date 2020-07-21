@@ -26,9 +26,6 @@ import java.util.List;
 public class LessonDTO extends BaseDTO implements Serializable {
 
     private OffsetDateTime date;
-    private List<Homework> homeworkList;
-    private List<Mark> marks;
-    private List<Attendance> attendanceList;
     private Team team;
     private LessonUnit lessonUnit;
 }

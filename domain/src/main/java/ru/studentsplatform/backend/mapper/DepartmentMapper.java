@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.Department;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {FacultyMapper.class})
 public interface DepartmentMapper {
 
     @Mappings({
@@ -16,9 +16,7 @@ public interface DepartmentMapper {
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "departmentName", source = "entity.departmentName"),
-            @Mapping(target = "faculty", source = "entity.faculty"),
-            @Mapping(target = "students", source = "entity.students"),
-            @Mapping(target = "teachers", source = "entity.teachers")
+            @Mapping(target = "faculty", source = "entity.faculty")
 
     })
     DepartmentDTO departmentToDepartmentDTO(Department entity);
@@ -28,9 +26,7 @@ public interface DepartmentMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "departmentName", source = "dto.departmentName"),
-            @Mapping(target = "faculty", source = "dto.faculty"),
-            @Mapping(target = "students", source = "dto.students"),
-            @Mapping(target = "teachers", source = "dto.teachers")
+            @Mapping(target = "faculty", source = "dto.faculty")
 
     })
     Department departmentDTOToDepartment(DepartmentDTO dto);

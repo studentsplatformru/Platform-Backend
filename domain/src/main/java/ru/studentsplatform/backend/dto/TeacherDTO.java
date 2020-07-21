@@ -27,7 +27,5 @@ public class TeacherDTO extends BaseDTO implements Serializable {
     private String personalPage;
     private User user;
     private Department department;
-    private Set<TeachersFeedback> teachersFeedback;
-    private List<LessonUnit> lessonUnits;
     private Direction direction;
 }

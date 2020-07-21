@@ -23,4 +23,5 @@ public class StudentCouncilDTO extends BaseDTO implements Serializable {
     private String audience;
     private String vkGroup;
     private Faculty faculty;
+
 }

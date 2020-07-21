@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.Subject;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {TeamMapper.class})
 public interface SubjectMapper {
 
     @Mappings({
@@ -16,9 +16,7 @@ public interface SubjectMapper {
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "subjectName", source = "entity.subjectName"),
-            @Mapping(target = "team", source = "entity.team"),
-            @Mapping(target = "lessonUnits", source = "entity.lessonUnits"),
-            @Mapping(target = "materials", source = "entity.materials")
+            @Mapping(target = "team", source = "entity.team")
     })
     SubjectDTO subjectToSubjectDTO(Subject entity);
 
@@ -27,9 +25,7 @@ public interface SubjectMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "subjectName", source = "dto.subjectName"),
-            @Mapping(target = "team", source = "dto.team"),
-            @Mapping(target = "lessonUnits", source = "dto.lessonUnits"),
-            @Mapping(target = "materials", source = "dto.materials")
+            @Mapping(target = "team", source = "dto.team")
     })
     Subject subjectDTOtoSubject(SubjectDTO dto);
 

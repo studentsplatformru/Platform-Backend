@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.LessonUnit;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {SubjectMapper.class, TeacherMapper.class})
 public interface LessonUnitMapper {
 
     @Mappings({
@@ -20,7 +20,6 @@ public interface LessonUnitMapper {
             @Mapping(target = "audience", source = "entity.audience"),
             @Mapping(target = "type", source = "entity.type"),
             @Mapping(target = "note", source = "entity.note"),
-            @Mapping(target = "lessons", source = "entity.lessons"),
             @Mapping(target = "teacher", source = "entity.teacher"),
             @Mapping(target = "subject", source = "entity.subject")
 
@@ -36,7 +35,6 @@ public interface LessonUnitMapper {
             @Mapping(target = "audience", source = "dto.audience"),
             @Mapping(target = "type", source = "dto.type"),
             @Mapping(target = "note", source = "dto.note"),
-            @Mapping(target = "lessons", source = "dto.lessons"),
             @Mapping(target = "teacher", source = "dto.teacher"),
             @Mapping(target = "subject", source = "dto.subject")
 

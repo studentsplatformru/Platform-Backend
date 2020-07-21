@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.Material;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {LibraryMapper.class, SubjectMapper.class})
 public interface MaterialMapper {
 
     @Mappings({

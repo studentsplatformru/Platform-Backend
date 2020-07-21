@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.Homework;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {LessonMapper.class})
 public interface HomeworkMapper {
 
     @Mappings({

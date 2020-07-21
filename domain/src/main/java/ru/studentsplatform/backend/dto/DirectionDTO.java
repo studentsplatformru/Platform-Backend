@@ -23,6 +23,5 @@ public class DirectionDTO extends BaseDTO implements Serializable {
     private String directionName;
     private String directionCode;
     private Faculty faculty;
-    private Set<Team> teams;
 
 }

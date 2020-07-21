@@ -23,9 +23,8 @@ import java.util.List;
 @ToString(callSuper = true)
 public class StudentDTO extends BaseDTO implements Serializable {
 
-    private User user;
     private Department department;
     private Team team;
     private Direction direction;
-    private List<Mark> marks;
+
 }

@@ -22,7 +22,5 @@ import java.util.Set;
 public class UniversityDTO extends BaseDTO implements Serializable {
 
     private String universityName;
-    private Set<Faculty> faculties;
-    private List<Library> libraries;
 
 }

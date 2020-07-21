@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.JobAd;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {FacultyMapper.class})
 public interface JobAdMapper {
     @Mappings({
             @Mapping(target = "id", source = "entity.id"),

@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.Faculty;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {UniversityMapper.class})
 public interface FacultyMapper {
 
     @Mappings({
@@ -16,11 +16,7 @@ public interface FacultyMapper {
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "facultyName", source = "entity.facultyName"),
-            @Mapping(target = "university", source = "entity.university"),
-            @Mapping(target = "departments", source = "entity.departments"),
-            @Mapping(target = "studentCouncils", source = "entity.studentCouncils"),
-            @Mapping(target = "jobAds", source = "entity.jobAds"),
-            @Mapping(target = "directions", source = "entity.directions")
+            @Mapping(target = "university", source = "entity.university")
     })
     FacultyDTO facultyToFacultyDTO(Faculty entity);
 
@@ -29,11 +25,7 @@ public interface FacultyMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "facultyName", source = "dto.facultyName"),
-            @Mapping(target = "university", source = "dto.university"),
-            @Mapping(target = "departments", source = "dto.departments"),
-            @Mapping(target = "studentCouncils", source = "dto.studentCouncils"),
-            @Mapping(target = "jobAds", source = "dto.jobAds"),
-            @Mapping(target = "directions", source = "dto.directions")
+            @Mapping(target = "university", source = "dto.university")
     })
     Faculty facultyDTOtoFaculty(FacultyDTO dto);
 

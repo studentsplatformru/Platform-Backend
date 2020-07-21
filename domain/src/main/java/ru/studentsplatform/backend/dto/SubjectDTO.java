@@ -24,6 +24,4 @@ public class SubjectDTO extends BaseDTO implements Serializable {
 
     private String subjectName;
     private Team team;
-    private List<LessonUnit> lessonUnits;
-    private List<Material> materials;
 }

@@ -24,4 +24,5 @@ public class JobAdDTO extends BaseDTO implements Serializable {
     private String description;
     private String link;
     private Faculty faculty;
+
 }

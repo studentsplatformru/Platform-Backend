@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.Attendance;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {LessonMapper.class})
 public interface AttendanceMapper {
     @Mappings({
             @Mapping(target = "id", source = "entity.id"),
