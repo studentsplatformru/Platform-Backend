@@ -27,7 +27,7 @@ public interface UserMapper {
     UserDTO userToUserDTO(User entity);
 
     @Mappings({
-            @Mapping(target = "id", source = "entity.id"),
+            @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "firstName", source = "dto.firstName"),
