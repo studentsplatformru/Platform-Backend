@@ -33,5 +33,5 @@ public interface DirectionMapper {
     Direction directionDTOtoDirection(DirectionDTO dto);
 
     List<DirectionDTO> listDirectionToDirectionDTO(List<Direction> entity);
-    List<Direction> listDirectionDTOtoDirection(List<DirectionDTO> entity);
+    List<Direction> listDirectionDTOtoDirection(List<DirectionDTO> dto);
 }

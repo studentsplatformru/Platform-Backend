@@ -36,5 +36,5 @@ public interface FacultyMapper {
     Faculty facultyDTOtoFaculty(FacultyDTO dto);
 
     List<FacultyDTO> listFacultyToFacultyDTO(List<Faculty> entity);
-    List<Faculty> listFacultyDTOtoFaculty(List<FacultyDTO> entity);
+    List<Faculty> listFacultyDTOtoFaculty(List<FacultyDTO> dto);
 }
