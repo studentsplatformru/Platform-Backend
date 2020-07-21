@@ -1,7 +1,5 @@
 package ru.studentsplatform.backend.endpoint.crud.impl;
 
-import org.mapstruct.ap.internal.model.Mapper;
-import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
