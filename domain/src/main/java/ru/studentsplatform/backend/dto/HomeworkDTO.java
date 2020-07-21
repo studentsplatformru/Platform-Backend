@@ -18,5 +18,4 @@ public class HomeworkDTO extends BaseDTO implements Serializable {
     private String fileType;
     private Byte[] file;
     private String note;
-
 }
