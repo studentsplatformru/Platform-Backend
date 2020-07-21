@@ -4,7 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.dto.HomeworkDTO;
-import ru.studentsplatform.backend.endpoint.crud.AttendanceController;
 import ru.studentsplatform.backend.endpoint.crud.HomeworkController;
 import ru.studentsplatform.backend.entities.model.Homework;
 import ru.studentsplatform.backend.mapper.HomeworkMapper;
@@ -12,7 +11,7 @@ import ru.studentsplatform.backend.service.crud.HomeworkService;
 import java.util.List;
 
 @RestController
-@RequestMapping(AttendanceController.BASE_URL)
+@RequestMapping(HomeworkController.BASE_URL)
 public class HomeworkControllerImpl implements HomeworkController {
 
     private final HomeworkService homeworkService;

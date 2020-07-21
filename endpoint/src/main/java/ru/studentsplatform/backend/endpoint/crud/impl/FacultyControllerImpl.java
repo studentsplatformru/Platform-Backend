@@ -4,7 +4,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.dto.FacultyDTO;
-import ru.studentsplatform.backend.endpoint.crud.DepartmentController;
 import ru.studentsplatform.backend.endpoint.crud.FacultyController;
 import ru.studentsplatform.backend.entities.model.Faculty;
 import ru.studentsplatform.backend.mapper.FacultyMapper;
@@ -12,7 +11,7 @@ import ru.studentsplatform.backend.service.crud.FacultyService;
 import java.util.List;
 
 @RestController
-@RequestMapping(DepartmentController.BASE_URL)
+@RequestMapping(FacultyController.BASE_URL)
 public class FacultyControllerImpl implements FacultyController {
 
     private final FacultyService facultyService;
