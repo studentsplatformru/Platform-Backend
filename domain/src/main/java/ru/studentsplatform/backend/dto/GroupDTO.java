@@ -21,5 +21,4 @@ public class GroupDTO extends BaseDTO implements Serializable {
     private List<Lesson> lessons;
     private List<Subject> subjects;
     private Direction direction;
-
 }

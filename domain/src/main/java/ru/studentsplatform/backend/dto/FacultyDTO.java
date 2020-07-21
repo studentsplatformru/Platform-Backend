@@ -24,5 +24,4 @@ public class FacultyDTO extends BaseDTO implements Serializable {
     private Set<Department> departments;
     private List<JobAd> jobAds;
     private Set<Direction> directions;
-
 }
