@@ -2,18 +2,15 @@ package ru.studentsplatform.backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.studentsplatform.backend.entities.model.TeachersFeedback;
 
 import java.io.Serializable;
 import java.util.Set;
 
 @Data
 @SuperBuilder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
@@ -26,6 +23,6 @@ public class UserDTO extends BaseDTO implements Serializable {
     private String email;
     private String password;
 
-    private Set<TeachersFeedback> teachersFeedback;
+    private Set<TeachersFeedbackDTO> teachersFeedbackDTO;
 
 }

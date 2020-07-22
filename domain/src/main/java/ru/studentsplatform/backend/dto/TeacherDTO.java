@@ -2,7 +2,6 @@ package ru.studentsplatform.backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
@@ -14,7 +13,6 @@ import java.util.Set;
 
 @Data
 @SuperBuilder
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(callSuper = true)
@@ -25,6 +23,6 @@ public class TeacherDTO extends BaseDTO implements Serializable {
     private Long departmentId;
     private Long directionId;
 
-    private Set<TeachersFeedback> teachersFeedback;
-    private List<LessonUnit> lessonUnits;
+    private Set<TeachersFeedbackDTO> teachersFeedbackDTO;
+    private List<LessonUnitDTO> lessonUnitsDTO;
 }
