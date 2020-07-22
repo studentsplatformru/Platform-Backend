@@ -7,6 +7,7 @@ import ru.studentsplatform.backend.dto.TeachersFeedbackDTO;
 import ru.studentsplatform.backend.entities.model.TeachersFeedback;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = {UserMapper.class, TeacherMapper.class})
 public interface TeachersFeedbackMapper {
@@ -35,5 +36,7 @@ public interface TeachersFeedbackMapper {
 
     List<TeachersFeedbackDTO> listTeachersFeedbackToTeachersFeedbackDTO(List<TeachersFeedback> entity);
     List<TeachersFeedback> listTeachersFeedbackDTOtoTeachersFeedback(List<TeachersFeedbackDTO> dto);
+    Set<TeachersFeedbackDTO> setTeachersFeedbackToTeachersFeedbackDTO(Set<TeachersFeedback> entity);
+    Set<TeachersFeedback> setTeachersFeedbackDTOtoTeachersFeedback(Set<TeachersFeedbackDTO> dto);
 
 }

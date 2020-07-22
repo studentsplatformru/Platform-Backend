@@ -21,7 +21,9 @@ public interface LessonUnitMapper {
             @Mapping(target = "type", source = "entity.type"),
             @Mapping(target = "note", source = "entity.note"),
             @Mapping(target = "teacherId", source = "entity.teacher.id"),
-            @Mapping(target = "subjectId", source = "entity.subject.id")
+            @Mapping(target = "subjectId", source = "entity.subject.id"),
+            @Mapping(target = "lessonsDTO", source = "entity.lessonsDTO")
+
 
     })
     LessonUnitDTO lessonUnitToLessonUnitDTO(LessonUnit entity);
@@ -36,7 +38,9 @@ public interface LessonUnitMapper {
             @Mapping(target = "type", source = "dto.type"),
             @Mapping(target = "note", source = "dto.note"),
             @Mapping(target = "teacher.id", source = "dto.teacherId"),
-            @Mapping(target = "subject.id", source = "dto.subjectId")
+            @Mapping(target = "subject.id", source = "dto.subjectId"),
+            @Mapping(target = "lessonsDTO", source = "dto.lessonsDTO")
+
 
     })
     LessonUnit lessonUnitDTOToLessonUnit(LessonUnitDTO dto);

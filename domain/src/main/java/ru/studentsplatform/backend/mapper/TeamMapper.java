@@ -7,6 +7,7 @@ import ru.studentsplatform.backend.dto.TeamDTO;
 import ru.studentsplatform.backend.entities.model.Team;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = {DirectionMapper.class})
 public interface TeamMapper {
@@ -17,7 +18,10 @@ public interface TeamMapper {
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "course", source = "entity.course"),
             @Mapping(target = "teamName", source = "entity.teamName"),
-            @Mapping(target = "directionId", source = "entity.direction.id")
+            @Mapping(target = "directionId", source = "entity.direction.id"),
+            @Mapping(target = "studentsDTO", source = "entity.studentsDTO"),
+            @Mapping(target = "lessonsDTO", source = "entity.lessonsDTO"),
+            @Mapping(target = "subjectsDTO", source = "entity.subjectsDTO")
     })
     TeamDTO teamToTeamDTO(Team entity);
 
@@ -27,11 +31,16 @@ public interface TeamMapper {
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "course", source = "dto.course"),
             @Mapping(target = "teamName", source = "dto.teamName"),
-            @Mapping(target = "direction.id", source = "dto.directionId")
+            @Mapping(target = "direction.id", source = "dto.directionId"),
+            @Mapping(target = "studentsDTO", source = "dto.studentsDTO"),
+            @Mapping(target = "lessonsDTO", source = "dto.lessonsDTO"),
+            @Mapping(target = "subjectsDTO", source = "dto.subjectsDTO")
     })
     Team teamDTOtoTeam(TeamDTO dto);
 
     List<TeamDTO> listTeamToTeamDTO(List<Team> entity);
     List<Team> listTeamDTOtoTeam(List<TeamDTO> dto);
+    Set<TeamDTO> setTeamToTeamDTO(Set<Team> entity);
+    Set<Team> setTeamDTOtoTeam(Set<Team> dto);
 
 }

@@ -19,7 +19,8 @@ public interface UserMapper {
             @Mapping(target = "patronymic", source = "entity.patronymic"),
             @Mapping(target = "phoneNumber", source = "entity.phoneNumber"),
             @Mapping(target = "email", source = "entity.email"),
-            @Mapping(target = "password", source = "entity.password")
+            @Mapping(target = "password", source = "entity.password"),
+            @Mapping(target = "teachersFeedbackDTO", source = "entity.teachersFeedbackDTO")
     })
     UserDTO userToUserDTO(User entity);
 
@@ -32,7 +33,8 @@ public interface UserMapper {
             @Mapping(target = "patronymic", source = "dto.patronymic"),
             @Mapping(target = "phoneNumber", source = "dto.phoneNumber"),
             @Mapping(target = "email", source = "dto.email"),
-            @Mapping(target = "password", source = "dto.password")
+            @Mapping(target = "password", source = "dto.password"),
+            @Mapping(target = "teachersFeedbackDTO", source = "dto.teachersFeedbackDTO")
     })
     User userDTOtoUser(UserDTO dto);
 
