@@ -4,6 +4,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.Teacher;
 import ru.studentsplatform.backend.repository.TeacherRepository;
+import ru.studentsplatform.backend.repository.UserRepository;
 import ru.studentsplatform.backend.service.crud.TeacherService;
 
 import java.util.List;
@@ -12,13 +13,16 @@ import java.util.NoSuchElementException;
 @Service
 public class TeacherServiceImpl implements TeacherService {
     private final TeacherRepository teacherRepository;
+    private final UserRepository userRepository;
 
-    public TeacherServiceImpl(TeacherRepository teacherRepository) {
+    public TeacherServiceImpl(TeacherRepository teacherRepository, UserRepository userRepository) {
         this.teacherRepository = teacherRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public Teacher create(Teacher newEntity) {
+        newEntity.setUser(userRepository.findById(newEntity.getUser().getId()).orElseThrow(NoSuchElementException::new));
         return teacherRepository.saveAndFlush(newEntity);
     }
 

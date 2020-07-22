@@ -12,7 +12,6 @@ import java.util.List;
 public interface TeacherMapper {
 
     @Mappings({
-            @Mapping(target = "id", source = "entity.id"),
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "userId", source = "entity.user.id"),
@@ -25,7 +24,6 @@ public interface TeacherMapper {
     TeacherDTO teacherToTeacherDTO(Teacher entity);
 
     @Mappings({
-            @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "user.id", source = "dto.userId"),
