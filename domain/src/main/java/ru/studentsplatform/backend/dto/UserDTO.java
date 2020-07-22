@@ -6,8 +6,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import ru.studentsplatform.backend.entities.model.TeachersFeedback;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @SuperBuilder
@@ -23,5 +25,7 @@ public class UserDTO extends BaseDTO implements Serializable {
     private String phoneNumber;
     private String email;
     private String password;
+
+    private Set<TeachersFeedback> teachersFeedback;
 
 }

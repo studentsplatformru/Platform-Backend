@@ -6,11 +6,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.studentsplatform.backend.entities.model.Department;
-import ru.studentsplatform.backend.entities.model.User;
-import ru.studentsplatform.backend.entities.model.Direction;
+import ru.studentsplatform.backend.entities.model.*;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @SuperBuilder
@@ -24,4 +24,7 @@ public class TeacherDTO extends BaseDTO implements Serializable {
     private User user;
     private Long departmentId;
     private Long directionId;
+
+    private Set<TeachersFeedback> teachersFeedback;
+    private List<LessonUnit> lessonUnits;
 }

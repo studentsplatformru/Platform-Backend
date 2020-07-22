@@ -7,9 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import ru.studentsplatform.backend.entities.model.Direction;
+import ru.studentsplatform.backend.entities.model.Lesson;
+import ru.studentsplatform.backend.entities.model.Student;
+import ru.studentsplatform.backend.entities.model.Subject;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @SuperBuilder
@@ -22,4 +26,8 @@ public class TeamDTO extends BaseDTO implements Serializable {
     private int course;
     private int teamName;
     private Long directionId;
+
+    private List<Student> students;
+    private List<Lesson> lessons;
+    private List<Subject> subjects;
 }

@@ -6,9 +6,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.studentsplatform.backend.entities.model.Faculty;
+import ru.studentsplatform.backend.entities.model.Student;
+import ru.studentsplatform.backend.entities.model.Teacher;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @SuperBuilder
@@ -20,5 +22,8 @@ public class DepartmentDTO extends BaseDTO implements Serializable {
 
     private String departmentName;
     private Long facultyId;
+
+    private List<Student> students;
+    private List<Teacher> teachers;
 
 }
