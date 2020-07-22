@@ -22,7 +22,9 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher create(Teacher newEntity) {
-        newEntity.setUser(userRepository.findById(newEntity.getUser().getId()).orElseThrow(NoSuchElementException::new));
+        newEntity.setUser(userRepository.findById(newEntity
+                .getUser().getId())
+                .orElseThrow(NoSuchElementException::new));
         return teacherRepository.saveAndFlush(newEntity);
     }
 
