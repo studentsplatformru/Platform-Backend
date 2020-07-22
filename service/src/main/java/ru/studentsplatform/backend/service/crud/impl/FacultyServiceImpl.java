@@ -4,6 +4,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.Faculty;
 import ru.studentsplatform.backend.repository.FacultyRepository;
+import ru.studentsplatform.backend.repository.UniversityRepository;
 import ru.studentsplatform.backend.service.crud.FacultyService;
 
 import java.util.List;
@@ -13,13 +14,16 @@ import java.util.NoSuchElementException;
 public class FacultyServiceImpl implements FacultyService {
 
     private final FacultyRepository facultyRepository;
+    private final UniversityRepository universityRepository;
 
-    public FacultyServiceImpl(FacultyRepository facultyRepository) {
+    public FacultyServiceImpl(FacultyRepository facultyRepository, UniversityRepository universityRepository) {
         this.facultyRepository = facultyRepository;
+        this.universityRepository = universityRepository;
     }
 
     @Override
     public Faculty create(Faculty newEntity) {
+        newEntity.setUniversity(universityRepository.findByUniversityName(newEntity.getUniversity().getUniversityName()));
         return facultyRepository.saveAndFlush(newEntity);
     }
 

@@ -18,8 +18,8 @@ import java.util.Set;
 @ToString(callSuper = true)
 public class TeacherDTO extends BaseDTO implements Serializable {
 
+    private Long userId;
     private String personalPage;
-    private User user;
     private Long departmentId;
     private Long directionId;
 

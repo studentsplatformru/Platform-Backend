@@ -8,15 +8,15 @@ import ru.studentsplatform.backend.entities.model.Teacher;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {DepartmentMapper.class, DirectionMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class, DepartmentMapper.class, DirectionMapper.class})
 public interface TeacherMapper {
 
     @Mappings({
             @Mapping(target = "id", source = "entity.id"),
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
+            @Mapping(target = "userId", source = "entity.user.id"),
             @Mapping(target = "personalPage", source = "entity.personalPage"),
-            @Mapping(target = "user", source = "entity.user"),
             @Mapping(target = "departmentId", source = "entity.department.id"),
             @Mapping(target = "directionId", source = "entity.direction.id")
     })
@@ -26,8 +26,8 @@ public interface TeacherMapper {
             @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
+            @Mapping(target = "user.id", source = "dto.userId"),
             @Mapping(target = "personalPage", source = "dto.personalPage"),
-            @Mapping(target = "user", source = "dto.user"),
             @Mapping(target = "department.id", source = "dto.departmentId"),
             @Mapping(target = "direction.id", source = "dto.directionId")
     })

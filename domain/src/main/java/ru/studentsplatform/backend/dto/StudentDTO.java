@@ -16,6 +16,7 @@ import java.util.List;
 @ToString(callSuper = true)
 public class StudentDTO extends BaseDTO implements Serializable {
 
+    private Long userId;
     private Long departmentId;
     private Long teamId;
     private Long directionId;

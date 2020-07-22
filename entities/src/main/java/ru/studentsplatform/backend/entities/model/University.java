@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "university", uniqueConstraints = {@UniqueConstraint(columnNames = "university_name")})
-public class University extends BaseEntity {
+public class University extends BaseEntity implements Serializable {
 
 	/**
 	 * Поле название университета.
