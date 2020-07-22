@@ -18,7 +18,7 @@ import java.util.List;
 public class TeamDTO extends BaseDTO implements Serializable {
 
     private int course;
-    private int teamName;
+    private String teamName;
     private Long directionId;
 
     private List<StudentDTO> studentsDTO;

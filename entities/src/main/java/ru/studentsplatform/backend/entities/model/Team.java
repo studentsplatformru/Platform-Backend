@@ -26,7 +26,7 @@ public class Team extends BaseEntity {
 	 * Поле название группы.
 	 */
 	@Column(name = "team_name", nullable = false)
-	private int teamName;
+	private String teamName;
 
 	/**
 	 * Связь "один-ко-многим" - Студент.
@@ -61,11 +61,11 @@ public class Team extends BaseEntity {
 		this.course = course;
 	}
 
-	public int getTeamName() {
+	public String getTeamName() {
 		return teamName;
 	}
 
-	public void setTeamName(int teamName) {
+	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
 
