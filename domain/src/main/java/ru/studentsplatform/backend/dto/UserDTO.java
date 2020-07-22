@@ -22,6 +22,8 @@ public class UserDTO extends BaseDTO implements Serializable {
     private String phoneNumber;
     private String email;
     private String password;
+    private Long studentId;
+    private Long teacherId;
 
     private Set<TeachersFeedbackDTO> teachersFeedbackDTO;
 
