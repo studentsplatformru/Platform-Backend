@@ -27,7 +27,7 @@ public class Faculty extends BaseEntity {
 	 * Связь "многие-к-одному" - Университет.
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "university_name")
+	@JoinColumn(name = "university_name", referencedColumnName = "university_name")
 	private University university;
 
 	/**
