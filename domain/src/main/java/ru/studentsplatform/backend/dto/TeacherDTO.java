@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.studentsplatform.backend.entities.model.*;
 
 import java.io.Serializable;
 import java.util.List;

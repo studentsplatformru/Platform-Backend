@@ -8,7 +8,7 @@ import ru.studentsplatform.backend.entities.model.Mark;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {LessonMapper.class, SubjectMapper.class})
+@Mapper(componentModel = "spring", uses = {LessonMapper.class, StudentMapper.class})
 public interface MarkMapper {
 
     @Mappings({

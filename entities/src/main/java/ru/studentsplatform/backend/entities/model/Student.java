@@ -25,6 +25,9 @@ public class Student extends BaseEntity {
 	@MapsId
 	private User user;
 
+	/**
+	 * Связь "многие-к-одному" - кафедра.
+	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "department_id", nullable = false)
 	private Department department;

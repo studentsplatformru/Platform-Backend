@@ -23,7 +23,8 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public Faculty create(Faculty newEntity) {
-        newEntity.setUniversity(universityRepository.findByUniversityName(newEntity.getUniversity().getUniversityName()));
+        newEntity.setUniversity(universityRepository.findByUniversityName(
+                newEntity.getUniversity().getUniversityName()));
         return facultyRepository.saveAndFlush(newEntity);
     }
 

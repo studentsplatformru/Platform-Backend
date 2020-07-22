@@ -6,7 +6,6 @@ import ru.studentsplatform.backend.entities.model.Library;
 import ru.studentsplatform.backend.repository.LibraryRepository;
 import ru.studentsplatform.backend.repository.UniversityRepository;
 import ru.studentsplatform.backend.service.crud.LibraryService;
-import ru.studentsplatform.backend.service.crud.UniversityService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -24,7 +23,8 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public Library create(Library newEntity) {
-        newEntity.setUniversity(universityRepository.findByUniversityName(newEntity.getUniversity().getUniversityName()));
+        newEntity.setUniversity(universityRepository.
+                findByUniversityName(newEntity.getUniversity().getUniversityName()));
         return libraryRepository.saveAndFlush(newEntity);
     }
 

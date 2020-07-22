@@ -8,7 +8,8 @@ import ru.studentsplatform.backend.entities.model.Student;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {UserMapper.class, DepartmentMapper.class, DirectionMapper.class, TeamMapper.class})
+@Mapper(componentModel = "spring", uses =
+        {UserMapper.class, DepartmentMapper.class, DirectionMapper.class, TeamMapper.class})
 public interface StudentMapper {
 
     @Mappings({

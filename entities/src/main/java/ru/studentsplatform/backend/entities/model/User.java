@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.entities.model;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,7 @@ import java.util.Set;
 /**
  * Класс всех пользователей.
  */
+
 @Entity
 @Table(name = "usr")
 public class User extends BaseEntity {
@@ -54,13 +56,13 @@ public class User extends BaseEntity {
 	/**
 	 * Связь "один-к-одному" - Преподаватель.
 	 */
-	@OneToOne(mappedBy = "user")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
 	private Teacher teacher;
 
 	/**
 	 * Связь "один-к-одному" - Студент.
 	 */
-	@OneToOne(mappedBy = "user")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
 	private Student student;
 
 	/**

@@ -7,6 +7,6 @@ import ru.studentsplatform.backend.entities.model.University;
 @Repository
 public interface UniversityRepository extends JpaRepository<University, Long> {
 
-    public University findByUniversityName(String universityName);
+    University findByUniversityName(String universityName);
 
 }
