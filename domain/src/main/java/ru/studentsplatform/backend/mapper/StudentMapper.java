@@ -15,9 +15,9 @@ public interface StudentMapper {
             @Mapping(target = "id", source = "entity.id"),
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
-            @Mapping(target = "department", source = "entity.department"),
-            @Mapping(target = "team", source = "entity.team"),
-            @Mapping(target = "direction", source = "entity.direction")
+            @Mapping(target = "departmentId", source = "entity.department.id"),
+            @Mapping(target = "teamId", source = "entity.team.id"),
+            @Mapping(target = "directionId", source = "entity.direction.id")
     })
     StudentDTO studentToStudentDTO(Student entity);
 
@@ -25,9 +25,9 @@ public interface StudentMapper {
             @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
-            @Mapping(target = "department", source = "dto.department"),
-            @Mapping(target = "team", source = "dto.team"),
-            @Mapping(target = "direction", source = "dto.direction")
+            @Mapping(target = "department.id", source = "dto.departmentId"),
+            @Mapping(target = "team.id", source = "dto.teamId"),
+            @Mapping(target = "direction.id", source = "dto.directionId")
     })
     Student studentDTOtoStudent(StudentDTO dto);
 

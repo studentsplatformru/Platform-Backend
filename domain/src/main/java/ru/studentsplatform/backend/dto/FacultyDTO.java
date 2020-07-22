@@ -19,6 +19,6 @@ import java.io.Serializable;
 public class FacultyDTO extends BaseDTO implements Serializable {
 
     private String facultyName;
-    private University university;
+    private String universityName;
 
 }

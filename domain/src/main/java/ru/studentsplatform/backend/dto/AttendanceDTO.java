@@ -19,6 +19,6 @@ import java.io.Serializable;
 public class AttendanceDTO extends BaseDTO implements Serializable {
 
     private boolean presence;
-    private Lesson lesson;
+    private Long lessonId;
 
 }

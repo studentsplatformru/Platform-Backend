@@ -21,5 +21,5 @@ public class TeamDTO extends BaseDTO implements Serializable {
 
     private int course;
     private int teamName;
-    private Direction direction;
+    private Long directionId;
 }

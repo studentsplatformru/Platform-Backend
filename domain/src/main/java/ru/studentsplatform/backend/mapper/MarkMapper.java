@@ -16,8 +16,8 @@ public interface MarkMapper {
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "markValue", source = "entity.markValue"),
-            @Mapping(target = "student", source = "entity.student"),
-            @Mapping(target = "lesson", source = "entity.lesson")
+            @Mapping(target = "studentId", source = "entity.student.id"),
+            @Mapping(target = "lessonId", source = "entity.lesson.id")
     })
     MarkDTO markToMarkDTO(Mark entity);
 
@@ -26,8 +26,8 @@ public interface MarkMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "markValue", source = "dto.markValue"),
-            @Mapping(target = "student", source = "dto.student"),
-            @Mapping(target = "lesson", source = "dto.lesson")
+            @Mapping(target = "student.id", source = "dto.studentId"),
+            @Mapping(target = "lesson.id", source = "dto.lessonId")
     })
     Mark markDTOtoMark(MarkDTO dto);
 

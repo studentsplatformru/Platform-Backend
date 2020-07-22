@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class MarkDTO extends BaseDTO implements Serializable {
 
     private String markValue;
-    private Student student;
-    private Lesson lesson;
+    private Long studentId;
+    private Long lessonId;
 
 }

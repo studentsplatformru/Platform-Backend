@@ -15,7 +15,7 @@ public interface HomeworkMapper {
             @Mapping(target = "id", source = "entity.id"),
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
-            @Mapping(target = "lesson", source = "entity.lesson"),
+            @Mapping(target = "lessonId", source = "entity.lesson.id"),
             @Mapping(target = "fileType", source = "entity.fileType"),
             @Mapping(target = "file", source = "entity.file"),
             @Mapping(target = "note", source = "entity.note")
@@ -26,7 +26,7 @@ public interface HomeworkMapper {
             @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
-            @Mapping(target = "lesson", source = "dto.lesson"),
+            @Mapping(target = "lesson.id", source = "dto.lessonId"),
             @Mapping(target = "fileType", source = "dto.fileType"),
             @Mapping(target = "file", source = "dto.file"),
             @Mapping(target = "note", source = "dto.note")

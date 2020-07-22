@@ -15,7 +15,7 @@ public interface AttendanceMapper {
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "presence", source = "entity.presence"),
-            @Mapping(target = "lesson", source = "entity.lesson")
+            @Mapping(target = "lessonId", source = "entity.lesson.id")
     })
     AttendanceDTO attendanceToAttendanceDTO(Attendance entity);
 
@@ -24,7 +24,7 @@ public interface AttendanceMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "presence", source = "dto.presence"),
-            @Mapping(target = "lesson", source = "dto.lesson")
+            @Mapping(target = "lesson.id", source = "dto.lessonId")
     })
     Attendance attendanceDTOtoAttendance(AttendanceDTO dto);
 

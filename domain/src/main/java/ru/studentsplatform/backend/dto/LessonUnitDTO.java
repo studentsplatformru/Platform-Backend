@@ -26,6 +26,6 @@ public class LessonUnitDTO extends BaseDTO implements Serializable {
     private String audience;
     private String type;
     private String note;
-    private Teacher teacher;
-    private Subject subject;
+    private Long teacherId;
+    private Long subjectId;
 }

@@ -18,7 +18,7 @@ public interface JobAdMapper {
             @Mapping(target = "jobName", source = "entity.jobName"),
             @Mapping(target = "description", source = "entity.description"),
             @Mapping(target = "link", source = "entity.link"),
-            @Mapping(target = "faculty", source = "entity.faculty")
+            @Mapping(target = "facultyId", source = "entity.faculty.id")
     })
     JobAdDTO jobAdToJobAdDTO(JobAd entity);
 
@@ -30,7 +30,7 @@ public interface JobAdMapper {
             @Mapping(target = "jobName", source = "dto.jobName"),
             @Mapping(target = "description", source = "dto.description"),
             @Mapping(target = "link", source = "dto.link"),
-            @Mapping(target = "faculty", source = "dto.faculty")
+            @Mapping(target = "faculty.id", source = "dto.facultyId")
     })
     JobAd jobAdDTOtoJobAd(JobAdDTO dto);
 

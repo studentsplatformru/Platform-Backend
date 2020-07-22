@@ -20,7 +20,7 @@ import java.io.Serializable;
 public class MaterialDTO extends BaseDTO implements Serializable {
 
     private String link;
-    private Library library;
-    private Subject subject;
+    private Long libraryId;
+    private Long subjectId;
 
 }

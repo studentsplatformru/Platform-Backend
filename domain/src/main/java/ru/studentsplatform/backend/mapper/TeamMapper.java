@@ -17,7 +17,7 @@ public interface TeamMapper {
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "course", source = "entity.course"),
             @Mapping(target = "teamName", source = "entity.teamName"),
-            @Mapping(target = "direction", source = "entity.direction")
+            @Mapping(target = "directionId", source = "entity.direction.id")
     })
     TeamDTO teamToTeamDTO(Team entity);
 
@@ -27,7 +27,7 @@ public interface TeamMapper {
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "course", source = "dto.course"),
             @Mapping(target = "teamName", source = "dto.teamName"),
-            @Mapping(target = "direction", source = "dto.direction")
+            @Mapping(target = "direction.id", source = "dto.directionId")
     })
     Team teamDTOtoTeam(TeamDTO dto);
 

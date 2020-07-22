@@ -19,7 +19,7 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 public class HomeworkDTO extends BaseDTO implements Serializable {
 
-    private Lesson lesson;
+    private Long lessonId;
     private String fileType;
     private Byte[] file;
     private String note;

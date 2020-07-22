@@ -16,7 +16,7 @@ public interface SubjectMapper {
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "subjectName", source = "entity.subjectName"),
-            @Mapping(target = "team", source = "entity.team")
+            @Mapping(target = "teamId", source = "entity.team.id")
     })
     SubjectDTO subjectToSubjectDTO(Subject entity);
 
@@ -25,7 +25,7 @@ public interface SubjectMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "subjectName", source = "dto.subjectName"),
-            @Mapping(target = "team", source = "dto.team")
+            @Mapping(target = "team.id", source = "dto.teamId")
     })
     Subject subjectDTOtoSubject(SubjectDTO dto);
 

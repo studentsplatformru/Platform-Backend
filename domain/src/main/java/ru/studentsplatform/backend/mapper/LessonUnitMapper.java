@@ -20,8 +20,8 @@ public interface LessonUnitMapper {
             @Mapping(target = "audience", source = "entity.audience"),
             @Mapping(target = "type", source = "entity.type"),
             @Mapping(target = "note", source = "entity.note"),
-            @Mapping(target = "teacher", source = "entity.teacher"),
-            @Mapping(target = "subject", source = "entity.subject")
+            @Mapping(target = "teacherId", source = "entity.teacher.id"),
+            @Mapping(target = "subjectId", source = "entity.subject.id")
 
     })
     LessonUnitDTO lessonUnitToLessonUnitDTO(LessonUnit entity);
@@ -35,8 +35,8 @@ public interface LessonUnitMapper {
             @Mapping(target = "audience", source = "dto.audience"),
             @Mapping(target = "type", source = "dto.type"),
             @Mapping(target = "note", source = "dto.note"),
-            @Mapping(target = "teacher", source = "dto.teacher"),
-            @Mapping(target = "subject", source = "dto.subject")
+            @Mapping(target = "teacher.id", source = "dto.teacherId"),
+            @Mapping(target = "subject.id", source = "dto.subjectId")
 
     })
     LessonUnit lessonUnitDTOToLessonUnit(LessonUnitDTO dto);

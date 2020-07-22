@@ -6,8 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import ru.studentsplatform.backend.entities.model.University;
-
 
 import java.io.Serializable;
 
@@ -19,6 +17,6 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 public class LibraryDTO extends BaseDTO implements Serializable {
 
-    private University university;
+    private String universityName;
 
 }

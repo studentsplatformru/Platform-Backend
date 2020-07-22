@@ -19,7 +19,7 @@ public interface StudentCouncilMapper {
             @Mapping(target = "email", source = "entity.email"),
             @Mapping(target = "audience", source = "entity.audience"),
             @Mapping(target = "vkGroup", source = "entity.vkGroup"),
-            @Mapping(target = "faculty", source = "entity.faculty")
+            @Mapping(target = "facultyId", source = "entity.faculty.id")
     })
     StudentCouncilDTO studentCouncilToStudentCouncilDTO(StudentCouncil entity);
 
@@ -31,7 +31,7 @@ public interface StudentCouncilMapper {
             @Mapping(target = "email", source = "dto.email"),
             @Mapping(target = "audience", source = "dto.audience"),
             @Mapping(target = "vkGroup", source = "dto.vkGroup"),
-            @Mapping(target = "faculty", source = "dto.faculty")
+            @Mapping(target = "faculty.id", source = "dto.facultyId")
     })
     StudentCouncil studentCouncilDTOtoStudentCouncil(StudentCouncilDTO dto);
 

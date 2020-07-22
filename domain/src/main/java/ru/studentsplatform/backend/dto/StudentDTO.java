@@ -20,8 +20,8 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 public class StudentDTO extends BaseDTO implements Serializable {
 
-    private Department department;
-    private Team team;
-    private Direction direction;
+    private Long departmentId;
+    private Long teamId;
+    private Long directionId;
 
 }

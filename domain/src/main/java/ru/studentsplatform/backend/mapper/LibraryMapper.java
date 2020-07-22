@@ -15,7 +15,7 @@ public interface LibraryMapper {
             @Mapping(target = "id", source = "entity.id"),
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
-            @Mapping(target = "university", source = "entity.university")
+            @Mapping(target = "universityName", source = "entity.university.universityName")
     })
     LibraryDTO libraryToLibraryDTO(Library entity);
 
@@ -23,7 +23,7 @@ public interface LibraryMapper {
             @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
-            @Mapping(target = "university", source = "dto.university")
+            @Mapping(target = "university.universityName", source = "dto.universityName")
 
     })
     Library libraryDTOToLibrary(LibraryDTO dto);

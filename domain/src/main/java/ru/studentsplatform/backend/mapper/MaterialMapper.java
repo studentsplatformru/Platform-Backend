@@ -16,8 +16,8 @@ public interface MaterialMapper {
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "link", source = "entity.link"),
-            @Mapping(target = "library", source = "entity.library"),
-            @Mapping(target = "subject", source = "entity.subject")
+            @Mapping(target = "libraryId", source = "entity.library.id"),
+            @Mapping(target = "subjectId", source = "entity.subject.id")
     })
     MaterialDTO materialToMaterialDTO(Material entity);
 
@@ -26,8 +26,8 @@ public interface MaterialMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "link", source = "dto.link"),
-            @Mapping(target = "library", source = "dto.library"),
-            @Mapping(target = "subject", source = "dto.subject")
+            @Mapping(target = "library.id", source = "dto.libraryId"),
+            @Mapping(target = "subject.id", source = "dto.subjectId")
     })
     Material materialDTOtoMaterial(MaterialDTO dto);
 

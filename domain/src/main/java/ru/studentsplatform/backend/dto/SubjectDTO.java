@@ -20,5 +20,5 @@ import java.io.Serializable;
 public class SubjectDTO extends BaseDTO implements Serializable {
 
     private String subjectName;
-    private Team team;
+    private Long teamId;
 }

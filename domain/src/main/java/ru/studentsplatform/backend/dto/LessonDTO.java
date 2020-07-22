@@ -22,6 +22,6 @@ import java.time.OffsetDateTime;
 public class LessonDTO extends BaseDTO implements Serializable {
 
     private OffsetDateTime date;
-    private Team team;
-    private LessonUnit lessonUnit;
+    private Long teamId;
+    private Long lessonUnitId;
 }

@@ -16,7 +16,7 @@ public interface FacultyMapper {
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "facultyName", source = "entity.facultyName"),
-            @Mapping(target = "university", source = "entity.university")
+            @Mapping(target = "universityName", source = "entity.university.universityName")
     })
     FacultyDTO facultyToFacultyDTO(Faculty entity);
 
@@ -25,7 +25,7 @@ public interface FacultyMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "facultyName", source = "dto.facultyName"),
-            @Mapping(target = "university", source = "dto.university")
+            @Mapping(target = "university.universityName", source = "dto.universityName")
     })
     Faculty facultyDTOtoFaculty(FacultyDTO dto);
 

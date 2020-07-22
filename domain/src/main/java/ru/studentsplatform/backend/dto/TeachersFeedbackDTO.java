@@ -24,7 +24,7 @@ public class TeachersFeedbackDTO extends BaseDTO implements Serializable {
 
     private String header;
     private String content;
-    private User author;
-    private Teacher teacher;
+    private Long authorId;
+    private Long teacherId;
 
 }

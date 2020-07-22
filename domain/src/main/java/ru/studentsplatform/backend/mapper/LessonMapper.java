@@ -16,8 +16,8 @@ public interface LessonMapper {
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "date", source = "entity.date"),
-            @Mapping(target = "team", source = "entity.team"),
-            @Mapping(target = "lessonUnit", source = "entity.lessonUnit")
+            @Mapping(target = "teamId", source = "entity.team.id"),
+            @Mapping(target = "lessonUnitId", source = "entity.lessonUnit.id")
     })
     LessonDTO lessonToLessonDTO(Lesson entity);
 
@@ -26,8 +26,8 @@ public interface LessonMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "date", source = "dto.date"),
-            @Mapping(target = "team", source = "dto.team"),
-            @Mapping(target = "lessonUnit", source = "dto.lessonUnit")
+            @Mapping(target = "team.id", source = "dto.teamId"),
+            @Mapping(target = "lessonUnit.id", source = "dto.lessonUnitId")
     })
     Lesson lessonDTOtoLesson(LessonDTO dto);
 

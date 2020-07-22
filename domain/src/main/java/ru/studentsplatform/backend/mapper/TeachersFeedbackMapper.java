@@ -17,8 +17,8 @@ public interface TeachersFeedbackMapper {
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "header", source = "entity.header"),
             @Mapping(target = "content", source = "entity.content"),
-            @Mapping(target = "author", source = "entity.author"),
-            @Mapping(target = "teacher", source = "entity.teacher")
+            @Mapping(target = "authorId", source = "entity.author.id"),
+            @Mapping(target = "teacherId", source = "entity.teacher.id")
     })
     TeachersFeedbackDTO teachersFeedbackToTeachersFeedbackDTO(TeachersFeedback entity);
 
@@ -28,8 +28,8 @@ public interface TeachersFeedbackMapper {
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "header", source = "dto.header"),
             @Mapping(target = "content", source = "dto.content"),
-            @Mapping(target = "author", source = "dto.author"),
-            @Mapping(target = "teacher", source = "dto.teacher")
+            @Mapping(target = "author.id", source = "dto.authorId"),
+            @Mapping(target = "teacher.id", source = "dto.teacherId")
     })
     TeachersFeedback teachersFeedbackDTOtoTeachersFeedback(TeachersFeedbackDTO dto);
 

@@ -17,8 +17,8 @@ public interface TeacherMapper {
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "personalPage", source = "entity.personalPage"),
             @Mapping(target = "user", source = "entity.user"),
-            @Mapping(target = "department", source = "entity.department"),
-            @Mapping(target = "direction", source = "entity.direction")
+            @Mapping(target = "departmentId", source = "entity.department.id"),
+            @Mapping(target = "directionId", source = "entity.direction.id")
     })
     TeacherDTO teacherToTeacherDTO(Teacher entity);
 
@@ -28,8 +28,8 @@ public interface TeacherMapper {
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "personalPage", source = "dto.personalPage"),
             @Mapping(target = "user", source = "dto.user"),
-            @Mapping(target = "department", source = "dto.department"),
-            @Mapping(target = "direction", source = "dto.direction")
+            @Mapping(target = "department.id", source = "dto.departmentId"),
+            @Mapping(target = "direction.id", source = "dto.directionId")
     })
     Teacher teacherDTOtoTeacher(TeacherDTO dto);
 
