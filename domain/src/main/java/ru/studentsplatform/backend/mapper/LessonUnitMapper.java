@@ -22,7 +22,7 @@ public interface LessonUnitMapper {
             @Mapping(target = "note", source = "entity.note"),
             @Mapping(target = "teacherId", source = "entity.teacher.id"),
             @Mapping(target = "subjectId", source = "entity.subject.id"),
-            @Mapping(target = "lessonsDTO", source = "entity.lessonsDTO")
+            @Mapping(target = "lessonsDTO", source = "entity.lessons")
 
 
     })
@@ -39,7 +39,7 @@ public interface LessonUnitMapper {
             @Mapping(target = "note", source = "dto.note"),
             @Mapping(target = "teacher.id", source = "dto.teacherId"),
             @Mapping(target = "subject.id", source = "dto.subjectId"),
-            @Mapping(target = "lessonsDTO", source = "dto.lessonsDTO")
+            @Mapping(target = "lessons", source = "dto.lessonsDTO")
 
 
     })

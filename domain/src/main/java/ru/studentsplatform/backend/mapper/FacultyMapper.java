@@ -18,8 +18,8 @@ public interface FacultyMapper {
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "facultyName", source = "entity.facultyName"),
             @Mapping(target = "universityName", source = "entity.university.universityName"),
-            @Mapping(target = "jobAdsDTO", source = "entity.jobAdsDTO"),
-            @Mapping(target = "directionsDTO", source = "entity.directionsDTO")
+            @Mapping(target = "jobAdsDTO", source = "entity.jobAds"),
+            @Mapping(target = "directionsDTO", source = "entity.directions")
     })
     FacultyDTO facultyToFacultyDTO(Faculty entity);
 
@@ -29,8 +29,8 @@ public interface FacultyMapper {
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "facultyName", source = "dto.facultyName"),
             @Mapping(target = "university.universityName", source = "dto.universityName"),
-            @Mapping(target = "jobAdsDTO", source = "dto.jobAdsDTO"),
-            @Mapping(target = "directionsDTO", source = "dto.directionsDTO")
+            @Mapping(target = "jobAds", source = "dto.jobAdsDTO"),
+            @Mapping(target = "directions", source = "dto.directionsDTO")
     })
     Faculty facultyDTOtoFaculty(FacultyDTO dto);
 

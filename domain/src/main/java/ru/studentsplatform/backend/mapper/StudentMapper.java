@@ -19,7 +19,7 @@ public interface StudentMapper {
             @Mapping(target = "departmentId", source = "entity.department.id"),
             @Mapping(target = "teamId", source = "entity.team.id"),
             @Mapping(target = "directionId", source = "entity.direction.id"),
-            @Mapping(target = "marksDTO", source = "entity.marksDTO")
+            @Mapping(target = "marksDTO", source = "entity.marks")
     })
     StudentDTO studentToStudentDTO(Student entity);
 
@@ -31,7 +31,7 @@ public interface StudentMapper {
             @Mapping(target = "department.id", source = "dto.departmentId"),
             @Mapping(target = "team.id", source = "dto.teamId"),
             @Mapping(target = "direction.id", source = "dto.directionId"),
-            @Mapping(target = "marksDTO", source = "dto.marksDTO")
+            @Mapping(target = "marks", source = "dto.marksDTO")
 
     })
     Student studentDTOtoStudent(StudentDTO dto);

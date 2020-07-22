@@ -18,7 +18,7 @@ public interface DirectionMapper {
             @Mapping(target = "directionName", source = "entity.directionName"),
             @Mapping(target = "directionCode", source = "entity.directionCode"),
             @Mapping(target = "facultyId", source = "entity.faculty.id"),
-            @Mapping(target = "teamsDTO", source = "entity.teamsDTO")
+            @Mapping(target = "teamsDTO", source = "entity.teams")
     })
     DirectionDTO directionToDirectionDTO(Direction entity);
 
@@ -28,7 +28,8 @@ public interface DirectionMapper {
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "directionName", source = "dto.directionName"),
             @Mapping(target = "directionCode", source = "dto.directionCode"),
-            @Mapping(target = "teamsDTO", source = "dto.teamsDTO")
+            @Mapping(target = "faculty.id", source = "dto.facultyId"),
+            @Mapping(target = "teams", source = "dto.teamsDTO")
     })
     Direction directionDTOtoDirection(DirectionDTO dto);
 

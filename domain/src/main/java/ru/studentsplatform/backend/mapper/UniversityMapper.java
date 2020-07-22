@@ -16,8 +16,8 @@ public interface UniversityMapper {
             @Mapping(target = "createdBy", source = "entity.createdBy"),
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "universityName", source = "entity.universityName"),
-            @Mapping(target = "facultiesDTO", source = "entity.facultiesDTO"),
-            @Mapping(target = "librariesDTO", source = "entity.librariesDTO")
+            @Mapping(target = "facultiesDTO", source = "entity.faculties"),
+            @Mapping(target = "librariesDTO", source = "entity.libraries")
     })
     UniversityDTO universityToUniversityDTO(University entity);
 
@@ -26,8 +26,8 @@ public interface UniversityMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "universityName", source = "dto.universityName"),
-            @Mapping(target = "facultiesDTO", source = "entity.facultiesDTO"),
-            @Mapping(target = "librariesDTO", source = "entity.librariesDTO")
+            @Mapping(target = "faculties", source = "dto.facultiesDTO"),
+            @Mapping(target = "libraries", source = "dto.librariesDTO")
     })
     University universityDTOtoUniversity(UniversityDTO dto);
 

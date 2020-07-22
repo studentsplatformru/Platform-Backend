@@ -17,8 +17,8 @@ public interface DepartmentMapper {
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "departmentName", source = "entity.departmentName"),
             @Mapping(target = "facultyId", source = "entity.faculty.id"),
-            @Mapping(target = "studentsDTO", source = "entity.studentsDTO"),
-            @Mapping(target = "teachersDTO", source = "entity.teachersDTO")
+            @Mapping(target = "studentsDTO", source = "entity.students"),
+            @Mapping(target = "teachersDTO", source = "entity.teachers")
 
     })
     DepartmentDTO departmentToDepartmentDTO(Department entity);
@@ -28,9 +28,9 @@ public interface DepartmentMapper {
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "departmentName", source = "dto.departmentName"),
-            @Mapping(target = "facultyId", source = "dto.faculty.id"),
-            @Mapping(target = "studentsDTO", source = "dto.studentsDTO"),
-            @Mapping(target = "teachersDTO", source = "dto.teachersDTO")
+            @Mapping(target = "faculty.id", source = "dto.facultyId"),
+            @Mapping(target = "students", source = "dto.studentsDTO"),
+            @Mapping(target = "teachers", source = "dto.teachersDTO")
 
     })
     Department departmentDTOToDepartment(DepartmentDTO dto);

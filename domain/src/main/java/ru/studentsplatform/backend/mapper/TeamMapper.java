@@ -19,9 +19,9 @@ public interface TeamMapper {
             @Mapping(target = "course", source = "entity.course"),
             @Mapping(target = "teamName", source = "entity.teamName"),
             @Mapping(target = "directionId", source = "entity.direction.id"),
-            @Mapping(target = "studentsDTO", source = "entity.studentsDTO"),
-            @Mapping(target = "lessonsDTO", source = "entity.lessonsDTO"),
-            @Mapping(target = "subjectsDTO", source = "entity.subjectsDTO")
+            @Mapping(target = "studentsDTO", source = "entity.students"),
+            @Mapping(target = "lessonsDTO", source = "entity.lessons"),
+            @Mapping(target = "subjectsDTO", source = "entity.subjects")
     })
     TeamDTO teamToTeamDTO(Team entity);
 
@@ -32,9 +32,9 @@ public interface TeamMapper {
             @Mapping(target = "course", source = "dto.course"),
             @Mapping(target = "teamName", source = "dto.teamName"),
             @Mapping(target = "direction.id", source = "dto.directionId"),
-            @Mapping(target = "studentsDTO", source = "dto.studentsDTO"),
-            @Mapping(target = "lessonsDTO", source = "dto.lessonsDTO"),
-            @Mapping(target = "subjectsDTO", source = "dto.subjectsDTO")
+            @Mapping(target = "students", source = "dto.studentsDTO"),
+            @Mapping(target = "lessons", source = "dto.lessonsDTO"),
+            @Mapping(target = "subjects", source = "dto.subjectsDTO")
     })
     Team teamDTOtoTeam(TeamDTO dto);
 
