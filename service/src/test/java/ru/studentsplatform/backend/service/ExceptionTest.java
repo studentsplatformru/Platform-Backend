@@ -15,7 +15,6 @@ import static ru.studentsplatform.backend.service.exception.ServiceExceptionReas
  *
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  */
-@ExtendWith(MockitoExtension.class)
 public class ExceptionTest {
 
     /**
