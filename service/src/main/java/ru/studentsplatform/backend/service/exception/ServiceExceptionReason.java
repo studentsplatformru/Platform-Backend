@@ -6,7 +6,7 @@ import ru.studentsplatform.backend.service.exception.core.BusinessExceptionReaso
 /**
  * Реализация {@link BusinessExceptionReason}.
  *
- * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020). feat. Krylov Sergey (krylov.sergey.1999@yandex.ru)
+ * @author Danila K (karnacevich5323537@gmail.com) (23.07.2020). feat. Krylov Sergey (krylov.sergey.1999@yandex.ru)
  */
 public enum ServiceExceptionReason implements BusinessExceptionReason {
 
@@ -14,7 +14,8 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 
     // Ошибки целлостности данных
     NOTE_NOT_FOUND(HttpStatus.NOT_FOUND, "F001", "Запись с id %s не найдена"),
-    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F002", "Комментарий с id %s не найден");
+    COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F002", "Комментарий с id %s не найден"),
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "F003", "Пользователь с id %s не найден");
 
     private final HttpStatus status;
     private final String code;
