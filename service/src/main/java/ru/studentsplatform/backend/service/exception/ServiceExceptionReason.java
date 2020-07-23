@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import ru.studentsplatform.backend.service.exception.core.BusinessExceptionReason;
 
 /**
- * Реализация {@link BusinessExceptionReason}
+ * Реализация {@link BusinessExceptionReason}.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020). feat. Krylov Sergey (krylov.sergey.1999@yandex.ru)
  */
@@ -22,7 +22,7 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 
     /**
      * @param status         Статус ошибки
-   1  * @param code           Код ошибки
+     * @param code           Код ошибки
      * @param messagePattern Паттерн для формирования текста ошибки
      */
     ServiceExceptionReason(HttpStatus status, String code, String messagePattern) {

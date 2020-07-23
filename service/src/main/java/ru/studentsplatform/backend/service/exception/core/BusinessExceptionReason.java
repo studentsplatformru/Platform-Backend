@@ -3,14 +3,14 @@ package ru.studentsplatform.backend.service.exception.core;
 import org.springframework.http.HttpStatus;
 
 /**
- * Интерфейс для описания причины возникновения ошибки
+ * Интерфейс для описания причины возникновения ошибки.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (23.07.2020).
  */
 public interface BusinessExceptionReason {
 
     /**
-     * Код ошибки
+     * Код ошибки.
      *
      * @return код ошибки
      */
@@ -25,7 +25,7 @@ public interface BusinessExceptionReason {
     String getMessagePattern();
 
     /**
-     * Возвращает статус ошибки исключения
+     * Возвращает статус ошибки исключения.
      *
      * @return статус ошибки
      */

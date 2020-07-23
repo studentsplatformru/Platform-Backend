@@ -11,12 +11,12 @@ import java.util.Objects;
 public class BusinessException extends RuntimeException {
 
     /**
-     * Причина возникновения исключения
+     * Причина возникновения исключения.
      */
     private final BusinessExceptionReason reason;
 
     /**
-     * Параметры исключения
+     * Параметры исключения.
      */
     private final Object[] parameters;
 
