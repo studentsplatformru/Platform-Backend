@@ -8,7 +8,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.entities.model.Faculty;
+import ru.studentsplatform.backend.entities.model.University;
 import ru.studentsplatform.backend.repository.FacultyRepository;
+import ru.studentsplatform.backend.repository.UniversityRepository;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +27,9 @@ class FacultyServiceImplTest {
     @Mock
     FacultyRepository repository;
 
+    @Mock
+    UniversityRepository universityRepository;
+
     @InjectMocks
     FacultyServiceImpl service;
 
@@ -35,6 +40,9 @@ class FacultyServiceImplTest {
     @Test
     void createTest(){
         Faculty faculty = new Faculty();
+        University university = new University();
+        university.setUniversityName("test");
+        faculty.setUniversity(university);
 
         Mockito.when(repository.saveAndFlush(Mockito.any(Faculty.class))).thenReturn(faculty);
         assertEquals(faculty, service.create(faculty));
