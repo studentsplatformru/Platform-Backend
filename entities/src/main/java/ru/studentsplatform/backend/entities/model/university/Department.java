@@ -20,16 +20,9 @@ import java.util.List;
 @Entity
 @Table(name = "department")
 public class Department extends BaseEntity {
-
-	/**
-	 * Поле название кафедры.
-	 */
 	@Column(name = "department")
 	private String department;
 
-	/**
-	 * Связь "многие-к-одному" - Факультет.
-	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "faculty_id")
 	private Faculty faculty;
