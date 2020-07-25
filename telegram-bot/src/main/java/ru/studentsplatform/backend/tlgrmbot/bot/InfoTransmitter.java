@@ -6,6 +6,7 @@ import ru.studentsplatform.backend.service.UniversityScheduleResolver;
 import ru.studentsplatform.backend.service.entities.Respondent;
 import ru.studentsplatform.backend.service.entities.Schedule.DaySchedule;
 import ru.studentsplatform.backend.service.entities.enums.University;
+import ru.studentsplatform.backend.service.spbu.parser.SpbuScheduleHtmlParser;
 
 import java.util.List;
 
@@ -35,7 +36,11 @@ public class InfoTransmitter {
     }
 
     private List<DaySchedule> createWeekSchedule(Respondent info) {
-        UniversityScheduleResolver resolver = factory.getResolver(info.getUniversity());
-        return resolver.getSchedule(info);
+        UniversityScheduleResolver resolver = factory.getResolver(info.getUniversity()); //TODO поменять на реальные объекты
+
+        SpbuScheduleHtmlParser parser = new SpbuScheduleHtmlParser();
+
+        return parser
+                .getWeekSchedule("https://timetable.spbu.ru/MCSC/StudentGroupEvents/Primary/248162/2020-05-25"); //resolver.getSchedule(info);
     }
 }

@@ -19,6 +19,7 @@
         <log4j.version>2.13.3</log4j.version>
         <mockito.version>3.4.0</mockito.version>
         <telegrambot.version>4.9</telegrambot.version>
+        <springstatemachine.version>2.2.0.RELEASE</springstatemachine.version>
     </properties>
 
     <modules>
@@ -52,6 +53,20 @@
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.statemachine</groupId>
+                <artifactId>spring-statemachine-core</artifactId>
+                <version>${springstatemachine.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.statemachine</groupId>
+                <artifactId>spring-statemachine-test</artifactId>
+                <version>${springstatemachine.version}</version>
+                <scope>test</scope>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -109,6 +124,13 @@
                 <artifactId>telegrambots-abilities</artifactId>
                 <version>${telegrambot.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.telegram</groupId>
+                <artifactId>telegrambotsextensions</artifactId>
+                <version>${telegrambot.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

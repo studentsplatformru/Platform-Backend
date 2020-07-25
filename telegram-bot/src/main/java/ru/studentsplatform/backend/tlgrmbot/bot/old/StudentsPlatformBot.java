@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot;
+package ru.studentsplatform.backend.tlgrmbot.bot.old;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -26,36 +26,30 @@ import static ru.studentsplatform.backend.tlgrmbot.bot.Text.*;
 
 /**
  * Бот принимает текст сообщения и отсылает его обратно пользователю.
- */
-@Service
+ *//*
 public class StudentsPlatformBot extends AbilityBot {
 
-    /**
+    *//**
      * Логгер.
-     */
+     *//*
     private static Logger logger = LogManager.getLogger(StudentsPlatformBot.class);
-    /**
+    *//**
      * Уникальный токен бота.
-     */
+     *//*
     private static final String BOT_TOKEN = "1334599795:AAG0yj3g1P5E4fwjpTADqoZ706OMNn-DlJQ";
-    /**
+    *//**
      * Уникальное имя бота.
-     */
+     *//*
     private static final String BOT_USERNAME = "StudPlatformTestBot";
 
-    /**
-     * {@link InfoTransmitter}
-     */
-    private final InfoTransmitter transmitter;
 
     protected StudentsPlatformBot(InfoTransmitter transmitter) {
         super(BOT_TOKEN, BOT_USERNAME);
-        this.transmitter = transmitter;
     }
 
-    /**
+    *//**
      * Регистрирует и запускает инстанс бота.
-     */
+     *//*
     @PostConstruct
     public void registerBot() {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
@@ -71,11 +65,11 @@ public class StudentsPlatformBot extends AbilityBot {
         return 64450131;
     }
 
-    /**
+    *//**
      * Событие вызывается при команде /schedule к боту.
      *
      * @return специальный объект, представляющий событие бота
-     */
+     *//*
     public Ability scheduleCommand() {
         return Ability
                 .builder()
@@ -90,7 +84,7 @@ public class StudentsPlatformBot extends AbilityBot {
     private void getSchedule(MessageContext ctx) {
         int userId = ctx.user().getId();
 
-        List<DaySchedule> schedules = transmitter.getScheduleById(userId);
+        List<DaySchedule> schedules = null;
         silent.send(SCHEDULE_SUCCESS.toString(), ctx.chatId());
 
         if (schedules != null) {
@@ -100,11 +94,11 @@ public class StudentsPlatformBot extends AbilityBot {
         }
     }
 
-    /**
+    *//**
      * Событие вызывается при подключении Telegram-пользователя к боту.
      *
      * @return специальный объект, представляющий событие бота
-     */
+     *//*
     public Ability startCommand() {
         return Ability
                 .builder()
@@ -116,22 +110,22 @@ public class StudentsPlatformBot extends AbilityBot {
                 .build();
     }
 
-    /**
+    *//**
      * Иницирует проверку пользователя в базе данных, а также отправляет стартовое сообщение.
      *
      * @param ctx MessageContext начального сообщения при подключении к боту
-     */
+     *//*
     private void toStart(MessageContext ctx) {
         checkUniversityDataBase(ctx);
         silent.send("Start Message", ctx.chatId()); //TODO достать эту строку откуда-нибудь
     }
 
-    /**
+    *//**
      * Проверяет наличие в базе данных пользователя по его userId. Если пользователя там нет,
      * добавляет его туда.
      *
      * @param ctx MessageContext начального сообщения при подключении к боту
-     */
+     *//*
     private void checkUniversityDataBase(MessageContext ctx) {
         int userId = ctx.user().getId();
 
@@ -140,12 +134,12 @@ public class StudentsPlatformBot extends AbilityBot {
         }
     }
 
-    /**
+    *//**
      * Проверяет информацию о пользователе в базе данных.
      *
      * @param userId уникальный идентификатор пользователя Telegram
      * @return true, если пользователь присутствует в базе данных
-     */
+     *//*
     private boolean universityDataBase(int userId) {
         return true;
     }
@@ -237,3 +231,4 @@ public class StudentsPlatformBot extends AbilityBot {
         }
     }
 }
+*/

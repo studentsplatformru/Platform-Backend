@@ -1,8 +1,9 @@
-package ru.studentsplatform.backend.tlgrmbot.bot;
+package ru.studentsplatform.backend.tlgrmbot.bot.old;
 
 import org.telegram.abilitybots.api.util.AbilityUtils;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import ru.studentsplatform.backend.tlgrmbot.bot.KeyboardConstructor;
 
 import static ru.studentsplatform.backend.tlgrmbot.bot.Text.*;
 

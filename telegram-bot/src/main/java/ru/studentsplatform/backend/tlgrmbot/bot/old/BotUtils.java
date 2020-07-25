@@ -1,12 +1,6 @@
-package ru.studentsplatform.backend.tlgrmbot.bot;
+package ru.studentsplatform.backend.tlgrmbot.bot.old;
 
-import org.telegram.abilitybots.api.bot.AbilityBot;
-import org.telegram.abilitybots.api.objects.Ability;
-import org.telegram.abilitybots.api.objects.Locality;
 import org.telegram.abilitybots.api.objects.MessageContext;
-import org.telegram.abilitybots.api.objects.Privacy;
-
-import static ru.studentsplatform.backend.tlgrmbot.bot.Text.START_INFO;
 
 public class BotUtils {
 
