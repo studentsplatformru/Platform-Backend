@@ -2,8 +2,8 @@ package ru.studentsplatform.backend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.studentsplatform.backend.entities.model.Student;
+import ru.studentsplatform.backend.entities.model.university.Discipline;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Long> {
+public interface DisciplineRepository extends JpaRepository<Discipline, Long> {
 }
