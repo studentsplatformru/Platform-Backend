@@ -146,8 +146,32 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Плагин для добавления просмотра ревизии сборки-->
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>${git-commit-id-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>git-commit-id</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <prefix>git-commit-id</prefix>
+                            <skipPoms>false</skipPoms>
+                            <gitDescribe>
+                                <skip>false</skip>
+                            </gitDescribe>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
     <reporting>
         <plugins>
             <plugin>
