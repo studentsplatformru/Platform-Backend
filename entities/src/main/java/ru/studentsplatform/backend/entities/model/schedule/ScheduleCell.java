@@ -3,6 +3,7 @@ package ru.studentsplatform.backend.entities.model.schedule;
 import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.enums.ClassTypeEnum;
+import ru.studentsplatform.backend.entities.model.university.Subject;
 import ru.studentsplatform.backend.entities.model.university.Team;
 
 import javax.persistence.Column;
@@ -31,4 +32,8 @@ public class ScheduleCell extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "team_id")
 	private Team team;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "subject_id")
+	private Subject subject;
 }

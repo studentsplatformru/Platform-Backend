@@ -5,12 +5,18 @@ import ru.studentsplatform.backend.entities.model.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Data
 @Entity
 @Table(name = "user_info")
 public class UserInfo extends BaseEntity {
+	@OneToOne
+	@MapsId
+	private User user;
+
 	/**
 	 * Поле имя.
 	 */

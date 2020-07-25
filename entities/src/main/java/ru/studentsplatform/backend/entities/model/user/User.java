@@ -24,6 +24,9 @@ import java.util.List;
 @Entity
 @Table(name = "usr")
 public class User extends BaseEntity {
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private UserInfo userInfo;
+
 	@Column(name = "email", nullable = false)
 	private String email;
 
