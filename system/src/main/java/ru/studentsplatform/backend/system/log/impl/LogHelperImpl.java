@@ -30,11 +30,14 @@ public class LogHelperImpl implements LogHelper {
 		this.logFileName = logFileName;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public byte[] getLogs(Long lines) {
+	public String getLogs(Long lines) {
 		if (logFileName == null || logFileName.isEmpty()) {
 			LOGGER.error(MESSAGE);
-			return MESSAGE.getBytes();
+			return MESSAGE;
 		}
 
 		if (lines == null) {
@@ -43,7 +46,13 @@ public class LogHelperImpl implements LogHelper {
 		return getLastLogLines(logFileName, lines);
 	}
 
-	private byte[] getAllLogFile(String path) {
+	/**
+	 * Вспомогательный метод для вывода всего файла логов.
+	 *
+	 * @param path Имя файла
+	 * @return Логи
+	 */
+	private String getAllLogFile(String path) {
 		// Это не лучший вариант, но сойдет
 		var stringBuilder = new StringBuilder();
 
@@ -58,15 +67,23 @@ public class LogHelperImpl implements LogHelper {
 			if (sc.ioException() != null) {
 				throw sc.ioException();
 			}
+			LOGGER.info("Successful display of all logs.");
+			return stringBuilder.toString();
 		} catch (IOException e) {
-			e.printStackTrace();
+			var message = String.format("%s path = %s", e.getClass(), path);
+			LOGGER.error(message);
+			return message;
 		}
-
-		LOGGER.info("Successful display of all logs.");
-		return stringBuilder.toString().getBytes();
 	}
 
-	private byte[] getLastLogLines(String path, Long lines) {
+	/**
+	 * Вспомогательный метод для вывода n последних строк лога.
+	 *
+	 * @param path  Имя файла
+	 * @param lines Кол-во строк
+	 * @return n последних строк файла
+	 */
+	private String getLastLogLines(String path, Long lines) {
 		var linesList = new ArrayList<String>();
 
 		// Это не лучший вариант, но сойдет
@@ -89,11 +106,14 @@ public class LogHelperImpl implements LogHelper {
 			if (sc.ioException() != null) {
 				throw sc.ioException();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
-		LOGGER.info(String.format("Successful display of %d rows of logs", lines));
-		return stringBuilder.toString().getBytes();
+			var message = String.format("Successful display of %d rows of logs", lines);
+			LOGGER.info(message);
+			return stringBuilder.toString();
+		} catch (IOException e) {
+			var message = String.format("%s path = %s", e.getClass(), path);
+			LOGGER.error(message);
+			return message;
+		}
 	}
 }

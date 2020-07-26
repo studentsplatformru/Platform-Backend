@@ -28,7 +28,7 @@ public class LogController extends AbstractController {
 
 
 	@GetMapping("")
-	public byte[] logFile(@RequestParam(value = "lines", required = false) Long lines) {
+	public String logFile(@RequestParam(value = "lines", required = false) Long lines) {
 		return logHelper.getLogs(lines);
 	}
 }

@@ -6,5 +6,11 @@ package ru.studentsplatform.backend.system.log;
  * @author Krylov Sergey (25.07.2020)
  */
 public interface LogHelper {
-	byte[] getLogs(Long lines);
+	/**
+	 * Метод возвращающий n последних строк логов.
+	 *
+	 * @param lines Кол-во последних строк которые надо показать.
+	 * @return Логи
+	 */
+	String getLogs(Long lines);
 }
