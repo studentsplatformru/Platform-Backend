@@ -16,7 +16,8 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 	NOTE_NOT_FOUND(HttpStatus.NOT_FOUND, "F001", "Запись с id %s не найдена"),
 	COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F002", "Комментарий с id %s не найден"),
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "F003", "Пользователь с id %s не найден"),
-	SCHEDULE_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "F004", "Отметка в расписании с id %s не найдена");
+	SCHEDULE_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "F004", "Отметка в расписании с id %s не найдена"),
+	NO_UPLOADED_FILES_FOUND(HttpStatus.NOT_FOUND, "F005", "Не найдено ни одного загружаемого файла");
 
 	private final HttpStatus status;
 	private final String code;

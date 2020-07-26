@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.entities.model.university;
 
-import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
@@ -36,6 +35,7 @@ public class Task extends BaseEntity {
 	private ScheduleUserCell scheduleUserCell;
 
 	@OneToMany
+	@JoinColumn(name = "task_id")
 	private List<TaskAttachment> attachments;
 
 	public String getTaskName() {
@@ -58,8 +58,8 @@ public class Task extends BaseEntity {
 		return isDone;
 	}
 
-	public void setDone(Boolean done) {
-		isDone = done;
+	public void setDone(Boolean isDone) {
+		this.isDone = isDone;
 	}
 
 	public Integer getMark() {

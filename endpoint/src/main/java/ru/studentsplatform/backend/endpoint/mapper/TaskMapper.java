@@ -27,7 +27,7 @@ public interface TaskMapper {
 			@Mapping(target = "createdBy", source = "entity.createdBy"),
 			@Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
 			@Mapping(target = "taskName", source = "entity.taskName"),
-			@Mapping(target = "isDone", source = "entity.isDone"),
+			@Mapping(target = "isDone", source = "entity.done"),
 			@Mapping(target = "mark", source = "entity.mark"),
 			@Mapping(target = "scheduleUserCellId", source = "entity.scheduleUserCell.id"),
 			@Mapping(target = "deadLine", source = "entity.deadLine")
@@ -46,7 +46,7 @@ public interface TaskMapper {
 			@Mapping(target = "createdBy", source = "dto.createdBy"),
 			@Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
 			@Mapping(target = "taskName", source = "dto.taskName"),
-			@Mapping(target = "isDone", source = "dto.isDone"),
+			@Mapping(target = "done", source = "dto.isDone"),
 			@Mapping(target = "mark", source = "dto.mark"),
 			@Mapping(target = "scheduleUserCell.id", source = "dto.scheduleUserCellId"),
 			@Mapping(target = "deadLine", source = "dto.deadLine")

@@ -14,6 +14,8 @@ import ru.studentsplatform.backend.domain.dto.TaskDTO;
 import ru.studentsplatform.backend.endpoint.mapper.TaskMapper;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;
+import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
+import ru.studentsplatform.backend.service.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 
 
@@ -49,9 +51,6 @@ public class TaskController {
 
 	/**
 	 * Создает на основе полученных данных объект студенчекой задачи.
-	 * Если задачу удается прикрепить к какой-либо ячейке расписания -
-	 * объект успешно сохраняется в БД, в противном случае
-	 * выбрасывается бизнесс-исключение и объект не сохранияется в базе.
 	 *
 	 * @param dto Объект, содержащий данные, полученные от пользователя.
 	 * @return Ответ со статусом 200(ok), содержащий сведения о сохраненной сущности.
@@ -76,17 +75,19 @@ public class TaskController {
 	 */
 	@PostMapping("/{id}/file")
 	public ResponseEntity<Boolean> taskAddFiles(@PathVariable(name = "id") Long taskId,
-												@RequestParam("file") MultipartFile file) {
+												@RequestParam(name = "file") MultipartFile file) {
 		var result = taskService.addFileForTask(taskId, file);
 		return ResponseEntity.ok(result);
 	}
 
-	/*
-	 * Download Files
+	/**
+	 * Возвращает страницу загрузки файла.
+	 * @param taskId Id файла для загрузки
+	 * @return тело веб-страницы
 	 */
 	@GetMapping("/{id}/file")
 	public ResponseEntity<byte[]> getFile(@PathVariable(name = "id") Long taskId) {
-		var file = taskAttachmentService.getById(taskId);
+		var file = taskAttachmentService.getByTaskId(taskId);
 
 		if (file != null) {
 			var fileName = file.getFileName();
@@ -94,10 +95,8 @@ public class TaskController {
 					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
 					.body(file.getContent());
 		} else {
-			System.out.println("Ебанный null");
+			throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND);
 		}
-
-		return ResponseEntity.status(404).body(null);
 	}
 
 }

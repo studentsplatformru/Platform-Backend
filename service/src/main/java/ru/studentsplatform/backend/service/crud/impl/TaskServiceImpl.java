@@ -25,12 +25,21 @@ public class TaskServiceImpl implements TaskService {
 
 	private final TaskAttachmentService taskAttachmentService;
 
+	/**
+	 * Консруктор.
+	 *
+	 * @param taskRepository		Репозиторий
+	 * @param taskAttachmentService Сервис прикрепляемых к task файлов
+	 */
 	public TaskServiceImpl(TaskRepository taskRepository,
 						   TaskAttachmentService taskAttachmentService) {
 		this.taskRepository = taskRepository;
 		this.taskAttachmentService = taskAttachmentService;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Task create(Task task) {
 		if (task.getScheduleUserCell().getId() == null) {
@@ -74,8 +83,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public boolean addFileForTask(Long taskId, MultipartFile file) {
 		if (file == null) {
-			// TODO бизнес ошибка
-			throw new RuntimeException("You must select the a file for uploading");
+			throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND);
 		}
 		var task = taskRepository.getOne(taskId);
 		var taskAttachment = taskAttachmentService.createByFile(task, file);

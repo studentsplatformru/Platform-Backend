@@ -2,6 +2,7 @@ package ru.studentsplatform.backend.service.crud.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.repository.TaskAttachmentRepository;
@@ -13,6 +14,7 @@ import ru.studentsplatform.backend.system.annotation.Profiled;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * @author Krylov Sergey (26.07.2020)
@@ -25,6 +27,11 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 
 	private final TaskAttachmentRepository taskAttachmentRepository;
 
+	/**
+	 * Конструктор.
+	 *
+	 * @param taskAttachmentRepository Репозиторий приложения к задаче
+	 */
 	public TaskAttachmentServiceImpl(TaskAttachmentRepository taskAttachmentRepository) {
 		this.taskAttachmentRepository = taskAttachmentRepository;
 	}
@@ -32,31 +39,43 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 	@Override
 	public TaskAttachment create(TaskAttachment taskAttachment) {
 
-		return null;
+		return taskAttachmentRepository.saveAndFlush(taskAttachment);
 	}
 
 	@Override
 	@Transactional
-	public TaskAttachment getById(Long taskId) {
-		var taskAttachment = taskAttachmentRepository.findByTaskId(taskId);
-		return taskAttachment;
+	public TaskAttachment getById(Long id) {
+		return taskAttachmentRepository.findById(id).orElseThrow(NoSuchElementException::new);
 	}
 
 	@Override
 	public List<TaskAttachment> getAll() {
-		return null;
+		return taskAttachmentRepository.findAll();
 	}
 
 	@Override
 	public TaskAttachment update(TaskAttachment updatedEntity, Long id) {
-		return null;
+		updatedEntity.setId(id);
+		return taskAttachmentRepository.saveAndFlush(updatedEntity);
 	}
 
 	@Override
 	public boolean delete(Long id) {
-		return false;
+		try {
+			taskAttachmentRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			return false;
+		}
+		return true;
 	}
 
+	/**
+	 * Прикрепление файла к task и сохранение его в БД.
+	 *
+	 * @param task	Задание, к которому прикрепляются файлы
+	 * @param file	Файл, который будет прикрепляться
+	 * @return 		Прикреплённый файл
+	 */
 	@Override
 	public TaskAttachment createByFile(Task task, MultipartFile file) {
 		var taskAttachment = new TaskAttachment();
@@ -71,5 +90,11 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 		}
 
 		return taskAttachment;
+	}
+
+	@Override
+	@Transactional
+	public TaskAttachment getByTaskId(Long taskId) {
+		return taskAttachmentRepository.findByTaskId(taskId);
 	}
 }
