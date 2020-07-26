@@ -24,3 +24,8 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+
+logging:
+  file:
+    name: "log"
+  config: "classpath:logback-spring.xml"
