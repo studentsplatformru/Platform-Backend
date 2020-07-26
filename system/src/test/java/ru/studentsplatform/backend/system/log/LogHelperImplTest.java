@@ -19,7 +19,7 @@ class LogHelperImplTest {
 
 	@BeforeEach
 	void before() {
-		var fileName = "src\\test\\resources\\TestFile.txt";
+		var fileName = "src/test/resources/TestFile.txt";
 		logHelper = new LogHelperImpl(fileName);
 	}
 
