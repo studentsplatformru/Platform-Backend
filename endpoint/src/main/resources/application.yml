@@ -7,3 +7,25 @@ management:
   endpoint:
     health:
       show-details: always
+
+mail.debug: true
+
+spring:
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/testDB
+    username: postgres
+    password: password256
+
+  jpa:
+    generate-ddl: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+logging:
+  file:
+    name: "log"
+  config: "classpath:logback-spring.xml"
