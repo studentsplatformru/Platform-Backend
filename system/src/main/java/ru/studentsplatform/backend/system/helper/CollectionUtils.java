@@ -66,6 +66,13 @@ public class CollectionUtils {
 		return (int) collection.stream().filter(Objects::nonNull).count();
 	}
 
+	/**
+	 * Добавляем элементы из источника в место назначения очищяя перед этим место назначения.
+	 *
+	 * @param destination Место назначения
+	 * @param source      Источник
+	 * @param <T>         Тип коллекций
+	 */
 	public static <T> void replace(Collection<T> destination, Collection<T> source) {
 		destination.clear();
 		destination.addAll(source);
