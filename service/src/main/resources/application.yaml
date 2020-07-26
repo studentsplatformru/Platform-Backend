@@ -9,5 +9,7 @@ spring:
     port: 465
     protocol: smtps
 
+  parser:
+    baseUrl: https://timetable.spbu.ru/
 #must be false in production
 mail.debug: true

@@ -16,5 +16,5 @@ public enum TelegramBotState {
     @Override
     public String toString() {
         return request;
-    }
+    } //TODO попытаться завязать здесь логику какую-нибудь
 }

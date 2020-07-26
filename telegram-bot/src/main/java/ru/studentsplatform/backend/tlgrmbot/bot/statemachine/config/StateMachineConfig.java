@@ -12,7 +12,6 @@ import org.springframework.statemachine.persist.DefaultStateMachinePersister;
 import org.springframework.statemachine.persist.StateMachinePersister;
 import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.actions.*;
 import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.event.TelegramBotEvent;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.listener.StateMachineApplicationListener;
 import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.persist.UniversityStateMachinePersister;
 import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotState;
 
@@ -23,7 +22,8 @@ import java.util.EnumSet;
 public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<TelegramBotState, TelegramBotEvent> {
 
     @Override
-    public void configure(StateMachineConfigurationConfigurer<TelegramBotState, TelegramBotEvent> config) throws Exception {
+    public void configure(StateMachineConfigurationConfigurer<TelegramBotState,
+            TelegramBotEvent> config) throws Exception {
         config
                 .withConfiguration()
                 .autoStartup(true);
@@ -58,15 +58,9 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Telegr
                 .and()
                 .withExternal()
                 .source(TelegramBotState.SPBU_SELECTED)
-                .target(TelegramBotState.SPBU_GROUP_SELECTED)
-                .event(TelegramBotEvent.SPBU_GROUP)
-                .action(spbuGroupAction(), errorAction())
-
-                .and()
-                .withExternal()
                 .target(TelegramBotState.END)
-                .event(TelegramBotEvent.SAVE)
-                .action(saveAction(), errorAction());
+                .event(TelegramBotEvent.SPBU_GROUP)
+                .action(spbuGroupAction(), errorAction());
     }
 
     @Bean
@@ -80,6 +74,11 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Telegr
     }
 
     @Bean
+    public Action<TelegramBotState, TelegramBotEvent> spbuGroupAction() {
+        return new SpbuGroupAction();
+    }
+
+    @Bean
     public Action<TelegramBotState, TelegramBotEvent> errorAction() {
         return new ErrorAction();
     }
@@ -87,11 +86,6 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Telegr
     @Bean
     public Action<TelegramBotState, TelegramBotEvent> saveAction() {
         return new SaveAction();
-    }
-
-    @Bean
-    public Action<TelegramBotState, TelegramBotEvent> spbuGroupAction() {
-        return new SpbuGroupAction();
     }
 
     @Bean

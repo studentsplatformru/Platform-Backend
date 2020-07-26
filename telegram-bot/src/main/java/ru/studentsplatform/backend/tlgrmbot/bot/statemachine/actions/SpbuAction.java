@@ -14,7 +14,7 @@ import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotSt
 public class SpbuAction implements Action<TelegramBotState, TelegramBotEvent> {
     @Override
     public void execute(StateContext<TelegramBotState, TelegramBotEvent> stateContext) {
-        Update update = (Update) stateContext.getExtendedState().getVariables().get("UPDATE");
+        Update update = (Update) stateContext.getExtendedState().getVariables().get("UPDATE"); //TODO может быть дублирование кода, подумать
         AbsSender absSender = (AbsSender) stateContext.getExtendedState().getVariables().get("ABS_SENDER");
 
         System.out.println("Это ивент " + stateContext.getEvent());

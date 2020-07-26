@@ -14,7 +14,7 @@ public class SetInfoCommand extends BotCommand {
     private final BotService botService;
 
     public SetInfoCommand(BotService botService) {
-        super("setinfo", Text.SET_INFO_DESCRIPTION.toString());
+        super("set_info", Text.SET_INFO_DESCRIPTION.toString());
         this.botService = botService;
     }
 

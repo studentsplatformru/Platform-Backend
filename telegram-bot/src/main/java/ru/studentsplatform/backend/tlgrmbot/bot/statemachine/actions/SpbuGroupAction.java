@@ -16,16 +16,18 @@ public class SpbuGroupAction implements Action<TelegramBotState, TelegramBotEven
     public void execute(StateContext<TelegramBotState, TelegramBotEvent> stateContext) {
         Update update = (Update) stateContext.getExtendedState().getVariables().get("UPDATE");
         AbsSender absSender = (AbsSender) stateContext.getExtendedState().getVariables().get("ABS_SENDER");
+        String group = (String) stateContext.getExtendedState().getVariables().get("GROUP");
+        University university = (University) stateContext.getExtendedState().getVariables().get("UNIVERSITY");
 
         System.out.println("Это ивент " + stateContext.getEvent());
         System.out.println("Это состояние из " + stateContext.getSource().getId().name());
         System.out.println("Это состояние в " + stateContext.getTarget().getId().name());
 
         Respondent respondent = new Respondent();
-        respondent.setUniversity(University.SPBU);
-        respondent.setGroupName("19.Б03-мкн");
+        respondent.setUniversity(university);
+        respondent.setGroupName(group);
 
-        System.out.println("Respondent сохранён");
+        System.out.println("Respondent сохранён\n" + respondent.getUniversity() + " " + respondent.getGroupName());
 
         SendMessage message = new SendMessage()
                 .setChatId(update.getMessage().getChatId())

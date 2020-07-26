@@ -12,6 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.studentsplatform.backend.service.entities.enums.Emoji;
 import ru.studentsplatform.backend.tlgrmbot.bot.commands.*;
+import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.service.BotService;
 
 import javax.annotation.PostConstruct;
 
@@ -19,6 +20,7 @@ import javax.annotation.PostConstruct;
 public class StudentsPlatformBot extends TelegramLongPollingCommandBot {
 
     private static final Logger logger = LogManager.getLogger(StudentsPlatformBot.class);
+    private final BotService botService;
 
     /**
      * Constructor.
@@ -29,7 +31,10 @@ public class StudentsPlatformBot extends TelegramLongPollingCommandBot {
      */
     public StudentsPlatformBot(StartCommand startCommand,
                                ScheduleCommand scheduleCommand,
-                               SetInfoCommand setInfoCommand) {
+                               SetInfoCommand setInfoCommand,
+                               BotService botService) {
+        this.botService = botService;
+
         HelpCommand helpCommand = new HelpCommand(this);
         registerAll(helpCommand,
                 startCommand,
@@ -57,7 +62,7 @@ public class StudentsPlatformBot extends TelegramLongPollingCommandBot {
             Message message = update.getMessage();
 
             if (message.hasText()) {
-                MessageProcessor.analyze(update, this);
+                botService.define(update, this);
             }
         }
     }

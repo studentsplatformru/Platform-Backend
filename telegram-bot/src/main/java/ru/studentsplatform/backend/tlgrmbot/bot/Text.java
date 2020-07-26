@@ -1,6 +1,10 @@
 package ru.studentsplatform.backend.tlgrmbot.bot;
 
 public enum Text {
+    STATE_NEW_NOTIFICATION("Возможно, вам необходимо начать с команды /setInfo"),
+    STATE_END_NOTIFICATION("Вы можете узнать доступные команды с помощью /help"),
+    WRONG_REPLY("Попробуйте ввести ещё раз"),
+
     START_DESCRIPTION("Приветственное сообщение и начало работы с ботом."),
     START_MESSAGE("Start Message"), //TODO дополнить
 
