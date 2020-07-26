@@ -26,7 +26,7 @@ public class InfoTransmitter {
         respondent.setGroupName("19.Б03-мкн");
         //заглушка - конец
 
-        List<DaySchedule> schedules = null;//TODO залезаем в другую бд и доастём расписание по информации
+        List<DaySchedule> schedules = null; //TODO залезаем в другую бд и доастём расписание по информации
 
 
         if (schedules == null) {
@@ -35,12 +35,14 @@ public class InfoTransmitter {
         return schedules;
     }
 
-    private List<DaySchedule> createWeekSchedule(Respondent info) {
-        UniversityScheduleResolver resolver = factory.getResolver(info.getUniversity()); //TODO поменять на реальные объекты
+    private List<DaySchedule> createWeekSchedule(Respondent info) { //TODO поменять на реальные объекты
+        UniversityScheduleResolver resolver = factory.getResolver(info.getUniversity());
 
         SpbuScheduleHtmlParser parser = new SpbuScheduleHtmlParser();
 
         return parser
-                .getWeekSchedule("https://timetable.spbu.ru/MCSC/StudentGroupEvents/Primary/248162/2020-05-25"); //resolver.getSchedule(info);
+                .getWeekSchedule(
+                        "https://timetable.spbu.ru/MCSC/StudentGroupEvents/Primary/248162/2020-05-25");
+        //resolver.getSchedule(info);
     }
 }

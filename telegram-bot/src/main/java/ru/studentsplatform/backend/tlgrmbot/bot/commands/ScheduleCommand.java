@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class ScheduleCommand extends BotCommand {
 
-    private static final Logger logger = LogManager.getLogger(ScheduleCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(ScheduleCommand.class);
     private final InfoTransmitter infoTransmitter;
 
     /**
@@ -49,7 +49,7 @@ public class ScheduleCommand extends BotCommand {
         try {
             absSender.execute(answer);
         } catch (TelegramApiException e) {
-            logger.log(Level.ERROR, e);
+            LOGGER.log(Level.ERROR, e);
         }
     }
 }

@@ -7,7 +7,8 @@ import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotSt
 
 import java.util.HashMap;
 
-public class UniversityStateMachinePersister implements StateMachinePersist<TelegramBotState, TelegramBotEvent, String> {
+public class UniversityStateMachinePersister
+        implements StateMachinePersist<TelegramBotState, TelegramBotEvent, String> {
     private final HashMap<String, StateMachineContext<TelegramBotState, TelegramBotEvent>> contexts = new HashMap<>();
 
     @Override

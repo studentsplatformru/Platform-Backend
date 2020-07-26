@@ -6,7 +6,10 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import java.util.ArrayList;
 import java.util.List;
 
-import static ru.studentsplatform.backend.service.entities.enums.University.*;
+import static ru.studentsplatform.backend.service.entities.enums.University.ITMO;
+import static ru.studentsplatform.backend.service.entities.enums.University.SPBU;
+import static ru.studentsplatform.backend.service.entities.enums.University.SPBSTU;
+
 
 public class KeyboardConstructor {
 

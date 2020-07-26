@@ -23,7 +23,7 @@ public enum Text {
 
     private final String value;
 
-    private Text(String value) {
+    Text(String value) {
         this.value = value;
     }
 

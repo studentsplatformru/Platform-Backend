@@ -11,7 +11,10 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.studentsplatform.backend.service.entities.enums.Emoji;
-import ru.studentsplatform.backend.tlgrmbot.bot.commands.*;
+import ru.studentsplatform.backend.tlgrmbot.bot.commands.HelpCommand;
+import ru.studentsplatform.backend.tlgrmbot.bot.commands.ScheduleCommand;
+import ru.studentsplatform.backend.tlgrmbot.bot.commands.SetInfoCommand;
+import ru.studentsplatform.backend.tlgrmbot.bot.commands.StartCommand;
 import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.service.BotService;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +22,7 @@ import javax.annotation.PostConstruct;
 @Service
 public class StudentsPlatformBot extends TelegramLongPollingCommandBot {
 
-    private static final Logger logger = LogManager.getLogger(StudentsPlatformBot.class);
+    private static final Logger LOGGER = LogManager.getLogger(StudentsPlatformBot.class);
     private final BotService botService;
 
     /**
@@ -28,6 +31,7 @@ public class StudentsPlatformBot extends TelegramLongPollingCommandBot {
      * @param startCommand    a
      * @param scheduleCommand b
      * @param setInfoCommand  c
+     * @param botService      d
      */
     public StudentsPlatformBot(StartCommand startCommand,
                                ScheduleCommand scheduleCommand,
@@ -49,7 +53,7 @@ public class StudentsPlatformBot extends TelegramLongPollingCommandBot {
             try {
                 absSender.execute(commandUnknownMessage);
             } catch (TelegramApiException e) {
-                logger.log(Level.ERROR, e);
+                LOGGER.log(Level.ERROR, e);
             }
             helpCommand.execute(absSender, message.getFrom(), message.getChat(), new String[]{});
         });
@@ -76,7 +80,7 @@ public class StudentsPlatformBot extends TelegramLongPollingCommandBot {
         try {
             telegramBotsApi.registerBot(this);
         } catch (TelegramApiException e) {
-            logger.log(Level.FATAL, e);
+            LOGGER.log(Level.FATAL, e);
         }
     }
 

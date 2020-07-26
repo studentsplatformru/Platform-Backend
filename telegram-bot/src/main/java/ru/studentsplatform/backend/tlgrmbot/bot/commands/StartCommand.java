@@ -15,7 +15,7 @@ import ru.studentsplatform.backend.tlgrmbot.bot.Text;
 @Service
 public class StartCommand extends BotCommand {
 
-    private static final Logger logger = LogManager.getLogger(StartCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(StartCommand.class);
 
     public StartCommand() {
         super("start", Text.START_DESCRIPTION.toString());
@@ -35,7 +35,7 @@ public class StartCommand extends BotCommand {
         try {
             absSender.execute(answer);
         } catch (TelegramApiException e) {
-            logger.log(Level.ERROR, e);
+            LOGGER.log(Level.ERROR, e);
         }
     }
 }

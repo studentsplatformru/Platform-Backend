@@ -3,7 +3,6 @@ package ru.studentsplatform.backend.tlgrmbot.bot.commands;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.IBotCommand;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.ICommandRegistry;
@@ -15,13 +14,13 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.studentsplatform.backend.tlgrmbot.bot.Text;
 
 /**
- * This command helps the user to find the command they need
+ * This command helps the user to find the command they need.
  *
  * @author Timo Schulz (Mit0x2)
  */
 public class HelpCommand extends BotCommand {
 
-    private static final Logger logger = LogManager.getLogger(HelpCommand.class);
+    private static final Logger LOGGER = LogManager.getLogger(HelpCommand.class);
     private final ICommandRegistry commandRegistry;
 
     public HelpCommand(ICommandRegistry commandRegistry) {

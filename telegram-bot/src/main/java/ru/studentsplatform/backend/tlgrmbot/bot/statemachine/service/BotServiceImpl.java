@@ -21,7 +21,7 @@ import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotSt
 @Service
 public class BotServiceImpl implements BotService {
 
-    private static final Logger logger = LogManager.getLogger(BotServiceImpl.class);
+    private static final Logger LOGGER = LogManager.getLogger(BotServiceImpl.class);
 
     private final StateMachinePersister<TelegramBotState, TelegramBotEvent, String> persister;
     private final StateMachineFactory<TelegramBotState, TelegramBotEvent> stateMachineFactory;
@@ -45,7 +45,7 @@ public class BotServiceImpl implements BotService {
         try {
             persister.restore(stateMachine, userId);
         } catch (Exception e) {
-            logger.log(Level.ERROR, e);
+            LOGGER.log(Level.ERROR, e);
         }
 
         TelegramBotState state = stateMachine.getState().getId();
@@ -62,6 +62,8 @@ public class BotServiceImpl implements BotService {
                 break;
             case END:
                 stateEndNotification(update, absSender);
+                break;
+            default:
                 break;
         }
     }
@@ -109,7 +111,7 @@ public class BotServiceImpl implements BotService {
         try {
             persister.persist(stateMachine, userId);
         } catch (Exception e) {
-            logger.log(Level.ERROR, e);
+            LOGGER.log(Level.ERROR, e);
         }
     }
 
@@ -185,7 +187,7 @@ public class BotServiceImpl implements BotService {
         try {
             absSender.execute(message);
         } catch (TelegramApiException e) {
-            logger.log(Level.ERROR, e);
+            LOGGER.log(Level.ERROR, e);
         }
     }
 }
