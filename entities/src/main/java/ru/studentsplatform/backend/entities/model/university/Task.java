@@ -5,17 +5,16 @@ import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.util.Date;
+import javax.persistence.Table;
+import java.time.OffsetDateTime;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "task")
 public class Task extends BaseEntity {
@@ -24,18 +23,66 @@ public class Task extends BaseEntity {
 	private String taskName;
 
 	@Column(name = "dead_line")
-	private Date deadLine;
+	private OffsetDateTime deadLine;
 
 	@Column(name = "is_done", nullable = false)
-	private boolean isDone;
+	private Boolean isDone;
 
 	@Column(name = "mark")
 	private Integer mark;
 
-	@ManyToOne
-	@JoinColumn(name = "schedule_user_cell_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "schedule_user_cell_id")
 	private ScheduleUserCell scheduleUserCell;
 
 	@OneToMany
 	private List<TaskAttachment> attachments;
+
+	public String getTaskName() {
+		return taskName;
+	}
+
+	public void setTaskName(String taskName) {
+		this.taskName = taskName;
+	}
+
+	public OffsetDateTime getDeadLine() {
+		return deadLine;
+	}
+
+	public void setDeadLine(OffsetDateTime deadLine) {
+		this.deadLine = deadLine;
+	}
+
+	public Boolean getDone() {
+		return isDone;
+	}
+
+	public void setDone(Boolean done) {
+		isDone = done;
+	}
+
+	public Integer getMark() {
+		return mark;
+	}
+
+	public void setMark(Integer mark) {
+		this.mark = mark;
+	}
+
+	public ScheduleUserCell getScheduleUserCell() {
+		return scheduleUserCell;
+	}
+
+	public void setScheduleUserCell(ScheduleUserCell scheduleUserCell) {
+		this.scheduleUserCell = scheduleUserCell;
+	}
+
+	public List<TaskAttachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<TaskAttachment> attachments) {
+		this.attachments = attachments;
+	}
 }

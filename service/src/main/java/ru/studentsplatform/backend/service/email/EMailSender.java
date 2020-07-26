@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service.emailinterface;
+package ru.studentsplatform.backend.service.email;
 
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;

@@ -6,18 +6,18 @@ import java.util.List;
 
 /**
  * Заготовка для создания интерфейсов сервисов.
+ *
  * @param <Entity> Класс сущности, для которой создается сервис.
  */
 public interface AbstractService<Entity extends BaseEntity> {
 
-    Entity create(Entity newEntity);
+	Entity create(Entity newEntity);
 
-    Entity getById(Long id);
+	Entity getById(Long id);
 
-    List<Entity> getAll();
+	List<Entity> getAll();
 
-    Entity update(Entity updatedEntity, Long id);
+	Entity update(Entity updatedEntity, Long id);
 
-    boolean delete(Long id);
-
+	boolean delete(Long id);
 }

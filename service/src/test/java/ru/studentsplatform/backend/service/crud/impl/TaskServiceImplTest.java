@@ -4,15 +4,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
-import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
+import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
+import ru.studentsplatform.backend.entities.model.university.Task;
 
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Тест каждого метода класса TaskServiceImpl
@@ -22,69 +30,74 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class TaskServiceImplTest {
 
-    @Mock
-    TaskRepository repository;
+	@Mock
+	private TaskRepository taskRepository;
 
-    @InjectMocks
-    TaskServiceImpl service;
+	@InjectMocks
+	private TaskServiceImpl taskService;
 
-    /**
-     * Проверка того, что метод create возвращает созданную задачу.
-     * Сымитировано поведение saveAndFlush.
-     */
-    @Test
-    void createTest() {
-        Task task = new Task();
+	/**
+	 * Проверка того, что метод create возвращает созданную задачу.
+	 * Сымитировано поведение saveAndFlush.
+	 */
+	@Test
+	void createTest() {
+		var task = mock(Task.class);
+		var scheduleUserCell = mock(ScheduleUserCell.class);
 
-        Mockito.when(repository.saveAndFlush(Mockito.any(Task.class))).thenReturn(task);
-        assertEquals(task, service.create(task));
-    }
+		doReturn(task).when(taskRepository).save(task);
+		doReturn(scheduleUserCell).when(task).getScheduleUserCell();
+		doReturn(1L).when(scheduleUserCell).getId();
 
-    /**
-     * Проверка того, что метод findById возвращает созданную задачу
-     * и кидает NoSuchElementException при её отсутствии.
-     */
-    @Test
-    void getByIdTest() {
-        Task task = new Task();
+		var result = taskService.create(task);
+		assertEquals(task, result);
+	}
 
-        Mockito.when(repository.findById(2L)).thenReturn(java.util.Optional.of(task));
+	/**
+	 * Проверка того, что метод findById возвращает созданную задачу
+	 * и кидает NoSuchElementException при её отсутствии.
+	 */
+	@Test
+	void getByIdTest() {
+		Task task = new Task();
 
-        assertEquals(repository.findById(2L).orElseThrow(), service.getById(2L));
-        assertThrows(NoSuchElementException.class,() ->service.getById(3L));
-    }
+		when(taskRepository.findById(2L)).thenReturn(java.util.Optional.of(task));
 
-    /**
-     * Проверка того, что метод getAll выводит результат метода findAll репозитория.
-     */
-    @Test
-    void getAllTest() {
-        assertEquals(service.getAll(),repository.findAll());
-    }
+		assertEquals(taskRepository.findById(2L).orElseThrow(), taskService.getById(2L));
+		assertThrows(NoSuchElementException.class, () -> taskService.getById(3L));
+	}
 
-    /**
-     * Проверка того, что метод update возвращает обновлённую задачу с Id,
-     * заданным в параметре.
-     */
-    @Test
-    void updateTest() {
-        Task newTask = new Task();
+	/**
+	 * Проверка того, что метод getAll выводит результат метода findAll репозитория.
+	 */
+	@Test
+	void getAllTest() {
+		assertEquals(taskService.getAll(), taskRepository.findAll());
+	}
 
-        Mockito.when(repository.saveAndFlush(newTask)).thenReturn(newTask);
-        assertEquals(newTask, service.update(newTask,3L));
-        assertEquals(3L, service.update(newTask, 3L).getId());
-    }
+	/**
+	 * Проверка того, что метод update возвращает обновлённую задачу с Id,
+	 * заданным в параметре.
+	 */
+	@Test
+	void updateTest() {
+		Task newTask = new Task();
 
-    /**
-     * Проверка того, что метод delete возвращает true, если
-     * EmptyResultDataAccessException не был брошен,
-     * и возвращает false в обратном случае.
-     */
-    @Test
-    void deleteTest() {
-        assertTrue(service.delete(Mockito.anyLong()));
+		when(taskRepository.saveAndFlush(newTask)).thenReturn(newTask);
+		assertEquals(newTask, taskService.update(newTask, 3L));
+		assertEquals(3L, taskService.update(newTask, 3L).getId());
+	}
 
-        Mockito.doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(Mockito.anyLong());
-        assertFalse(service.delete(Mockito.anyLong()));
-    }
+	/**
+	 * Проверка того, что метод delete возвращает true, если
+	 * EmptyResultDataAccessException не был брошен,
+	 * и возвращает false в обратном случае.
+	 */
+	@Test
+	void deleteTest() {
+		assertTrue(taskService.delete(anyLong()));
+
+		doThrow(EmptyResultDataAccessException.class).when(taskRepository).deleteById(anyLong());
+		assertFalse(taskService.delete(anyLong()));
+	}
 }
