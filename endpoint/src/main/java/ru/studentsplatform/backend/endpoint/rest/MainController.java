@@ -14,6 +14,4 @@ public class MainController {
 	public ResponseEntity getMain() {
 		return ResponseEntity.ok("Hello world");
 	}
-
-
 }
