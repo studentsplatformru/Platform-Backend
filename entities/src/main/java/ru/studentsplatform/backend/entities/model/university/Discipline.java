@@ -25,7 +25,7 @@ public class Discipline extends BaseEntity {
 	private Subject subject;
 
 	@OneToMany
-	@JoinColumn(name = "schedule_user_cell_id")
+	@JoinColumn(name = "discipline_id")
 	private List<ScheduleUserCell> scheduleUserCells;
 
 	private int semester;
