@@ -22,7 +22,7 @@ import java.util.List;
 @Table(name = "schedule_user_cell")
 public class ScheduleUserCell extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "urs_id")
+	@JoinColumn(name = "usr_id")
 	private User user;
 
 	@ManyToOne(fetch = FetchType.LAZY)
