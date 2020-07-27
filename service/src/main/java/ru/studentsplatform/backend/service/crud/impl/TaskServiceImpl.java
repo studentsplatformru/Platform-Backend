@@ -85,7 +85,7 @@ public class TaskServiceImpl implements TaskService {
 	@Transactional
 	public boolean addFileForTask(Long taskId, MultipartFile file) {
 		if (file == null) {
-			throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND);
+			throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND, taskId);
 		}
 		var task = taskRepository.getOne(taskId);
 		var taskAttachment = taskAttachmentService.createByFile(task, file);

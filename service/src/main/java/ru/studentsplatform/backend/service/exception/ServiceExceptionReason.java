@@ -17,7 +17,7 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 	COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F002", "Комментарий с id %s не найден"),
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "F003", "Пользователь с id %s не найден"),
 	SCHEDULE_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "F004", "Отметка в расписании с id %s не найдена"),
-	NO_UPLOADED_FILES_FOUND(HttpStatus.NOT_FOUND, "F005", "Не найдено ни одного загружаемого файла"),
+	NO_UPLOADED_FILES_FOUND(HttpStatus.NOT_FOUND, "F005", "Не найдено ни одного загружаемого файла к задаче с ID %d"),
 	FILE_INDEX_NOT_EXIST(HttpStatus.NOT_FOUND, "F006", "Файла с таким индексом не существует в данной задаче");
 
 	private final HttpStatus status;

@@ -5,6 +5,9 @@ import ru.studentsplatform.backend.entities.model.university.Task;
 
 import java.util.List;
 
+/**
+ * CRUD сервис студенческого задания, прикрепляемого к определенному занятию
+ */
 public interface TaskService extends AbstractService<Task> {
 
 	/*
@@ -17,15 +20,35 @@ public interface TaskService extends AbstractService<Task> {
 	@Override
 	Task create(Task newEntity);
 
+	/**
+	 * Поиск студенческой задачи по её Id.
+	 * @param id Id задчи, которую необходимо найти
+	 * @return Искомая задача
+	 */
 	@Override
 	Task getById(Long id);
 
+	/**
+	 * Поиск всех студенческих задач, хранящихся в БД.
+	 * @return лист всех имеющихся студенческих задач
+	 */
 	@Override
 	List<Task> getAll();
 
+	/**
+	 * Обновление параметров студенческой задачи.
+	 * @param updatedEntity Обновленные данные задачи
+	 * @param id Id задчи, которая будет обновлена
+	 * @return Обновленная задача
+	 */
 	@Override
 	Task update(Task updatedEntity, Long id);
 
+	/**
+	 * Удаление студенческой задачи.
+	 * @param id Id задачи, которая должна быть удалена
+	 * @return Успешно ли было произведено удаление
+	 */
 	@Override
 	boolean delete(Long id);
 
