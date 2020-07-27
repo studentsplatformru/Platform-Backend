@@ -6,7 +6,7 @@ import ru.studentsplatform.backend.entities.model.university.Task;
 import java.util.List;
 
 /**
- * CRUD сервис студенческого задания, прикрепляемого к определенному занятию
+ * CRUD сервис студенческого задания, прикрепляемого к определенному занятию.
  */
 public interface TaskService extends AbstractService<Task> {
 
