@@ -23,6 +23,7 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+    show-sql: false
   flyway:
     enabled: true
     baseline-on-migrate: true
