@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -81,6 +82,7 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
+	@Transactional
 	public boolean addFileForTask(Long taskId, MultipartFile file) {
 		if (file == null) {
 			throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND);

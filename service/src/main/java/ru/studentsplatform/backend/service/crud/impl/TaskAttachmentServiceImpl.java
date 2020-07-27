@@ -9,6 +9,8 @@ import ru.studentsplatform.backend.domain.repository.TaskAttachmentRepository;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
+import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
+import ru.studentsplatform.backend.service.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 
 import javax.transaction.Transactional;
@@ -38,12 +40,10 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 
 	@Override
 	public TaskAttachment create(TaskAttachment taskAttachment) {
-
 		return taskAttachmentRepository.saveAndFlush(taskAttachment);
 	}
 
 	@Override
-	@Transactional
 	public TaskAttachment getById(Long id) {
 		return taskAttachmentRepository.findById(id).orElseThrow(NoSuchElementException::new);
 	}
@@ -77,6 +77,7 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 	 * @return 		Прикреплённый файл
 	 */
 	@Override
+	@Transactional
 	public TaskAttachment createByFile(Task task, MultipartFile file) {
 		var taskAttachment = new TaskAttachment();
 
@@ -94,7 +95,17 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 
 	@Override
 	@Transactional
-	public TaskAttachment getByTaskId(Long taskId) {
+	public List<TaskAttachment> getByTaskId(Long taskId) {
 		return taskAttachmentRepository.findByTaskId(taskId);
 	}
+
+	@Override
+	public TaskAttachment getByFileIndex(Long taskId, int index) {
+		List<TaskAttachment> attachments = getByTaskId(taskId);
+		if (attachments.size() > 0 && index > 0 && index <= attachments.size()) {
+			return attachments.get(index - 1);
+		}
+		throw new BusinessException(ServiceExceptionReason.FILE_INDEX_NOT_EXIST);
+	}
+
 }

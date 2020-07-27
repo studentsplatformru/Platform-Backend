@@ -6,9 +6,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.university.Task;
+import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
+import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
+import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
+import ru.studentsplatform.backend.service.exception.core.BusinessException;
 
 import java.util.NoSuchElementException;
 
@@ -32,6 +37,9 @@ class TaskServiceImplTest {
 
 	@Mock
 	private TaskRepository taskRepository;
+
+	@Mock
+	private TaskAttachmentService taskAttachmentService;
 
 	@InjectMocks
 	private TaskServiceImpl taskService;
@@ -99,5 +107,22 @@ class TaskServiceImplTest {
 
 		doThrow(EmptyResultDataAccessException.class).when(taskRepository).deleteById(anyLong());
 		assertFalse(taskService.delete(anyLong()));
+	}
+
+	/**
+	 * Проверка того, что при наличии файла метод возвращает true,
+	 * в впротивном случае бросит бизнесс-исключение.
+	 */
+	@Test
+	void addFilesTest(){
+		var task = mock(Task.class);
+		var file = mock(MultipartFile.class);
+		var attachment = mock(TaskAttachment.class);
+		doReturn(task).when(taskRepository).getOne(anyLong());
+		doReturn(attachment).when(taskAttachmentService).createByFile(task, file);
+		assertTrue(taskService.addFileForTask(2L,file));
+		MultipartFile nullFile = null;
+		assertThrows(BusinessException.class,
+				() -> taskService.addFileForTask(3L,nullFile));
 	}
 }

@@ -3,6 +3,7 @@ package ru.studentsplatform.backend.domain.dto;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 /**
  * Класс DTO, хранящий сведения о сущности студенчекой задачи.
@@ -21,4 +22,6 @@ public class TaskDTO extends ru.studentsplatform.backend.domain.dto.BaseDTO {
 	private Integer mark;
 
 	private Long scheduleUserCellId;
+
+	private List<TaskAttachmentDTO> attachments;
 }

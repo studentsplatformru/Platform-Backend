@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Archie-Vian (sas-artamonov@yandex.ru) 26.07.2020
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {TaskAttachmentMapper.class})
 public interface TaskMapper {
 	/**
 	 * Трансформация полей сущности задачи в поля DTO.
@@ -30,7 +30,8 @@ public interface TaskMapper {
 			@Mapping(target = "isDone", source = "entity.done"),
 			@Mapping(target = "mark", source = "entity.mark"),
 			@Mapping(target = "scheduleUserCellId", source = "entity.scheduleUserCell.id"),
-			@Mapping(target = "deadLine", source = "entity.deadLine")
+			@Mapping(target = "deadLine", source = "entity.deadLine"),
+			@Mapping(target = "attachments", source = "entity.attachments")
 
 	})
 	TaskDTO taskToTaskDTO(Task entity);
@@ -49,7 +50,8 @@ public interface TaskMapper {
 			@Mapping(target = "done", source = "dto.isDone"),
 			@Mapping(target = "mark", source = "dto.mark"),
 			@Mapping(target = "scheduleUserCell.id", source = "dto.scheduleUserCellId"),
-			@Mapping(target = "deadLine", source = "dto.deadLine")
+			@Mapping(target = "deadLine", source = "dto.deadLine"),
+			@Mapping(target = "attachments", source = "dto.attachments")
 
 	})
 	Task taskDTOToTask(TaskDTO dto);

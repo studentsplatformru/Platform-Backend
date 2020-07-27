@@ -28,7 +28,9 @@ public interface TaskAttachmentService extends AbstractService<TaskAttachment> {
 	@Override
 	boolean delete(Long id);
 
-	TaskAttachment getByTaskId(Long taskId);
+	List<TaskAttachment> getByTaskId(Long taskId);
 
 	TaskAttachment createByFile(Task task, MultipartFile file);
+
+	TaskAttachment getByFileIndex(Long taskId, int index);
 }

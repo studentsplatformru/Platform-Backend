@@ -14,10 +14,7 @@ import ru.studentsplatform.backend.domain.dto.TaskDTO;
 import ru.studentsplatform.backend.endpoint.mapper.TaskMapper;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;
-import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
-import ru.studentsplatform.backend.service.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.annotation.Profiled;
-
 
 /**
  * Контроллер, служащий для создания задач для студентов.
@@ -69,34 +66,37 @@ public class TaskController {
 	 * Позволяет прикреплять к студенческой задаче файлы с решением.
 	 *
 	 * @param taskId Идентификатор задачи, к которой будет прикреплено решение.
-	 * @param file   Файл, который будут прикреплены к залдаче
+	 * @param files   Файлы, которые будут прикреплены к залдаче
 	 * @return Ответ со статусом 200(ok),
-	 * содержащий сведения о задаче с прикрепленными к ней файлами.
+	 * содержащий сведения о том, удачно ли прикреплены все полученные файлы.
 	 */
 	@PostMapping("/{id}/file")
 	public ResponseEntity<Boolean> taskAddFiles(@PathVariable(name = "id") Long taskId,
-												@RequestParam(name = "file") MultipartFile file) {
-		var result = taskService.addFileForTask(taskId, file);
+												@RequestParam(name = "file") MultipartFile... files) {
+		boolean result = false;
+		for (MultipartFile file: files) {
+			result = taskService.addFileForTask(taskId, file);
+		}
+
 		return ResponseEntity.ok(result);
 	}
 
 	/**
 	 * Возвращает страницу загрузки файла.
 	 * @param taskId Id файла для загрузки
+	 * @param fileIndex Номер прикреплённого файла (начиная с единицы)
 	 * @return тело веб-страницы
 	 */
-	@GetMapping("/{id}/file")
-	public ResponseEntity<byte[]> getFile(@PathVariable(name = "id") Long taskId) {
-		var file = taskAttachmentService.getByTaskId(taskId);
+	@GetMapping("/{id}/file/{fileNum}")
+	public ResponseEntity<byte[]> getFile(@PathVariable(name = "id") Long taskId,
+										  @PathVariable(name = "fileNum") int fileIndex) {
 
-		if (file != null) {
+			var file = taskAttachmentService.getByFileIndex(taskId, fileIndex);
 			var fileName = file.getFileName();
+
 			return ResponseEntity.ok()
 					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
 					.body(file.getContent());
-		} else {
-			throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND);
-		}
 	}
 
 }
