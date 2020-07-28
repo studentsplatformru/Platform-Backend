@@ -21,7 +21,7 @@
  - mvn flyway:repair - Восстанавливает таблицу *flyway_schema_history*.
  
 Необходимые настройки Flyway можно сделать в [конфигурациях][],
-либо настроить плагин можно в 
+либо же настроить плагин можно в 
 [pom](../migration/pom.xml)
 
 [Подробная инструкция](https://flywaydb.org/documentation/maven/)
