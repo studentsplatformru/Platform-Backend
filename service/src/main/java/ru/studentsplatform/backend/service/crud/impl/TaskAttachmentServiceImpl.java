@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.repository.TaskAttachmentRepository;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -12,6 +13,7 @@ import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.service.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.annotation.Profiled;
+import ru.studentsplatform.backend.system.helper.CollectionUtils;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -38,27 +40,42 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 		this.taskAttachmentRepository = taskAttachmentRepository;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public TaskAttachment create(TaskAttachment taskAttachment) {
 		return taskAttachmentRepository.saveAndFlush(taskAttachment);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public TaskAttachment getById(Long id) {
 		return taskAttachmentRepository.findById(id).orElseThrow(NoSuchElementException::new);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<TaskAttachment> getAll() {
 		return taskAttachmentRepository.findAll();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public TaskAttachment update(TaskAttachment updatedEntity, Long id) {
 		updatedEntity.setId(id);
 		return taskAttachmentRepository.saveAndFlush(updatedEntity);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean delete(Long id) {
 		try {
@@ -70,11 +87,7 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 	}
 
 	/**
-	 * Прикрепление файла к task и сохранение его в БД.
-	 *
-	 * @param task	Задание, к которому прикрепляются файлы
-	 * @param file	Файл, который будет прикрепляться
-	 * @return 		Прикреплённый файл
+	 * {@inheritDoc}
 	 */
 	@Override
 	@Transactional
@@ -82,9 +95,10 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 		var taskAttachment = new TaskAttachment();
 
 		try {
-			taskAttachment.setFileName(file.getName());
+			taskAttachment.setFileName(StringUtils.cleanPath(file.getOriginalFilename()));
 			taskAttachment.setContent(file.getBytes());
 			taskAttachment.setTask(task);
+			taskAttachment.setContentType(file.getContentType());
 			taskAttachment = taskAttachmentRepository.save(taskAttachment);
 		} catch (IOException e) {
 			LOGGER.error("Error occurred while adding task attachments!");
@@ -93,19 +107,28 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 		return taskAttachment;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	@Transactional
 	public List<TaskAttachment> getByTaskId(Long taskId) {
 		return taskAttachmentRepository.findByTaskId(taskId);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public TaskAttachment getByFileIndex(Long taskId, int index) {
+	public TaskAttachment getByFileId(Long taskId, Long attachmentID) {
 		List<TaskAttachment> attachments = getByTaskId(taskId);
-		if (attachments.size() > 0 && index > 0 && index <= attachments.size()) {
-			return attachments.get(index - 1);
+		if (CollectionUtils.notEmpty(attachments)) {
+			return attachments.stream()
+					.filter(element -> element.getId().equals(attachmentID)).findFirst()
+					.orElseThrow(() ->
+							new BusinessException(ServiceExceptionReason.FILE_INDEX_NOT_EXIST, attachmentID, taskId));
 		}
-		throw new BusinessException(ServiceExceptionReason.FILE_INDEX_NOT_EXIST);
+		throw new BusinessException(ServiceExceptionReason.FILE_INDEX_NOT_EXIST, attachmentID, taskId);
 	}
 
 }

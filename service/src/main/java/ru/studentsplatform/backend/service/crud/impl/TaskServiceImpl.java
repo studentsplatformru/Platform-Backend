@@ -43,22 +43,31 @@ public class TaskServiceImpl implements TaskService {
 	 */
 	@Override
 	public Task create(Task task) {
-		if (task.getScheduleUserCell().getId() == null) {
-			throw new BusinessException(ServiceExceptionReason.SCHEDULE_CELL_NOT_FOUND);
+		if (task.getScheduleUserCell() == null || task.getScheduleUserCell().getId() == null) {
+			throw new BusinessException(ServiceExceptionReason.SCHEDULE_CELL_NOT_FOUND, task.getTaskName());
 		}
 		return taskRepository.save(task);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Task getById(Long id) {
 		return taskRepository.findById(id).orElseThrow(NoSuchElementException::new);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Task> getAll() {
 		return taskRepository.findAll();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Task update(Task updatedEntity, Long id) {
 		updatedEntity.setId(id);
@@ -83,14 +92,18 @@ public class TaskServiceImpl implements TaskService {
 	 */
 	@Override
 	@Transactional
-	public boolean addFileForTask(Long taskId, MultipartFile file) {
-		if (file == null) {
+	public boolean addFilesForTask(Long taskId, MultipartFile... files) {
+		if (files == null || files.length == 0) {
 			throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND, taskId);
 		}
-		var task = taskRepository.getOne(taskId);
-		var taskAttachment = taskAttachmentService.createByFile(task, file);
-		task.getAttachments().add(taskAttachment);
-
+		for (MultipartFile file: files) {
+			if (file == null) {
+				throw new BusinessException(ServiceExceptionReason.NULL_FILE_EXCEPTION, taskId);
+			}
+			var task = taskRepository.getOne(taskId);
+			var taskAttachment = taskAttachmentService.createByFile(task, file);
+			task.getAttachments().add(taskAttachment);
+		}
 		return true;
 	}
 }

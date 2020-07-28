@@ -120,9 +120,11 @@ class TaskServiceImplTest {
 		var attachment = mock(TaskAttachment.class);
 		doReturn(task).when(taskRepository).getOne(anyLong());
 		doReturn(attachment).when(taskAttachmentService).createByFile(task, file);
-		assertTrue(taskService.addFileForTask(2L,file));
+		assertTrue(taskService.addFilesForTask(2L,file));
 		MultipartFile nullFile = null;
 		assertThrows(BusinessException.class,
-				() -> taskService.addFileForTask(3L,nullFile));
+				() -> taskService.addFilesForTask(3L,nullFile));
+		assertThrows(BusinessException.class,
+				() -> taskService.addFilesForTask(3L,null));
 	}
 }
