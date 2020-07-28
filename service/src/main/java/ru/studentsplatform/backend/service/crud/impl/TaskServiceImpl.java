@@ -13,6 +13,7 @@ import ru.studentsplatform.backend.service.crud.TaskService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.service.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.annotation.Profiled;
+import ru.studentsplatform.backend.system.helper.CollectionUtils;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -92,18 +93,19 @@ public class TaskServiceImpl implements TaskService {
 	 */
 	@Override
 	@Transactional
-	public boolean addFilesForTask(Long taskId, MultipartFile... files) {
-		if (files == null || files.length == 0) {
-			throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND, taskId);
-		}
-		for (MultipartFile file: files) {
-			if (file == null) {
-				throw new BusinessException(ServiceExceptionReason.NULL_FILE_EXCEPTION, taskId);
+	public boolean addFilesForTask(Long taskId, List<MultipartFile> files) {
+		if (CollectionUtils.notEmpty(files)) {
+			for (MultipartFile file: files) {
+				if (file == null) {
+					throw new BusinessException(ServiceExceptionReason.NULL_FILE_EXCEPTION, taskId);
+				}
+				var task = taskRepository.getOne(taskId);
+				var taskAttachment = taskAttachmentService.createByFile(task, file);
+				task.getAttachments().add(taskAttachment);
 			}
-			var task = taskRepository.getOne(taskId);
-			var taskAttachment = taskAttachmentService.createByFile(task, file);
-			task.getAttachments().add(taskAttachment);
+			return true;
 		}
-		return true;
+
+		throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND, taskId);
 	}
 }

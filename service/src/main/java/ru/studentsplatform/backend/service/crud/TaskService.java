@@ -56,8 +56,8 @@ public interface TaskService extends AbstractService<Task> {
 	 * Добавление файлов к уже существующей Task.
 	 *
 	 * @param taskId ИД task
-	 * @param files  Файл
+	 * @param files  Лист файлов
 	 * @return Результат добавления
 	 */
-	boolean addFilesForTask(Long taskId, MultipartFile... files);
+	boolean addFilesForTask(Long taskId, List<MultipartFile> files);
 }

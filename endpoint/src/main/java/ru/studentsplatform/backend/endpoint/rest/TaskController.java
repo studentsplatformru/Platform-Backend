@@ -19,6 +19,8 @@ import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 
+import java.util.Arrays;
+
 /**
  * Контроллер, служащий для создания задач для студентов.
  * Позволяет создать сущность с необходимыми параметрами, а также прикреплять к ней файлы.
@@ -76,7 +78,7 @@ public class TaskController {
 	public ResponseEntity<Boolean> taskAddFiles(@PathVariable(name = "id") Long taskId,
 												@RequestParam(name = "file") MultipartFile... files) {
 
-		var result = taskService.addFilesForTask(taskId, files);
+		var result = taskService.addFilesForTask(taskId, Arrays.asList(files));
 
 		return ResponseEntity.ok(result);
 	}
