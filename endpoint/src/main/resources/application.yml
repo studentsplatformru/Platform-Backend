@@ -8,22 +8,26 @@ management:
     health:
       show-details: always
 
-mail.debug: true
-
 spring:
   datasource:
     platform: postgres
     url: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/testDB
     username: postgres
     password: password256
+    driver-class-name: org.postgresql.Driver
 
   jpa:
-    generate-ddl: true
+    generate-ddl: false
     properties:
       hibernate:
         jdbc:
           lob:
             non_contextual_creation: true
+    show-sql: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    baseline-version: 0
 
 logging:
   file:
