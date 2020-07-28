@@ -340,3 +340,70 @@ Review the locations above or check your Flyway configuration
 2020-07-27 23:58:13.389  INFO c.p.bots.sdk.longpoll.LongPoll           : Response of getting updates: 
 {"updates":[],"pts":10000318,"ts":1690646800}
 
+2020-07-28 16:25:47.404  INFO r.s.b.endpoint.EndpointApplication       : Starting EndpointApplication on LAPTOP-B5PR574U with PID 10804 (D:\Capital\Platform-Backend\endpoint\target\classes started by Danila in D:\Capital\Platform-Backend)
+2020-07-28 16:25:47.407  INFO r.s.b.endpoint.EndpointApplication       : No active profile set, falling back to default profiles: default
+2020-07-28 16:25:49.947  INFO .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-07-28 16:25:50.315  INFO .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 352ms. Found 15 JPA repository interfaces.
+2020-07-28 16:25:52.974  INFO o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-07-28 16:25:52.986  INFO o.a.coyote.http11.Http11NioProtocol      : Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-28 16:25:52.987  INFO o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-07-28 16:25:52.987  INFO org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-07-28 16:25:53.335  INFO o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-07-28 16:25:53.335  INFO w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5741 ms
+2020-07-28 16:25:53.996  INFO o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 6.5.2 by Redgate
+2020-07-28 16:25:54.005  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-07-28 16:25:57.042  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-07-28 16:25:57.169  INFO o.f.c.internal.database.DatabaseFactory  : Database: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/testDB (PostgreSQL 12.3)
+2020-07-28 16:25:58.709  INFO o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.496s)
+2020-07-28 16:25:59.320  INFO o.f.core.internal.command.DbMigrate      : Current version of schema "public": 1
+2020-07-28 16:25:59.407  INFO o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2020-07-28 16:26:00.665  INFO o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-28 16:26:00.754  INFO org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-28 16:26:01.093  INFO o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-28 16:26:01.597  INFO org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-07-28 16:26:03.652  INFO o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-28 16:26:03.663  INFO j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-28 16:26:07.053  INFO c.p.bots.sdk.longpoll.LongPoll           : GetLongPollServerResponse: 
+{"response":{"server":"im.vk.com/nim197060785","key":"24374c9dc9e5f67f5e5d147f710b9f3532e87bfc","pts":10000318,"ts":1844341957}}
+
+2020-07-28 16:26:07.059  INFO c.p.bots.sdk.longpoll.LongPoll           : Started listening to events from VK LongPoll server...
+2020-07-28 16:26:07.442  WARN JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-28 16:26:08.206  INFO o.s.b.a.e.web.EndpointLinksResolver      : Exposing 16 endpoint(s) beneath base path '/actuator'
+2020-07-28 16:26:08.782  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-28 16:26:09.344  INFO o.a.coyote.http11.Http11NioProtocol      : Starting ProtocolHandler ["http-nio-8080"]
+2020-07-28 16:26:09.373  INFO o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-28 16:26:09.374  INFO d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-07-28 16:26:09.389  INFO d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-07-28 16:26:09.401  INFO s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-07-28 16:26:09.691  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2020-07-28 16:26:09.696  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2020-07-28 16:26:09.698  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingDELETE_1
+2020-07-28 16:26:09.701  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2020-07-28 16:26:09.703  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_4
+2020-07-28 16:26:09.705  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_5
+2020-07-28 16:26:09.707  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_6
+2020-07-28 16:26:09.709  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_7
+2020-07-28 16:26:09.711  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_8
+2020-07-28 16:26:09.713  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_9
+2020-07-28 16:26:09.714  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_10
+2020-07-28 16:26:09.717  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_11
+2020-07-28 16:26:09.719  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_12
+2020-07-28 16:26:09.722  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_13
+2020-07-28 16:26:09.724  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_14
+2020-07-28 16:26:09.726  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_15
+2020-07-28 16:26:09.727  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_16
+2020-07-28 16:26:09.729  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_17
+2020-07-28 16:26:09.731  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_18
+2020-07-28 16:26:09.733  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_19
+2020-07-28 16:26:09.735  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_20
+2020-07-28 16:26:09.737  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_21
+2020-07-28 16:26:09.821  INFO r.s.b.endpoint.EndpointApplication       : Started EndpointApplication in 27.364 seconds (JVM running for 44.343)
+2020-07-28 16:26:16.083  INFO o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-28 16:26:16.084  INFO o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-07-28 16:26:16.168  INFO o.s.web.servlet.DispatcherServlet        : Completed initialization in 84 ms
+2020-07-28 16:26:32.299  INFO c.p.bots.sdk.longpoll.LongPoll           : Response of getting updates: 
+{"updates":[],"pts":10000318,"ts":1844341957}
+
+2020-07-28 16:26:57.377  INFO c.p.bots.sdk.longpoll.LongPoll           : Response of getting updates: 
+{"updates":[],"pts":10000318,"ts":1844341957}
+
