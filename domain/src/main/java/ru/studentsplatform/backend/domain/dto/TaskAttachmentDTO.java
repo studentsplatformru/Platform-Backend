@@ -10,4 +10,6 @@ public class TaskAttachmentDTO extends BaseDTO {
 	private byte[] content;
 
 	private Long taskId;
+
+	private String contentType;
 }

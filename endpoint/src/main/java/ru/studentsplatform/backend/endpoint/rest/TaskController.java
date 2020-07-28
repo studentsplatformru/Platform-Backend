@@ -1,6 +1,9 @@
 package ru.studentsplatform.backend.endpoint.rest;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,8 @@ import ru.studentsplatform.backend.endpoint.mapper.TaskMapper;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;
 import ru.studentsplatform.backend.system.annotation.Profiled;
+
+import java.util.Arrays;
 
 /**
  * Контроллер, служащий для создания задач для студентов.
@@ -55,7 +60,6 @@ public class TaskController {
 	@PostMapping
 	public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO dto) {
 		var task = taskMapper.taskDTOToTask(dto);
-
 		task = taskService.create(task);
 
 		var result = taskMapper.taskToTaskDTO(task);
@@ -73,30 +77,29 @@ public class TaskController {
 	@PostMapping("/{id}/file")
 	public ResponseEntity<Boolean> taskAddFiles(@PathVariable(name = "id") Long taskId,
 												@RequestParam(name = "file") MultipartFile... files) {
-		boolean result = false;
-		for (MultipartFile file: files) {
-			result = taskService.addFileForTask(taskId, file);
-		}
+
+		var result = taskService.addFilesForTask(taskId, Arrays.asList(files));
 
 		return ResponseEntity.ok(result);
 	}
 
 	/**
-	 * Возвращает страницу загрузки файла.
-	 * @param taskId Id файла для загрузки
-	 * @param fileIndex Номер прикреплённого файла (начиная с единицы)
+	 * Загружает выбранный файл на компьютер.
+	 * @param taskId Id задачи, к которой прикреплен файл для загрузки
+	 * @param fileId Id файла дял загрузки
 	 * @return тело веб-страницы
 	 */
-	@GetMapping("/{id}/file/{fileNum}")
-	public ResponseEntity<byte[]> getFile(@PathVariable(name = "id") Long taskId,
-										  @PathVariable(name = "fileNum") int fileIndex) {
+	@GetMapping("/{id}/file/{fileId}")
+	public ResponseEntity<Resource> getFileRelatedToTask(@PathVariable(name = "id") Long taskId,
+														 @PathVariable(name = "fileId") Long fileId) {
 
-			var file = taskAttachmentService.getByFileIndex(taskId, fileIndex);
-			var fileName = file.getFileName();
+		var file = taskAttachmentService.getByFileId(taskId, fileId);
+		var fileName = file.getFileName();
 
-			return ResponseEntity.ok()
-					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
-					.body(file.getContent());
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"").
+						contentType(MediaType.parseMediaType(file.getContentType()))
+				.body(new ByteArrayResource(file.getContent()));
 	}
 
 }

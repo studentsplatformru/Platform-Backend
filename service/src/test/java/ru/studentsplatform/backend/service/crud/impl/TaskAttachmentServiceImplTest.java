@@ -115,17 +115,17 @@ class TaskAttachmentServiceImplTest {
     }
 
     /**
-     * Проверка того, что метод возвращает прикрепление, находящееся по порядковому номеру
-     * в общем понимании (т.е. начиная с единицы)
+     * Проверка того, что метод возвращает прикрепление с указаным Id
      * В противном случае бросает бизнесс исключение
      */
     @Test
     void getByFileIndexTest(){
         TaskAttachment attachment = mock(TaskAttachment.class);
+        doReturn(1L).when(attachment).getId();
         LinkedList<TaskAttachment> linkedList = new LinkedList<>();
         linkedList.add(attachment);
         doReturn(linkedList).when(repository).findByTaskId(2L);
-        assertEquals(linkedList.get(0), service.getByFileIndex(2L, 1));
-        assertThrows(BusinessException.class,() -> service.getByFileIndex(2L, 3));
+        assertEquals(linkedList.get(0), service.getByFileId(2L, 1L));
+        assertThrows(BusinessException.class,() -> service.getByFileId(2L, 3L));
     }
 }

@@ -53,11 +53,11 @@ public interface TaskService extends AbstractService<Task> {
 	boolean delete(Long id);
 
 	/**
-	 * Добавление файла к уже существующей Task.
+	 * Добавление файлов к уже существующей Task.
 	 *
 	 * @param taskId ИД task
-	 * @param file  Файл
+	 * @param files  Лист файлов
 	 * @return Результат добавления
 	 */
-	boolean addFileForTask(Long taskId, MultipartFile file);
+	boolean addFilesForTask(Long taskId, List<MultipartFile> files);
 }

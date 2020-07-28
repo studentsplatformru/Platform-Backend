@@ -24,6 +24,9 @@ public class TaskAttachment extends BaseEntity {
 	@Column(name = "content")
 	private byte[] content;
 
+	@Column(name = "content_type")
+	private String contentType;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Task task;
 
@@ -49,5 +52,13 @@ public class TaskAttachment extends BaseEntity {
 
 	public void setTask(Task task) {
 		this.task = task;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 }

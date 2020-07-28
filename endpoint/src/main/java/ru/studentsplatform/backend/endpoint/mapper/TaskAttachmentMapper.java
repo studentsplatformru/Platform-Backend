@@ -24,7 +24,8 @@ public interface TaskAttachmentMapper {
 			@Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
 			@Mapping(target = "fileName", source = "entity.fileName"),
 			@Mapping(target = "content", source = "entity.content"),
-			@Mapping(target = "taskId", source = "entity.task.id")
+			@Mapping(target = "taskId", source = "entity.task.id"),
+			@Mapping(target = "contentType", source = "entity.contentType")
 	})
 	TaskAttachmentDTO taskAttachmentToTaskAttachmentDTO(TaskAttachment entity);
 
@@ -40,7 +41,8 @@ public interface TaskAttachmentMapper {
 			@Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
 			@Mapping(target = "fileName", source = "dto.fileName"),
 			@Mapping(target = "content", source = "dto.content"),
-			@Mapping(target = "task.id", source = "dto.taskId")
+			@Mapping(target = "task.id", source = "dto.taskId"),
+			@Mapping(target = "contentType", source = "dto.contentType")
 	})
 	TaskAttachment taskAttachmentDTOToTaskAttachment(TaskAttachmentDTO dto);
 

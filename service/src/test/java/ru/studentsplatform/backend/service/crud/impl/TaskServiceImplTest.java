@@ -15,6 +15,7 @@ import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.service.exception.core.BusinessException;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -120,9 +121,11 @@ class TaskServiceImplTest {
 		var attachment = mock(TaskAttachment.class);
 		doReturn(task).when(taskRepository).getOne(anyLong());
 		doReturn(attachment).when(taskAttachmentService).createByFile(task, file);
-		assertTrue(taskService.addFileForTask(2L,file));
+		assertTrue(taskService.addFilesForTask(2L, Arrays.asList(file)));
 		MultipartFile nullFile = null;
 		assertThrows(BusinessException.class,
-				() -> taskService.addFileForTask(3L,nullFile));
+				() -> taskService.addFilesForTask(3L,Arrays.asList(nullFile)));
+		assertThrows(BusinessException.class,
+				() -> taskService.addFilesForTask(3L,null));
 	}
 }

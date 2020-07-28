@@ -24,14 +24,14 @@ public interface TaskAttachmentService extends AbstractService<TaskAttachment> {
 	/**
 	 * Поиск прикрепления к задаче по его Id.
 	 * @param id Id прикрепления к задаче
-	 * @return
+	 * @return Прикрепление к задаче
 	 */
 	@Override
 	TaskAttachment getById(Long id);
 
 	/**
 	 * Поиск всех прикреплений к задачам, находящихся в БД.
-	 * @return
+	 * @return Лист прикреплений к задаче
 	 */
 	@Override
 	List<TaskAttachment> getAll();
@@ -70,11 +70,12 @@ public interface TaskAttachmentService extends AbstractService<TaskAttachment> {
 	TaskAttachment createByFile(Task task, MultipartFile file);
 
 	/**
-	 * Позволяет найти файл по его порядковому номеру (начиная с единицы) в
+	 * Позволяет найти файл по его Id в
 	 * списке прикрепленных к задаче файлов.
 	 * @param taskId Id задачи, к которой прикреплен искомый файл
-	 * @param index Порядковый номер файла, начиная с единицы
+	 * @param attachmentId Id рикрепления
 	 * @return Искомый файл
 	 */
-	TaskAttachment getByFileIndex(Long taskId, int index);
+	TaskAttachment getByFileId(Long taskId, Long attachmentId);
+
 }
