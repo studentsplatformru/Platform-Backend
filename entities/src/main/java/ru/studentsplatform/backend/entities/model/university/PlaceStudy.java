@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "place_study")
 public class PlaceStudy extends BaseEntity {
+	@JoinColumn(name = "user_id")
 	@OneToOne
 	@MapsId
 	private User user;
