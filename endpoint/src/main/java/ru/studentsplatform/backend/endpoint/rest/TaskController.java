@@ -104,6 +104,7 @@ public class TaskController {
 											  @PathVariable(name = "cellId") Long cellId,
 											  @RequestBody TaskDTO dto) {
 
+		dto.setScheduleUserCellId(cellId);
 		var task = taskMapper.taskDTOToTask(dto);
 		task = taskService.create(task);
 		var result = taskMapper.taskToTaskDTO(task);
