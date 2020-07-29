@@ -97,6 +97,7 @@ create table task_attachment
     created_by varchar(255),
     modified_by varchar(255),
     content oid,
+    content_type varchar(255),
     file_name varchar(255),
     task_id int8,
     primary key
