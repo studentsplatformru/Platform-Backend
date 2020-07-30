@@ -2,7 +2,6 @@ package ru.studentsplatform.backend.endpoint.exception;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +9,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import ru.studentsplatform.backend.endpoint.EndpointApplication;
-import ru.studentsplatform.backend.endpoint.rest.MainController;
 import ru.studentsplatform.backend.system.exception.core.BusinessExceptionController;
 
 import java.nio.charset.StandardCharsets;
@@ -30,9 +28,6 @@ public class ExceptionControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Mock
-    private MainController controller;
 
     @Test
     public void pageNotFoundTest() throws Exception {
