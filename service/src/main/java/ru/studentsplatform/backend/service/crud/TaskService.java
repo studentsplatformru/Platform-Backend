@@ -60,4 +60,19 @@ public interface TaskService extends AbstractService<Task> {
 	 * @return Результат добавления
 	 */
 	boolean addFilesForTask(Long taskId, List<MultipartFile> files);
+
+	/**
+	 * Найти все задачи, закрепленные за ячейкой расписания пользователя.
+	 * @param userCellId Id ячейки расписания пользователя
+	 * @return Лист задач, принадлежащих к ячейке
+	 */
+	List<Task> getByUserCell(Long userCellId);
+
+	/**
+	 * Найти все задачи, закрепленные за пользователем.
+	 * @param userId Id пользователя
+	 * @return Лист задач, закрепленных за пользователем
+	 */
+	List<Task> getByUser(Long userId);
+
 }

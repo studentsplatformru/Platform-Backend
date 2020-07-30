@@ -12,6 +12,7 @@
     
 ###### Основное
 - Task
-    - **http://localhost:8080/task** - *Добавить task*
-    - **http://localhost:8080/task/1/file** - *Приложить файл к task c Id 1*
-    - **http://localhost:8080/task/1/file/2/** *Загрузить файл, прикрепленный к task c Id 1, имеющий Id = 2*
+    - **http://localhost:8080/user/3/schedule/cell/2/task/1/** - *Получить сведения о task c Id = 1, привязанной к ячейке с Id = 2, принадлежащей пользователю с Id = 3*
+    - **http://localhost:8080/user/2/schedule/cell/1/tasks** - *Получить сведения о всех task, привязанных к ячейке с Id = 1, принадлежащих пользователю с Id = 2*
+    - **http://localhost:8080/user/3/schedule/cell/2/task/1/file** - *Приложить файлы к task c Id = 1, привязаной к ячейке с Id = 2, принадлежащей пользователю с Id = 3*
+    - **http://localhost:8080/user/3/schedule/cell/2/task/1/file/1/** - *Получить файл с Id = 1, прикрепленный к task c Id = 2, привязаной к ячейке с Id = 3, принадлежащей пользователю с Id = 4*
