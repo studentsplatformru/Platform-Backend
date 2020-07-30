@@ -19,6 +19,7 @@ import java.util.List;
  */
 public interface TaskController extends AbstractController<TaskDTO> {
 
+    String BASE_URL = AbstractController.BASE_URL + "/task";
     /**
      * Позволяет прикреплять к студенческой задаче файлы с решением.
      *
@@ -87,7 +88,7 @@ public interface TaskController extends AbstractController<TaskDTO> {
      */
     @Transactional
     @GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}")
-    ResponseEntity<TaskDTO> gatTask(@PathVariable(name = "userId") Long userId,
+    ResponseEntity<TaskDTO> getTask(@PathVariable(name = "userId") Long userId,
                                            @PathVariable(name = "cellId") Long cellId,
                                            @PathVariable(name = "taskId") Long taskId);
 

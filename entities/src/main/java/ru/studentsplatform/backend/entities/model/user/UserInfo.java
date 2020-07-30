@@ -17,7 +17,6 @@ import javax.persistence.Table;
 public class UserInfo extends BaseEntity {
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
-	@JoinColumn(name = "user_id")
 	private User user;
 
 	/**

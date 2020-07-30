@@ -61,15 +61,11 @@ class UserInfoServiceImplTest {
         user.setId(1L);
         userInfo.setUser(user);
         doReturn(userInfo).when(userInfoRepository).save(userInfo);
-        doReturn(false).when(userInfoRepository).existsById(userInfo.getUser().getId());
-        doReturn(true).when(userRepository).existsById(userInfo.getUser().getId());
+        doReturn(false, true).when(userInfoRepository).existsById(userInfo.getUser().getId());
+        doReturn(true, true, false).when(userRepository).existsById(userInfo.getUser().getId());
         doReturn(Optional.of(user)).when(userRepository).findById(user.getId());
         Assert.assertEquals(userInfo, service.create(userInfo));
-
-        doReturn(true).when(userInfoRepository).existsById(userInfo.getUser().getId());
         Assert.assertThrows(BusinessException.class, () -> service.create(userInfo));
-
-        doReturn(false).when(userRepository).existsById(userInfo.getUser().getId());
         Assert.assertThrows(BusinessException.class, () -> service.create(userInfo));
     }
 
@@ -130,15 +126,13 @@ class UserInfoServiceImplTest {
     void uploadImage() {
         Assert.assertThrows(BusinessException.class,() -> service.uploadImage(null,1L));
         MultipartFile file = mock(MultipartFile.class);
-        try { doThrow(IOException.class).when(file).getBytes(); }
+        try { doThrow(IOException.class).doReturn(new byte[]{1}).when(file).getBytes(); }
         catch (IOException e) { }
         doReturn(Optional.of(userInfo)).when(userInfoRepository).findById(userInfo.getId());
         doReturn("filename").when(file).getOriginalFilename();
         doReturn("").when(file).getContentType();
         Assert.assertEquals(false, service.uploadImage(file,userInfo.getId()));
 
-        try { doReturn(new byte[]{1}).when(file).getBytes(); }
-        catch (IOException e) { e.printStackTrace(); }
         doReturn(userInfo).when(userInfoRepository).saveAndFlush(userInfo);
         Assert.assertEquals(true, service.uploadImage(file,userInfo.getId()));
     }

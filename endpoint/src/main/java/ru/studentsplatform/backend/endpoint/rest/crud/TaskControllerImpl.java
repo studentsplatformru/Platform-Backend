@@ -5,10 +5,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +24,7 @@ import java.util.List;
 
 @Profiled
 @RestController
-@RequestMapping
+@RequestMapping(TaskController.BASE_URL)
 public class TaskControllerImpl implements TaskController {
 	private final TaskMapper taskMapper;
 
@@ -40,7 +37,7 @@ public class TaskControllerImpl implements TaskController {
 	 *
 	 * @param taskMapper            Task маппер
 	 * @param taskService           Сервис с методами для работы с Task
-	 * @param taskAttachmentService Сервис
+	 * @param taskAttachmentService Сервис с методами для работы с файлами, прикрепленными к Task
 	 */
 	public TaskControllerImpl(TaskMapper taskMapper,
 							  TaskServiceImpl taskService, TaskAttachmentService taskAttachmentService) {
@@ -53,7 +50,7 @@ public class TaskControllerImpl implements TaskController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<TaskDTO> gatTask(@PathVariable(name = "userId") Long userId,
+	public ResponseEntity<TaskDTO> getTask(@PathVariable(name = "userId") Long userId,
 										   @PathVariable(name = "cellId") Long cellId,
 										   @PathVariable(name = "taskId") Long taskId) {
 

@@ -9,7 +9,7 @@ import ru.studentsplatform.backend.entities.model.user.UserInfo;
 import java.util.List;
 
 
-@Mapper(componentModel = "spring", uses = {UserMapper.class})
+@Mapper(componentModel = "spring")
 public interface UserInfoMapper {
     @Mappings({
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),

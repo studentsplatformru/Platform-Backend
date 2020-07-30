@@ -39,7 +39,7 @@ class TaskMapperTest {
 	 * Проверка того, что поля сущности и DTO, созданного при помощи mapper, совпадают.
 	 */
 	@Test
-	void taskToTaskDTO() {
+	void taskToTaskDTOTest() {
 		Task entity = new Task();
 		ScheduleUserCell cell = new ScheduleUserCell();
 
@@ -71,7 +71,7 @@ class TaskMapperTest {
 	 * Проверка того, что поля DTO и сущности, созданной при помощи mapper, совпадают.
 	 */
 	@Test
-	void taskDTOToTask() {
+	void taskDTOToTaskTest() {
 		TaskDTO dto = new TaskDTO();
 		LinkedList<TaskAttachmentDTO> attachmentDTOS = new LinkedList<>();
 		TaskAttachmentDTO attachmentDTO = new TaskAttachmentDTO();
@@ -105,7 +105,7 @@ class TaskMapperTest {
 	 * и корректно переносит их поля.
 	 */
 	@Test
-	void listTaskToTaskDTO() {
+	void listTaskToTaskDTOTest() {
 		List<Task> taskList = new LinkedList<>();
 		Task testTask = new Task();
 		testTask.setId(3L);
@@ -121,7 +121,7 @@ class TaskMapperTest {
 	 * и корректно переносит их поля.
 	 */
 	@Test
-	void listTaskDTOToTask() {
+	void listTaskDTOToTaskTest() {
 		List<TaskDTO> taskDTOS = new LinkedList<>();
 		TaskDTO testTaskDTO = new TaskDTO();
 		testTaskDTO.setId(5L);

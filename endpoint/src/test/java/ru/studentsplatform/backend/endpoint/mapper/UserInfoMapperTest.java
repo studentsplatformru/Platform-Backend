@@ -19,7 +19,7 @@ class UserInfoMapperTest {
     private UserInfoMapperImpl mapper = new UserInfoMapperImpl();
 
     @Test
-    void userInfoToUserInfoDTO() {
+    void userInfoToUserInfoDTOTest() {
         UserInfo userInfo = new UserInfo();
         User user = new User();
         user.setId(Long.valueOf(1));
@@ -41,7 +41,7 @@ class UserInfoMapperTest {
     }
 
     @Test
-    void userInfoDTOtoUserInfo() {
+    void userInfoDTOtoUserInfoTest() {
         UserInfoDTO userInfoDTO = new UserInfoDTO();
         userInfoDTO.setUserId(Long.valueOf(1));
         userInfoDTO.setCreatedBy("created_by");
@@ -62,7 +62,7 @@ class UserInfoMapperTest {
     }
 
     @Test
-    void listUserInfoToUserInfoDTO() {
+    void listUserInfoToUserInfoDTOTest() {
         List<UserInfo> userInfoList = new LinkedList<>();
         UserInfo testUserInfo = new UserInfo();
         testUserInfo.setId(3L);
@@ -74,7 +74,7 @@ class UserInfoMapperTest {
     }
 
     @Test
-    void listUserInfoDTOtoUserInfo() {
+    void listUserInfoDTOtoUserInfoTest() {
         List<UserInfoDTO> userInfoDTOS = new LinkedList<>();
         UserInfoDTO testUserInfoDTO = new UserInfoDTO();
         testUserInfoDTO.setId(5L);
