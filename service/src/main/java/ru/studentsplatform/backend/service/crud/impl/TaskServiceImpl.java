@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -92,7 +91,6 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	@Transactional
 	public boolean addFilesForTask(Long taskId, List<MultipartFile> files) {
 		if (CollectionUtils.notEmpty(files)) {
 			for (MultipartFile file: files) {
@@ -100,12 +98,27 @@ public class TaskServiceImpl implements TaskService {
 					throw new BusinessException(ServiceExceptionReason.NULL_FILE_EXCEPTION, taskId);
 				}
 				var task = taskRepository.getOne(taskId);
-				var taskAttachment = taskAttachmentService.createByFile(task, file);
-				task.getAttachments().add(taskAttachment);
+				taskAttachmentService.createByFile(task, file);
 			}
 			return true;
 		}
 
 		throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND, taskId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Task> getByUserCell(Long userCellId) {
+		return taskRepository.findByScheduleUserCellId(userCellId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Task> getByUser(Long userId) {
+		return taskRepository.findByUserId(userId);
 	}
 }

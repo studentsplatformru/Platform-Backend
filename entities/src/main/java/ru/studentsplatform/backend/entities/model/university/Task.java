@@ -31,7 +31,6 @@ public class Task extends BaseEntity {
 	private Integer mark;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "schedule_user_cell_id")
 	private ScheduleUserCell scheduleUserCell;
 
 	@OneToMany
