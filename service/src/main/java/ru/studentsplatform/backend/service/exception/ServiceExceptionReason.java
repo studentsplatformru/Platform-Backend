@@ -1,7 +1,7 @@
 package ru.studentsplatform.backend.service.exception;
 
 import org.springframework.http.HttpStatus;
-import ru.studentsplatform.backend.service.exception.core.BusinessExceptionReason;
+import ru.studentsplatform.backend.system.exception.core.BusinessExceptionReason;
 
 /**
  * Реализация {@link BusinessExceptionReason}.

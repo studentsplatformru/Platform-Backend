@@ -12,8 +12,7 @@ import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
-import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
-import ru.studentsplatform.backend.service.exception.core.BusinessException;
+import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
