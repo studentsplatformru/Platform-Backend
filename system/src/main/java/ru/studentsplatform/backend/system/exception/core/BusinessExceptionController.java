@@ -50,12 +50,12 @@ public class BusinessExceptionController {
     /**
      * Исключения для серверной ошибки.
      * @param exception Получает агрументом внешнее исключение.
-     * После возвращает пользовател в виде {@link ExceptionDto}
+     * @return ExceptionDto тело ответа пользователю.
      */
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ExceptionDto serverException(Exception exception){
+    public ExceptionDto serverException(Exception exception) {
         LOGGER.error(exception.getMessage());
         return new ExceptionDto("Что-то пошло не так.", HttpStatus.INTERNAL_SERVER_ERROR);
     }
