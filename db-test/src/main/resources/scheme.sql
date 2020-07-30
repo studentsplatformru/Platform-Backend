@@ -138,7 +138,7 @@ create table usr
     email varchar(255) not null,
     password varchar(255) not null,
     university_role varchar(255),
-    team_id int8,
+    usr_id int8,
     primary key
         (id));;
 alter table if exists department
@@ -147,61 +147,61 @@ alter table if exists department
             references faculty;
 alter table if exists direction
     add constraint direction_fk
-        foreign key (faculty_id) references faculty on delete cascade;
+        foreign key (faculty_id) references faculty;
 alter table if exists discipline
     add constraint discipline_to_subject_fk
-        foreign key (subject_id) references subject on delete cascade;
+        foreign key (subject_id) references subject;
 alter table if exists discipline
     add constraint discipline_to_usr_fk
-        foreign key (usr_id) references usr on delete cascade;
+        foreign key (usr_id) references usr;
 alter table if exists faculty
     add constraint faculty_fk
-        foreign key (university_name) references university on delete cascade;
+        foreign key (university_name) references university;
 alter table if exists place_study
     add constraint place_study_to_department_fk
-        foreign key (department_id) references department on delete cascade;
+        foreign key (department_id) references department;
 alter table if exists place_study
     add constraint place_study_to_direction_fk
-        foreign key (direction_id) references direction on delete cascade;
+        foreign key (direction_id) references direction;
 alter table if exists place_study
     add constraint place_study_to_faculty_fk
-        foreign key (faculty_id) references faculty on delete cascade;
+        foreign key (faculty_id) references faculty;
 alter table if exists place_study
     add constraint place_study_to_team_fk
-        foreign key (team_id) references team on delete cascade;
+        foreign key (team_id) references team;
 alter table if exists place_study
     add constraint place_study_to_university_fk
-        foreign key (university_id) references university on delete cascade;
+        foreign key (university_id) references university;
 alter table if exists place_study
     add constraint place_study_to_usr_fk
-        foreign key (user_id) references usr on delete cascade;
+        foreign key (user_id) references usr;
 alter table if exists schedule_cell
     add constraint schedule_cell_to_subject_fk
-        foreign key (subject_id) references subject on delete cascade;
+        foreign key (subject_id) references subject;
 alter table if exists schedule_cell
     add constraint schedule_cell_to_team_fk
-        foreign key (team_id) references team on delete cascade;
+        foreign key (team_id) references team;
 alter table if exists schedule_user_cell
     add constraint schedule_user_cell_to_schedule_cell_fk
-        foreign key (schedule_cell) references schedule_cell on delete cascade;
+        foreign key (schedule_cell) references schedule_cell;
 alter table if exists schedule_user_cell
     add constraint schedule_user_cell_to_usr_fk
-        foreign key (usr_id) references usr on delete cascade;
+        foreign key (usr_id) references usr;
 alter table if exists schedule_user_cell
     add constraint schedule_user_cell_to_discipline_fk
-        foreign key (discipline_id) references discipline on delete cascade;
+        foreign key (discipline_id) references discipline;
 alter table if exists task
     add constraint task_fk
-        foreign key (schedule_user_cell_id) references schedule_user_cell on delete cascade;
+        foreign key (schedule_user_cell_id) references schedule_user_cell;
 alter table if exists task_attachment
     add constraint task_attachment_fk
-        foreign key (task_id) references task on delete cascade;
+        foreign key (task_id) references task;
 alter table if exists team
     add constraint team_direction_fk
-        foreign key (direction_id) references direction on delete cascade;
+        foreign key (direction_id) references direction;
 alter table if exists user_info
     add constraint user_info_fk
-        foreign key (user_id) references usr on delete cascade;
+        foreign key (user_id) references usr;
 alter table if exists usr
     add constraint usr_fk
-        foreign key (team_id) references team on delete cascade;
+        foreign key (usr_id) references team;
