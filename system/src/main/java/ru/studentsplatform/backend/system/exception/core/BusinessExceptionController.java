@@ -23,12 +23,12 @@ public class BusinessExceptionController {
     /**
      * Исключения для бизнес ошибок.
      * @param exception Получает агрументом внешнее исключение
-     * выброшенное в контроллере. После возвращает пользователю
-     * в виде {@link ExceptionDto}
+     * выброшенное в контроллере.
+     * @return ExceptionDto тело ответа пользователю.
      */
     @ExceptionHandler(BusinessException.class)
     @ResponseBody
-    public ExceptionDto exception(BusinessException exception){
+    public ExceptionDto exception(BusinessException exception) {
         LOGGER.error(exception.getMessage());
         return new ExceptionDto(exception.getMessage(), exception.getStatus());
     }
@@ -37,12 +37,12 @@ public class BusinessExceptionController {
      * Исключения для ошибки необробатываемых контрллером путей,
      * либо отсутствием страницы.
      * @param exception Получает агрументом внешнее исключение.
-     * После возвращает пользовател в виде {@link ExceptionDto}
+     * @return ExceptionDto тело ответа пользователю.
      */
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public ExceptionDto exception_NOT_FOUND(Exception exception){
+    public ExceptionDto exceptionNOTFOUND(Exception exception) {
         LOGGER.error(exception.getMessage());
         return new ExceptionDto("Упс, страница не найдена.", HttpStatus.NOT_FOUND);
     }
