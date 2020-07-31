@@ -14,7 +14,7 @@ public interface AbstractController<DTO> {
     String BASE_URL = "/api";
 
     @PostMapping("/create")
-    ResponseEntity<DTO> create(@RequestBody DTO newInstanceRequest);
+    ResponseEntity<DTO> create(@RequestBody DTO dto);
 
     @GetMapping("/{id}")
     ResponseEntity<DTO> getById(@PathVariable Long id);
@@ -23,7 +23,7 @@ public interface AbstractController<DTO> {
     ResponseEntity<List<DTO>> getAll();
 
     @PutMapping("/{id}")
-    ResponseEntity<DTO> update(@RequestBody DTO updatedInstanceRequest, @PathVariable Long id);
+    ResponseEntity<DTO> update(@RequestBody DTO dto, @PathVariable Long id);
 
     @DeleteMapping("/{id}")
     ResponseEntity<Boolean> delete(@PathVariable Long id);

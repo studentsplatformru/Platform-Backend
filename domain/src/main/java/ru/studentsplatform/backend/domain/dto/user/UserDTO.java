@@ -9,8 +9,6 @@ import ru.studentsplatform.backend.domain.dto.BaseDTO;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO extends BaseDTO {
-    private Long userInfoId;
-
     private String email;
 
     private String password;
