@@ -13,8 +13,8 @@ import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.entities.model.user.UserInfo;
 import ru.studentsplatform.backend.service.crud.UserInfoService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
-import ru.studentsplatform.backend.service.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.annotation.Profiled;
+import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.List;
 

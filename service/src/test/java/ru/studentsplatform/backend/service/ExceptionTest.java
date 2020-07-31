@@ -3,7 +3,7 @@ package ru.studentsplatform.backend.service;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
-import ru.studentsplatform.backend.service.exception.core.BusinessException;
+import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import static ru.studentsplatform.backend.service.exception.ServiceExceptionReason.COMMENT_NOT_FOUND;
 import static ru.studentsplatform.backend.service.exception.ServiceExceptionReason.NOTE_NOT_FOUND;

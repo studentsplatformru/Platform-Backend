@@ -4,6 +4,7 @@ target/
 !**/src/test/**
 .idea/
 .mvn/
+log
 ### STS ###
 .apt_generated
 .classpath

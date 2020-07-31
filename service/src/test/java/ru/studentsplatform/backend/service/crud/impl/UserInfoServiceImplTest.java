@@ -1,35 +1,27 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import org.junit.Assert;
-import org.mockito.Mockito;
-import org.slf4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.repository.UserInfoRepository;
 import ru.studentsplatform.backend.domain.repository.UserRepository;
-import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
-import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.entities.model.user.UserInfo;
-import ru.studentsplatform.backend.service.crud.UserInfoService;
-import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
-import ru.studentsplatform.backend.service.exception.core.BusinessException;
-import ru.studentsplatform.backend.service.exception.core.BusinessExceptionReason;
+import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

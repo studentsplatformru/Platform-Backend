@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service.exception.core;
+package ru.studentsplatform.backend.system.exception.core;
 
 import org.springframework.http.HttpStatus;
 
