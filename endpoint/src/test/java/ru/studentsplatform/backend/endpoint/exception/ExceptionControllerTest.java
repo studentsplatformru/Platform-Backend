@@ -80,7 +80,7 @@ public class ExceptionControllerTest {
     public void businessExceptionTest() throws Exception {
 
         given(controller.getMain())
-                .willThrow(new BusinessException(ServiceExceptionReason.USER_NOT_FOUND, "34"));
+                .willThrow(new BusinessException(ServiceExceptionReason.USER_NOT_FOUND, 34));
 
         MvcResult mvcResult = this.mockMvc
                 .perform(get("/"))
