@@ -3,7 +3,7 @@ package ru.studentsplatform.backend.endpoint.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import ru.studentsplatform.backend.domain.dto.TaskDTO;
+import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
 import ru.studentsplatform.backend.entities.model.university.Task;
 
 import java.util.List;

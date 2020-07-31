@@ -1,6 +1,7 @@
-package ru.studentsplatform.backend.domain.dto;
+package ru.studentsplatform.backend.domain.dto.university;
 
 import lombok.Data;
+import ru.studentsplatform.backend.domain.dto.utility.TaskAttachmentDTO;
 
 import java.time.OffsetDateTime;
 import java.util.List;
