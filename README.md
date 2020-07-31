@@ -9,7 +9,7 @@
 ***
 ### Deploy
 
-[Ссылка на проект на AWS](http://ec2-35-179-15-245.eu-west-2.compute.amazonaws.com/)
+[Ссылка на проект на AWS](http://ec2-18-133-125-132.eu-west-2.compute.amazonaws.com/)
 ***
 **Cхема БД**
 

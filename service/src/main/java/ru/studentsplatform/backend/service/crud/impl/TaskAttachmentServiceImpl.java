@@ -11,7 +11,7 @@ import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
-import ru.studentsplatform.backend.service.exception.core.BusinessException;
+import ru.studentsplatform.backend.system.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.system.helper.CollectionUtils;
 
@@ -79,6 +79,7 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 		try {
 			taskAttachmentRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
+			LOGGER.error("Error occured: cannot delete non-existent task attachment");
 			return false;
 		}
 		return true;
