@@ -28,7 +28,11 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 			"Информация о пользователе с id %d уже существует"),
 	NULL_IMAGE_FILE(HttpStatus.BAD_REQUEST, "F009",
 			"Файл изображения пуст"),
-	USER_INFO_NOT_FOUND(HttpStatus.NOT_FOUND, "F010", "Информация о пользователе с Id %d не найдена");
+	USER_INFO_NOT_FOUND(HttpStatus.NOT_FOUND, "F010", "Информация о пользователе с Id %d не найдена"),
+	FACULTY_NOT_FOUND(HttpStatus.NOT_FOUND, "F011", "Информация об институте с Id %d не найдена"),
+	DIRECTION_NOT_FOUND(HttpStatus.NOT_FOUND, "F012", "Информация о направлении с Id %d не найдена"),
+	DEPARTMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F013", "Информация о кафедре с Id %d не найдена"),
+	TEAM_NOT_FOUND(HttpStatus.NOT_FOUND, "F014", "Информация о группе с Id %d не найдена");
 
 	private final HttpStatus status;
 	private final String code;
