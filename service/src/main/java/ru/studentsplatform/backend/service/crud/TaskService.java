@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface TaskService extends AbstractService<Task> {
 
-	/*
+	/**
 	 * Сохраняет запись о task в БД, если удается прикрепить task к ячейке расписания.
 	 * В противном случае бросает бизнесс-исключение.
 	 *
-	 * @param task Task для сохранения в БД
+	 * @param newEntity Task для сохранения в БД
 	 * @return Сохраненный task
 	 */
 	@Override
@@ -60,4 +60,19 @@ public interface TaskService extends AbstractService<Task> {
 	 * @return Результат добавления
 	 */
 	boolean addFilesForTask(Long taskId, List<MultipartFile> files);
+
+	/**
+	 * Найти все задачи, закрепленные за ячейкой расписания пользователя.
+	 * @param userCellId Id ячейки расписания пользователя
+	 * @return Лист задач, принадлежащих к ячейке
+	 */
+	List<Task> getByUserCell(Long userCellId);
+
+	/**
+	 * Найти все задачи, закрепленные за пользователем.
+	 * @param userId Id пользователя
+	 * @return Лист задач, закрепленных за пользователем
+	 */
+	List<Task> getByUser(Long userId);
+
 }
