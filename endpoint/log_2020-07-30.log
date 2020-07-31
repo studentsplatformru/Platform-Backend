@@ -1,0 +1,731 @@
+2020-07-30 19:18:32.512  INFO r.s.b.e.e.ExceptionControllerTest        : Starting ExceptionControllerTest on LAPTOP-B5PR574U with PID 12392 (started by Danila in D:\Capital\Platform-Backend\endpoint)
+2020-07-30 19:18:32.517  INFO r.s.b.e.e.ExceptionControllerTest        : No active profile set, falling back to default profiles: default
+2020-07-30 19:18:36.034  INFO .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-07-30 19:18:36.336  INFO .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 281ms. Found 15 JPA repository interfaces.
+2020-07-30 19:18:39.200  INFO o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 6.5.2 by Redgate
+2020-07-30 19:18:39.254  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-07-30 19:18:43.125  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-07-30 19:18:43.418  INFO o.f.c.internal.database.DatabaseFactory  : Database: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/testDB (PostgreSQL 12.3)
+2020-07-30 19:18:45.129  WARN o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: 
+Migration checksum mismatch for migration version 1
+-> Applied to database : 1057702486
+-> Resolved locally    : -1556965144
+
+2020-07-30 19:18:45.130  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-07-30 19:18:45.572  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-07-30 19:18:45.593  INFO ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-07-30 19:18:45.609 ERROR o.s.boot.SpringApplication               : Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: 
+Migration checksum mismatch for migration version 1
+-> Applied to database : 1057702486
+-> Resolved locally    : -1556965144
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1796)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:595)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:226)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1109)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:869)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:120)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:123)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:98)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$5(ClassBasedTestDescriptor.java:341)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:346)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$6(ClassBasedTestDescriptor.java:341)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1624)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:340)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:263)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$2(ClassBasedTestDescriptor.java:256)
+	at java.base/java.util.Optional.orElseGet(Optional.java:362)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$3(ClassBasedTestDescriptor.java:255)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:29)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:108)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:71)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$1(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:248)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$5(DefaultLauncher.java:211)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:226)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:199)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:132)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+Caused by: org.flywaydb.core.api.FlywayException: Validate failed: 
+Migration checksum mismatch for migration version 1
+-> Applied to database : 1057702486
+-> Resolved locally    : -1556965144
+
+	at org.flywaydb.core.Flyway.doValidate(Flyway.java:292)
+	at org.flywaydb.core.Flyway.access$100(Flyway.java:73)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:166)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:158)
+	at org.flywaydb.core.Flyway.execute(Flyway.java:527)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:158)
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1855)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1792)
+	... 81 common frames omitted
+2020-07-30 19:18:45.612 ERROR o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@571c5681] to prepare test instance [ru.studentsplatform.backend.endpoint.exception.ExceptionControllerTest@7079f8f0]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:132)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:123)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:98)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$5(ClassBasedTestDescriptor.java:341)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:346)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$6(ClassBasedTestDescriptor.java:341)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1624)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:340)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:263)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$2(ClassBasedTestDescriptor.java:256)
+	at java.base/java.util.Optional.orElseGet(Optional.java:362)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$3(ClassBasedTestDescriptor.java:255)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:29)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:108)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:71)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$1(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:248)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$5(DefaultLauncher.java:211)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:226)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:199)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:132)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: 
+Migration checksum mismatch for migration version 1
+-> Applied to database : 1057702486
+-> Resolved locally    : -1556965144
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1796)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:595)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:226)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:310)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1109)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:869)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:551)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:120)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	... 63 common frames omitted
+Caused by: org.flywaydb.core.api.FlywayException: Validate failed: 
+Migration checksum mismatch for migration version 1
+-> Applied to database : 1057702486
+-> Resolved locally    : -1556965144
+
+	at org.flywaydb.core.Flyway.doValidate(Flyway.java:292)
+	at org.flywaydb.core.Flyway.access$100(Flyway.java:73)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:166)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:158)
+	at org.flywaydb.core.Flyway.execute(Flyway.java:527)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:158)
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:65)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1855)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1792)
+	... 81 common frames omitted
+2020-07-30 19:19:26.442  INFO r.s.b.e.e.ExceptionControllerTest        : Starting ExceptionControllerTest on LAPTOP-B5PR574U with PID 6280 (started by Danila in D:\Capital\Platform-Backend\endpoint)
+2020-07-30 19:19:26.446  INFO r.s.b.e.e.ExceptionControllerTest        : No active profile set, falling back to default profiles: default
+2020-07-30 19:19:29.218  INFO .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-07-30 19:19:29.487  INFO .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 250ms. Found 15 JPA repository interfaces.
+2020-07-30 19:19:32.754  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-07-30 19:19:34.872  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-07-30 19:19:35.259  INFO o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-30 19:19:35.632  INFO org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-30 19:19:36.501  INFO o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-30 19:19:37.333  INFO org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-07-30 19:19:41.017  INFO o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-30 19:19:41.057  INFO j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 19:19:44.532  INFO c.p.bots.sdk.longpoll.LongPoll           : GetLongPollServerResponse: 
+{"response":{"server":"im.vk.com/nim197060785","key":"40ab6f7877c04cee02bc23429413ba61fd56723b","pts":10000318,"ts":1691969138}}
+
+2020-07-30 19:19:44.538  INFO c.p.bots.sdk.longpoll.LongPoll           : Started listening to events from VK LongPoll server...
+2020-07-30 19:19:46.284  WARN JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-30 19:19:49.898  INFO o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2020-07-30 19:19:53.786  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-30 19:19:55.580  INFO o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2020-07-30 19:19:55.581  INFO o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2020-07-30 19:19:55.641  INFO o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 60 ms
+2020-07-30 19:19:55.771  INFO d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-07-30 19:19:55.892  INFO d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-07-30 19:19:55.946  INFO s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-07-30 19:19:56.434  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2020-07-30 19:19:56.443  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2020-07-30 19:19:56.446  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingDELETE_1
+2020-07-30 19:19:56.450  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2020-07-30 19:19:56.454  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_4
+2020-07-30 19:19:56.458  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_5
+2020-07-30 19:19:56.463  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_6
+2020-07-30 19:19:56.468  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_7
+2020-07-30 19:19:56.472  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_8
+2020-07-30 19:19:56.477  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_9
+2020-07-30 19:19:56.480  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_10
+2020-07-30 19:19:56.485  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_11
+2020-07-30 19:19:56.493  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_12
+2020-07-30 19:19:56.498  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_13
+2020-07-30 19:19:56.502  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_14
+2020-07-30 19:19:56.506  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_15
+2020-07-30 19:19:56.509  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_16
+2020-07-30 19:19:56.513  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_17
+2020-07-30 19:19:56.518  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_18
+2020-07-30 19:19:56.524  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_19
+2020-07-30 19:19:56.530  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_20
+2020-07-30 19:19:56.767  INFO r.s.b.e.e.ExceptionControllerTest        : Started ExceptionControllerTest in 31.452 seconds (JVM running for 34.948)
+2020-07-30 19:19:58.113  INFO r.s.b.system.aspect.ProfiledAspect       : ru.studentsplatform.backend.endpoint.rest.MainController.getMain() 
+     | argument: []
+     | result: <200 OK OK,Hello world,[]>
+     | time [40 msec]
+2020-07-30 19:19:58.367  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-30 19:19:58.383  INFO j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 19:19:58.386  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-07-30 19:19:58.434  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-07-30 19:24:40.924  INFO r.s.b.e.e.ExceptionControllerTest        : Starting ExceptionControllerTest on LAPTOP-B5PR574U with PID 10160 (started by Danila in D:\Capital\Platform-Backend\endpoint)
+2020-07-30 19:24:40.928  INFO r.s.b.e.e.ExceptionControllerTest        : No active profile set, falling back to default profiles: default
+2020-07-30 19:24:43.938  INFO .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-07-30 19:24:44.099  INFO .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 151ms. Found 15 JPA repository interfaces.
+2020-07-30 19:24:46.193  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-07-30 19:24:48.596  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-07-30 19:24:48.718  INFO o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-30 19:24:48.833  INFO org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-30 19:24:49.191  INFO o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-30 19:24:49.601  INFO org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-07-30 19:24:52.522  INFO o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-30 19:24:52.533  INFO j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 19:24:55.135  INFO c.p.bots.sdk.longpoll.LongPoll           : GetLongPollServerResponse: 
+{"response":{"server":"im.vk.com/nim197060785","key":"8522dc5d0374ae6d0a3b464a9c8c3aac3de7729d","pts":10000318,"ts":1691969138}}
+
+2020-07-30 19:24:55.138  INFO c.p.bots.sdk.longpoll.LongPoll           : Started listening to events from VK LongPoll server...
+2020-07-30 19:24:55.909  WARN JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-30 19:24:57.320  INFO o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2020-07-30 19:24:58.950  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-30 19:24:59.740  INFO o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2020-07-30 19:24:59.740  INFO o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2020-07-30 19:24:59.778  INFO o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 38 ms
+2020-07-30 19:24:59.842  INFO d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-07-30 19:24:59.869  INFO d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-07-30 19:24:59.885  INFO s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-07-30 19:25:00.225  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2020-07-30 19:25:00.235  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2020-07-30 19:25:00.238  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingDELETE_1
+2020-07-30 19:25:00.241  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2020-07-30 19:25:00.246  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_4
+2020-07-30 19:25:00.250  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_5
+2020-07-30 19:25:00.254  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_6
+2020-07-30 19:25:00.259  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_7
+2020-07-30 19:25:00.264  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_8
+2020-07-30 19:25:00.268  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_9
+2020-07-30 19:25:00.272  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_10
+2020-07-30 19:25:00.276  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_11
+2020-07-30 19:25:00.285  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_12
+2020-07-30 19:25:00.288  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_13
+2020-07-30 19:25:00.292  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_14
+2020-07-30 19:25:00.296  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_15
+2020-07-30 19:25:00.300  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_16
+2020-07-30 19:25:00.303  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_17
+2020-07-30 19:25:00.306  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_18
+2020-07-30 19:25:00.312  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_19
+2020-07-30 19:25:00.318  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_20
+2020-07-30 19:25:00.450  INFO r.s.b.e.e.ExceptionControllerTest        : Started ExceptionControllerTest in 20.63 seconds (JVM running for 22.865)
+2020-07-30 19:25:01.123  INFO r.s.b.system.aspect.ProfiledAspect       : ru.studentsplatform.backend.endpoint.rest.MainController.getMain() 
+     | argument: []
+     | result: <200 OK OK,Hello world,[]>
+     | time [13 msec]
+2020-07-30 19:25:01.203  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-30 19:25:01.213  INFO j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 19:25:01.216  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-07-30 19:25:01.229  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-07-30 20:42:47.051  INFO r.s.b.e.e.ExceptionControllerTest        : Starting ExceptionControllerTest on LAPTOP-B5PR574U with PID 13308 (started by Danila in D:\Capital\Platform-Backend\endpoint)
+2020-07-30 20:42:47.054  INFO r.s.b.e.e.ExceptionControllerTest        : No active profile set, falling back to default profiles: default
+2020-07-30 20:42:53.543  INFO .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-07-30 20:42:53.798  INFO .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 217ms. Found 15 JPA repository interfaces.
+2020-07-30 20:43:00.791  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-07-30 20:43:04.482  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-07-30 20:43:04.870  INFO o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-30 20:43:05.031  INFO org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-30 20:43:05.977  INFO o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-30 20:43:06.555  INFO org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-07-30 20:43:09.746  INFO o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-30 20:43:09.772  INFO j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 20:43:14.060  INFO c.p.bots.sdk.longpoll.LongPoll           : GetLongPollServerResponse: 
+{"response":{"server":"im.vk.com/nim197060785","key":"59228dbdf974ca28d85b4fe340872653331ab2b7","pts":10000318,"ts":1691969138}}
+
+2020-07-30 20:43:14.065  INFO c.p.bots.sdk.longpoll.LongPoll           : Started listening to events from VK LongPoll server...
+2020-07-30 20:43:15.242  WARN JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-30 20:43:17.359  INFO o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2020-07-30 20:43:20.663  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-30 20:43:21.688  INFO o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2020-07-30 20:43:21.688  INFO o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2020-07-30 20:43:21.712  INFO o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 24 ms
+2020-07-30 20:43:21.816  INFO d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-07-30 20:43:21.925  INFO d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-07-30 20:43:21.962  INFO s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-07-30 20:43:22.356  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2020-07-30 20:43:22.362  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2020-07-30 20:43:22.365  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingDELETE_1
+2020-07-30 20:43:22.368  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2020-07-30 20:43:22.372  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_4
+2020-07-30 20:43:22.377  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_5
+2020-07-30 20:43:22.382  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_6
+2020-07-30 20:43:22.385  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_7
+2020-07-30 20:43:22.389  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_8
+2020-07-30 20:43:22.392  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_9
+2020-07-30 20:43:22.395  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_10
+2020-07-30 20:43:22.398  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_11
+2020-07-30 20:43:22.400  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_12
+2020-07-30 20:43:22.406  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_13
+2020-07-30 20:43:22.409  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_14
+2020-07-30 20:43:22.412  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_15
+2020-07-30 20:43:22.414  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_16
+2020-07-30 20:43:22.417  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_17
+2020-07-30 20:43:22.419  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_18
+2020-07-30 20:43:22.422  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_19
+2020-07-30 20:43:22.425  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_20
+2020-07-30 20:43:22.545  INFO r.s.b.e.e.ExceptionControllerTest        : Started ExceptionControllerTest in 37.709 seconds (JVM running for 45.939)
+2020-07-30 20:43:23.426 ERROR o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@d278d2b] to prepare test instance [ru.studentsplatform.backend.endpoint.exception.ExceptionControllerTest@732d2b59]
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'ru.studentsplatform.backend.endpoint.exception.ExceptionControllerTest': Unsatisfied dependency expressed through field 'restTemplate'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.web.client.RestTemplate' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:643)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:130)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1422)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:393)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:119)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener.prepareTestInstance(SpringBootDependencyInjectionTestExecutionListener.java:43)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:244)
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:98)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$5(ClassBasedTestDescriptor.java:341)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:346)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$6(ClassBasedTestDescriptor.java:341)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1624)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:340)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:263)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$2(ClassBasedTestDescriptor.java:256)
+	at java.base/java.util.Optional.orElseGet(Optional.java:362)
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$3(ClassBasedTestDescriptor.java:255)
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:29)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:108)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:107)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:71)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$1(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:107)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:75)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1510)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:38)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$5(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$7(NodeTestTask.java:125)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:135)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:123)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:122)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:80)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:32)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:51)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:248)
+	at org.junit.platform.launcher.core.DefaultLauncher.lambda$execute$5(DefaultLauncher.java:211)
+	at org.junit.platform.launcher.core.DefaultLauncher.withInterceptedStreams(DefaultLauncher.java:226)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:199)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:132)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:33)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:230)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:58)
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.web.client.RestTemplate' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1714)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1270)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1224)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640)
+	... 67 common frames omitted
+2020-07-30 20:43:23.663  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-30 20:43:23.670  INFO j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 20:43:23.737  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-07-30 20:43:23.748  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-07-30 20:49:07.419  INFO r.s.b.e.e.ExceptionControllerTest        : Starting ExceptionControllerTest on LAPTOP-B5PR574U with PID 6572 (started by Danila in D:\Capital\Platform-Backend\endpoint)
+2020-07-30 20:49:07.421  INFO r.s.b.e.e.ExceptionControllerTest        : No active profile set, falling back to default profiles: default
+2020-07-30 20:49:13.469  INFO .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-07-30 20:49:14.135  INFO .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 618ms. Found 15 JPA repository interfaces.
+2020-07-30 20:49:19.751  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-07-30 20:49:22.607  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-07-30 20:49:22.792  INFO o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-30 20:49:22.904  INFO org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-30 20:49:23.361  INFO o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-30 20:49:23.914  INFO org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-07-30 20:49:26.556  INFO o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-30 20:49:26.579  INFO j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 20:49:29.105  INFO c.p.bots.sdk.longpoll.LongPoll           : GetLongPollServerResponse: 
+{"response":{"server":"im.vk.com/nim197060785","key":"6eb9222080b28d6ef6ad625dad82c243aa8d7b98","pts":10000318,"ts":1691969138}}
+
+2020-07-30 20:49:29.109  INFO c.p.bots.sdk.longpoll.LongPoll           : Started listening to events from VK LongPoll server...
+2020-07-30 20:49:30.458  WARN JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-30 20:49:32.198  INFO o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2020-07-30 20:49:34.836  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-30 20:49:36.214  INFO o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2020-07-30 20:49:36.215  INFO o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2020-07-30 20:49:36.268  INFO o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 53 ms
+2020-07-30 20:49:36.403  INFO d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-07-30 20:49:36.535  INFO d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-07-30 20:49:36.557  INFO s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-07-30 20:49:36.983  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2020-07-30 20:49:36.993  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2020-07-30 20:49:36.997  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingDELETE_1
+2020-07-30 20:49:37.001  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2020-07-30 20:49:37.006  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_4
+2020-07-30 20:49:37.011  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_5
+2020-07-30 20:49:37.015  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_6
+2020-07-30 20:49:37.022  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_7
+2020-07-30 20:49:37.031  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_8
+2020-07-30 20:49:37.036  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_9
+2020-07-30 20:49:37.041  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_10
+2020-07-30 20:49:37.045  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_11
+2020-07-30 20:49:37.050  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_12
+2020-07-30 20:49:37.058  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_13
+2020-07-30 20:49:37.061  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_14
+2020-07-30 20:49:37.064  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_15
+2020-07-30 20:49:37.067  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_16
+2020-07-30 20:49:37.070  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_17
+2020-07-30 20:49:37.073  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_18
+2020-07-30 20:49:37.076  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_19
+2020-07-30 20:49:37.080  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_20
+2020-07-30 20:49:37.338  INFO r.s.b.e.e.ExceptionControllerTest        : Started ExceptionControllerTest in 31.911 seconds (JVM running for 36.013)
+2020-07-30 20:49:38.562  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-30 20:49:38.575  INFO j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 20:49:38.577  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-07-30 20:49:38.589  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-07-30 20:50:32.719  INFO r.s.b.e.e.ExceptionControllerTest        : Starting ExceptionControllerTest on LAPTOP-B5PR574U with PID 6280 (started by Danila in D:\Capital\Platform-Backend\endpoint)
+2020-07-30 20:50:32.722  INFO r.s.b.e.e.ExceptionControllerTest        : No active profile set, falling back to default profiles: default
+2020-07-30 20:50:35.298  INFO .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-07-30 20:50:35.493  INFO .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 182ms. Found 15 JPA repository interfaces.
+2020-07-30 20:50:37.604  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-07-30 20:50:39.872  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-07-30 20:50:39.992  INFO o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-30 20:50:40.090  INFO org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-30 20:50:40.476  INFO o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-30 20:50:40.858  INFO org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-07-30 20:50:43.256  INFO o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-30 20:50:43.274  INFO j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 20:50:45.133  INFO c.p.bots.sdk.longpoll.LongPoll           : GetLongPollServerResponse: 
+{"response":{"server":"im.vk.com/nim197060785","key":"22be6a7e5bf7a200bd7cd93345c2dafaedcf0755","pts":10000318,"ts":1691969138}}
+
+2020-07-30 20:50:45.137  INFO c.p.bots.sdk.longpoll.LongPoll           : Started listening to events from VK LongPoll server...
+2020-07-30 20:50:45.899  WARN JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-30 20:50:47.248  INFO o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2020-07-30 20:50:48.629  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-30 20:50:49.481  INFO o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2020-07-30 20:50:49.482  INFO o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2020-07-30 20:50:49.515  INFO o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 33 ms
+2020-07-30 20:50:49.571  INFO d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-07-30 20:50:49.602  INFO d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-07-30 20:50:49.621  INFO s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-07-30 20:50:49.935  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2020-07-30 20:50:49.944  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2020-07-30 20:50:49.948  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingDELETE_1
+2020-07-30 20:50:49.952  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2020-07-30 20:50:49.957  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_4
+2020-07-30 20:50:49.965  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_5
+2020-07-30 20:50:49.972  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_6
+2020-07-30 20:50:49.976  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_7
+2020-07-30 20:50:49.980  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_8
+2020-07-30 20:50:49.984  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_9
+2020-07-30 20:50:49.988  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_10
+2020-07-30 20:50:49.992  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_11
+2020-07-30 20:50:49.999  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_12
+2020-07-30 20:50:50.003  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_13
+2020-07-30 20:50:50.007  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_14
+2020-07-30 20:50:50.009  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_15
+2020-07-30 20:50:50.024  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_16
+2020-07-30 20:50:50.028  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_17
+2020-07-30 20:50:50.032  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_18
+2020-07-30 20:50:50.035  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_19
+2020-07-30 20:50:50.038  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_20
+2020-07-30 20:50:50.146  INFO r.s.b.e.e.ExceptionControllerTest        : Started ExceptionControllerTest in 18.351 seconds (JVM running for 21.171)
+2020-07-30 20:50:51.126  INFO r.s.b.system.aspect.ProfiledAspect       : ru.studentsplatform.backend.endpoint.rest.MainController.getMain() 
+     | argument: []
+     | result: <200 OK OK,Hello world,[]>
+     | time [8 msec]
+2020-07-30 20:50:51.270  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-30 20:50:51.280  INFO j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 20:50:51.282  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-07-30 20:50:51.303  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-07-30 20:52:29.420  INFO r.s.b.e.e.ExceptionControllerTest        : Starting ExceptionControllerTest on LAPTOP-B5PR574U with PID 4184 (started by Danila in D:\Capital\Platform-Backend\endpoint)
+2020-07-30 20:52:29.422  INFO r.s.b.e.e.ExceptionControllerTest        : No active profile set, falling back to default profiles: default
+2020-07-30 20:52:31.430  INFO .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-07-30 20:52:31.603  INFO .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 161ms. Found 15 JPA repository interfaces.
+2020-07-30 20:52:33.785  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-07-30 20:52:35.922  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-07-30 20:52:36.067  INFO o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-30 20:52:36.204  INFO org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-30 20:52:36.553  INFO o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-30 20:52:36.897  INFO org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-07-30 20:52:39.183  INFO o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-30 20:52:39.195  INFO j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 20:52:41.009  INFO c.p.bots.sdk.longpoll.LongPoll           : GetLongPollServerResponse: 
+{"response":{"server":"im.vk.com/nim197060785","key":"e4fd153c2e4d0fa763166cfa463f5e9323c44805","pts":10000318,"ts":1691969138}}
+
+2020-07-30 20:52:41.013  INFO c.p.bots.sdk.longpoll.LongPoll           : Started listening to events from VK LongPoll server...
+2020-07-30 20:52:41.808  WARN JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-30 20:52:43.255  INFO o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2020-07-30 20:52:44.596  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-30 20:52:45.506  INFO o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2020-07-30 20:52:45.506  INFO o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2020-07-30 20:52:45.544  INFO o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 38 ms
+2020-07-30 20:52:45.600  INFO d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-07-30 20:52:45.628  INFO d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-07-30 20:52:45.645  INFO s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-07-30 20:52:45.981  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2020-07-30 20:52:45.991  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2020-07-30 20:52:45.996  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingDELETE_1
+2020-07-30 20:52:46.000  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2020-07-30 20:52:46.004  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_4
+2020-07-30 20:52:46.009  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_5
+2020-07-30 20:52:46.014  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_6
+2020-07-30 20:52:46.027  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_7
+2020-07-30 20:52:46.032  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_8
+2020-07-30 20:52:46.036  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_9
+2020-07-30 20:52:46.040  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_10
+2020-07-30 20:52:46.044  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_11
+2020-07-30 20:52:46.052  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_12
+2020-07-30 20:52:46.055  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_13
+2020-07-30 20:52:46.060  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_14
+2020-07-30 20:52:46.063  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_15
+2020-07-30 20:52:46.067  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_16
+2020-07-30 20:52:46.070  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_17
+2020-07-30 20:52:46.073  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_18
+2020-07-30 20:52:46.077  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_19
+2020-07-30 20:52:46.081  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_20
+2020-07-30 20:52:46.218  INFO r.s.b.e.e.ExceptionControllerTest        : Started ExceptionControllerTest in 17.646 seconds (JVM running for 20.598)
+2020-07-30 20:52:46.781  WARN o.s.web.servlet.PageNotFound             : No mapping for GET /some/wrong/path
+2020-07-30 20:52:46.796 ERROR r.s.b.system.log.impl.LogHelperImpl      : No handler found for GET /some/wrong/path
+2020-07-30 20:52:46.942  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-30 20:52:46.952  INFO j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 20:52:46.955  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-07-30 20:52:46.971  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-07-30 20:54:00.031  INFO r.s.b.e.e.ExceptionControllerTest        : Starting ExceptionControllerTest on LAPTOP-B5PR574U with PID 6940 (started by Danila in D:\Capital\Platform-Backend\endpoint)
+2020-07-30 20:54:00.036  INFO r.s.b.e.e.ExceptionControllerTest        : No active profile set, falling back to default profiles: default
+2020-07-30 20:54:02.150  INFO .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-07-30 20:54:02.400  INFO .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 238ms. Found 15 JPA repository interfaces.
+2020-07-30 20:54:04.493  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-07-30 20:54:06.909  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-07-30 20:54:07.036  INFO o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-30 20:54:07.135  INFO org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-30 20:54:07.520  INFO o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-30 20:54:07.913  INFO org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-07-30 20:54:10.333  INFO o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-30 20:54:10.344  INFO j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 20:54:12.132  INFO c.p.bots.sdk.longpoll.LongPoll           : GetLongPollServerResponse: 
+{"response":{"server":"im.vk.com/nim197060785","key":"54180c96895f9ddd7fa94005ad223e9c05ae08ad","pts":10000318,"ts":1691969138}}
+
+2020-07-30 20:54:12.142  INFO c.p.bots.sdk.longpoll.LongPoll           : Started listening to events from VK LongPoll server...
+2020-07-30 20:54:12.949  WARN JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-30 20:54:14.428  INFO o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2020-07-30 20:54:15.894  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-30 20:54:16.872  INFO o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2020-07-30 20:54:16.873  INFO o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2020-07-30 20:54:16.919  INFO o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 46 ms
+2020-07-30 20:54:16.981  INFO d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-07-30 20:54:17.015  INFO d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-07-30 20:54:17.039  INFO s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-07-30 20:54:17.395  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2020-07-30 20:54:17.407  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2020-07-30 20:54:17.412  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingDELETE_1
+2020-07-30 20:54:17.416  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2020-07-30 20:54:17.423  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_4
+2020-07-30 20:54:17.432  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_5
+2020-07-30 20:54:17.441  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_6
+2020-07-30 20:54:17.459  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_7
+2020-07-30 20:54:17.466  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_8
+2020-07-30 20:54:17.474  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_9
+2020-07-30 20:54:17.479  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_10
+2020-07-30 20:54:17.493  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_11
+2020-07-30 20:54:17.508  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_12
+2020-07-30 20:54:17.515  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_13
+2020-07-30 20:54:17.520  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_14
+2020-07-30 20:54:17.523  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_15
+2020-07-30 20:54:17.527  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_16
+2020-07-30 20:54:17.532  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_17
+2020-07-30 20:54:17.540  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_18
+2020-07-30 20:54:17.548  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_19
+2020-07-30 20:54:17.553  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_20
+2020-07-30 20:54:17.703  INFO r.s.b.e.e.ExceptionControllerTest        : Started ExceptionControllerTest in 18.602 seconds (JVM running for 20.579)
+2020-07-30 20:54:18.201  WARN o.s.web.servlet.PageNotFound             : No mapping for GET /some/wrong/path
+2020-07-30 20:54:18.217 ERROR r.s.b.system.log.impl.LogHelperImpl      : No handler found for GET /some/wrong/path
+2020-07-30 20:54:18.370  WARN o.s.web.servlet.PageNotFound             : No mapping for GET /user
+2020-07-30 20:54:18.370 ERROR r.s.b.system.log.impl.LogHelperImpl      : No handler found for GET /user
+2020-07-30 20:54:18.433  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-30 20:54:18.442  INFO j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 20:54:18.446  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-07-30 20:54:18.458  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2020-07-30 21:01:17.335  INFO r.s.b.e.e.ExceptionControllerTest        : Starting ExceptionControllerTest on LAPTOP-B5PR574U with PID 956 (started by Danila in D:\Capital\Platform-Backend\endpoint)
+2020-07-30 21:01:17.337  INFO r.s.b.e.e.ExceptionControllerTest        : No active profile set, falling back to default profiles: default
+2020-07-30 21:01:19.408  INFO .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-07-30 21:01:19.634  INFO .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 207ms. Found 15 JPA repository interfaces.
+2020-07-30 21:01:22.113  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-07-30 21:01:23.895  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-07-30 21:01:24.011  INFO o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-07-30 21:01:24.125  INFO org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2020-07-30 21:01:24.523  INFO o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-07-30 21:01:24.922  INFO org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-07-30 21:01:30.036  INFO o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-07-30 21:01:30.144  INFO j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 21:01:43.663  INFO c.p.bots.sdk.longpoll.LongPoll           : GetLongPollServerResponse: 
+{"response":{"server":"im.vk.com/nim197060785","key":"0a030670c1d2501d318de3db0ed365dd0a2914df","pts":10000318,"ts":1691969138}}
+
+2020-07-30 21:01:43.688  INFO c.p.bots.sdk.longpoll.LongPoll           : Started listening to events from VK LongPoll server...
+2020-07-30 21:01:45.333  WARN JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-07-30 21:01:48.314  INFO o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2020-07-30 21:01:51.001  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-30 21:01:53.744  INFO o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2020-07-30 21:01:53.744  INFO o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2020-07-30 21:01:53.794  INFO o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 50 ms
+2020-07-30 21:01:53.893  INFO d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-07-30 21:01:54.102  INFO d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-07-30 21:01:54.170  INFO s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-07-30 21:01:55.553  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2020-07-30 21:01:55.563  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2020-07-30 21:01:55.567  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingDELETE_1
+2020-07-30 21:01:55.571  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2020-07-30 21:01:55.575  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_4
+2020-07-30 21:01:55.580  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_5
+2020-07-30 21:01:55.585  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_6
+2020-07-30 21:01:55.591  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_7
+2020-07-30 21:01:55.596  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_8
+2020-07-30 21:01:55.602  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_9
+2020-07-30 21:01:55.606  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_10
+2020-07-30 21:01:55.620  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_11
+2020-07-30 21:01:55.633  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_12
+2020-07-30 21:01:55.638  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_13
+2020-07-30 21:01:55.642  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_14
+2020-07-30 21:01:55.646  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_15
+2020-07-30 21:01:55.650  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_16
+2020-07-30 21:01:55.654  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_17
+2020-07-30 21:01:55.658  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_18
+2020-07-30 21:01:55.663  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_19
+2020-07-30 21:01:55.667  INFO .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_20
+2020-07-30 21:01:55.836  INFO r.s.b.e.e.ExceptionControllerTest        : Started ExceptionControllerTest in 39.301 seconds (JVM running for 43.351)
+2020-07-30 21:01:59.552  WARN o.s.web.servlet.PageNotFound             : No mapping for GET /some/wrong/path
+2020-07-30 21:01:59.800 ERROR r.s.b.system.log.impl.LogHelperImpl      : No handler found for GET /some/wrong/path
+2020-07-30 21:02:00.905  INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-07-30 21:02:00.914  INFO j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-07-30 21:02:00.924  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-07-30 21:02:00.937  INFO com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
