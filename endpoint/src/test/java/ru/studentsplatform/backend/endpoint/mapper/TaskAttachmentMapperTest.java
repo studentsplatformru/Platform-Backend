@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.endpoint;
+package ru.studentsplatform.backend.endpoint.mapper;
 
 import org.junit.jupiter.api.Test;
 import ru.studentsplatform.backend.domain.dto.TaskAttachmentDTO;
@@ -25,7 +25,7 @@ class TaskAttachmentMapperTest {
 	 * Проверка того, что поля сущности и DTO, созданного при помощи mapper, совпадают.
 	 */
 	@Test
-	void taskAttachmentToTaskAttachmentDTO() {
+	void taskAttachmentToTaskAttachmentDTOTest() {
 
 		Task task = new Task();
 		task.setId(4L);
@@ -47,7 +47,7 @@ class TaskAttachmentMapperTest {
 	 * Проверка того, что поля DTO и сущности, созданной при помощи mapper, совпадают.
 	 */
 	@Test
-	void taskAttachmentDTOToTaskAttachment() {
+	void taskAttachmentDTOToTaskAttachmentTest() {
 		Task task = new Task();
 		task.setId(4L);
 
@@ -70,7 +70,7 @@ class TaskAttachmentMapperTest {
 	 * и корректно переносит их поля.
 	 */
 	@Test
-	void listTaskAttachmentToTaskAttachmentDTO() {
+	void listTaskAttachmentToTaskAttachmentDTOTest() {
 		TaskAttachment attachment = new TaskAttachment();
 		attachment.setId(5L);
 
@@ -88,7 +88,7 @@ class TaskAttachmentMapperTest {
 	 * и корректно переносит их поля.
 	 */
 	@Test
-	void listTaskAttachmentDTOToTaskAttachment() {
+	void listTaskAttachmentDTOToTaskAttachmentTest() {
 		TaskAttachmentDTO dto = new TaskAttachmentDTO();
 		dto.setId(3L);
 

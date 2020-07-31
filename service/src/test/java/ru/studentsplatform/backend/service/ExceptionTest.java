@@ -26,14 +26,14 @@ public class ExceptionTest {
 
 		try {
 
-			throw new BusinessException(NOTE_NOT_FOUND, "Exception for test");
+			throw new BusinessException(NOTE_NOT_FOUND, 1);
 
 		} catch (BusinessException e) {
 
 			Assert.assertEquals("F001", e.getCode());
 
 			Assert.assertTrue(
-					e.getMessage().contains("Exception for test"));
+					e.getMessage().contains("1"));
 
 			Assert.assertEquals(
 					e.getReason(), NOTE_NOT_FOUND);
@@ -78,14 +78,14 @@ public class ExceptionTest {
 
 		try {
 
-			throw new BusinessException(COMMENT_NOT_FOUND, "Exception for test");
+			throw new BusinessException(COMMENT_NOT_FOUND, 1);
 
 		} catch (BusinessException e) {
 
 			Assert.assertEquals("F002", e.getCode());
 
 			Assert.assertTrue(
-					e.getMessage().contains("Exception for test"));
+					e.getMessage().contains("1"));
 
 			Assert.assertEquals(
 					e.getReason(), COMMENT_NOT_FOUND);
@@ -104,14 +104,14 @@ public class ExceptionTest {
 
 		try {
 
-			throw new BusinessException(USER_NOT_FOUND, "Exception for test");
+			throw new BusinessException(USER_NOT_FOUND, 1);
 
 		} catch (BusinessException e) {
 
 			Assert.assertEquals("F003", e.getCode());
 
 			Assert.assertTrue(
-					e.getMessage().contains("Exception for test"));
+					e.getMessage().contains("1"));
 
 			Assert.assertEquals(
 					e.getReason(), USER_NOT_FOUND);
