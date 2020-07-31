@@ -7,10 +7,11 @@ import ru.studentsplatform.backend.domain.dto.user.UserDTO;
 import java.util.List;
 
 @Data
-public class DepartmentDTO extends BaseDTO {
+public class TeamDTO extends BaseDTO {
 
-    private String department;
-    private Long facultyId;
-    private List<UserDTO> users;
+    private Long semester;
+    private String teamName;
+    private List<UserDTO> userDTOS;
+    private Long directionId;
 
 }
