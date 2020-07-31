@@ -11,13 +11,13 @@ management:
 spring:
   datasource:
     platform: postgres
-    url: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/testDB
+    url: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/mainDB
     username: postgres
     password: password256
     driver-class-name: org.postgresql.Driver
 
   jpa:
-    generate-ddl: false
+    generate-ddl: true
     properties:
       hibernate:
         jdbc:
@@ -28,6 +28,10 @@ spring:
     enabled: false
     baseline-on-migrate: true
     baseline-version: 0
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
 
 logging:
   file:

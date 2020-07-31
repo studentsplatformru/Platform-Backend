@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.repository.TaskAttachmentRepository;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
-import ru.studentsplatform.backend.service.exception.core.BusinessException;
+import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
