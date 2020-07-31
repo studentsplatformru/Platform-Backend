@@ -1,8 +1,9 @@
 package ru.studentsplatform.backend.entities.model.enums;
 
 public enum UniversityEnum {
-	SPBU("Санкт-Петербургский государственный университет"),
-	ITMO("Университет ИТМО");
+	SPBU("СПБГУ"),
+	SPBSTU("СПБПУ"),
+	ITMO("ИТМО");
 
 	private String name;
 
@@ -12,5 +13,20 @@ public enum UniversityEnum {
 
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * Получаем университет из строки с его аббревиатурой на русском языке.
+	 *
+	 * @param name Строка с названием университета.
+	 * @return Объект университета.
+	 */
+	public static UniversityEnum getUniversityByName(String name) {
+		for (UniversityEnum university : UniversityEnum.values()) {
+			if (university.getName().equals(name)) {
+				return university;
+			}
+		}
+		return null;
 	}
 }
