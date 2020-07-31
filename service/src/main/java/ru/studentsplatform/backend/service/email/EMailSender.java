@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface EMailSender {
 
+	int random();
+
 	/**
 	 * Метод для отправки сообщений без вложенных файлов.
 	 *

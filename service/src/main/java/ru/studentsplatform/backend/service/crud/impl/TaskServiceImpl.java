@@ -11,7 +11,7 @@ import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.TaskService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.service.exception.core.BusinessException;
-import ru.studentsplatform.backend.system.annotation.Profiled;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import ru.studentsplatform.backend.system.helper.CollectionUtils;
 
 import java.util.List;

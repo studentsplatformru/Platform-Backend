@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(AbstractController.BASE_URL)
 public abstract class AbstractController {
-	static final String BASE_URL = "/api/system";
+	public static final String BASE_URL = "/api/system";
 }

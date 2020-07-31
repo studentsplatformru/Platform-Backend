@@ -8,6 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -17,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -27,6 +29,7 @@ import java.util.Scanner;
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  */
 @Service
+@Profiled
 public class EMailSenderImpl implements EMailSender {
 
 	private final JavaMailSender javaMailSender;
@@ -42,6 +45,13 @@ public class EMailSenderImpl implements EMailSender {
 	 */
 	public EMailSenderImpl(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
+	}
+
+
+	@Override
+	public int random() {
+		Random random = new Random();
+		return random.nextInt() % 10;
 	}
 
 	/**
