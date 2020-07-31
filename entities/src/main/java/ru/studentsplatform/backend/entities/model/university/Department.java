@@ -28,6 +28,6 @@ public class Department extends BaseEntity {
 	private Faculty faculty;
 
 	@OneToMany
-	@JoinColumn(name = "usr_id")
+	@JoinColumn(name = "department_id")
 	private List<User> users;
 }
