@@ -9,7 +9,7 @@ import ru.studentsplatform.backend.entities.model.university.PlaceStudy;
 import java.util.List;
 
 /**
- * Маппер для конвертации объекта сущности места занятий для студента в DTO,
+ * Маппер для конвертации объекта сущности места занятий в DTO,
  * а также List'ов, содержащих сущности в List DTO и обратно.
  *
  * @author Archie-Vian (sas-artamonov@yandex.ru) 31.07.2020

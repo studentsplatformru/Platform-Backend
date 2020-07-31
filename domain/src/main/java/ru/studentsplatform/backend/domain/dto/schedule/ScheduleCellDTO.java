@@ -11,7 +11,7 @@ public class ScheduleCellDTO extends BaseDTO {
 
     private OffsetDateTime startClass;
     private OffsetDateTime endClass;
-    private ClassTypeEnum type;
+    private String type;
     private Long teamId;
     private Long subjectId;
 

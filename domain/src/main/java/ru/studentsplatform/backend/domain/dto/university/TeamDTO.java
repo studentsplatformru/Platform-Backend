@@ -11,7 +11,7 @@ public class TeamDTO extends BaseDTO {
 
     private Long semester;
     private String teamName;
-    private List<UserDTO> userDTOS;
+    private List<UserDTO> users;
     private Long directionId;
 
 }

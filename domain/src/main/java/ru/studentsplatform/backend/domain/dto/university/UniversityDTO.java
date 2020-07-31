@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class UniversityDTO extends BaseDTO {
 
-    private UniversityEnum university;
-    private List<FacultyDTO> facultyDTOS;
+    private String university;
+    private List<FacultyDTO> faculties;
 
 }
