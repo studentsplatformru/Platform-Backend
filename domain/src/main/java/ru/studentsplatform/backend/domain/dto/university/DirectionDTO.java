@@ -10,5 +10,5 @@ public class DirectionDTO extends BaseDTO {
     private String direction;
     private String directionCode;
     private Long facultyId;
-    private List<TeamDTO> teamDTOS;
+    private List<TeamDTO> teams;
 }

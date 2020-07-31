@@ -8,7 +8,7 @@ public class FacultyDTO extends BaseDTO {
 
     private String faculty;
     private Long universityId;
-    private List<DepartmentDTO> departmentDTOS;
-    private List<DirectionDTO> directionDTOS;
+    private List<DepartmentDTO> departments;
+    private List<DirectionDTO> directions;
 
 }

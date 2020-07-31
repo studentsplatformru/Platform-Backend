@@ -12,6 +12,6 @@ public class DisciplineDTO extends BaseDTO {
     private Long userId;
     private Long subjectId;
     private Integer semester;
-    private List<ScheduleUserCellDTO> scheduleUserCellDTOS;
+    private List<ScheduleUserCellDTO> scheduleUserCells;
 
 }
