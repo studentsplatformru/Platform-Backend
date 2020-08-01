@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.entities.model.university;
 
-import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 
 import javax.persistence.Column;
@@ -15,7 +14,6 @@ import java.util.List;
 /**
  * Факультет в университете.
  */
-@Data
 @Entity
 @Table(name = "faculty")
 public class Faculty extends BaseEntity {
@@ -31,4 +29,36 @@ public class Faculty extends BaseEntity {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "faculty")
 	private List<Direction> directions;
+
+	public String getFaculty() {
+		return faculty;
+	}
+
+	public void setFaculty(String faculty) {
+		this.faculty = faculty;
+	}
+
+	public University getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(University university) {
+		this.university = university;
+	}
+
+	public List<Department> getDepartments() {
+		return departments;
+	}
+
+	public void setDepartments(List<Department> departments) {
+		this.departments = departments;
+	}
+
+	public List<Direction> getDirections() {
+		return directions;
+	}
+
+	public void setDirections(List<Direction> directions) {
+		this.directions = directions;
+	}
 }

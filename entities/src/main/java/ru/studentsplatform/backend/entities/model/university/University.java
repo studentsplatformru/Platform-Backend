@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.entities.model.university;
 
-import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.enums.UniversityEnum;
 
@@ -16,7 +15,6 @@ import java.util.List;
 /**
  * Класс университета.
  */
-@Data
 @Entity
 @Table(name = "university")
 public class University extends BaseEntity {
@@ -26,4 +24,20 @@ public class University extends BaseEntity {
 
 	@OneToMany(mappedBy = "university", fetch = FetchType.LAZY)
 	private List<Faculty> faculties;
+
+	public UniversityEnum getUniversity() {
+		return university;
+	}
+
+	public void setUniversity(UniversityEnum university) {
+		this.university = university;
+	}
+
+	public List<Faculty> getFaculties() {
+		return faculties;
+	}
+
+	public void setFaculties(List<Faculty> faculties) {
+		this.faculties = faculties;
+	}
 }
