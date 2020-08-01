@@ -32,7 +32,9 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 	FACULTY_NOT_FOUND(HttpStatus.NOT_FOUND, "F011", "Информация об институте с Id %d не найдена"),
 	DIRECTION_NOT_FOUND(HttpStatus.NOT_FOUND, "F012", "Информация о направлении с Id %d не найдена"),
 	DEPARTMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F013", "Информация о кафедре с Id %d не найдена"),
-	TEAM_NOT_FOUND(HttpStatus.NOT_FOUND, "F014", "Информация о группе с Id %d не найдена");
+	TEAM_NOT_FOUND(HttpStatus.NOT_FOUND, "F014", "Информация о группе с Id %d не найдена"),
+	USER_ALREADY_EXISTS(HttpStatus.CONFLICT, "F015",
+			"Пользователь с id %d уже существует");
 
 	private final HttpStatus status;
 	private final String code;

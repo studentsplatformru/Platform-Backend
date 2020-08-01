@@ -9,18 +9,18 @@ import ru.studentsplatform.backend.entities.model.university.PlaceStudy;
 import java.util.List;
 
 /**
- * Маппер для конвертации объекта сущности места занятий в DTO,
+ * Маппер для конвертации объекта сущности места учёбы в DTO,
  * а также List'ов, содержащих сущности в List DTO и обратно.
  *
- * @author Archie-Vian (sas-artamonov@yandex.ru) 31.07.2020
  */
 @Mapper(componentModel = "spring")
+
 public interface PlaceStudyMapper {
     /**
-     * Трансформация полей сущности места занятий в поля DTO.
+     * Трансформация полей сущности места учёбы в поля DTO.
      *
-     * @param entity Сущность места занятий, на основе которой будет создан DTO
-     * @return DTO места занятий.
+     * @param entity Сущность места учёбы, на основе которой будет создан DTO
+     * @return DTO места учёбы.
      */
     @Mappings({
             @Mapping(target = "id", source = "entity.id"),
@@ -33,15 +33,14 @@ public interface PlaceStudyMapper {
             @Mapping(target = "directionId", source = "entity.direction.id"),
             @Mapping(target = "teamId", source = "entity.team.id"),
             @Mapping(target = "semester", source = "entity.semester")
-
     })
     PlaceStudyDTO placeStudyToPlaceStudyDTO(PlaceStudy entity);
 
     /**
-     * Трансформация полей объекта DTO места занятий в поля сущности места занятий.
+     * Трансформация полей объекта DTO места учёбы в поля сущности места учёбы.
      *
-     * @param dto DTO места занятий, на основе которого будет создана сущность.
-     * @return Объект сущности места занятий.
+     * @param dto DTO места учёбы, на основе которого будет создана сущность.
+     * @return Объект сущности места учёбы.
      */
     @Mappings({
             @Mapping(target = "id", source = "dto.id"),
@@ -54,13 +53,11 @@ public interface PlaceStudyMapper {
             @Mapping(target = "direction.id", source = "dto.directionId"),
             @Mapping(target = "team.id", source = "dto.teamId"),
             @Mapping(target = "semester", source = "dto.semester")
-
     })
     PlaceStudy placeStudyDTOToPlaceStudy(PlaceStudyDTO dto);
 
     /**
      * Конвертирует сразу несколько Сущностей в DTO.
-     *
      * @param entity Список мест занятий.
      * @return Список DTO.
      */
@@ -73,5 +70,5 @@ public interface PlaceStudyMapper {
      * @return Список мест занятий
      */
     List<PlaceStudy> listPlaceStudyDTOToPlaceStudy(List<PlaceStudyDTO> dto);
-
 }
+

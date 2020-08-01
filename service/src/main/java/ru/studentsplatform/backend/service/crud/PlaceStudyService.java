@@ -5,9 +5,8 @@ import ru.studentsplatform.backend.entities.model.university.PlaceStudy;
 import java.util.List;
 
 public interface PlaceStudyService extends AbstractService<PlaceStudy> {
-
     @Override
-    PlaceStudy create(PlaceStudy newEntity);
+    PlaceStudy create(PlaceStudy newPlaceStudy);
 
     @Override
     PlaceStudy getById(Long id);
@@ -16,7 +15,7 @@ public interface PlaceStudyService extends AbstractService<PlaceStudy> {
     List<PlaceStudy> getAll();
 
     @Override
-    PlaceStudy update(PlaceStudy updatedEntity, Long id);
+    PlaceStudy update(PlaceStudy updatedPlaceStudy, Long id);
 
     @Override
     boolean delete(Long id);

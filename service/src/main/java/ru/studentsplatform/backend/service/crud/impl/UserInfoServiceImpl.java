@@ -30,6 +30,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     /**
      * Конструктор.
+     *
      * @param userInfoRepository Репозиторий информации о пользователе.
      * @param userRepository     Репозиторий пользователя.
      */
@@ -42,17 +43,17 @@ public class UserInfoServiceImpl implements UserInfoService {
      * {@inheritDoc}
      */
     @Override
-    public UserInfo create(UserInfo userInfo) {
-        if (!userRepository.existsById(userInfo.getUser().getId())) {
-            throw new BusinessException(ServiceExceptionReason.USER_NOT_FOUND, userInfo.getUser().getId());
+    public UserInfo create(UserInfo newEntity) {
+        if (!userRepository.existsById(newEntity.getUser().getId())) {
+            throw new BusinessException(ServiceExceptionReason.USER_NOT_FOUND, newEntity.getUser().getId());
         }
-        if (userInfoRepository.existsById(userInfo.getUser().getId())) {
+        if (userInfoRepository.existsById(newEntity.getUser().getId())) {
             throw new BusinessException(ServiceExceptionReason.USER_INFO_ALREADY_EXISTS,
-                    userInfo.getUser().getId());
+                    newEntity.getUser().getId());
         }
-        User user = userRepository.findById(userInfo.getUser().getId()).get();
-        userInfo.setUser(user);
-        return userInfoRepository.save(userInfo);
+        User user = userRepository.findById(newEntity.getUser().getId()).get();
+        newEntity.setUser(user);
+        return userInfoRepository.save(newEntity);
     }
 
     /**
@@ -77,6 +78,11 @@ public class UserInfoServiceImpl implements UserInfoService {
      */
     @Override
     public UserInfo update(UserInfo updatedEntity, Long id) {
+        if (!userInfoRepository.existsById(id)) {
+            throw new BusinessException(ServiceExceptionReason.USER_INFO_NOT_FOUND, id);
+        }
+        User user = userRepository.getOne(id);
+        updatedEntity.setUser(user);
         updatedEntity.setId(id);
         return userInfoRepository.saveAndFlush(updatedEntity);
     }
