@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.university.DirectionDTO;
 import ru.studentsplatform.backend.endpoint.mapper.DirectionMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.DirectionController;
-import ru.studentsplatform.backend.endpoint.rest.crud.UserConroller;
 import ru.studentsplatform.backend.service.crud.DirectionService;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 
@@ -17,7 +16,7 @@ import java.util.List;
  */
 @Profiled
 @RestController
-@RequestMapping(UserConroller.BASE_URL)
+@RequestMapping(DirectionController.BASE_URL)
 public class DirectionControllerImpl implements DirectionController {
 
     private final DirectionMapper mapper;

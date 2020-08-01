@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.university.DepartmentDTO;
 import ru.studentsplatform.backend.endpoint.mapper.DepartmentMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.DepartmentController;
-import ru.studentsplatform.backend.endpoint.rest.crud.UserConroller;
 import ru.studentsplatform.backend.service.crud.DepartmentService;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 
@@ -17,7 +16,7 @@ import java.util.List;
  */
 @Profiled
 @RestController
-@RequestMapping(UserConroller.BASE_URL)
+@RequestMapping(DepartmentController.BASE_URL)
 public class DepartmentControllerImpl implements DepartmentController {
 
     private final DepartmentMapper mapper;

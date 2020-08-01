@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.university.DisciplineDTO;
 import ru.studentsplatform.backend.endpoint.mapper.DisciplineMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.DisciplineController;
-import ru.studentsplatform.backend.endpoint.rest.crud.UserConroller;
 import ru.studentsplatform.backend.service.crud.DisciplineService;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 
@@ -17,7 +16,7 @@ import java.util.List;
  */
 @Profiled
 @RestController
-@RequestMapping(UserConroller.BASE_URL)
+@RequestMapping(DisciplineController.BASE_URL)
 public class DisciplineControllerImpl implements DisciplineController {
 
     private final DisciplineMapper mapper;
