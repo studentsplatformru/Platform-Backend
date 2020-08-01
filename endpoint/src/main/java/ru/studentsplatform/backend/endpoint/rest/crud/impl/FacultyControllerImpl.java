@@ -1,16 +1,23 @@
 package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.university.FacultyDTO;
 import ru.studentsplatform.backend.endpoint.mapper.FacultyMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.FacultyController;
+import ru.studentsplatform.backend.endpoint.rest.crud.UserConroller;
 import ru.studentsplatform.backend.service.crud.FacultyService;
+import ru.studentsplatform.backend.system.annotation.Profiled;
 
 import java.util.List;
 
 /**
  * @author Archie-Vian (sas-aramonov@yandex.ru) 01.08.2020
  */
+@Profiled
+@RestController
+@RequestMapping(UserConroller.BASE_URL)
 public class FacultyControllerImpl implements FacultyController {
 
     private final FacultyMapper mapper;
@@ -18,8 +25,8 @@ public class FacultyControllerImpl implements FacultyController {
 
     /**
      * Конструктор.
-     * @param mapper Маппер faculty
-     * @param service CRUD сервис faculty
+     * @param mapper    Маппер faculty
+     * @param service   CRUD сервис faculty
      */
     public FacultyControllerImpl(FacultyMapper mapper, FacultyService service) {
         this.mapper = mapper;

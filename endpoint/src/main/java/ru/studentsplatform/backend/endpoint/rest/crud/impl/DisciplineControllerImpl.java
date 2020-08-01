@@ -1,16 +1,23 @@
 package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.university.DisciplineDTO;
 import ru.studentsplatform.backend.endpoint.mapper.DisciplineMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.DisciplineController;
+import ru.studentsplatform.backend.endpoint.rest.crud.UserConroller;
 import ru.studentsplatform.backend.service.crud.DisciplineService;
+import ru.studentsplatform.backend.system.annotation.Profiled;
 
 import java.util.List;
 
 /**
  * @author Archie-Vian (sas-aramonov@yandex.ru) 01.08.2020
  */
+@Profiled
+@RestController
+@RequestMapping(UserConroller.BASE_URL)
 public class DisciplineControllerImpl implements DisciplineController {
 
     private final DisciplineMapper mapper;
@@ -18,8 +25,8 @@ public class DisciplineControllerImpl implements DisciplineController {
 
     /**
      * Конструктор.
-     * @param mapper маппер discipline
-     * @param service CRUD сервис discipline
+     * @param mapper    маппер discipline
+     * @param service   CRUD сервис discipline
      */
     public DisciplineControllerImpl(DisciplineMapper mapper, DisciplineService service) {
         this.mapper = mapper;

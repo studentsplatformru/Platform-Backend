@@ -1,16 +1,23 @@
 package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.university.DepartmentDTO;
 import ru.studentsplatform.backend.endpoint.mapper.DepartmentMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.DepartmentController;
+import ru.studentsplatform.backend.endpoint.rest.crud.UserConroller;
 import ru.studentsplatform.backend.service.crud.DepartmentService;
+import ru.studentsplatform.backend.system.annotation.Profiled;
 
 import java.util.List;
 
 /**
  * @author Archie-Vian (sas-aramonov@yandex.ru) 01.08.2020
  */
+@Profiled
+@RestController
+@RequestMapping(UserConroller.BASE_URL)
 public class DepartmentControllerImpl implements DepartmentController {
 
     private final DepartmentMapper mapper;
@@ -18,8 +25,8 @@ public class DepartmentControllerImpl implements DepartmentController {
 
     /**
      * Конструктор.
-     * @param mapper маппер department
-     * @param service CRUD сервис department
+     * @param mapper    маппер department
+     * @param service   CRUD сервис department
      */
     public DepartmentControllerImpl(DepartmentMapper mapper, DepartmentService service) {
         this.mapper = mapper;
