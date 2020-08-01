@@ -9,6 +9,9 @@ import ru.studentsplatform.backend.domain.dto.university.DepartmentDTO;
 import ru.studentsplatform.backend.entities.model.university.Department;
 import ru.studentsplatform.backend.entities.model.university.Faculty;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -47,6 +50,30 @@ public class DepartmentMapperTest {
         assertEquals(department.getId(), dto.getId());
         assertEquals(department.getDepartment(), dto.getDepartment());
         assertEquals(department.getFaculty().getId(), dto.getFacultyId());
+    }
+
+    @Test
+    void listDepartmentToDepartmentDTOTest(){
+        List<Department> departmentList = new LinkedList<>();
+        Department testDepartment = new Department();
+        testDepartment.setId(3L);
+        departmentList.add(testDepartment);
+        departmentList.add(testDepartment);
+        List<DepartmentDTO> departmentDTOS = mapper.listDepartmentToDepartmentDTO(departmentList);
+        assertEquals(3L, departmentDTOS.get(0).getId());
+        assertEquals(3L, departmentDTOS.get(1).getId());
+    }
+
+    @Test
+    void listDepartmentDTOtoDepartmentTest() {
+        List<DepartmentDTO> departmentDTOS = new LinkedList<>();
+        DepartmentDTO testDepartmentDTO = new DepartmentDTO();
+        testDepartmentDTO.setId(5L);
+        departmentDTOS.add(testDepartmentDTO);
+        departmentDTOS.add(testDepartmentDTO);
+        List<Department> departments = mapper.listDepartmentDTOToDepartment(departmentDTOS);
+        assertEquals(5L, departments.get(0).getId());
+        assertEquals(5L, departments.get(1).getId());
     }
 
 }

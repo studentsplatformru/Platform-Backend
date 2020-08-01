@@ -9,6 +9,9 @@ import ru.studentsplatform.backend.domain.dto.university.DirectionDTO;
 import ru.studentsplatform.backend.entities.model.university.Direction;
 import ru.studentsplatform.backend.entities.model.university.Faculty;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -48,6 +51,30 @@ public class DirectionMapperTest {
         assertEquals(dto.getFacultyId(), direction.getFaculty().getId());
         assertEquals(dto.getDirectionCode(), direction.getDirectionCode());
         assertEquals(dto.getDirection(), direction.getDirection());
+    }
+
+    @Test
+    void listDirectionToDirectionDTOTest(){
+        List<Direction> directionList = new LinkedList<>();
+        Direction testDirection = new Direction();
+        testDirection.setId(3L);
+        directionList.add(testDirection);
+        directionList.add(testDirection);
+        List<DirectionDTO> directionDTOS = mapper.listDirectionToDirectionDTO(directionList);
+        assertEquals(3L, directionDTOS.get(0).getId());
+        assertEquals(3L, directionDTOS.get(1).getId());
+    }
+
+    @Test
+    void listDirectionDTOtoDirectionTest() {
+        List<DirectionDTO> directionDTOS = new LinkedList<>();
+        DirectionDTO testDirectionDTO = new DirectionDTO();
+        testDirectionDTO.setId(5L);
+        directionDTOS.add(testDirectionDTO);
+        directionDTOS.add(testDirectionDTO);
+        List<Direction> directions = mapper.listDirectionDTOToDirection(directionDTOS);
+        assertEquals(5L, directions.get(0).getId());
+        assertEquals(5L, directions.get(1).getId());
     }
 
 }
