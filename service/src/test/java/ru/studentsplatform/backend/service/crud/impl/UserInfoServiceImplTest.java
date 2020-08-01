@@ -13,6 +13,8 @@ import ru.studentsplatform.backend.domain.repository.UserInfoRepository;
 import ru.studentsplatform.backend.domain.repository.UserRepository;
 import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.entities.model.user.UserInfo;
+import ru.studentsplatform.backend.service.crud.UserInfoService;
+import ru.studentsplatform.backend.service.crud.impl.UserInfoServiceImpl;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.io.IOException;
@@ -20,8 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,12 +44,11 @@ class UserInfoServiceImplTest {
         userInfo.setId(1L);
     }
     /**
-     * Проверка того, что возвращается переданный объект.
-     * Проверка гененрации ошибки, когда пользователь не найден.
-     * Проверка генерации ошибки, когда инфа о пользователе уже создана.
+     * Test for create method
+     * @see UserInfoService#create(UserInfo)
      */
     @Test
-    void create() {
+    void createTest() {
         User user = new User();
         user.setId(1L);
         userInfo.setUser(user);
@@ -62,11 +62,11 @@ class UserInfoServiceImplTest {
     }
 
     /**
-     * Проверка возвращения значения, если найдена запись
-     * и исключения в противном случае.
+     * Test for getById method
+     * @see UserInfoService#getById(Long)
      */
     @Test
-    void getById() {
+    void getByIdTest() {
         doReturn(Optional.of(userInfo)).when(userInfoRepository).findById(userInfo.getId());
         doThrow(BusinessException.class).when(userInfoRepository).findById(2L);
         assertEquals(userInfo,service.getById(userInfo.getId()));
@@ -74,32 +74,41 @@ class UserInfoServiceImplTest {
     }
 
     /**
-     * Проверка того, что результатом является вызов findAll.
+     * Test for getAll method
+     * @see UserInfoService#getAll()
      */
     @Test
-    void getAll() {
-        List<UserInfo> list = new LinkedList<>();
+    void getAllTest() {
+        List<UserInfo> list = new LinkedList<UserInfo>();
         doReturn(list).when(userInfoRepository).findAll();
-        Assert.assertEquals(userInfoRepository.findAll(),service.getAll());
+        Assert.assertEquals(list, service.getAll());
     }
 
     /**
-     * Проверка того, что в результате работы вернется запись с обновленным id
+     * Test for update method
+     * @see UserInfoService#update(UserInfo, Long)
      */
     @Test
-    void update() {
-        Long newId = 2L;
-        userInfo.setId(2L);
-        doReturn(userInfo).when(userInfoRepository).saveAndFlush(userInfo);
-        Assert.assertEquals(userInfo,service.update(userInfo,newId));
+    void updateTest() {
+        UserInfo updated_userInfo = new UserInfo();
+        User user = new User();
+        userInfo.setUser(user);
+        doReturn(user).when(userRepository).getOne(userInfo.getId());
+        doReturn(true, false).when(userInfoRepository).existsById(userInfo.getId());
+        doReturn(updated_userInfo).when(userInfoRepository).saveAndFlush(updated_userInfo);
+        var result = service.update(updated_userInfo, userInfo.getId());
+        Assert.assertEquals(updated_userInfo,result);
+        Assert.assertEquals(user, result.getUser());
+        Assert.assertEquals(userInfo.getId(), result.getId());
+        Assert.assertThrows(BusinessException.class, () -> service.update(userInfo, userInfo.getId()));
     }
 
     /**
-     * Проверка true если есть запись
-     * false если нет записи
+     * Test for delete method
+     * @see UserInfoService#delete(Long)
      */
     @Test
-    void delete() {
+    void deleteTest() {
         doNothing().when(userInfoRepository).deleteById(userInfo.getId());
         Assert.assertEquals(true, service.delete(userInfo.getId()));
         userInfo.setId(2L);
@@ -108,14 +117,11 @@ class UserInfoServiceImplTest {
     }
 
     /**
-     * Проверки:
-     * Если файл пуст, то возвращаем Business exception
-     * Если прервалась запись, то возвращаем false
-     * Если удачно выполнено, то true
-     * @throws IOException
+     * Test for uploadImage method
+     * @see UserInfoService#uploadImage(MultipartFile, Long)
      */
     @Test
-    void uploadImage() {
+    void uploadImageTest() {
         Assert.assertThrows(BusinessException.class,() -> service.uploadImage(null,1L));
         MultipartFile file = mock(MultipartFile.class);
         try { doThrow(IOException.class).doReturn(new byte[]{1}).when(file).getBytes(); }

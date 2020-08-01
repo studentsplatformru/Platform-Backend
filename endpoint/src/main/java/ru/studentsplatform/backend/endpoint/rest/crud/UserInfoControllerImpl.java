@@ -23,6 +23,11 @@ public class UserInfoControllerImpl implements UserInfoController {
 
     private final UserInfoServiceImpl userInfoService;
 
+    /**
+     * Конструктор.
+     * @param userInfoMapper userMapper маппер, преобразующий UserInfoDTO в сущность UserInfo и наоборот.
+     * @param userInfoService userService CRUD сервис UserInfo.
+     */
     public UserInfoControllerImpl(UserInfoMapper userInfoMapper, UserInfoServiceImpl userInfoService) {
         this.userInfoMapper = userInfoMapper;
         this.userInfoService = userInfoService;
@@ -55,19 +60,29 @@ public class UserInfoControllerImpl implements UserInfoController {
         return ResponseEntity.ok(userInfoMapper.userInfoToUserInfoDTO(userInfoService.getById(id)));
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public ResponseEntity<List<UserInfoDTO>> getAll() {
-        return null;
+        return ResponseEntity.ok(userInfoMapper.listUserInfoToUserInfoDTO(userInfoService.getAll()));
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
-    public ResponseEntity<UserInfoDTO> update(UserInfoDTO updatedInstanceRequest, Long id) {
-        return null;
+    public ResponseEntity<UserInfoDTO> update(UserInfoDTO dto, Long id) {
+        var entity = userInfoMapper.userInfoDTOtoUserInfo(dto);
+        return ResponseEntity.ok(userInfoMapper.userInfoToUserInfoDTO(userInfoService.update(entity, id)));
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public ResponseEntity<Boolean> delete(Long id) {
-        return null;
+        return ResponseEntity.ok(userInfoService.delete(id));
     }
 
     /**
