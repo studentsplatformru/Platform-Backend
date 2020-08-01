@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name = "discipline")
 public class Discipline extends BaseEntity {
 	@ManyToOne
-	@JoinColumn(name = "usr_id", nullable = false)
+	@JoinColumn(nullable = false)
 	private User user;
 
 	@ManyToOne

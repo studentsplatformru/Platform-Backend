@@ -23,7 +23,7 @@ public class Faculty extends BaseEntity {
 	private String faculty;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "university_name")
+	@JoinColumn(name = "university_id")
 	private University university;
 
 	@OneToMany(mappedBy = "faculty", fetch = FetchType.LAZY)
