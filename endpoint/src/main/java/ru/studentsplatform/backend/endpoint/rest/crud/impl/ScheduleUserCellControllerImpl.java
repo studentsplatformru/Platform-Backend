@@ -46,7 +46,8 @@ public class ScheduleUserCellControllerImpl implements ScheduleUserCellControlle
      */
     @Override
     public ResponseEntity<ScheduleUserCellDTO> getById(Long id) {
-        return ResponseEntity.ok(scheduleUserCellMapper.scheduleUserCellToScheduleUserCellDTO(scheduleUserCellService.getById(id)));
+        return ResponseEntity.ok(scheduleUserCellMapper.
+                scheduleUserCellToScheduleUserCellDTO(scheduleUserCellService.getById(id)));
     }
 
     /**
@@ -54,7 +55,8 @@ public class ScheduleUserCellControllerImpl implements ScheduleUserCellControlle
      */
     @Override
     public ResponseEntity<List<ScheduleUserCellDTO>> getAll() {
-        return ResponseEntity.ok(scheduleUserCellMapper.listScheduleUserCellToScheduleUserCellDTO(scheduleUserCellService.getAll()));
+        return ResponseEntity.ok(scheduleUserCellMapper.
+                listScheduleUserCellToScheduleUserCellDTO(scheduleUserCellService.getAll()));
     }
 
     /**

@@ -47,7 +47,7 @@ public interface UserConroller extends AbstractController<UserDTO> {
      * @return обновленная запись.
      */
     @Override
-    ResponseEntity<UserDTO> update(@RequestBody UserDTO dto,@PathVariable Long id);
+    ResponseEntity<UserDTO> update(@RequestBody UserDTO dto, @PathVariable Long id);
 
     /**
      * Удаляет запись c данным id из БД.

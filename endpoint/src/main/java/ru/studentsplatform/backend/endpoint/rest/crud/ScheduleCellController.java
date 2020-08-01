@@ -19,7 +19,7 @@ public interface ScheduleCellController extends AbstractController<ScheduleCellD
     ResponseEntity<List<ScheduleCellDTO>> getAll();
 
     @Override
-    ResponseEntity<ScheduleCellDTO> update(@RequestBody ScheduleCellDTO scheduleCellDTO,@PathVariable Long id);
+    ResponseEntity<ScheduleCellDTO> update(@RequestBody ScheduleCellDTO scheduleCellDTO, @PathVariable Long id);
 
     @Override
     ResponseEntity<Boolean> delete(@PathVariable Long id);

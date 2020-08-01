@@ -19,7 +19,8 @@ public interface ScheduleUserCellController extends AbstractController<ScheduleU
     ResponseEntity<List<ScheduleUserCellDTO>> getAll();
 
     @Override
-    ResponseEntity<ScheduleUserCellDTO> update(@RequestBody ScheduleUserCellDTO scheduleUserCellDTO, @PathVariable Long id);
+    ResponseEntity<ScheduleUserCellDTO> update(@RequestBody ScheduleUserCellDTO scheduleUserCellDTO,
+                                               @PathVariable Long id);
 
     @Override
     ResponseEntity<Boolean> delete(@PathVariable Long id);
