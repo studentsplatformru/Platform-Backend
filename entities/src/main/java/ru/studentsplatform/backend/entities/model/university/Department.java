@@ -20,7 +20,7 @@ import java.util.List;
 @Entity
 @Table(name = "department")
 public class Department extends BaseEntity {
-	@Column(name = "department")
+	@Column(name = "department", nullable = false)
 	private String department;
 
 	@ManyToOne(fetch = FetchType.LAZY)
