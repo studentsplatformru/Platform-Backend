@@ -28,7 +28,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         if(!facultyRepository.existsById(newEntity.getFaculty().getId())){
             throw new BusinessException(ServiceExceptionReason.FACULTY_NOT_FOUND, newEntity.getFaculty().getId());
         }
-        newEntity.setFaculty(facultyRepository.findById(newEntity.getFaculty().getId()).get());
+        newEntity.setFaculty(facultyRepository.getOne(newEntity.getFaculty().getId()));
         return departmentRepository.save(newEntity);
     }
 

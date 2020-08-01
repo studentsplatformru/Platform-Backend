@@ -51,7 +51,7 @@ public class UserInfoServiceImpl implements UserInfoService {
             throw new BusinessException(ServiceExceptionReason.USER_INFO_ALREADY_EXISTS,
                     newEntity.getUser().getId());
         }
-        User user = userRepository.findById(newEntity.getUser().getId()).get();
+        User user = userRepository.getOne(newEntity.getUser().getId());
         newEntity.setUser(user);
         return userInfoRepository.save(newEntity);
     }
