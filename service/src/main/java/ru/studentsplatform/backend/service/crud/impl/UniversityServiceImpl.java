@@ -3,18 +3,24 @@ package ru.studentsplatform.backend.service.crud.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.studentsplatform.backend.domain.repository.UniversityRepository;
 import ru.studentsplatform.backend.entities.model.university.University;
 import ru.studentsplatform.backend.service.crud.UniversityService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
+import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.List;
 
+@Profiled
+@Transactional
+@Service
 public class UniversityServiceImpl implements UniversityService {
     private UniversityRepository universityRepository;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserInfoServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UniversityServiceImpl.class);
     public UniversityServiceImpl(UniversityRepository universityRepository) {
         this.universityRepository = universityRepository;
     }
@@ -47,7 +53,7 @@ public class UniversityServiceImpl implements UniversityService {
     @Override
     public University update(University updatedEntity, Long id) {
         if (!universityRepository.existsById(id)) {
-            throw new BusinessException(ServiceExceptionReason.USER_NOT_FOUND, id);
+            throw new BusinessException(ServiceExceptionReason.UNIVERSITY_NOT_FOUND, id);
         }
         updatedEntity.setId(id);
         return universityRepository.saveAndFlush(updatedEntity);
