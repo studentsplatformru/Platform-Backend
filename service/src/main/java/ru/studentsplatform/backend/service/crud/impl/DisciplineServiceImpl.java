@@ -16,6 +16,9 @@ import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.List;
 
+/**
+ * @author Archie-Vian (sas-aramonov@yandex.ru) 01.08.2020
+ */
 @Profiled
 @Transactional
 @Service
