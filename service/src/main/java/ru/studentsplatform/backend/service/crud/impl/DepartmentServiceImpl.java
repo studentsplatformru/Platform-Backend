@@ -25,7 +25,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department create(Department newEntity) {
-        if(!facultyRepository.existsById(newEntity.getFaculty().getId())){
+        if (!facultyRepository.existsById(newEntity.getFaculty().getId())) {
             throw new BusinessException(ServiceExceptionReason.FACULTY_NOT_FOUND, newEntity.getFaculty().getId());
         }
         newEntity.setFaculty(facultyRepository.getOne(newEntity.getFaculty().getId()));

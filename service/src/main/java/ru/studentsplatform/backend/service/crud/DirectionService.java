@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.service.crud;
 
-import ru.studentsplatform.backend.domain.repository.DirectionRepository;
 import ru.studentsplatform.backend.entities.model.university.Direction;
 
 import java.util.List;

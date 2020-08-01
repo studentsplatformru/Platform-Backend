@@ -25,7 +25,7 @@ public class DirectionServiceImpl implements DirectionService {
 
     @Override
     public Direction create(Direction newEntity) {
-        if(!facultyRepository.existsById(newEntity.getFaculty().getId())){
+        if (!facultyRepository.existsById(newEntity.getFaculty().getId())) {
             throw new BusinessException(ServiceExceptionReason.FACULTY_NOT_FOUND, newEntity.getFaculty().getId());
         }
         newEntity.setFaculty(facultyRepository.getOne(newEntity.getFaculty().getId()));
@@ -34,7 +34,8 @@ public class DirectionServiceImpl implements DirectionService {
 
     @Override
     public Direction getById(Long id) {
-        return directionRepository.findById(id).orElseThrow(() -> new BusinessException(ServiceExceptionReason.DIRECTION_NOT_FOUND, id));
+        return directionRepository.findById(id).orElseThrow(() ->
+                new BusinessException(ServiceExceptionReason.DIRECTION_NOT_FOUND, id));
     }
 
     @Override
