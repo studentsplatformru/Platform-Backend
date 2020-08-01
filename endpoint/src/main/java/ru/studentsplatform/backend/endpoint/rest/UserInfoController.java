@@ -21,7 +21,7 @@ public interface UserInfoController extends AbstractController<UserInfoDTO> {
     /**
      * Путь к user info.
      */
-    String BASE_URL = AbstractController.BASE_URL + "/userinfo";
+    String BASE_URL = AbstractController.BASE_URL + "/user_info";
 
     /**
      * Создает новую запись в таблице user_info по заданным параметрам(без изображения).

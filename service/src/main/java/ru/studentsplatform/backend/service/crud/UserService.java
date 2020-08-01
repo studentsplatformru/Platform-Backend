@@ -21,7 +21,7 @@ public interface UserService extends AbstractService<User> {
      * Ищет сущность по id.
      * @param id id сущности в таблице user, которую надо получить.
      * @return найденная сущность
-     * @throws ru.studentsplatform.backend.service.exception.core.BusinessException
+     * @throws ru.studentsplatform.backend.system.exception.core.BusinessException
      * - если пользователь не найден (ServiceExceptionReason.USER_NOT_FOUND)
      */
     @Override
