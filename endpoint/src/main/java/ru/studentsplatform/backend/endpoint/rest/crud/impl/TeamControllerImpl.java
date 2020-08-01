@@ -1,11 +1,11 @@
-package ru.studentsplatform.backend.endpoint.rest.crud;
+package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.university.TeamDTO;
 import ru.studentsplatform.backend.endpoint.mapper.TeamMapper;
-import ru.studentsplatform.backend.endpoint.rest.TeamController;
+import ru.studentsplatform.backend.endpoint.rest.crud.TeamController;
 import ru.studentsplatform.backend.service.crud.impl.TeamServiceImpl;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 

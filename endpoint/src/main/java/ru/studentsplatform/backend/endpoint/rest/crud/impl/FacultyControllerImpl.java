@@ -1,9 +1,9 @@
-package ru.studentsplatform.backend.endpoint.rest.crud;
+package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.http.ResponseEntity;
 import ru.studentsplatform.backend.domain.dto.university.FacultyDTO;
 import ru.studentsplatform.backend.endpoint.mapper.FacultyMapper;
-import ru.studentsplatform.backend.endpoint.rest.FacultyController;
+import ru.studentsplatform.backend.endpoint.rest.crud.FacultyController;
 import ru.studentsplatform.backend.service.crud.FacultyService;
 
 import java.util.List;

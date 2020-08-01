@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.endpoint.rest;
+package ru.studentsplatform.backend.endpoint.rest.main;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

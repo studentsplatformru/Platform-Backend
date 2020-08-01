@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.endpoint.rest;
+package ru.studentsplatform.backend.endpoint.rest.crud;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;

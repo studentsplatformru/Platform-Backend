@@ -1,9 +1,9 @@
-package ru.studentsplatform.backend.endpoint.rest.crud;
+package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.http.ResponseEntity;
 import ru.studentsplatform.backend.domain.dto.university.DirectionDTO;
 import ru.studentsplatform.backend.endpoint.mapper.DirectionMapper;
-import ru.studentsplatform.backend.endpoint.rest.DirectionController;
+import ru.studentsplatform.backend.endpoint.rest.crud.DirectionController;
 import ru.studentsplatform.backend.service.crud.DirectionService;
 
 import java.util.List;

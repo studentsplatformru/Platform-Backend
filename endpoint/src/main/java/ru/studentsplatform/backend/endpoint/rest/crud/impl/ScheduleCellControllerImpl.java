@@ -1,11 +1,11 @@
-package ru.studentsplatform.backend.endpoint.rest.crud;
+package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.schedule.ScheduleCellDTO;
 import ru.studentsplatform.backend.endpoint.mapper.ScheduleCellMapper;
-import ru.studentsplatform.backend.endpoint.rest.ScheduleCellController;
+import ru.studentsplatform.backend.endpoint.rest.crud.ScheduleCellController;
 import ru.studentsplatform.backend.service.crud.impl.ScheduleCellServiceImpl;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 

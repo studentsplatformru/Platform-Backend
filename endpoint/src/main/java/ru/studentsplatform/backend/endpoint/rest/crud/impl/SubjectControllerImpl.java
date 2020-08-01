@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.endpoint.rest.crud;
+package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 
 import org.springframework.http.ResponseEntity;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.university.SubjectDTO;
 import ru.studentsplatform.backend.endpoint.mapper.SubjectMapper;
-import ru.studentsplatform.backend.endpoint.rest.SubjectController;
+import ru.studentsplatform.backend.endpoint.rest.crud.SubjectController;
 import ru.studentsplatform.backend.service.crud.impl.SubjectServiceImpl;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 

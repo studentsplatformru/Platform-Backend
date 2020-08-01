@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.endpoint.rest.crud;
+package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
 import ru.studentsplatform.backend.endpoint.mapper.TaskMapper;
-import ru.studentsplatform.backend.endpoint.rest.TaskController;
+import ru.studentsplatform.backend.endpoint.rest.crud.TaskController;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;
