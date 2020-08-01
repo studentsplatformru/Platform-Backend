@@ -44,7 +44,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Task create(Task task) {
 		if (task.getScheduleUserCell() == null || task.getScheduleUserCell().getId() == null) {
-			throw new BusinessException(ServiceExceptionReason.SCHEDULE_CELL_NOT_FOUND, task.getTaskName());
+			throw new BusinessException(ServiceExceptionReason.SCHEDULE_CELL_NOT_FOUND, task.getId());
 		}
 		return taskRepository.save(task);
 	}

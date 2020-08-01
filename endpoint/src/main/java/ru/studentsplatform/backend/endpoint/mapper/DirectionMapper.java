@@ -46,7 +46,7 @@ public interface DirectionMapper {
             @Mapping(target = "direction", source = "dto.direction"),
             @Mapping(target = "directionCode", source = "dto.directionCode"),
             @Mapping(target = "faculty.id", source = "dto.facultyId"),
-            @Mapping(target = "teams.id", source = "dto.teams")
+            @Mapping(target = "teams", source = "dto.teams")
 
     })
     Direction directionDTOToDirection(DirectionDTO dto);

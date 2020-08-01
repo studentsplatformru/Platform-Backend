@@ -40,7 +40,9 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 	PLACE_STUDY_NOT_FOUND(HttpStatus.NOT_FOUND, "F017",
 			"Информация о месте проведения занятий с Id %d не найдена"),
 	DISCIPLINE_NOT_FOUND(HttpStatus.NOT_FOUND, "F018",
-			"Информация о дисциплине с Id %d не найдена");
+			"Информация о дисциплине с Id %d не найдена"),
+	UNIVERSITY_NOT_FOUND(HttpStatus.NOT_FOUND, "F022",
+			"Информация об университете с Id %d не найдена");
 
 
 	private final HttpStatus status;

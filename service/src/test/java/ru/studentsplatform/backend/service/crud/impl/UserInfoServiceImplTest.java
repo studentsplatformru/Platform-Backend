@@ -55,7 +55,7 @@ class UserInfoServiceImplTest {
         doReturn(userInfo).when(userInfoRepository).save(userInfo);
         doReturn(false, true).when(userInfoRepository).existsById(userInfo.getUser().getId());
         doReturn(true, true, false).when(userRepository).existsById(userInfo.getUser().getId());
-        doReturn(Optional.of(user)).when(userRepository).findById(user.getId());
+        doReturn(user).when(userRepository).getOne(user.getId());
         Assert.assertEquals(userInfo, service.create(userInfo));
         Assert.assertThrows(BusinessException.class, () -> service.create(userInfo));
         Assert.assertThrows(BusinessException.class, () -> service.create(userInfo));
