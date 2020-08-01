@@ -17,7 +17,7 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 	COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F002", "Комментарий с Id %d не найден"),
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "F003", "Пользователь с Id %d не найден"),
 	SCHEDULE_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "F004",
-			"Отметка в расписании, связанная с задачей с Id %d, не найдена"),
+			"Ячейка расписания с Id %d, не найдена"),
 	NO_UPLOADED_FILES_FOUND(HttpStatus.NOT_FOUND, "F005",
 			"Не найдено ни одного загружаемого файла к задаче с Id %d"),
 	FILE_INDEX_NOT_EXIST(HttpStatus.NOT_FOUND, "F006",
@@ -40,7 +40,10 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 	PLACE_STUDY_NOT_FOUND(HttpStatus.NOT_FOUND, "F017",
 			"Информация о месте проведения занятий с Id %d не найдена"),
 	DISCIPLINE_NOT_FOUND(HttpStatus.NOT_FOUND, "F018",
-			"Информация о дисциплине с Id %d не найдена");
+			"Информация о дисциплине с Id %d не найдена"),
+	UNIVERSITY_NOT_FOUND(HttpStatus.NOT_FOUND, "F019", "Информация об университете с id %d не найдена"),
+	SCHEDULE_USER_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "F020",
+			"Ячейка расписания с id %d пользователя  не найдена");
 
 
 	private final HttpStatus status;
