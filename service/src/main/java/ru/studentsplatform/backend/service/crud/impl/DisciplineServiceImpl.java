@@ -3,16 +3,22 @@ package ru.studentsplatform.backend.service.crud.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.studentsplatform.backend.domain.repository.DisciplineRepository;
 import ru.studentsplatform.backend.domain.repository.SubjectRepository;
 import ru.studentsplatform.backend.domain.repository.UserRepository;
 import ru.studentsplatform.backend.entities.model.university.Discipline;
 import ru.studentsplatform.backend.service.crud.DisciplineService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
+import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.List;
 
+@Profiled
+@Transactional
+@Service
 public class DisciplineServiceImpl implements DisciplineService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DisciplineServiceImpl.class);

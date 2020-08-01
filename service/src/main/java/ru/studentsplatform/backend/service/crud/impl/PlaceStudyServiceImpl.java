@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.studentsplatform.backend.domain.repository.FacultyRepository;
 import ru.studentsplatform.backend.domain.repository.PlaceStudyRepository;
 import ru.studentsplatform.backend.domain.repository.UniversityRepository;
@@ -14,6 +15,7 @@ import ru.studentsplatform.backend.domain.repository.UserRepository;
 import ru.studentsplatform.backend.entities.model.university.PlaceStudy;
 import ru.studentsplatform.backend.service.crud.PlaceStudyService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
+import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.List;
@@ -21,6 +23,8 @@ import java.util.List;
 /**
  * @author Perevalov Pavel (28.07.2020)
  */
+@Transactional
+@Profiled
 @Service
 public class PlaceStudyServiceImpl implements PlaceStudyService {
 

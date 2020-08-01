@@ -3,15 +3,21 @@ package ru.studentsplatform.backend.service.crud.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.studentsplatform.backend.domain.repository.DepartmentRepository;
 import ru.studentsplatform.backend.domain.repository.FacultyRepository;
 import ru.studentsplatform.backend.entities.model.university.Department;
 import ru.studentsplatform.backend.service.crud.DepartmentService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
+import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.List;
 
+@Transactional
+@Profiled
+@Service
 public class DepartmentServiceImpl implements DepartmentService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
 
