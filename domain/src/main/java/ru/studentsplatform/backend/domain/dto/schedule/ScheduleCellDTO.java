@@ -2,7 +2,6 @@ package ru.studentsplatform.backend.domain.dto.schedule;
 
 import lombok.Data;
 import ru.studentsplatform.backend.domain.dto.BaseDTO;
-import ru.studentsplatform.backend.entities.model.enums.ClassTypeEnum;
 
 import java.time.OffsetDateTime;
 

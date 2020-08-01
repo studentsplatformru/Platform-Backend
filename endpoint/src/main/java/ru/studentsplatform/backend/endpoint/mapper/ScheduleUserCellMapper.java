@@ -29,7 +29,7 @@ public interface ScheduleUserCellMapper {
             @Mapping(target = "userId", source = "entity.user.id"),
             @Mapping(target = "scheduleCellId", source = "entity.scheduleCell.id"),
             @Mapping(target = "universityRole", source = "entity.universityRole"),
-            @Mapping(target = "ScheduleUserCells", source = "entity.ScheduleUserCells")
+            @Mapping(target = "tasks", source = "entity.tasks")
 
     })
     ScheduleUserCellDTO scheduleUserCellToScheduleUserCellDTO(ScheduleUserCell entity);
@@ -46,8 +46,8 @@ public interface ScheduleUserCellMapper {
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "user.id", source = "dto.userId"),
             @Mapping(target = "scheduleCell.id", source = "dto.scheduleCellId"),
-            @Mapping(target = "universityRole", source = "entity.universityRole"),
-            @Mapping(target = "ScheduleUserCells", source = "entity.ScheduleUserCells")
+            @Mapping(target = "universityRole", source = "dto.universityRole"),
+            @Mapping(target = "tasks", source = "dto.tasks")
     })
     ScheduleUserCell scheduleUserCellDTOToScheduleUserCell(ScheduleUserCellDTO dto);
 

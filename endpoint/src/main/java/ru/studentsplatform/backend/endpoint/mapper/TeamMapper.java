@@ -44,9 +44,9 @@ public interface TeamMapper {
             @Mapping(target = "id", source = "dto.id"),
             @Mapping(target = "createdBy", source = "dto.createdBy"),
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
-            @Mapping(target = "TeamName", source = "dto.semester"),
-            @Mapping(target = "done", source = "dto.teamName"),
-            @Mapping(target = "mark", source = "dto.users"),
+            @Mapping(target = "semester", source = "dto.semester"),
+            @Mapping(target = "teamName", source = "dto.teamName"),
+            @Mapping(target = "users", source = "dto.users"),
             @Mapping(target = "direction.id", source = "dto.directionId")
 
     })
