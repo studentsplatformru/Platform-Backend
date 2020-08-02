@@ -24,6 +24,9 @@ public class DisciplineMapperTest {
     @InjectMocks
     DisciplineMapper mapper = new DisciplineMapperImpl();
 
+    /**
+     * Проверка того, что маппер может создать DTO на основе сущности
+     */
     @Test
     void disciplineToDisciplineDTOTest(){
         Discipline entity = new Discipline();
@@ -44,6 +47,9 @@ public class DisciplineMapperTest {
 
     }
 
+    /**
+     * Проверка того, что маппер способен создать сущность на основе DTO
+     */
     @Test
     void disciplineDTOToDisciplineTest(){
         DisciplineDTO dto = new DisciplineDTO();
@@ -59,6 +65,9 @@ public class DisciplineMapperTest {
         assertEquals(dto.getSubjectId(), entity.getSubject().getId());
     }
 
+    /**
+     * Проверка того, что маппер способен создать лист DTO на основе листа сущностей
+     */
     @Test
     void listDisciplineToDisciplineDTOTest(){
         List<Discipline> disciplineList = new LinkedList<>();
@@ -71,6 +80,9 @@ public class DisciplineMapperTest {
         assertEquals(3L, disciplineDTOS.get(1).getId());
     }
 
+    /**
+     * Проверка того, что маппер способен создать лист сущностей на основе листа DTO
+     */
     @Test
     void listDisciplineDTOtoDisciplineTest() {
         List<DisciplineDTO> disciplineDTOS = new LinkedList<>();

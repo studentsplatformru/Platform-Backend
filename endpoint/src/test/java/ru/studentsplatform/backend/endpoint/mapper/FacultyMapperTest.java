@@ -26,6 +26,9 @@ public class FacultyMapperTest {
     @InjectMocks
     FacultyMapper mapper = new FacultyMapperImpl();
 
+    /**
+     * Проверка того, что маппер может создать DTO на основе сущности
+     */
     @Test
     void facultyToFacultyDTOTest(){
         Faculty entity = new Faculty();
@@ -40,6 +43,9 @@ public class FacultyMapperTest {
         assertEquals(dto.getUniversityId(), entity.getUniversity().getId());
     }
 
+    /**
+     * Проверка того, что маппер способен создать сущность на основе DTO
+     */
     @Test
     void facultyDTOtoFacultyTest(){
         FacultyDTO dto = new FacultyDTO();
@@ -52,6 +58,9 @@ public class FacultyMapperTest {
         assertEquals(dto.getUniversityId(), entity.getUniversity().getId());
     }
 
+    /**
+     * Проверка того, что маппер способен создать лист DTO на основе листа сущностей
+     */
     @Test
     void listFacultyToFacultyDTOTest(){
         List<Faculty> facultyList = new LinkedList<>();
@@ -64,6 +73,9 @@ public class FacultyMapperTest {
         assertEquals(3L, facultyDTOS.get(1).getId());
     }
 
+    /**
+     * Проверка того, что маппер способен создать лист сущностей на основе листа DTO
+     */
     @Test
     void listFacultyDTOtoFacultyTest() {
         List<FacultyDTO> facultyDTOS = new LinkedList<>();

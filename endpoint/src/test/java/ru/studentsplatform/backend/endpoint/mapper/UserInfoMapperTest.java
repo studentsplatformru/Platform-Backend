@@ -18,6 +18,9 @@ class UserInfoMapperTest {
 
     private UserInfoMapperImpl mapper = new UserInfoMapperImpl();
 
+    /**
+     * Проверка того, что маппер может создать DTO на основе сущности
+     */
     @Test
     void userInfoToUserInfoDTOTest() {
         UserInfo userInfo = new UserInfo();
@@ -40,6 +43,9 @@ class UserInfoMapperTest {
         Assert.assertEquals(userInfo.getPhoneNumber(),dto.getPhoneNumber());
     }
 
+    /**
+     * Проверка того, что маппер способен создать сущность на основе DTO
+     */
     @Test
     void userInfoDTOtoUserInfoTest() {
         UserInfoDTO userInfoDTO = new UserInfoDTO();
@@ -61,6 +67,9 @@ class UserInfoMapperTest {
 
     }
 
+    /**
+     * Проверка того, что маппер способен создать лист DTO на основе листа сущностей
+     */
     @Test
     void listUserInfoToUserInfoDTOTest() {
         List<UserInfo> userInfoList = new LinkedList<>();
@@ -73,6 +82,9 @@ class UserInfoMapperTest {
         assertEquals(3L, userInfoDTOS.get(1).getId());
     }
 
+    /**
+     * Проверка того, что маппер способен создать лист сущностей на основе листа DTO
+     */
     @Test
     void listUserInfoDTOtoUserInfoTest() {
         List<UserInfoDTO> userInfoDTOS = new LinkedList<>();

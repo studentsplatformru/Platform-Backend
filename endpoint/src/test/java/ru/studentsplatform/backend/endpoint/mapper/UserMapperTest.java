@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserMapperTest {
 
+    /**
+     * Проверка того, что маппер может создать DTO на основе сущности
+     */
     UserMapper mapper = new UserMapperImpl();
     @Test
     void userToUserDTOTest() {
@@ -28,6 +31,9 @@ class UserMapperTest {
         Assert.assertEquals(user.getPassword(), dto.getPassword());
     }
 
+    /**
+     * Проверка того, что маппер способен создать сущность на основе DTO
+     */
     @Test
     void userDTOtoUserTest() {
         UserDTO userDTO = new UserDTO();
@@ -44,6 +50,9 @@ class UserMapperTest {
         Assert.assertEquals(userDTO.getPassword(), entity.getPassword());
     }
 
+    /**
+     * Проверка того, что маппер способен создать лист DTO на основе листа сущностей
+     */
     @Test
     void listUserToUserDTOTest() {
         List<User> userList = new LinkedList<>();
@@ -56,6 +65,9 @@ class UserMapperTest {
         assertEquals(3L, userDTOS.get(1).getId());
     }
 
+    /**
+     * Проверка того, что маппер способен создать лист сущностей на основе листа DTO
+     */
     @Test
     void listUserDTOtoUserTest() {
         List<UserDTO> userDTOS = new LinkedList<>();

@@ -23,7 +23,9 @@ public class DepartmentMapperTest {
     @InjectMocks
     private DepartmentMapper mapper = new DepartmentMapperImpl();
 
-
+    /**
+     * Проверка того, что маппер может DTO сущность на основе сущности
+     */
     @Test
     void departmentToDepartmentDTOTest(){
         Department department = new Department();
@@ -40,6 +42,9 @@ public class DepartmentMapperTest {
 
     }
 
+    /**
+     * Проверка того, что маппер может создать сущность на основе DTO
+     */
     @Test
     void departmentDTOToDepartmentTest(){
         DepartmentDTO dto = new DepartmentDTO();
@@ -52,6 +57,9 @@ public class DepartmentMapperTest {
         assertEquals(department.getFaculty().getId(), dto.getFacultyId());
     }
 
+    /**
+     * Проверка того, что маппер может создать лист DTO на основе листа сущностей
+     */
     @Test
     void listDepartmentToDepartmentDTOTest(){
         List<Department> departmentList = new LinkedList<>();
@@ -64,6 +72,9 @@ public class DepartmentMapperTest {
         assertEquals(3L, departmentDTOS.get(1).getId());
     }
 
+    /**
+     * Проверка того, что маппер может создать лист сущностей на основе листа DTO
+     */
     @Test
     void listDepartmentDTOtoDepartmentTest() {
         List<DepartmentDTO> departmentDTOS = new LinkedList<>();

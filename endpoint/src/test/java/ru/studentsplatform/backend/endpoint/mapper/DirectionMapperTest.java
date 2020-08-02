@@ -23,6 +23,9 @@ public class DirectionMapperTest {
     @InjectMocks
     DirectionMapper mapper = new DirectionMapperImpl();
 
+    /**
+     * Проверка того, что маппер может создать DTO на основе сущности
+     */
     @Test
     void directionToDirectionDTOTest(){
         Direction direction = new Direction();
@@ -39,6 +42,9 @@ public class DirectionMapperTest {
         assertEquals(dto.getDirectionCode(),direction.getDirectionCode());
     }
 
+    /**
+     * Проверка того, что маппер способен создать сущность на основе DTO
+     */
     @Test
     void directionDTOToDirectionTest(){
         DirectionDTO dto = new DirectionDTO();
@@ -53,6 +59,9 @@ public class DirectionMapperTest {
         assertEquals(dto.getDirection(), direction.getDirection());
     }
 
+    /**
+     * Проверка того, что маппер способен создать лист DTO на основе листа сущностей
+     */
     @Test
     void listDirectionToDirectionDTOTest(){
         List<Direction> directionList = new LinkedList<>();
@@ -65,6 +74,9 @@ public class DirectionMapperTest {
         assertEquals(3L, directionDTOS.get(1).getId());
     }
 
+    /**
+     * Проверка того, что маппер способен создать лист сущностей на основе листа DTO
+     */
     @Test
     void listDirectionDTOtoDirectionTest() {
         List<DirectionDTO> directionDTOS = new LinkedList<>();
