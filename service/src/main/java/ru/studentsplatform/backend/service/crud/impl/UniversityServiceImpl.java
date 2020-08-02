@@ -25,6 +25,9 @@ public class UniversityServiceImpl implements UniversityService {
         this.universityRepository = universityRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public University create(University newEntity) {
         return universityRepository.save(newEntity);

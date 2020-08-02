@@ -33,6 +33,9 @@ public class FacultyServiceImpl implements FacultyService {
         this.universityRepository = universityRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Faculty create(Faculty newEntity) {
         if (!universityRepository.existsById(newEntity.getUniversity().getId())) {
@@ -42,23 +45,35 @@ public class FacultyServiceImpl implements FacultyService {
         return facultyRepository.save(newEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Faculty getById(Long id) {
         return facultyRepository.findById(id).orElseThrow(() ->
                 new BusinessException(ServiceExceptionReason.FACULTY_NOT_FOUND, id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Faculty> getAll() {
         return facultyRepository.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Faculty update(Faculty updatedEntity, Long id) {
         updatedEntity.setId(id);
         return facultyRepository.save(updatedEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(Long id) {
         try {

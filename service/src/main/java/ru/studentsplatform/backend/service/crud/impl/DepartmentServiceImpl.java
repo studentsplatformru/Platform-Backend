@@ -32,6 +32,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         this.facultyRepository = facultyRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Department create(Department newEntity) {
         if (!facultyRepository.existsById(newEntity.getFaculty().getId())) {
@@ -41,23 +44,35 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.save(newEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Department getById(Long id) {
         return departmentRepository.findById(id).orElseThrow(() ->
                 new BusinessException(ServiceExceptionReason.DEPARTMENT_NOT_FOUND, id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Department> getAll() {
         return departmentRepository.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Department update(Department updatedEntity, Long id) {
         updatedEntity.setId(id);
         return departmentRepository.saveAndFlush(updatedEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(Long id) {
         try {

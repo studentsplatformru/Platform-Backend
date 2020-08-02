@@ -37,6 +37,9 @@ public class DisciplineServiceImpl implements DisciplineService {
         this.subjectRepository = subjectRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Discipline create(Discipline newEntity) {
         if (!userRepository.existsById(newEntity.getUser().getId())) {
@@ -48,23 +51,35 @@ public class DisciplineServiceImpl implements DisciplineService {
         return disciplineRepository.save(newEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Discipline getById(Long id) {
         return disciplineRepository.findById(id).orElseThrow(() ->
                 new BusinessException(ServiceExceptionReason.DISCIPLINE_NOT_FOUND, id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Discipline> getAll() {
         return disciplineRepository.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Discipline update(Discipline updatedEntity, Long id) {
         updatedEntity.setId(id);
         return disciplineRepository.save(updatedEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(Long id) {
         try {

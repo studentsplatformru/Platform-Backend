@@ -32,6 +32,9 @@ public class DirectionServiceImpl implements DirectionService {
         this.facultyRepository = facultyRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Direction create(Direction newEntity) {
         if (!facultyRepository.existsById(newEntity.getFaculty().getId())) {
@@ -41,23 +44,35 @@ public class DirectionServiceImpl implements DirectionService {
         return directionRepository.save(newEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Direction getById(Long id) {
         return directionRepository.findById(id).orElseThrow(() ->
                 new BusinessException(ServiceExceptionReason.DIRECTION_NOT_FOUND, id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Direction> getAll() {
         return directionRepository.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Direction update(Direction updatedEntity, Long id) {
         updatedEntity.setId(id);
         return directionRepository.saveAndFlush(updatedEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(Long id) {
         try {

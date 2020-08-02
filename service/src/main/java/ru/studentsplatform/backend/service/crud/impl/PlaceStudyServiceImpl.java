@@ -64,6 +64,9 @@ public class PlaceStudyServiceImpl implements PlaceStudyService {
         this.teamRepository = teamRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PlaceStudy create(PlaceStudy newPlaceStudy) {
         if (!userRepository.existsById(newPlaceStudy.getUser().getId())) {
@@ -94,23 +97,35 @@ public class PlaceStudyServiceImpl implements PlaceStudyService {
         return placeStudyRepository.saveAndFlush(newPlaceStudy);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PlaceStudy getById(Long id) {
         return placeStudyRepository.findById(id).orElseThrow(() ->
                 new BusinessException(ServiceExceptionReason.PLACE_STUDY_NOT_FOUND, id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<PlaceStudy> getAll() {
         return placeStudyRepository.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PlaceStudy update(PlaceStudy updatedPlaceStudy, Long id) {
         updatedPlaceStudy.setId(id);
         return placeStudyRepository.save(updatedPlaceStudy);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean delete(Long id) {
         try {
