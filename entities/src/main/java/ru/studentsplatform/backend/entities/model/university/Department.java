@@ -27,7 +27,4 @@ public class Department extends BaseEntity {
 	@JoinColumn(name = "faculty_id")
 	private Faculty faculty;
 
-	@OneToMany
-	@JoinColumn(name = "department_id")
-	private List<User> users;
 }
