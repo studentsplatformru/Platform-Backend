@@ -12,8 +12,6 @@ import ru.studentsplatform.backend.entities.model.university.Department;
 import ru.studentsplatform.backend.entities.model.university.Faculty;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
-import java.util.NoSuchElementException;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -33,7 +31,7 @@ public class DepartmentServiceImplTest {
     private DepartmentServiceImpl departmentService;
 
     /**
-     * Проверка того, что метод create возвращает созданный институт.
+     * Проверка того, что метод create возвращает созданную кафедру.
      * Сымитировано поведение saveAndFlush.
      */
     @Test
@@ -52,7 +50,7 @@ public class DepartmentServiceImplTest {
     }
 
     /**
-     * Проверка того, что метод findById возвращает созданный институт
+     * Проверка того, что метод findById возвращает созданную кафедру
      * и кидает NoSuchElementException при её отсутствии.
      */
     @Test
@@ -74,7 +72,7 @@ public class DepartmentServiceImplTest {
     }
 
     /**
-     * Проверка того, что метод update возвращает обновлённый институт с Id,
+     * Проверка того, что метод update возвращает обновлённую кафедру с Id,
      * заданным в параметре.
      */
     @Test

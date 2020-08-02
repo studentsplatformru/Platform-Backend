@@ -24,7 +24,7 @@ public class UniversityServiceImplTest {
     private UniversityServiceImpl universityService;
 
     /**
-     * Проверка того, что метод create возвращает созданный институт.
+     * Проверка того, что метод create возвращает созданный унииверситет.
      * Сымитировано поведение saveAndFlush.
      */
     @Test
@@ -36,7 +36,7 @@ public class UniversityServiceImplTest {
     }
 
     /**
-     * Проверка того, что метод findById возвращает созданный институт
+     * Проверка того, что метод findById возвращает созданный унииверситет
      * и кидает NoSuchElementException при её отсутствии.
      */
     @Test
@@ -58,7 +58,7 @@ public class UniversityServiceImplTest {
     }
 
     /**
-     * Проверка того, что метод update возвращает обновлённый институт с Id,
+     * Проверка того, что метод update возвращает обновлённый унииверситет с Id,
      * заданным в параметре.
      */
     @Test
