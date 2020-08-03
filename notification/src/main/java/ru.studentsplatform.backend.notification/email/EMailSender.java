@@ -1,8 +1,9 @@
-package ru.studentsplatform.backend.service.email;
+package ru.studentsplatform.backend.notification.email;
 
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public interface EMailSender {
 	 */
 	void send(
 			@NonNull String to, String subject,
-			String body, String contentPath) throws IOException;
+			String body, String contentPath)
+			throws IOException, MessagingException;
 
 	/**
 	 * Метод для отправки сообщений с множественным контентом(файлами).
@@ -46,7 +48,7 @@ public interface EMailSender {
 	void send(
 			@NonNull String to, String subject,
 			String body, List<String> contentPaths)
-			throws IOException;
+			throws IOException, MessagingException;
 
 	/**
 	 * Метод для отправки сообщений с множественным контентом(файлами).
@@ -60,5 +62,5 @@ public interface EMailSender {
 	void sendHtml(
 			@NonNull String to, String subject,
 			String htmlPath, @Nullable List<String> contentPaths)
-			throws IOException;
+			throws IOException, MessagingException;
 }

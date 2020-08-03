@@ -1,5 +1,7 @@
-package ru.studentsplatform.backend.service.email;
+package ru.studentsplatform.backend.notification.email;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.lang.NonNull;
@@ -30,6 +32,10 @@ import java.util.Scanner;
 @Service
 @Profiled
 public class EMailSenderImpl implements EMailSender {
+	/**
+	 * Логгер.
+	 */
+	private final Logger LOGGER = LogManager.getLogger(this.getClass());
 
 	private final JavaMailSender javaMailSender;
 	/**
@@ -68,7 +74,7 @@ public class EMailSenderImpl implements EMailSender {
 	@Override
 	public void send(
 			@NonNull String to, String subject,
-			String body, String contentPath) throws IOException {
+			String body, String contentPath) throws IOException, MessagingException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -92,7 +98,9 @@ public class EMailSenderImpl implements EMailSender {
 
 		} catch (MessagingException e) {
 
-			e.printStackTrace();
+			LOGGER.error(e);
+
+			throw e;
 		}
 	}
 
@@ -102,7 +110,7 @@ public class EMailSenderImpl implements EMailSender {
 	@Override
 	public void send(
 			@NonNull String to, String subject,
-			String body, List<String> contentPaths) throws IOException {
+			String body, List<String> contentPaths) throws IOException, MessagingException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -128,7 +136,9 @@ public class EMailSenderImpl implements EMailSender {
 
 		} catch (MessagingException e) {
 
-			e.printStackTrace();
+			LOGGER.error(e);
+
+			throw e;
 		}
 	}
 
@@ -138,7 +148,7 @@ public class EMailSenderImpl implements EMailSender {
 	@Override
 	public void sendHtml(
 			@NonNull String to, String subject,
-			String htmlPath, @Nullable List<String> contentPaths) throws IOException {
+			String htmlPath, @Nullable List<String> contentPaths) throws IOException, MessagingException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -174,7 +184,9 @@ public class EMailSenderImpl implements EMailSender {
 
 		} catch (MessagingException e) {
 
-			e.printStackTrace();
+			LOGGER.error(e);
+
+			throw e;
 		}
 	}
 

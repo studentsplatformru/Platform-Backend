@@ -1,5 +1,6 @@
-package ru.studentsplatform.backend.service;
+package ru.studentsplatform.backend.notification.email;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -10,16 +11,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.util.ReflectionTestUtils;
-import ru.studentsplatform.backend.service.email.EMailSender;
-import ru.studentsplatform.backend.service.email.EMailSenderImpl;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
 
 
 /**
@@ -48,7 +44,7 @@ public class EMailSenderTest {
 
 		eMailSender.send(to, subject, body);
 
-		verify(javaMailSender, Mockito.times(1))
+		Mockito.verify(javaMailSender, Mockito.times(1))
 				.send((SimpleMailMessage) ArgumentMatchers.any());
 
 	}
@@ -59,7 +55,7 @@ public class EMailSenderTest {
 	 * @throws IOException в случае неправильного пути файла.
 	 */
 	@Test
-	public void sendMailTestWithContent() throws IOException {
+	public void sendMailTestWithContent() throws IOException, MessagingException {
 		ReflectionTestUtils.setField(eMailSender, "from", "someadress@gmail.com");
 
 		String subject = "Some subject";
@@ -68,16 +64,16 @@ public class EMailSenderTest {
 		String contentPath = "src/test/resources/test.txt";
 
 
-		doReturn(mimeMessage)
+		Mockito.doReturn(mimeMessage)
 				.when(javaMailSender)
 				.createMimeMessage();
 
 		eMailSender.send(to, subject, body, contentPath);
 
-		verify(javaMailSender, Mockito.times(1))
+		Mockito.verify(javaMailSender, Mockito.times(1))
 				.createMimeMessage();
 
-		verify(javaMailSender, Mockito.times(1))
+		Mockito.verify(javaMailSender, Mockito.times(1))
 				.send((MimeMessage) ArgumentMatchers.any());
 
 	}
@@ -93,17 +89,17 @@ public class EMailSenderTest {
 		String to = "test@test.com";
 		String contentPath = "/some/wrong/path";
 
-		doReturn(mimeMessage)
+		Mockito.doReturn(mimeMessage)
 				.when(javaMailSender)
 				.createMimeMessage();
 
-		assertThrows(NoSuchFileException.class,
+		Assertions.assertThrows(NoSuchFileException.class,
 				() -> eMailSender.send(to, subject, body, contentPath));
 
-		verify(javaMailSender, Mockito.times(1))
+		Mockito.verify(javaMailSender, Mockito.times(1))
 				.createMimeMessage();
 
-		verify(javaMailSender, Mockito.times(0))
+		Mockito.verify(javaMailSender, Mockito.times(0))
 				.send((MimeMessage) ArgumentMatchers.any());
 	}
 }
