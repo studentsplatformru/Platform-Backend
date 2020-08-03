@@ -65,7 +65,7 @@ public class EMailSenderTest {
 		String subject = "Some subject";
 		String body = "Some contents.";
 		String to = "test@test.com";
-		String contentPath = "src/test/java/ru/studentsplatform/backend/service/resources/test.txt";
+		String contentPath = "src/test/resources/test.txt";
 
 
 		doReturn(mimeMessage)

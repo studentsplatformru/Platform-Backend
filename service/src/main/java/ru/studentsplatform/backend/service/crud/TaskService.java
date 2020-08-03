@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface TaskService extends AbstractService<Task> {
 
-	/*
+	/**
 	 * Сохраняет запись о task в БД, если удается прикрепить task к ячейке расписания.
 	 * В противном случае бросает бизнесс-исключение.
 	 *
-	 * @param task Task для сохранения в БД
+	 * @param newEntity Task для сохранения в БД
 	 * @return Сохраненный task
 	 */
 	@Override

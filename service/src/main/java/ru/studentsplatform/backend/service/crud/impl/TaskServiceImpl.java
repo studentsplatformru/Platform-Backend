@@ -82,6 +82,7 @@ public class TaskServiceImpl implements TaskService {
 		try {
 			taskRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
+			LOGGER.error("Error occured: cannot delete non-existent task");
 			return false;
 		}
 		return true;

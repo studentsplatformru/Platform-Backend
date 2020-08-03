@@ -1,7 +1,7 @@
 package ru.studentsplatform.backend.service.exception;
 
 import org.springframework.http.HttpStatus;
-import ru.studentsplatform.backend.service.exception.core.BusinessExceptionReason;
+import ru.studentsplatform.backend.system.exception.core.BusinessExceptionReason;
 
 /**
  * Реализация {@link BusinessExceptionReason}.
@@ -13,9 +13,9 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 	UNEXPECTED_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "UNEXPECTED_ERROR", "Непредвиденная ошибка"),
 
 	// Ошибки целлостности данных
-	NOTE_NOT_FOUND(HttpStatus.NOT_FOUND, "F001", "Запись с Id %s не найдена"),
-	COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F002", "Комментарий с Id %s не найден"),
-	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "F003", "Пользователь с Id %s не найден"),
+	NOTE_NOT_FOUND(HttpStatus.NOT_FOUND, "F001", "Запись с Id %d не найдена"),
+	COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F002", "Комментарий с Id %d не найден"),
+	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "F003", "Пользователь с Id %d не найден"),
 	SCHEDULE_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "F004",
 			"Отметка в расписании, связанная с задачей с именем %s, не найдена"),
 	NO_UPLOADED_FILES_FOUND(HttpStatus.NOT_FOUND, "F005",
@@ -23,7 +23,14 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 	FILE_INDEX_NOT_EXIST(HttpStatus.NOT_FOUND, "F006",
 			"Файла с ID %d не существует в задаче с Id %d"),
 	NULL_FILE_EXCEPTION(HttpStatus.BAD_REQUEST, "F007",
-			"Отсутствет содержимое загружаемого в задачу c Id %d файла");
+			"Отсутствет содержимое загружаемого в задачу c Id %d файла"),
+	USER_INFO_ALREADY_EXISTS(HttpStatus.CONFLICT, "F008",
+			"Информация о пользователе с id %d уже существует"),
+	NULL_IMAGE_FILE(HttpStatus.BAD_REQUEST, "F009",
+			"Файл изображения пуст"),
+	USER_INFO_NOT_FOUND(HttpStatus.NOT_FOUND, "F010", "Информация о пользователе с Id %d не найдена"),
+	USER_ALREADY_EXISTS(HttpStatus.CONFLICT, "F011",
+			"Пользователь с id %d уже существует");
 
 	private final HttpStatus status;
 	private final String code;

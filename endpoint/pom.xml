@@ -38,7 +38,11 @@
             <artifactId>migration</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>ru.studentsplatform</groupId>
+            <artifactId>telegram-bot</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -74,6 +78,12 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
+        </dependency>
+
+        <!-- Telegram-bot-->
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
         </dependency>
     </dependencies>
 

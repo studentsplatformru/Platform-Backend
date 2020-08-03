@@ -79,6 +79,7 @@ public class TaskAttachmentServiceImpl implements TaskAttachmentService {
 		try {
 			taskAttachmentRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
+			LOGGER.error("Error occured: cannot delete non-existent task attachment");
 			return false;
 		}
 		return true;
