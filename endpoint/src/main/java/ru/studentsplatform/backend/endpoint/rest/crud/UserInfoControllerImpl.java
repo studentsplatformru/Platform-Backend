@@ -11,7 +11,7 @@ import ru.studentsplatform.backend.domain.dto.user.UserInfoDTO;
 import ru.studentsplatform.backend.endpoint.mapper.UserInfoMapper;
 import ru.studentsplatform.backend.endpoint.rest.UserInfoController;
 import ru.studentsplatform.backend.service.crud.impl.UserInfoServiceImpl;
-import ru.studentsplatform.backend.system.annotation.Profiled;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.util.List;
 

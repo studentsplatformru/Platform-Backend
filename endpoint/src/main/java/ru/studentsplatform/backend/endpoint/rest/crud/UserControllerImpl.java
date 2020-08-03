@@ -7,7 +7,7 @@ import ru.studentsplatform.backend.domain.dto.user.UserDTO;
 import ru.studentsplatform.backend.endpoint.mapper.UserMapper;
 import ru.studentsplatform.backend.endpoint.rest.UserConroller;
 import ru.studentsplatform.backend.service.crud.impl.UserServiceImpl;
-import ru.studentsplatform.backend.system.annotation.Profiled;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.util.List;
 

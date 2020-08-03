@@ -9,11 +9,11 @@ import java.util.List;
 /**
  * Контроллер user , позволяющий создать,удалить,получить,обновить user (CRUD контроллер).
  */
-public interface UserConroller extends AbstractController<UserDTO> {
+public interface UserConroller extends AbstractCRUDController<UserDTO> {
     /**
      * Маппинг контроллера.
      */
-    String BASE_URL = AbstractController.BASE_URL + "/user";
+    String BASE_URL = AbstractCRUDController.BASE_URL + "/user";
 
     /**
      * Создает новую запись в таблице usr по заданным параметрам.

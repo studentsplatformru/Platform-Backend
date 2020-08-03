@@ -17,9 +17,9 @@ import java.util.List;
  * Контроллер, служащий для создания задач для студентов.
  * Позволяет создать сущность с необходимыми параметрами, а также прикреплять к ней файлы.
  */
-public interface TaskController extends AbstractController<TaskDTO> {
+public interface TaskController extends AbstractCRUDController<TaskDTO> {
 
-	String BASE_URL = AbstractController.BASE_URL + "/task";
+	String BASE_URL = AbstractCRUDController.BASE_URL + "/task";
 	/**
 	 * Позволяет прикреплять к студенческой задаче файлы с решением.
 	 *

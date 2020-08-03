@@ -17,11 +17,11 @@ import java.util.List;
  * А также позволяющий загрузить изображение и получить изображение,
  * связанное с соответствующей записью user info в БД.
  */
-public interface UserInfoController extends AbstractController<UserInfoDTO> {
+public interface UserInfoController extends AbstractCRUDController<UserInfoDTO> {
     /**
      * Путь к user info.
      */
-    String BASE_URL = AbstractController.BASE_URL + "/userinfo";
+    String BASE_URL = AbstractCRUDController.BASE_URL + "/userinfo";
 
     /**
      * Создает новую запись в таблице user_info по заданным параметрам(без изображения).

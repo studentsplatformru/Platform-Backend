@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.studentsplatform.backend.domain.repository.UserRepository;
 import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
-import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.service.crud.UserService;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.util.List;
 
