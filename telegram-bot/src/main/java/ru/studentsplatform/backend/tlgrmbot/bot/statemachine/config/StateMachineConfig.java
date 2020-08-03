@@ -27,79 +27,79 @@ import java.util.EnumSet;
 @EnableStateMachineFactory
 public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<TelegramBotState, TelegramBotEvent> {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void configure(StateMachineConfigurationConfigurer<TelegramBotState,
-            TelegramBotEvent> config) throws Exception {
-        config
-                .withConfiguration()
-                .autoStartup(true);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void configure(StateMachineConfigurationConfigurer<TelegramBotState,
+			TelegramBotEvent> config) throws Exception {
+		config
+				.withConfiguration()
+				.autoStartup(true);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void configure(StateMachineStateConfigurer<TelegramBotState, TelegramBotEvent> states) throws Exception {
-        states
-                .withStates()
-                .initial(TelegramBotState.NEW)
-                .end(TelegramBotState.END)
-                .states(EnumSet.allOf(TelegramBotState.class));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void configure(StateMachineStateConfigurer<TelegramBotState, TelegramBotEvent> states) throws Exception {
+		states
+				.withStates()
+				.initial(TelegramBotState.NEW)
+				.end(TelegramBotState.END)
+				.states(EnumSet.allOf(TelegramBotState.class));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void configure(StateMachineTransitionConfigurer<TelegramBotState,
-            TelegramBotEvent> transitions) throws Exception {
-        transitions
-                .withExternal()
-                .source(TelegramBotState.NEW)
-                .target(TelegramBotState.CHOOSING_UNIVERSITY)
-                .event(TelegramBotEvent.SET_INFO)
-                .action(setInfoAction(), errorAction())
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void configure(StateMachineTransitionConfigurer<TelegramBotState,
+			TelegramBotEvent> transitions) throws Exception {
+		transitions
+				.withExternal()
+				.source(TelegramBotState.NEW)
+				.target(TelegramBotState.CHOOSING_UNIVERSITY)
+				.event(TelegramBotEvent.SET_INFO)
+				.action(setInfoAction(), errorAction())
 
-                .and()
-                .withExternal()
-                .source(TelegramBotState.CHOOSING_UNIVERSITY)
-                .target(TelegramBotState.SPBU_SELECTED)
-                .event(TelegramBotEvent.SPBU)
-                .action(spbuAction(), errorAction())
+				.and()
+				.withExternal()
+				.source(TelegramBotState.CHOOSING_UNIVERSITY)
+				.target(TelegramBotState.SPBU_SELECTED)
+				.event(TelegramBotEvent.SPBU)
+				.action(spbuAction(), errorAction())
 
-                .and()
-                .withExternal()
-                .source(TelegramBotState.SPBU_SELECTED)
-                .target(TelegramBotState.END)
-                .event(TelegramBotEvent.SPBU_GROUP)
-                .action(spbuGroupAction(), errorAction());
-    }
+				.and()
+				.withExternal()
+				.source(TelegramBotState.SPBU_SELECTED)
+				.target(TelegramBotState.END)
+				.event(TelegramBotEvent.SPBU_GROUP)
+				.action(spbuGroupAction(), errorAction());
+	}
 
-    @Bean
-    public Action<TelegramBotState, TelegramBotEvent> setInfoAction() {
-        return new SetInfoAction();
-    }
+	@Bean
+	public Action<TelegramBotState, TelegramBotEvent> setInfoAction() {
+		return new SetInfoAction();
+	}
 
-    @Bean
-    public Action<TelegramBotState, TelegramBotEvent> spbuAction() {
-        return new SpbuAction();
-    }
+	@Bean
+	public Action<TelegramBotState, TelegramBotEvent> spbuAction() {
+		return new SpbuAction();
+	}
 
-    @Bean
-    public Action<TelegramBotState, TelegramBotEvent> spbuGroupAction() {
-        return new SpbuGroupAction();
-    }
+	@Bean
+	public Action<TelegramBotState, TelegramBotEvent> spbuGroupAction() {
+		return new SpbuGroupAction();
+	}
 
-    @Bean
-    public Action<TelegramBotState, TelegramBotEvent> errorAction() {
-        return new ErrorAction();
-    }
+	@Bean
+	public Action<TelegramBotState, TelegramBotEvent> errorAction() {
+		return new ErrorAction();
+	}
 
-    @Bean
-    public StateMachinePersister<TelegramBotState, TelegramBotEvent, String> persister() {
-        return new DefaultStateMachinePersister<>(new UniversityStateMachinePersister());
-    }
+	@Bean
+	public StateMachinePersister<TelegramBotState, TelegramBotEvent, String> persister() {
+		return new DefaultStateMachinePersister<>(new UniversityStateMachinePersister());
+	}
 }

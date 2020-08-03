@@ -9,11 +9,11 @@ import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotSt
  */
 public class ErrorAction extends AbstractAction {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(StateContext<TelegramBotState, TelegramBotEvent> stateContext) {
-        System.out.println("Вы ещё не выбрали " + stateContext.getTarget().getId().toString());
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(StateContext<TelegramBotState, TelegramBotEvent> stateContext) {
+		System.out.println("Вы ещё не выбрали " + stateContext.getTarget().getId().toString());
+	}
 }

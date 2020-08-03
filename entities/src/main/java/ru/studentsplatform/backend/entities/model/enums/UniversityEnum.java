@@ -11,10 +11,6 @@ public enum UniversityEnum {
 		this.name = name;
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	/**
 	 * Получаем университет из строки с его аббревиатурой на русском языке.
 	 *
@@ -28,5 +24,9 @@ public enum UniversityEnum {
 			}
 		}
 		return null;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

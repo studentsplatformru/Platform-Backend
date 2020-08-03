@@ -14,40 +14,40 @@ import java.util.NoSuchElementException;
  */
 @Service
 public class PlaceStudyServiceImpl implements PlaceStudyService {
-    private final PlaceStudyRepository placeStudyRepository;
+	private final PlaceStudyRepository placeStudyRepository;
 
-    public PlaceStudyServiceImpl(PlaceStudyRepository placeStudyRepository) {
-        this.placeStudyRepository = placeStudyRepository;
-    }
+	public PlaceStudyServiceImpl(PlaceStudyRepository placeStudyRepository) {
+		this.placeStudyRepository = placeStudyRepository;
+	}
 
-    @Override
-    public PlaceStudy create(PlaceStudy newPlaceStudy) {
-        return placeStudyRepository.saveAndFlush(newPlaceStudy);
-    }
+	@Override
+	public PlaceStudy create(PlaceStudy newPlaceStudy) {
+		return placeStudyRepository.saveAndFlush(newPlaceStudy);
+	}
 
-    @Override
-    public PlaceStudy getById(Long id) {
-        return placeStudyRepository.findById(id).orElseThrow(NoSuchElementException::new);
-    }
+	@Override
+	public PlaceStudy getById(Long id) {
+		return placeStudyRepository.findById(id).orElseThrow(NoSuchElementException::new);
+	}
 
-    @Override
-    public List<PlaceStudy> getAll() {
-        return placeStudyRepository.findAll();
-    }
+	@Override
+	public List<PlaceStudy> getAll() {
+		return placeStudyRepository.findAll();
+	}
 
-    @Override
-    public PlaceStudy update(PlaceStudy updatedPlaceStudy, Long id) {
-        updatedPlaceStudy.setId(id);
-        return placeStudyRepository.saveAndFlush(updatedPlaceStudy);
-    }
+	@Override
+	public PlaceStudy update(PlaceStudy updatedPlaceStudy, Long id) {
+		updatedPlaceStudy.setId(id);
+		return placeStudyRepository.saveAndFlush(updatedPlaceStudy);
+	}
 
-    @Override
-    public boolean delete(Long id) {
-        try {
-            placeStudyRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean delete(Long id) {
+		try {
+			placeStudyRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			return false;
+		}
+		return true;
+	}
 }

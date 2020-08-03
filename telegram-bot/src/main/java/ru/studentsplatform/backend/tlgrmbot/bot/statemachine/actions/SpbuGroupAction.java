@@ -19,37 +19,37 @@ import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotSt
  */
 public class SpbuGroupAction extends AbstractAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(SpbuGroupAction.class);
+	private static final Logger LOGGER = LogManager.getLogger(SpbuGroupAction.class);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(StateContext<TelegramBotState, TelegramBotEvent> stateContext) {
-        Update update = (Update) stateContext
-                .getExtendedState()
-                .getVariables()
-                .remove("Update");
-        AbsSender absSender = (AbsSender) stateContext
-                .getExtendedState()
-                .getVariables()
-                .remove("AbsSender");
-        String group = (String) stateContext
-                .getExtendedState()
-                .getVariables()
-                .remove("Group");
-        University university = (University) stateContext
-                .getExtendedState()
-                .getVariables()
-                .remove("University");
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(StateContext<TelegramBotState, TelegramBotEvent> stateContext) {
+		Update update = (Update) stateContext
+				.getExtendedState()
+				.getVariables()
+				.remove("Update");
+		AbsSender absSender = (AbsSender) stateContext
+				.getExtendedState()
+				.getVariables()
+				.remove("AbsSender");
+		String group = (String) stateContext
+				.getExtendedState()
+				.getVariables()
+				.remove("Group");
+		University university = (University) stateContext
+				.getExtendedState()
+				.getVariables()
+				.remove("University");
 /*        PlaceStudyMapper mapper = (PlaceStudyMapper) stateContext
                 .getExtendedState()
                 .getVariables()
                 .remove()("MAPPER");*/
-        PlaceStudyService service = (PlaceStudyService) stateContext
-                .getExtendedState()
-                .getVariables()
-                .remove("Service");
+		PlaceStudyService service = (PlaceStudyService) stateContext
+				.getExtendedState()
+				.getVariables()
+				.remove("Service");
 
 /*        Team team = new Team();
         team.setTeamName(group);
@@ -63,18 +63,18 @@ public class SpbuGroupAction extends AbstractAction {
 
         service.create(placeStudy);*/
 
-        logEvent(stateContext, LOGGER);
+		logEvent(stateContext, LOGGER);
 
-        SendMessage message = new SendMessage()
-                .setChatId(update.getMessage().getChatId())
-                .setText("Окей, вы внесли свои данные")
-                .setReplyMarkup(new ReplyKeyboardRemove());
+		SendMessage message = new SendMessage()
+				.setChatId(update.getMessage().getChatId())
+				.setText("Окей, вы внесли свои данные")
+				.setReplyMarkup(new ReplyKeyboardRemove());
 
-        LOGGER.log(Level.INFO, "ДАННЫЕ СОХРАНЕНЫ");
-        try {
-            absSender.execute(message);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
+		LOGGER.log(Level.INFO, "ДАННЫЕ СОХРАНЕНЫ");
+		try {
+			absSender.execute(message);
+		} catch (TelegramApiException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -18,17 +18,17 @@ import ru.studentsplatform.backend.entities.model.user.User;
 @EqualsAndHashCode(callSuper = true)
 public class PlaceStudyDTO extends BaseDTO {
 
-    private User user;
+	private User user;
 
-    private University university;
+	private University university;
 
-    private Faculty faculty;
+	private Faculty faculty;
 
-    private Department department;
+	private Department department;
 
-    private Direction direction;
+	private Direction direction;
 
-    private Team team;
+	private Team team;
 
-    private int semester;
+	private int semester;
 }

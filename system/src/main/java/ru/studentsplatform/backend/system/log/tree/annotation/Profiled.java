@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.system.annotation;
+package ru.studentsplatform.backend.system.log.tree.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
