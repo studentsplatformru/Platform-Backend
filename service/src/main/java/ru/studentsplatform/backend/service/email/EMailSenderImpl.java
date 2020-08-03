@@ -18,7 +18,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 
@@ -45,13 +44,6 @@ public class EMailSenderImpl implements EMailSender {
 	 */
 	public EMailSenderImpl(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
-	}
-
-
-	@Override
-	public int random() {
-		Random random = new Random();
-		return random.nextInt() % 10;
 	}
 
 	/**
