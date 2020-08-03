@@ -38,6 +38,6 @@ public class ScheduleUserCell extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private UniversityRoleEnum universityRole;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "scheduleUserCell")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "scheduleUserCell")
 	private List<Task> tasks;
 }
