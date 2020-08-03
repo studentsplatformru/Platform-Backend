@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Archie-Vian (sas-artamonov@yandex.ru) 31.07.2020
  */
-@Mapper(componentModel = "spring", uses = {UserMapper.class})
+@Mapper(componentModel = "spring")
 public interface DepartmentMapper {
 
     /**
@@ -29,7 +29,6 @@ public interface DepartmentMapper {
             @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
             @Mapping(target = "department", source = "entity.department"),
             @Mapping(target = "facultyId", source = "entity.faculty.id"),
-            @Mapping(target = "users", source = "entity.users")
 
     })
     DepartmentDTO departmentToDepartmentDTO(Department entity);
@@ -46,7 +45,6 @@ public interface DepartmentMapper {
             @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
             @Mapping(target = "department", source = "dto.department"),
             @Mapping(target = "faculty.id", source = "dto.facultyId"),
-            @Mapping(target = "users", source = "dto.users")
 
     })
     Department departmentDTOToDepartment(DepartmentDTO dto);

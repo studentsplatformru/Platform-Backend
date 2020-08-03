@@ -17,9 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 public class DepartmentMapperTest {
 
-    @Mock
-    private UserMapper userMapper;
-
     @InjectMocks
     private DepartmentMapper mapper = new DepartmentMapperImpl();
 
