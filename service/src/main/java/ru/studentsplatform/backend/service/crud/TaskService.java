@@ -3,6 +3,7 @@ package ru.studentsplatform.backend.service.crud;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.entities.model.university.Task;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -116,5 +117,14 @@ public interface TaskService extends AbstractService<Task> {
 	 * @return Лист задач, струдентов определенной группы
 	 */
 	List<Task> getBySubjectIdForTeam(Long subjectId, Long teamId);
+
+	/**
+	 * Найти все задачи пользователя в данных временных рамках .
+	 * @param userId Id пользователя.
+	 * @param startTime нижняя граница времени.
+	 * @param endTime верхняя граница времени.
+	 * @return список сущностей Task.
+	 */
+	List<Task> getByStartEndTimeForUser(Long userId, OffsetDateTime startTime, OffsetDateTime endTime);
 
 }

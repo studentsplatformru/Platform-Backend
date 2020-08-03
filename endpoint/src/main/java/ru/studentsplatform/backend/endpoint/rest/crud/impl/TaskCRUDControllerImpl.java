@@ -16,6 +16,7 @@ import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -154,6 +155,13 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 		return ResponseEntity.ok(result);
 	}
 
+	@Override
+	public ResponseEntity<List<TaskDTO>> getTaskByStartEndTimeForUser(
+			Long userId, OffsetDateTime startTime, OffsetDateTime endTime) {
+		var list = taskService.getByStartEndTimeForUser(userId, startTime, endTime);
+		return ResponseEntity.ok(taskMapper.listTaskToTaskDTO(list));
+	}
+
 	//TODO: redirect to createTask() method
 	@Override
 	public ResponseEntity<TaskDTO> create(TaskDTO dto) {
@@ -166,7 +174,7 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 		return null;
 	}
 
-	//TODO: redirect to getAllTasks() method
+	//TODO
 	@Override
 	public ResponseEntity<List<TaskDTO>> getAll() {
 		return null;

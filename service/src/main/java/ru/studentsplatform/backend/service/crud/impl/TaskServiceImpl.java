@@ -15,6 +15,7 @@ import ru.studentsplatform.backend.system.helper.CollectionUtils;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import javax.transaction.Transactional;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -155,5 +156,11 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public List<Task> getBySubjectIdForTeam(Long teamId, Long subjectId) {
 		return taskRepository.findBySubjectIdForTeam(subjectId, teamId);
+	}
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Task> getByStartEndTimeForUser(Long userId, OffsetDateTime startTime, OffsetDateTime endTime) {
+		return taskRepository.findByStartEndTimeForUser(userId, startTime, endTime);
 	}
 }

@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.endpoint.rest.crud;
 
 import org.springframework.core.io.Resource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -118,5 +120,21 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	@GetMapping("/subject/{subjectId}/group/{groupId}")
 	ResponseEntity<List<TaskDTO>> getTaskByGroup(@PathVariable(name = "subjectId") Long subjectId,
 												 @PathVariable(name = "groupId") Long groupID);
+
+	/**
+	 * Возвращает список всех задач данного пользователя.
+	 * @param userId
+	 * @param startTime
+	 * @param endTime
+	 * @return Ответ с кодом 200(ok), содержащий список задач и свединия о них.
+	 */
+	@GetMapping("/user/{userId}/getTasks")
+	ResponseEntity<List<TaskDTO>> getTaskByStartEndTimeForUser(
+			@PathVariable(name = "userId") Long userId,
+			@RequestParam(value = "start-time", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+					OffsetDateTime startTime,
+			@RequestParam(value = "end-time", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+					OffsetDateTime endTime);
+
 }
 
