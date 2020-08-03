@@ -97,7 +97,7 @@ public interface TaskService extends AbstractService<Task> {
 	 * @param semester Выбраный семестр
 	 * @return Лист задач, закрепленных за пользователем
 	 */
-	List<Task> getBySemesterForUser(Long userId, Long semester);
+	List<Task> getBySemesterForUser(Long userId, Integer semester);
 
 	/**
 	 * Найти все задачи по выбраному предмету, закрепленные за пользователем.

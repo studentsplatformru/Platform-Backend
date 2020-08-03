@@ -30,10 +30,10 @@ public class Task extends BaseEntity {
 	@Column(name = "mark")
 	private Integer mark;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private ScheduleUserCell scheduleUserCell;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "task_id")
 	private List<TaskAttachment> attachments;
 

@@ -137,7 +137,7 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Task> getBySemesterForUser(Long userId, Long semester) {
+	public List<Task> getBySemesterForUser(Long userId, Integer semester) {
 		return taskRepository.findBySemesterByUserId(userId, semester);
 	}
 

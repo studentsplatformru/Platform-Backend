@@ -5,10 +5,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
@@ -50,9 +47,7 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<TaskDTO> getTask(@PathVariable(name = "userId") Long userId,
-										   @PathVariable(name = "cellId") Long cellId,
-										   @PathVariable(name = "taskId") Long taskId) {
+	public ResponseEntity<TaskDTO> getTask(Long taskId) {
 
 		Task task = taskService.getById(taskId);
 		TaskDTO result = taskMapper.taskToTaskDTO(task);
@@ -64,8 +59,7 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<TaskDTO>> getAllTasks(@PathVariable(name = "userId") Long userId,
-													 @PathVariable(name = "cellId") Long cellId) {
+	public ResponseEntity<List<TaskDTO>> getAllTasksForCell(Long cellId) {
 
 		List<Task> taskList = taskService.getByUserCell(cellId);
 		List<TaskDTO> result = taskMapper.listTaskToTaskDTO(taskList);
@@ -77,9 +71,8 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<TaskDTO> createTask(@PathVariable(name = "userId") Long userId,
-											  @PathVariable(name = "cellId") Long cellId,
-											  @RequestBody TaskDTO dto) {
+	public ResponseEntity<TaskDTO> createTask(Long cellId,
+											  TaskDTO dto) {
 
 		dto.setScheduleUserCellId(cellId);
 		var task = taskMapper.taskDTOToTask(dto);
@@ -93,10 +86,8 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<Boolean> taskAddFiles(@PathVariable(name = "userId") Long userId,
-												@PathVariable(name = "cellId") Long cellId,
-												@PathVariable(name = "taskId") Long taskId,
-												@RequestParam(name = "file") MultipartFile... files) {
+	public ResponseEntity<Boolean> taskAddFiles(Long taskId,
+												MultipartFile... files) {
 
 		var result = taskService.addFilesForTask(taskId, Arrays.asList(files));
 
@@ -107,10 +98,8 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<Resource> getFileRelatedToTask(@PathVariable(name = "userId") Long userId,
-														 @PathVariable(name = "cellId") Long cellId,
-														 @PathVariable(name = "taskId") Long taskId,
-														 @PathVariable(name = "fileId") Long fileId) {
+	public ResponseEntity<Resource> getFileRelatedToTask(Long taskId,
+														 Long fileId) {
 
 		var file = taskAttachmentService.getByFileId(taskId, fileId);
 		var fileName = file.getFileName();
@@ -126,8 +115,6 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 */
 	@Override
 	public ResponseEntity<List<TaskDTO>> getByDoneTaskForUser(Long userId,
-															  Long cellId,
-															  Long taskId,
 															  Boolean isDone) {
 		var entityList = taskService.getByIsDoneByUserId(userId, isDone);
 		var result = taskMapper.listTaskToTaskDTO(entityList);
@@ -139,9 +126,7 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 */
 	@Override
 	public ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(Long userId,
-																  Long cellId,
-																  Long taskId,
-																  Long semester) {
+																  Integer semester) {
 		var entityList = taskService.getBySemesterForUser(userId, semester);
 		var result = taskMapper.listTaskToTaskDTO(entityList);
 		return ResponseEntity.ok(result);
@@ -152,8 +137,6 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 */
 	@Override
 	public ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(Long userId,
-																 Long cellId,
-																 Long taskId,
 																 Long subjectId) {
 		var entityList = taskService.getBySubjectForUser(userId, subjectId);
 		var result = taskMapper.listTaskToTaskDTO(entityList);
@@ -164,7 +147,7 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<TaskDTO>> getTaskByGroup(Long userId, Long cellId, Long taskId, Long groupID) {
+	public ResponseEntity<List<TaskDTO>> getTaskByGroup(Long groupID) {
 		var entityList = taskService.getByTeamId(groupID);
 		var result = taskMapper.listTaskToTaskDTO(entityList);
 		return ResponseEntity.ok(result);

@@ -12,7 +12,16 @@
     
 ###### Основное
 - Task
-    - **http://localhost:8080/user/3/schedule/cell/2/task/1/** - *Получить сведения о task c Id = 1, привязанной к ячейке с Id = 2, принадлежащей пользователю с Id = 3*
-    - **http://localhost:8080/user/2/schedule/cell/1/tasks** - *Получить сведения о всех task, привязанных к ячейке с Id = 1, принадлежащих пользователю с Id = 2*
-    - **http://localhost:8080/user/3/schedule/cell/2/task/1/file** - *Приложить файлы к task c Id = 1, привязаной к ячейке с Id = 2, принадлежащей пользователю с Id = 3*
-    - **http://localhost:8080/user/3/schedule/cell/2/task/1/file/1/** - *Получить файл с Id = 1, прикрепленный к task c Id = 2, привязаной к ячейке с Id = 3, принадлежащей пользователю с Id = 4*
+    -POST
+    - **http://localhost:8080/api/task/1/file** - *Прикрепить файл к задаче с Id = 1* (файлы прикреплять с именем значения "file")
+    - **http://localhost:8080/api/task/cell/1/create** - *Создаёт задачу, прикреплённую к ячейке пользовательского расписания с Id = 1*
+    
+    -GET
+    - **http://localhost:8080/api/task/1/** - *Получить сведения о task c Id = 1*
+    - **http://localhost:8080/api/task/cell/1/** - *Получить сведения о всех task, привязанных к ячейке с Id = 1*
+    - **http://localhost:8080/api/task/user/1/isDone/false** - *Поиск невыполненных заданий у пользователя с Id = 1*
+    - **http://localhost:8080/api/task/user/1/semester/1/** - *Поиск заданий у пользователя с Id = 1 в первом семестре*
+    - **http://localhost:8080/api/task/user/1/subject/2/** - *Поиск заданий у пользователя с Id = 1 по предмету с Id = 2*
+    - **http://localhost:8080/api/task/group/1** - *Поиск заданий у группы студенов с Id = 1*  
+    - **http://localhost:8080/api/task/1/file/1/** - *Получить файл с Id = 1, прикрепленный к task c Id = 2*
+    

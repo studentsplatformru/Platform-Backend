@@ -23,7 +23,7 @@ import java.util.List;
 @Table(name = "schedule_user_cell")
 public class ScheduleUserCell extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usr_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -38,6 +38,6 @@ public class ScheduleUserCell extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private UniversityRoleEnum universityRole;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "scheduleUserCell")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "scheduleUserCell")
 	private List<Task> tasks;
 }

@@ -5,6 +5,7 @@ import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.user.User;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,8 +17,9 @@ import java.util.List;
 @Entity
 @Table(name = "discipline")
 public class Discipline extends BaseEntity {
+
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
 	@ManyToOne
@@ -28,5 +30,6 @@ public class Discipline extends BaseEntity {
 	@JoinColumn(name = "discipline_id")
 	private List<ScheduleUserCell> scheduleUserCells;
 
-	private int semester;
+	@Column(name = "semester")
+	private Integer semester;
 }
