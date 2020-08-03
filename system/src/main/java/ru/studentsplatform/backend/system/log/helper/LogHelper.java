@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.system.log;
+package ru.studentsplatform.backend.system.log.helper;
 
 /**
  * Интерфейс для описывания методов для получения логов.

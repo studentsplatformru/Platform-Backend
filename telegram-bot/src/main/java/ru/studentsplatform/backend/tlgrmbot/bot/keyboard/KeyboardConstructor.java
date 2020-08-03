@@ -12,56 +12,56 @@ import java.util.List;
  */
 public class KeyboardConstructor {
 
-    /**
-     * Конфигурирует клавиатуру со списком доступных университетов.
-     *
-     * @return клавиатура с произвольным количеством рядов, каждый из которых вмещает до 3 кнопок.
-     */
-    public static ReplyKeyboardMarkup getUniversitiesKeyboard() {
-        List<KeyboardRow> rows = new ArrayList<>();
-        KeyboardRow row = new KeyboardRow();
+	/**
+	 * Конфигурирует клавиатуру со списком доступных университетов.
+	 *
+	 * @return клавиатура с произвольным количеством рядов, каждый из которых вмещает до 3 кнопок.
+	 */
+	public static ReplyKeyboardMarkup getUniversitiesKeyboard() {
+		List<KeyboardRow> rows = new ArrayList<>();
+		KeyboardRow row = new KeyboardRow();
 
-        for (UniversityEnum universityEnum : UniversityEnum.values()) {
-            row.add(universityEnum.getName());
+		for (UniversityEnum universityEnum : UniversityEnum.values()) {
+			row.add(universityEnum.getName());
 
-            if (row.size() == 3) {
-                rows.add(row);
-                row = new KeyboardRow();
-            }
-        }
-        rows.add(row);
+			if (row.size() == 3) {
+				rows.add(row);
+				row = new KeyboardRow();
+			}
+		}
+		rows.add(row);
 
-        return new ReplyKeyboardMarkup(rows)
-                .setResizeKeyboard(true);
-    }
+		return new ReplyKeyboardMarkup(rows)
+				.setResizeKeyboard(true);
+	}
 
-    /**
-     * Конфигурирует клавиатуру со списком доступных направлений.
-     *
-     * @return клавиатура с единственным элементом кнопки.
-     */
-    public static ReplyKeyboardMarkup getDirectionsKeyboard() {
-        List<KeyboardRow> rows = new ArrayList<>();
-        KeyboardRow row = new KeyboardRow();
-        row.add("Mahematics and Computer Science");
-        rows.add(row);
+	/**
+	 * Конфигурирует клавиатуру со списком доступных направлений.
+	 *
+	 * @return клавиатура с единственным элементом кнопки.
+	 */
+	public static ReplyKeyboardMarkup getDirectionsKeyboard() {
+		List<KeyboardRow> rows = new ArrayList<>();
+		KeyboardRow row = new KeyboardRow();
+		row.add("Mahematics and Computer Science");
+		rows.add(row);
 
-        return new ReplyKeyboardMarkup(rows)
-                .setResizeKeyboard(true);
-    }
+		return new ReplyKeyboardMarkup(rows)
+				.setResizeKeyboard(true);
+	}
 
-    /**
-     * Конфигурирует клавиатуру со списком доступных групп.
-     *
-     * @return клавиатура с единственным элементом кнопки.
-     */
-    public static ReplyKeyboardMarkup getGroupsKeyboard() {
-        List<KeyboardRow> rows = new ArrayList<>();
-        KeyboardRow row = new KeyboardRow();
-        row.add("19.Б03-мкн");
-        rows.add(row);
+	/**
+	 * Конфигурирует клавиатуру со списком доступных групп.
+	 *
+	 * @return клавиатура с единственным элементом кнопки.
+	 */
+	public static ReplyKeyboardMarkup getGroupsKeyboard() {
+		List<KeyboardRow> rows = new ArrayList<>();
+		KeyboardRow row = new KeyboardRow();
+		row.add("19.Б03-мкн");
+		rows.add(row);
 
-        return new ReplyKeyboardMarkup(rows)
-                .setResizeKeyboard(true);
-    }
+		return new ReplyKeyboardMarkup(rows)
+				.setResizeKeyboard(true);
+	}
 }

@@ -17,7 +17,7 @@ import ru.studentsplatform.backend.endpoint.rest.TaskController;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;
-import ru.studentsplatform.backend.system.annotation.Profiled;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.util.Arrays;
 import java.util.List;

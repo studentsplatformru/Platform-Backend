@@ -20,42 +20,42 @@ import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotSt
  */
 public class SpbuAction extends AbstractAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(SpbuAction.class);
+	private static final Logger LOGGER = LogManager.getLogger(SpbuAction.class);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(StateContext<TelegramBotState, TelegramBotEvent> stateContext) {
-        Update update = (Update) stateContext
-                .getExtendedState()
-                .getVariables()
-                .remove("Update"); //TODO дублирование кода, подумать
-        AbsSender absSender = (AbsSender) stateContext
-                .getExtendedState()
-                .getVariables()
-                .remove("AbsSender");
-        UniversityEnum universityEnum = (UniversityEnum) stateContext
-                .getExtendedState()
-                .getVariables()
-                .remove("UniversityEnum");
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(StateContext<TelegramBotState, TelegramBotEvent> stateContext) {
+		Update update = (Update) stateContext
+				.getExtendedState()
+				.getVariables()
+				.remove("Update"); //TODO дублирование кода, подумать
+		AbsSender absSender = (AbsSender) stateContext
+				.getExtendedState()
+				.getVariables()
+				.remove("AbsSender");
+		UniversityEnum universityEnum = (UniversityEnum) stateContext
+				.getExtendedState()
+				.getVariables()
+				.remove("UniversityEnum");
 
-        University university = new University();
-        university.setUniversity(universityEnum);
+		University university = new University();
+		university.setUniversity(universityEnum);
 
-        stateContext.getExtendedState().getVariables().put("University", university);
+		stateContext.getExtendedState().getVariables().put("University", university);
 
-        logEvent(stateContext, LOGGER);
+		logEvent(stateContext, LOGGER);
 
-        SendMessage message = new SendMessage()
-                .setChatId(update.getMessage().getChatId())
-                .setText(Text.GROUP_STATE.toString())
-                .setReplyMarkup(KeyboardConstructor.getGroupsKeyboard());
+		SendMessage message = new SendMessage()
+				.setChatId(update.getMessage().getChatId())
+				.setText(Text.GROUP_STATE.toString())
+				.setReplyMarkup(KeyboardConstructor.getGroupsKeyboard());
 
-        try {
-            absSender.execute(message);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			absSender.execute(message);
+		} catch (TelegramApiException e) {
+			e.printStackTrace();
+		}
+	}
 }

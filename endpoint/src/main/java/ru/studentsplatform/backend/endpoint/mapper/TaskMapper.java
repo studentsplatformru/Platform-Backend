@@ -5,6 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import ru.studentsplatform.backend.domain.dto.TaskDTO;
 import ru.studentsplatform.backend.entities.model.university.Task;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  *
  * @author Archie-Vian (sas-artamonov@yandex.ru) 26.07.2020
  */
+@Profiled
 @Mapper(componentModel = "spring", uses = {TaskAttachmentMapper.class})
 public interface TaskMapper {
 	/**
