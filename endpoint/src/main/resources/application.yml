@@ -30,6 +30,7 @@ spring:
     baseline-version: 0
   mvc:
     throw-exception-if-no-handler-found: true
+# зависимость может понадобиться в будущем
 #  resources:
 #    add-mappings: false
 

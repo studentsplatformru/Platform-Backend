@@ -5,6 +5,11 @@ import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.stereotype.Component;
 
+/**
+ * Настраиваемая страница для /actuator/info
+ *
+ * @author Danila K (karnacevich5323537@gmail.com) (03.08.2020).
+ */
 @Component
 public class CustomInfoContributor  implements InfoContributor {
     @Override
