@@ -9,34 +9,34 @@ import org.springframework.http.HttpStatus;
  */
 public class ExceptionDto {
 
-    /**
-     * Сообщение для пользователя.
-     */
-    private String message;
+	/**
+	 * Сообщение для пользователя.
+	 */
+	private String message;
 
-    /**
-     * Статус ошибки.
-     */
-    private HttpStatus status;
+	/**
+	 * Статус ошибки.
+	 */
+	private HttpStatus status;
 
-    public ExceptionDto(String message, HttpStatus status) {
-        this.message = message;
-        this.status = status;
-    }
+	public ExceptionDto(String message, HttpStatus status) {
+		this.message = message;
+		this.status = status;
+	}
 
-    public String getMessage() {
-        return message;
-    }
+	public String getMessage() {
+		return message;
+	}
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
-    public HttpStatus getStatus() {
-        return status;
-    }
+	public HttpStatus getStatus() {
+		return status;
+	}
 
-    public void setStatus(HttpStatus status) {
-        this.status = status;
-    }
+	public void setStatus(HttpStatus status) {
+		this.status = status;
+	}
 }

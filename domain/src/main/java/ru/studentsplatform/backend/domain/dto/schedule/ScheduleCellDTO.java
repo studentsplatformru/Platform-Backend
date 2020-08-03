@@ -8,10 +8,10 @@ import java.time.OffsetDateTime;
 @Data
 public class ScheduleCellDTO extends BaseDTO {
 
-    private OffsetDateTime startClass;
-    private OffsetDateTime endClass;
-    private String type;
-    private Long teamId;
-    private Long subjectId;
+	private OffsetDateTime startClass;
+	private OffsetDateTime endClass;
+	private String type;
+	private Long teamId;
+	private Long subjectId;
 
 }

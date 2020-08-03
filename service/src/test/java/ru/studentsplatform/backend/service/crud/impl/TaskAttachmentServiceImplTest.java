@@ -15,117 +15,125 @@ import ru.studentsplatform.backend.system.exception.core.BusinessException;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class TaskAttachmentServiceImplTest {
 
-    @Mock
-    TaskAttachmentRepository repository;
+	@Mock
+	TaskAttachmentRepository repository;
 
-    @InjectMocks
-    TaskAttachmentServiceImpl service;
+	@InjectMocks
+	TaskAttachmentServiceImpl service;
 
-    /**
-     * Проверка того, что метод create возвращает созданное прикрепление к задаче.
-     * Сымитировано поведение saveAndFlush.
-     */
-    @Test
-    void createTest() {
-        var taskAttachment = mock(TaskAttachment.class);
+	/**
+	 * Проверка того, что метод create возвращает созданное прикрепление к задаче.
+	 * Сымитировано поведение saveAndFlush.
+	 */
+	@Test
+	void createTest() {
+		var taskAttachment = mock(TaskAttachment.class);
 
-        doReturn(taskAttachment).when(repository).saveAndFlush(taskAttachment);
+		doReturn(taskAttachment).when(repository).saveAndFlush(taskAttachment);
 
-        var result = service.create(taskAttachment);
-        assertEquals(taskAttachment, result);
-    }
+		var result = service.create(taskAttachment);
+		assertEquals(taskAttachment, result);
+	}
 
-    /**
-     * Проверка того, что метод findById возвращает созданное прикрепление к задаче
-     * и кидает NoSuchElementException при его отсутствии.
-     */
-    @Test
-    void getByIdTest() {
-        TaskAttachment taskAttachment = new TaskAttachment();
+	/**
+	 * Проверка того, что метод findById возвращает созданное прикрепление к задаче
+	 * и кидает NoSuchElementException при его отсутствии.
+	 */
+	@Test
+	void getByIdTest() {
+		TaskAttachment taskAttachment = new TaskAttachment();
 
-        when(repository.findById(2L)).thenReturn(java.util.Optional.of(taskAttachment));
+		when(repository.findById(2L)).thenReturn(java.util.Optional.of(taskAttachment));
 
-        assertEquals(repository.findById(2L).orElseThrow(), service.getById(2L));
-        assertThrows(NoSuchElementException.class, () -> service.getById(3L));
-    }
+		assertEquals(repository.findById(2L).orElseThrow(), service.getById(2L));
+		assertThrows(NoSuchElementException.class, () -> service.getById(3L));
+	}
 
-    /**
-     * Проверка того, что метод getAll выводит результат метода findAll репозитория.
-     */
-    @Test
-    void getAllTest() {
-        assertEquals(service.getAll(), repository.findAll());
-    }
+	/**
+	 * Проверка того, что метод getAll выводит результат метода findAll репозитория.
+	 */
+	@Test
+	void getAllTest() {
+		assertEquals(service.getAll(), repository.findAll());
+	}
 
-    /**
-     * Проверка того, что метод update возвращает обновлённое прикрепление к задаче с Id,
-     * заданным в параметре.
-     */
-    @Test
-    void updateTest() {
-        TaskAttachment newTaskAttachment = new TaskAttachment();
+	/**
+	 * Проверка того, что метод update возвращает обновлённое прикрепление к задаче с Id,
+	 * заданным в параметре.
+	 */
+	@Test
+	void updateTest() {
+		TaskAttachment newTaskAttachment = new TaskAttachment();
 
-        when(repository.saveAndFlush(newTaskAttachment)).thenReturn(newTaskAttachment);
-        assertEquals(newTaskAttachment, service.update(newTaskAttachment, 3L));
-        assertEquals(3L, service.update(newTaskAttachment, 3L).getId());
-    }
+		when(repository.saveAndFlush(newTaskAttachment)).thenReturn(newTaskAttachment);
+		assertEquals(newTaskAttachment, service.update(newTaskAttachment, 3L));
+		assertEquals(3L, service.update(newTaskAttachment, 3L).getId());
+	}
 
-    /**
-     * Проверка того, что метод delete возвращает true, если
-     * EmptyResultDataAccessException не был брошен,
-     * и возвращает false в противном случае.
-     */
-    @Test
-    void deleteTest() {
-        assertTrue(service.delete(anyLong()));
+	/**
+	 * Проверка того, что метод delete возвращает true, если
+	 * EmptyResultDataAccessException не был брошен,
+	 * и возвращает false в противном случае.
+	 */
+	@Test
+	void deleteTest() {
+		assertTrue(service.delete(anyLong()));
 
-        doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(anyLong());
-        assertFalse(service.delete(anyLong()));
-    }
+		doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(anyLong());
+		assertFalse(service.delete(anyLong()));
+	}
 
-    /**
-     * Проверка того, что метод возвращает прикрепление к задаче с
-     * данными, основанными на файле, переданном в параметре.
-     */
-    @Test
-    void createByFile() {
-        var file = mock(MultipartFile.class);
+	/**
+	 * Проверка того, что метод возвращает прикрепление к задаче с
+	 * данными, основанными на файле, переданном в параметре.
+	 */
+	@Test
+	void createByFile() {
+		var file = mock(MultipartFile.class);
 
-        var taskAttachment = mock(TaskAttachment.class);
-        var task = mock(Task.class);
+		var taskAttachment = mock(TaskAttachment.class);
+		var task = mock(Task.class);
 
-        doReturn(taskAttachment).when(repository).save(any(TaskAttachment.class));
-        assertEquals(taskAttachment.getFileName(), service.createByFile(task, file).getFileName());
-    }
+		doReturn(taskAttachment).when(repository).save(any(TaskAttachment.class));
+		assertEquals(taskAttachment.getFileName(), service.createByFile(task, file).getFileName());
+	}
 
-    /**
-     * Проверка того, что метод возвращает лист при указании корректного taskId
-     */
-    @Test
-    void getByTaskId() {
-        LinkedList taskAttachmentList = mock(LinkedList.class);
-        doReturn(taskAttachmentList).when(repository).findByTaskId(3L);
-        assertEquals(taskAttachmentList, service.getByTaskId(3L));
-    }
+	/**
+	 * Проверка того, что метод возвращает лист при указании корректного taskId
+	 */
+	@Test
+	void getByTaskId() {
+		LinkedList taskAttachmentList = mock(LinkedList.class);
+		doReturn(taskAttachmentList).when(repository).findByTaskId(3L);
+		assertEquals(taskAttachmentList, service.getByTaskId(3L));
+	}
 
-    /**
-     * Проверка того, что метод возвращает прикрепление с указаным Id
-     * В противном случае бросает бизнесс исключение
-     */
-    @Test
-    void getByFileIndexTest(){
-        TaskAttachment attachment = mock(TaskAttachment.class);
-        doReturn(1L).when(attachment).getId();
-        LinkedList<TaskAttachment> linkedList = new LinkedList<>();
-        linkedList.add(attachment);
-        doReturn(linkedList).when(repository).findByTaskId(2L);
-        assertEquals(linkedList.get(0), service.getByFileId(2L, 1L));
-        assertThrows(BusinessException.class,() -> service.getByFileId(2L, 3L));
-    }
+	/**
+	 * Проверка того, что метод возвращает прикрепление с указаным Id
+	 * В противном случае бросает бизнесс исключение
+	 */
+	@Test
+	void getByFileIndexTest() {
+		TaskAttachment attachment = mock(TaskAttachment.class);
+		doReturn(1L).when(attachment).getId();
+		LinkedList<TaskAttachment> linkedList = new LinkedList<>();
+		linkedList.add(attachment);
+		doReturn(linkedList).when(repository).findByTaskId(2L);
+		assertEquals(linkedList.get(0), service.getByFileId(2L, 1L));
+		assertThrows(BusinessException.class, () -> service.getByFileId(2L, 3L));
+	}
 }

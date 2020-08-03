@@ -22,6 +22,7 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Поиск студенческой задачи по её Id.
+	 *
 	 * @param id Id задчи, которую необходимо найти
 	 * @return Искомая задача
 	 */
@@ -30,6 +31,7 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Поиск всех студенческих задач, хранящихся в БД.
+	 *
 	 * @return лист всех имеющихся студенческих задач
 	 */
 	@Override
@@ -37,8 +39,9 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Обновление параметров студенческой задачи.
+	 *
 	 * @param updatedEntity Обновленные данные задачи
-	 * @param id Id задчи, которая будет обновлена
+	 * @param id            Id задчи, которая будет обновлена
 	 * @return Обновленная задача
 	 */
 	@Override
@@ -46,6 +49,7 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Удаление студенческой задачи.
+	 *
 	 * @param id Id задачи, которая должна быть удалена
 	 * @return Успешно ли было произведено удаление
 	 */
@@ -63,6 +67,7 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Найти все задачи, закрепленные за ячейкой расписания пользователя.
+	 *
 	 * @param userCellId Id ячейки расписания пользователя
 	 * @return Лист задач, принадлежащих к ячейке
 	 */
@@ -70,6 +75,7 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Найти все задачи, закрепленные за пользователем.
+	 *
 	 * @param userId Id пользователя
 	 * @return Лист задач, закрепленных за пользователем
 	 */
@@ -77,6 +83,7 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Найти все задачи по завершенности, закрепленные за пользователем.
+	 *
 	 * @param userId Id пользователя
 	 * @param isDone Выполнена ли задача
 	 * @return Лист задач, закрепленных за пользователем
@@ -85,7 +92,8 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Найти все задачи в выбраном семестре, закрепленные за пользователем.
-	 * @param userId Id пользователя
+	 *
+	 * @param userId   Id пользователя
 	 * @param semester Выбраный семестр
 	 * @return Лист задач, закрепленных за пользователем
 	 */
@@ -93,7 +101,8 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Найти все задачи по выбраному предмету, закрепленные за пользователем.
-	 * @param userId Id пользователя
+	 *
+	 * @param userId    Id пользователя
 	 * @param subjectId Выбраный предмет
 	 * @return Лист задач, закрепленных за пользователем
 	 */

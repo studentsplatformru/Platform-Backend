@@ -9,9 +9,9 @@ import java.util.List;
 @Data
 public class DisciplineDTO extends BaseDTO {
 
-    private Long userId;
-    private Long subjectId;
-    private Integer semester;
-    private List<ScheduleUserCellDTO> scheduleUserCells;
+	private Long userId;
+	private Long subjectId;
+	private Integer semester;
+	private List<ScheduleUserCellDTO> scheduleUserCells;
 
 }

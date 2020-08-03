@@ -9,9 +9,9 @@ import java.util.List;
 @Data
 public class TeamDTO extends BaseDTO {
 
-    private Long semester;
-    private String teamName;
-    private List<UserDTO> users;
-    private Long directionId;
+	private Long semester;
+	private String teamName;
+	private List<UserDTO> users;
+	private Long directionId;
 
 }

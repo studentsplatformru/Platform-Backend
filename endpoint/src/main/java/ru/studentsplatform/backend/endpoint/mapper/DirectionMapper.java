@@ -16,55 +16,55 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring", uses = {TeamMapper.class})
 public interface DirectionMapper {
-    /**
-     * Трансформация полей сущности направления в поля DTO.
-     *
-     * @param entity Сущность направления, на основе которой будет создан DTO
-     * @return DTO направления.
-     */
-    @Mappings({
-            @Mapping(target = "id", source = "entity.id"),
-            @Mapping(target = "createdBy", source = "entity.createdBy"),
-            @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
-            @Mapping(target = "direction", source = "entity.direction"),
-            @Mapping(target = "directionCode", source = "entity.directionCode"),
-            @Mapping(target = "facultyId", source = "entity.faculty.id"),
-            @Mapping(target = "teams", source = "entity.teams")
-    })
-    DirectionDTO directionToDirectionDTO(Direction entity);
+	/**
+	 * Трансформация полей сущности направления в поля DTO.
+	 *
+	 * @param entity Сущность направления, на основе которой будет создан DTO
+	 * @return DTO направления.
+	 */
+	@Mappings({
+			@Mapping(target = "id", source = "entity.id"),
+			@Mapping(target = "createdBy", source = "entity.createdBy"),
+			@Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
+			@Mapping(target = "direction", source = "entity.direction"),
+			@Mapping(target = "directionCode", source = "entity.directionCode"),
+			@Mapping(target = "facultyId", source = "entity.faculty.id"),
+			@Mapping(target = "teams", source = "entity.teams")
+	})
+	DirectionDTO directionToDirectionDTO(Direction entity);
 
-    /**
-     * Трансформация полей объекта DTO направления в поля сущности направления.
-     *
-     * @param dto DTO направления, на основе которого будет создана сущность.
-     * @return Объект сущности направления.
-     */
-    @Mappings({
-            @Mapping(target = "id", source = "dto.id"),
-            @Mapping(target = "createdBy", source = "dto.createdBy"),
-            @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
-            @Mapping(target = "direction", source = "dto.direction"),
-            @Mapping(target = "directionCode", source = "dto.directionCode"),
-            @Mapping(target = "faculty.id", source = "dto.facultyId"),
-            @Mapping(target = "teams", source = "dto.teams")
+	/**
+	 * Трансформация полей объекта DTO направления в поля сущности направления.
+	 *
+	 * @param dto DTO направления, на основе которого будет создана сущность.
+	 * @return Объект сущности направления.
+	 */
+	@Mappings({
+			@Mapping(target = "id", source = "dto.id"),
+			@Mapping(target = "createdBy", source = "dto.createdBy"),
+			@Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
+			@Mapping(target = "direction", source = "dto.direction"),
+			@Mapping(target = "directionCode", source = "dto.directionCode"),
+			@Mapping(target = "faculty.id", source = "dto.facultyId"),
+			@Mapping(target = "teams", source = "dto.teams")
 
-    })
-    Direction directionDTOToDirection(DirectionDTO dto);
+	})
+	Direction directionDTOToDirection(DirectionDTO dto);
 
-    /**
-     * Конвертирует сразу несколько Сущностей в DTO.
-     *
-     * @param entity Список направлений.
-     * @return Список DTO.
-     */
-    List<DirectionDTO> listDirectionToDirectionDTO(List<Direction> entity);
+	/**
+	 * Конвертирует сразу несколько Сущностей в DTO.
+	 *
+	 * @param entity Список направлений.
+	 * @return Список DTO.
+	 */
+	List<DirectionDTO> listDirectionToDirectionDTO(List<Direction> entity);
 
-    /**
-     * Конвертирует сразу несколько DTO в сущности направлений.
-     *
-     * @param dto Список DTO.
-     * @return Список направлений
-     */
-    List<Direction> listDirectionDTOToDirection(List<DirectionDTO> dto);
+	/**
+	 * Конвертирует сразу несколько DTO в сущности направлений.
+	 *
+	 * @param dto Список DTO.
+	 * @return Список направлений
+	 */
+	List<Direction> listDirectionDTOToDirection(List<DirectionDTO> dto);
 
 }

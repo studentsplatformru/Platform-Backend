@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class UniversityDTO extends BaseDTO {
 
-    private String university;
-    private List<FacultyDTO> faculties;
+	private String university;
+	private List<FacultyDTO> faculties;
 
 }

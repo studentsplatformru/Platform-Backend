@@ -7,8 +7,8 @@ import java.util.List;
 
 @Data
 public class DirectionDTO extends BaseDTO {
-    private String direction;
-    private String directionCode;
-    private Long facultyId;
-    private List<TeamDTO> teams;
+	private String direction;
+	private String directionCode;
+	private Long facultyId;
+	private List<TeamDTO> teams;
 }

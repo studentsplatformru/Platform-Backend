@@ -6,6 +6,6 @@ import ru.studentsplatform.backend.domain.dto.BaseDTO;
 @Data
 public class SubjectDTO extends BaseDTO {
 
-    private String subjectName;
+	private String subjectName;
 
 }

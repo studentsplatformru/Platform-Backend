@@ -5,11 +5,12 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import ru.studentsplatform.backend.domain.dto.utility.TaskAttachmentDTO;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.util.List;
 
+@Profiled
 @Mapper(componentModel = "spring")
-
 public interface TaskAttachmentMapper {
 
 	/**

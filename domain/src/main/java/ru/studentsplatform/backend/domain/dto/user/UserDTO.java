@@ -1,20 +1,21 @@
 package ru.studentsplatform.backend.domain.dto.user;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.studentsplatform.backend.domain.dto.BaseDTO;
+import ru.studentsplatform.backend.domain.dto.university.DisciplineDTO;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO extends BaseDTO {
-    private String email;
-
-    private String password;
-    // TODO:
-    // team_id.
-    // place_study list.
-    // discipline list.
-    // schedule_user_cell.
+	private String email;
+	private String password;
+	private String universityRole;
+	private Long placeStudyId;
+	private Long userInfoId;
+	private List<DisciplineDTO> disciplines;
 }

@@ -16,56 +16,56 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring", uses = {UserMapper.class})
 public interface TeamMapper {
-    /**
-     * Трансформация полей сущности группы в поля DTO.
-     *
-     * @param entity Сущность группы, на основе которой будет создан DTO
-     * @return DTO группы.
-     */
-    @Mappings({
-            @Mapping(target = "id", source = "entity.id"),
-            @Mapping(target = "createdBy", source = "entity.createdBy"),
-            @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
-            @Mapping(target = "semester", source = "entity.semester"),
-            @Mapping(target = "teamName", source = "entity.teamName"),
-            @Mapping(target = "users", source = "entity.users"),
-            @Mapping(target = "directionId", source = "entity.direction.id")
+	/**
+	 * Трансформация полей сущности группы в поля DTO.
+	 *
+	 * @param entity Сущность группы, на основе которой будет создан DTO
+	 * @return DTO группы.
+	 */
+	@Mappings({
+			@Mapping(target = "id", source = "entity.id"),
+			@Mapping(target = "createdBy", source = "entity.createdBy"),
+			@Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
+			@Mapping(target = "semester", source = "entity.semester"),
+			@Mapping(target = "teamName", source = "entity.teamName"),
+			@Mapping(target = "users", source = "entity.users"),
+			@Mapping(target = "directionId", source = "entity.direction.id")
 
-    })
-    TeamDTO teamToTeamDTO(Team entity);
+	})
+	TeamDTO teamToTeamDTO(Team entity);
 
-    /**
-     * Трансформация полей объекта DTO группы в поля сущности группы.
-     *
-     * @param dto DTO группы, на основе которого будет создана сущность.
-     * @return Объект сущности группы.
-     */
-    @Mappings({
-            @Mapping(target = "id", source = "dto.id"),
-            @Mapping(target = "createdBy", source = "dto.createdBy"),
-            @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
-            @Mapping(target = "semester", source = "dto.semester"),
-            @Mapping(target = "teamName", source = "dto.teamName"),
-            @Mapping(target = "users", source = "dto.users"),
-            @Mapping(target = "direction.id", source = "dto.directionId")
+	/**
+	 * Трансформация полей объекта DTO группы в поля сущности группы.
+	 *
+	 * @param dto DTO группы, на основе которого будет создана сущность.
+	 * @return Объект сущности группы.
+	 */
+	@Mappings({
+			@Mapping(target = "id", source = "dto.id"),
+			@Mapping(target = "createdBy", source = "dto.createdBy"),
+			@Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
+			@Mapping(target = "semester", source = "dto.semester"),
+			@Mapping(target = "teamName", source = "dto.teamName"),
+			@Mapping(target = "users", source = "dto.users"),
+			@Mapping(target = "direction.id", source = "dto.directionId")
 
-    })
-    Team teamDTOToTeam(TeamDTO dto);
+	})
+	Team teamDTOToTeam(TeamDTO dto);
 
-    /**
-     * Конвертирует сразу несколько Сущностей в DTO.
-     *
-     * @param entity Список групп.
-     * @return Список DTO.
-     */
-    List<TeamDTO> listTeamToTeamDTO(List<Team> entity);
+	/**
+	 * Конвертирует сразу несколько Сущностей в DTO.
+	 *
+	 * @param entity Список групп.
+	 * @return Список DTO.
+	 */
+	List<TeamDTO> listTeamToTeamDTO(List<Team> entity);
 
-    /**
-     * Конвертирует сразу несколько DTO в сущности групп.
-     *
-     * @param dto Список DTO.
-     * @return Список групп
-     */
-    List<Team> listTeamDTOToTeam(List<TeamDTO> dto);
+	/**
+	 * Конвертирует сразу несколько DTO в сущности групп.
+	 *
+	 * @param dto Список DTO.
+	 * @return Список групп
+	 */
+	List<Team> listTeamDTOToTeam(List<TeamDTO> dto);
 
 }

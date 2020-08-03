@@ -6,12 +6,12 @@ import ru.studentsplatform.backend.domain.dto.BaseDTO;
 @Data
 public class PlaceStudyDTO extends BaseDTO {
 
-    private Long userId;
-    private Long universityId;
-    private Long facultyId;
-    private Long departmentId;
-    private Long directionId;
-    private Long teamId;
-    private Integer semester;
+	private Long userId;
+	private Long universityId;
+	private Long facultyId;
+	private Long departmentId;
+	private Long directionId;
+	private Long teamId;
+	private Integer semester;
 
 }

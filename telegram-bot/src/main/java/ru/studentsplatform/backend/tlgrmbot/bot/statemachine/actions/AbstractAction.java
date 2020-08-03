@@ -12,15 +12,15 @@ import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotSt
  */
 abstract class AbstractAction implements Action<TelegramBotState, TelegramBotEvent> {
 
-    /**
-     * Отображает информацию о смене состояния.
-     *
-     * @param stateContext контекст состояния
-     * @param logger       логгер класса
-     */
-    void logEvent(StateContext<TelegramBotState, TelegramBotEvent> stateContext, Logger logger) {
-        logger.log(Level.INFO, "Это ивент " + stateContext.getEvent());
-        logger.log(Level.INFO, "Это состояние из " + stateContext.getSource().getId().name());
-        logger.log(Level.INFO, "Это состояние в " + stateContext.getTarget().getId().name());
-    }
+	/**
+	 * Отображает информацию о смене состояния.
+	 *
+	 * @param stateContext контекст состояния
+	 * @param logger       логгер класса
+	 */
+	void logEvent(StateContext<TelegramBotState, TelegramBotEvent> stateContext, Logger logger) {
+		logger.log(Level.INFO, "Это ивент " + stateContext.getEvent());
+		logger.log(Level.INFO, "Это состояние из " + stateContext.getSource().getId().name());
+		logger.log(Level.INFO, "Это состояние в " + stateContext.getTarget().getId().name());
+	}
 }

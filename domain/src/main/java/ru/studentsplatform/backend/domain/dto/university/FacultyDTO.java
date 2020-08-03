@@ -8,9 +8,9 @@ import java.util.List;
 @Data
 public class FacultyDTO extends BaseDTO {
 
-    private String faculty;
-    private Long universityId;
-    private List<DepartmentDTO> departments;
-    private List<DirectionDTO> directions;
+	private String faculty;
+	private Long universityId;
+	private List<DepartmentDTO> departments;
+	private List<DirectionDTO> directions;
 
 }

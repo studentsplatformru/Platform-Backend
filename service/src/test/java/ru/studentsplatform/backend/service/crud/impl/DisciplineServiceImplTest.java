@@ -14,98 +14,99 @@ import ru.studentsplatform.backend.entities.model.university.Subject;
 import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class DisciplineServiceImplTest {
 
-    @Mock
-    private DisciplineRepository disciplineRepository;
+	@Mock
+	SubjectRepository subjectRepository;
+	@Mock
+	private DisciplineRepository disciplineRepository;
+	@Mock
+	private UserRepository userRepository;
+	@InjectMocks
+	private DisciplineServiceImpl disciplineService;
 
-    @Mock
-    private UserRepository userRepository;
+	/**
+	 * Проверка того, что метод create возвращает созданную дисциплину.
+	 * Сымитировано поведение save.
+	 */
+	@Test
+	void createTest() {
+		var discipline = mock(Discipline.class);
+		var user = mock(User.class);
+		var subject = mock(Subject.class);
+		doReturn(user).when(discipline).getUser();
+		doReturn(1L).when(user).getId();
+		doReturn(true).when(userRepository).existsById(1L);
 
-    @Mock
-    SubjectRepository subjectRepository;
+		doReturn(subject).when(discipline).getSubject();
+		doReturn(1L).when(subject).getId();
+		doReturn(true).when(subjectRepository).existsById(1L);
 
+		doReturn(discipline).when(disciplineRepository).save(discipline);
 
-    @InjectMocks
-    private DisciplineServiceImpl disciplineService;
+		var result = disciplineService.create(discipline);
+		assertEquals(discipline, result);
+		doReturn(2L).when(user).getId();
+		assertThrows(BusinessException.class, () -> disciplineService.create(discipline));
+	}
 
-    /**
-     * Проверка того, что метод create возвращает созданную дисциплину.
-     * Сымитировано поведение save.
-     */
-    @Test
-    void createTest() {
-        var discipline = mock(Discipline.class);
-        var user = mock(User.class);
-        var subject = mock(Subject.class);
-        doReturn(user).when(discipline).getUser();
-        doReturn(1L).when(user).getId();
-        doReturn(true).when(userRepository).existsById(1L);
+	/**
+	 * Проверка того, что метод findById возвращает созданную дисциплину
+	 * и кидает NoSuchElementException при её отсутствии.
+	 */
+	@Test
+	void getByIdTest() {
+		Discipline discipline = new Discipline();
 
-        doReturn(subject).when(discipline).getSubject();
-        doReturn(1L).when(subject).getId();
-        doReturn(true).when(subjectRepository).existsById(1L);
+		when(disciplineRepository.findById(2L)).thenReturn(java.util.Optional.of(discipline));
 
-        doReturn(discipline).when(disciplineRepository).save(discipline);
+		assertEquals(disciplineRepository.findById(2L).orElseThrow(), disciplineService.getById(2L));
+		assertThrows(BusinessException.class, () -> disciplineService.getById(3L));
+	}
 
-        var result = disciplineService.create(discipline);
-        assertEquals(discipline, result);
-        doReturn(2L).when(user).getId();
-        assertThrows(BusinessException.class,() -> disciplineService.create(discipline));
-    }
+	/**
+	 * Проверка того, что метод getAll выводит результат метода findAll репозитория.
+	 */
+	@Test
+	void getAllTest() {
+		assertEquals(disciplineService.getAll(), disciplineRepository.findAll());
+	}
 
-    /**
-     * Проверка того, что метод findById возвращает созданную дисциплину
-     * и кидает NoSuchElementException при её отсутствии.
-     */
-    @Test
-    void getByIdTest() {
-        Discipline discipline = new Discipline();
+	/**
+	 * Проверка того, что метод update возвращает обновлённую дисциплину с Id,
+	 * заданным в параметре.
+	 */
+	@Test
+	void updateTest() {
+		Discipline newDiscipline = new Discipline();
 
-        when(disciplineRepository.findById(2L)).thenReturn(java.util.Optional.of(discipline));
+		doReturn(newDiscipline).when(disciplineRepository).save(newDiscipline);
+		assertEquals(newDiscipline, disciplineService.update(newDiscipline, 3L));
+		assertEquals(3L, disciplineService.update(newDiscipline, 3L).getId());
+	}
 
-        assertEquals(disciplineRepository.findById(2L).orElseThrow(), disciplineService.getById(2L));
-        assertThrows(BusinessException.class, () -> disciplineService.getById(3L));
-    }
+	/**
+	 * Проверка того, что метод delete возвращает true, если
+	 * EmptyResultDataAccessException не был брошен,
+	 * и возвращает false в обратном случае.
+	 */
+	@Test
+	void deleteTest() {
+		assertTrue(disciplineService.delete(anyLong()));
 
-    /**
-     * Проверка того, что метод getAll выводит результат метода findAll репозитория.
-     */
-    @Test
-    void getAllTest() {
-        assertEquals(disciplineService.getAll(), disciplineRepository.findAll());
-    }
-
-    /**
-     * Проверка того, что метод update возвращает обновлённую дисциплину с Id,
-     * заданным в параметре.
-     */
-    @Test
-    void updateTest() {
-        Discipline newDiscipline = new Discipline();
-
-        doReturn(newDiscipline).when(disciplineRepository).save(newDiscipline);
-        assertEquals(newDiscipline, disciplineService.update(newDiscipline, 3L));
-        assertEquals(3L, disciplineService.update(newDiscipline, 3L).getId());
-    }
-
-    /**
-     * Проверка того, что метод delete возвращает true, если
-     * EmptyResultDataAccessException не был брошен,
-     * и возвращает false в обратном случае.
-     */
-    @Test
-    void deleteTest() {
-        assertTrue(disciplineService.delete(anyLong()));
-
-        doThrow(EmptyResultDataAccessException.class).when(disciplineRepository).deleteById(anyLong());
-        assertFalse(disciplineService.delete(anyLong()));
-    }
+		doThrow(EmptyResultDataAccessException.class).when(disciplineRepository).deleteById(anyLong());
+		assertFalse(disciplineService.delete(anyLong()));
+	}
 
 }

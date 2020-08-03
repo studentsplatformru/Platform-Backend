@@ -10,8 +10,8 @@ import ru.studentsplatform.backend.domain.repository.FacultyRepository;
 import ru.studentsplatform.backend.entities.model.university.Department;
 import ru.studentsplatform.backend.service.crud.DepartmentService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
-import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.util.List;
 
@@ -22,65 +22,65 @@ import java.util.List;
 @Profiled
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
 
-    private final DepartmentRepository departmentRepository;
-    private final FacultyRepository facultyRepository;
+	private final DepartmentRepository departmentRepository;
+	private final FacultyRepository facultyRepository;
 
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository, FacultyRepository facultyRepository) {
-        this.departmentRepository = departmentRepository;
-        this.facultyRepository = facultyRepository;
-    }
+	public DepartmentServiceImpl(DepartmentRepository departmentRepository, FacultyRepository facultyRepository) {
+		this.departmentRepository = departmentRepository;
+		this.facultyRepository = facultyRepository;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Department create(Department newEntity) {
-        if (!facultyRepository.existsById(newEntity.getFaculty().getId())) {
-            throw new BusinessException(ServiceExceptionReason.FACULTY_NOT_FOUND, newEntity.getFaculty().getId());
-        }
-        newEntity.setFaculty(facultyRepository.getOne(newEntity.getFaculty().getId()));
-        return departmentRepository.save(newEntity);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Department create(Department newEntity) {
+		if (!facultyRepository.existsById(newEntity.getFaculty().getId())) {
+			throw new BusinessException(ServiceExceptionReason.FACULTY_NOT_FOUND, newEntity.getFaculty().getId());
+		}
+		newEntity.setFaculty(facultyRepository.getOne(newEntity.getFaculty().getId()));
+		return departmentRepository.save(newEntity);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Department getById(Long id) {
-        return departmentRepository.findById(id).orElseThrow(() ->
-                new BusinessException(ServiceExceptionReason.DEPARTMENT_NOT_FOUND, id));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Department getById(Long id) {
+		return departmentRepository.findById(id).orElseThrow(() ->
+				new BusinessException(ServiceExceptionReason.DEPARTMENT_NOT_FOUND, id));
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Department> getAll() {
-        return departmentRepository.findAll();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Department> getAll() {
+		return departmentRepository.findAll();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Department update(Department updatedEntity, Long id) {
-        updatedEntity.setId(id);
-        return departmentRepository.saveAndFlush(updatedEntity);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Department update(Department updatedEntity, Long id) {
+		updatedEntity.setId(id);
+		return departmentRepository.saveAndFlush(updatedEntity);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean delete(Long id) {
-        try {
-            departmentRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            LOGGER.error("Error occured: cannot delete non-existing department");
-            return false;
-        }
-        return true;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean delete(Long id) {
+		try {
+			departmentRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			LOGGER.error("Error occured: cannot delete non-existing department");
+			return false;
+		}
+		return true;
+	}
 }

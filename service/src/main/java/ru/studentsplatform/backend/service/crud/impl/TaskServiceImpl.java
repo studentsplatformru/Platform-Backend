@@ -11,8 +11,8 @@ import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.TaskService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
-import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.system.helper.CollectionUtils;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -31,7 +31,7 @@ public class TaskServiceImpl implements TaskService {
 	/**
 	 * Консруктор.
 	 *
-	 * @param taskRepository		Репозиторий
+	 * @param taskRepository        Репозиторий
 	 * @param taskAttachmentService Сервис прикрепляемых к task файлов
 	 */
 	public TaskServiceImpl(TaskRepository taskRepository,
@@ -96,7 +96,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public boolean addFilesForTask(Long taskId, List<MultipartFile> files) {
 		if (CollectionUtils.notEmpty(files)) {
-			for (MultipartFile file: files) {
+			for (MultipartFile file : files) {
 				if (file == null) {
 					throw new BusinessException(ServiceExceptionReason.NULL_FILE_EXCEPTION, taskId);
 				}

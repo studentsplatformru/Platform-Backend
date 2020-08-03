@@ -17,52 +17,52 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface DepartmentMapper {
 
-    /**
-     * Трансформация полей сущности кафедры в поля DTO.
-     *
-     * @param entity Сущность кафедры, на основе которой будет создан DTO
-     * @return DTO кафедры.
-     */
-    @Mappings({
-            @Mapping(target = "id", source = "entity.id"),
-            @Mapping(target = "createdBy", source = "entity.createdBy"),
-            @Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
-            @Mapping(target = "department", source = "entity.department"),
-            @Mapping(target = "facultyId", source = "entity.faculty.id"),
+	/**
+	 * Трансформация полей сущности кафедры в поля DTO.
+	 *
+	 * @param entity Сущность кафедры, на основе которой будет создан DTO
+	 * @return DTO кафедры.
+	 */
+	@Mappings({
+			@Mapping(target = "id", source = "entity.id"),
+			@Mapping(target = "createdBy", source = "entity.createdBy"),
+			@Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
+			@Mapping(target = "department", source = "entity.department"),
+			@Mapping(target = "facultyId", source = "entity.faculty.id"),
 
-    })
-    DepartmentDTO departmentToDepartmentDTO(Department entity);
+	})
+	DepartmentDTO departmentToDepartmentDTO(Department entity);
 
-    /**
-     * Трансформация полей объекта DTO кафедры в поля сущности кафедры.
-     *
-     * @param dto DTO кафедры, на основе которого будет создана сущность.
-     * @return Объект сущности кафедры.
-     */
-    @Mappings({
-            @Mapping(target = "id", source = "dto.id"),
-            @Mapping(target = "createdBy", source = "dto.createdBy"),
-            @Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
-            @Mapping(target = "department", source = "dto.department"),
-            @Mapping(target = "faculty.id", source = "dto.facultyId"),
+	/**
+	 * Трансформация полей объекта DTO кафедры в поля сущности кафедры.
+	 *
+	 * @param dto DTO кафедры, на основе которого будет создана сущность.
+	 * @return Объект сущности кафедры.
+	 */
+	@Mappings({
+			@Mapping(target = "id", source = "dto.id"),
+			@Mapping(target = "createdBy", source = "dto.createdBy"),
+			@Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
+			@Mapping(target = "department", source = "dto.department"),
+			@Mapping(target = "faculty.id", source = "dto.facultyId"),
 
-    })
-    Department departmentDTOToDepartment(DepartmentDTO dto);
+	})
+	Department departmentDTOToDepartment(DepartmentDTO dto);
 
-    /**
-     * Конвертирует сразу несколько Сущностей в DTO.
-     *
-     * @param entity Список кафедр.
-     * @return Список DTO.
-     */
-    List<DepartmentDTO> listDepartmentToDepartmentDTO(List<Department> entity);
+	/**
+	 * Конвертирует сразу несколько Сущностей в DTO.
+	 *
+	 * @param entity Список кафедр.
+	 * @return Список DTO.
+	 */
+	List<DepartmentDTO> listDepartmentToDepartmentDTO(List<Department> entity);
 
-    /**
-     * Конвертирует сразу несколько DTO в сущности кафедр.
-     *
-     * @param dto Список DTO.
-     * @return Список кафедр
-     */
-    List<Department> listDepartmentDTOToDepartment(List<DepartmentDTO> dto);
+	/**
+	 * Конвертирует сразу несколько DTO в сущности кафедр.
+	 *
+	 * @param dto Список DTO.
+	 * @return Список кафедр
+	 */
+	List<Department> listDepartmentDTOToDepartment(List<DepartmentDTO> dto);
 
 }
