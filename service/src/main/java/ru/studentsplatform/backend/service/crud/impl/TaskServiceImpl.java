@@ -148,4 +148,12 @@ public class TaskServiceImpl implements TaskService {
 	public List<Task> getBySubjectForUser(Long userId, Long subjectId) {
 		return taskRepository.findBySubjectIdByUserId(userId, subjectId);
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Task> getByTeamId(Long teamId) {
+		return taskRepository.findByTeamId(teamId);
+	}
 }

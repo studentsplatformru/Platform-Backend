@@ -21,6 +21,7 @@ public interface UserMapper {
 			@Mapping(target = "userInfoId", source = "entity.userInfo.id"),
 			@Mapping(target = "universityRole", source = "entity.universityRole"),
 			@Mapping(target = "placeStudyId", source = "entity.placeStudy.id"),
+			@Mapping(target = "teamId", source = "entity.team.id"),
 			@Mapping(target = "disciplines", source = "entity.disciplines")
 	})
 	UserDTO userToUserDTO(User entity);
@@ -33,7 +34,7 @@ public interface UserMapper {
 			@Mapping(target = "password", source = "dto.password"),
 			@Mapping(target = "userInfo.id", source = "dto.userInfoId"),
 			@Mapping(target = "universityRole", source = "dto.universityRole"),
-			@Mapping(target = "placeStudy.id", source = "dto.placeStudyId"),
+			@Mapping(target = "team.id", source = "dto.teamId"),
 			@Mapping(target = "disciplines", source = "dto.disciplines")
 	})
 	User userDTOtoUser(UserDTO dto);

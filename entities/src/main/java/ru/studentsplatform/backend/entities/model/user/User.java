@@ -5,6 +5,7 @@ import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.enums.UniversityRoleEnum;
 import ru.studentsplatform.backend.entities.model.university.Discipline;
 import ru.studentsplatform.backend.entities.model.university.PlaceStudy;
+import ru.studentsplatform.backend.entities.model.university.Team;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -39,6 +42,10 @@ public class User extends BaseEntity {
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private PlaceStudy placeStudy;
+
+	@ManyToOne
+	@JoinColumn(name = "team_id")
+	private Team team;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Discipline> disciplines;

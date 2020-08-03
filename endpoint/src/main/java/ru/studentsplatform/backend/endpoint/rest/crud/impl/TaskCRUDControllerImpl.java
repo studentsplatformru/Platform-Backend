@@ -121,8 +121,11 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 				.body(new ByteArrayResource(file.getContent()));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public ResponseEntity<List<TaskDTO>> getIsDoneTaskForUser(Long userId,
+	public ResponseEntity<List<TaskDTO>> getByDoneTaskForUser(Long userId,
 															  Long cellId,
 															  Long taskId,
 															  Boolean isDone) {
@@ -131,6 +134,9 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 		return ResponseEntity.ok(result);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(Long userId,
 																  Long cellId,
@@ -141,12 +147,25 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 		return ResponseEntity.ok(result);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(Long userId,
 																 Long cellId,
 																 Long taskId,
 																 Long subjectId) {
 		var entityList = taskService.getBySubjectForUser(userId, subjectId);
+		var result = taskMapper.listTaskToTaskDTO(entityList);
+		return ResponseEntity.ok(result);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<List<TaskDTO>> getTaskByGroup(Long userId, Long cellId, Long taskId, Long groupID) {
+		var entityList = taskService.getByTeamId(groupID);
 		var result = taskMapper.listTaskToTaskDTO(entityList);
 		return ResponseEntity.ok(result);
 	}

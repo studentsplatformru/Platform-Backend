@@ -16,6 +16,7 @@ public class UserDTO extends BaseDTO {
 	private String password;
 	private String universityRole;
 	private Long placeStudyId;
+	private Long teamId;
 	private Long userInfoId;
 	private List<DisciplineDTO> disciplines;
 }

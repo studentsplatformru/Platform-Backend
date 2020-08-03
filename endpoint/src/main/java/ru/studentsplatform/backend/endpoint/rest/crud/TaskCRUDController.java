@@ -88,23 +88,67 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 									@PathVariable(name = "cellId") Long cellId,
 									@PathVariable(name = "taskId") Long taskId);
 
+	/**
+	 * Возвращает сведения о задачах для конкретного пользователя
+	 * по степени их завершенности.
+	 *
+	 * @param userId Id пользователя, которому принадлежит задача
+	 * @param cellId Id ячейки расписания пользователя, к которой прикреплена задача
+	 * @param taskId Id задачи студента
+	 * @param isDone Завершена ли задача
+	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
+	 */
 	@GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}/isDone/{isDone}")
-	ResponseEntity<List<TaskDTO>> getIsDoneTaskForUser(@PathVariable(name = "userId") Long userId,
+	ResponseEntity<List<TaskDTO>> getByDoneTaskForUser(@PathVariable(name = "userId") Long userId,
 													   @PathVariable(name = "cellId") Long cellId,
 													   @PathVariable(name = "taskId") Long taskId,
 													   @PathVariable(name = "isDone") Boolean isDone);
 
-
+	/**
+	 * Возвращает сведения о задачах для конкретного пользователя
+	 * по семестру.
+	 *
+	 * @param userId Id пользователя, которому принадлежит задача
+	 * @param cellId Id ячейки расписания пользователя, к которой прикреплена задача
+	 * @param taskId Id задачи студента
+	 * @param semester номер семестра
+	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
+	 */
 	@GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}/semester/{semester}")
 	ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(@PathVariable(name = "userId") Long userId,
 														   @PathVariable(name = "cellId") Long cellId,
 														   @PathVariable(name = "taskId") Long taskId,
 														   @PathVariable(name = "semester") Long semester);
 
+	/**
+	 * Возвращает сведения о задачах для конкретного пользователя
+	 * по предмету.
+	 *
+	 * @param userId Id пользователя, которому принадлежит задача
+	 * @param cellId Id ячейки расписания пользователя, к которой прикреплена задача
+	 * @param taskId Id задачи студента
+	 * @param subjectId Id предмета
+	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
+	 */
 	@GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}/subject/{subjectId}")
 	ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(@PathVariable(name = "userId") Long userId,
 														  @PathVariable(name = "cellId") Long cellId,
 														  @PathVariable(name = "taskId") Long taskId,
 														  @PathVariable(name = "subjectId") Long subjectId);
+
+	/**
+	 * Возвращает сведения о задачах для группы студентов.
+	 *
+	 * @param userId Id пользователя, которому принадлежит задача
+	 * @param cellId Id ячейки расписания пользователя, к которой прикреплена задача
+	 * @param taskId Id задачи студента
+	 * @param groupID Id группы студентов
+	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
+	 */
+	@GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}/group/{subjectId}")
+	ResponseEntity<List<TaskDTO>> getTaskByGroup(@PathVariable(name = "userId") Long userId,
+														  @PathVariable(name = "cellId") Long cellId,
+														  @PathVariable(name = "taskId") Long taskId,
+														  @PathVariable(name = "groupId") Long groupID);
 }
 
