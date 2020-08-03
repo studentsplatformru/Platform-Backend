@@ -111,9 +111,10 @@ public interface TaskService extends AbstractService<Task> {
 	/**
 	 * Найти все задачи по студенческой группе.
 	 *
+	 * @param subjectId Id предмета
 	 * @param teamId Id группы, поиск задач которой выполняется
 	 * @return Лист задач, струдентов определенной группы
 	 */
-	List<Task> getByTeamId(Long teamId);
+	List<Task> getBySubjectIdForTeam(Long subjectId, Long teamId);
 
 }

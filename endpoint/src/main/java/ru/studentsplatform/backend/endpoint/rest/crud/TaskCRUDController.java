@@ -39,7 +39,7 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	 * @param fileId Id файла дял загрузки
 	 * @return тело веб-страницы
 	 */
-	@GetMapping("{taskId}/file/{fileId}")
+	@GetMapping("/{taskId}/file/{fileId}")
 	ResponseEntity<Resource> getFileRelatedToTask(@PathVariable(name = "taskId") Long taskId,
 												  @PathVariable(name = "fileId") Long fileId);
 
@@ -80,7 +80,7 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	 * @param isDone Завершена ли задача
 	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
 	 */
-	@GetMapping("user/{userId}/isDone/{isDone}")
+	@GetMapping("/user/{userId}/isDone/{isDone}")
 	ResponseEntity<List<TaskDTO>> getByDoneTaskForUser(@PathVariable(name = "userId") Long userId,
 													   @PathVariable(name = "isDone") Boolean isDone);
 
@@ -92,7 +92,7 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	 * @param semester номер семестра
 	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
 	 */
-	@GetMapping("user/{userId}/semester/{semester}")
+	@GetMapping("/user/{userId}/semester/{semester}")
 	ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(@PathVariable(name = "userId") Long userId,
 														   @PathVariable(name = "semester") Integer semester);
 
@@ -104,17 +104,19 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	 * @param subjectId Id предмета
 	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
 	 */
-	@GetMapping("user/{userId}/subject/{subjectId}")
+	@GetMapping("/user/{userId}/subject/{subjectId}")
 	ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(@PathVariable(name = "userId") Long userId,
 														  @PathVariable(name = "subjectId") Long subjectId);
 
 	/**
 	 * Возвращает сведения о задачах для группы студентов.
 	 *
+	 * @param subjectId Id предмета
 	 * @param groupID Id группы студентов
 	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
 	 */
-	@GetMapping("group/{groupId}")
-	ResponseEntity<List<TaskDTO>> getTaskByGroup(@PathVariable(name = "groupId") Long groupID);
+	@GetMapping("/subject/{subjectId}/group/{groupId}")
+	ResponseEntity<List<TaskDTO>> getTaskByGroup(@PathVariable(name = "subjectId") Long subjectId,
+												 @PathVariable(name = "groupId") Long groupID);
 }
 

@@ -153,7 +153,7 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Task> getByTeamId(Long teamId) {
-		return taskRepository.findByTeamId(teamId);
+	public List<Task> getBySubjectIdForTeam(Long teamId, Long subjectId) {
+		return taskRepository.findBySubjectIdForTeam(subjectId, teamId);
 	}
 }

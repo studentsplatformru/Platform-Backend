@@ -27,6 +27,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 			"and att.scheduleUserCell.discipline.subject.id = :subjectId")
 	List<Task> findBySubjectIdByUserId(@Param("userId") Long userId, @Param("subjectId") Long subjectId);
 
-	@Query("select att from Task att where att.scheduleUserCell.user.team.id = :teamId")
-	List<Task> findByTeamId(@Param("teamId") Long teamId);
+	@Query("select att from Task att where att.scheduleUserCell.user.team.id = :teamId " +
+			"and att.scheduleUserCell.discipline.subject.id = :subjectId")
+	List<Task> findBySubjectIdForTeam(@Param("subjectId") Long subjectId, @Param("teamId") Long teamId);
 }

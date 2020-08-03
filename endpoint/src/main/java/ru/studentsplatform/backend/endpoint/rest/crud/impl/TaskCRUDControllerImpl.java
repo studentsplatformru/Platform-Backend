@@ -147,8 +147,9 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<TaskDTO>> getTaskByGroup(Long groupID) {
-		var entityList = taskService.getByTeamId(groupID);
+	public ResponseEntity<List<TaskDTO>> getTaskByGroup(Long subjectId,
+														Long groupID) {
+		var entityList = taskService.getBySubjectIdForTeam(subjectId, groupID);
 		var result = taskMapper.listTaskToTaskDTO(entityList);
 		return ResponseEntity.ok(result);
 	}
