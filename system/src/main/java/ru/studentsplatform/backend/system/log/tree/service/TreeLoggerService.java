@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Service
 public class TreeLoggerService {
-	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private final TreeMethodCallService treeMethodCallService;
 
@@ -28,6 +28,12 @@ public class TreeLoggerService {
 		this.treeMethodCallService = treeMethodCallService;
 	}
 
+	/**
+	 * Метод профилирования, реализует логгику логгирования.
+	 *
+	 * @param joinPoint Точка входа
+	 * @return Результат
+	 */
 	public Object profile(ProceedingJoinPoint joinPoint) {
 		var joinPointHelper = getJoinPointHelper(joinPoint);
 		var dataStorage = RequestStorage.getRequestStorage();
@@ -75,7 +81,7 @@ public class TreeLoggerService {
 		var ind = indexStorage.decrementAndGet();
 		treeMethodCallService.endCall(treeMethodCall, Objects.toString(result));
 		if (ind == 0) {
-			LOGGER.info(treeMethodCallService.createTree(dataStorage));
+			logger.info(treeMethodCallService.createTree(dataStorage));
 			dataStorage.clear();
 		}
 	}

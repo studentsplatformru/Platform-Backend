@@ -51,7 +51,7 @@ class TaskMapperTest {
 		entity.setTaskName("testName");
 		entity.setDone(false);
 		entity.setDeadLine(OffsetDateTime.of(LocalDateTime.of(2017, 5, 12, 5, 45, 5),
-                ZoneOffset.ofHoursMinutes(6, 0)));
+				ZoneOffset.ofHoursMinutes(6, 0)));
 		entity.setMark(4);
 		entity.setScheduleUserCell(cell);
 
@@ -83,7 +83,7 @@ class TaskMapperTest {
 		dto.setTaskName("testName");
 		dto.setIsDone(false);
 		dto.setDeadLine(OffsetDateTime.of(LocalDateTime.of(2017, 5, 12, 5, 45, 5),
-                ZoneOffset.ofHoursMinutes(6, 0)));
+				ZoneOffset.ofHoursMinutes(6, 0)));
 		dto.setMark(4);
 		dto.setScheduleUserCellId(2L);
 		dto.setAttachments(attachmentDTOS);

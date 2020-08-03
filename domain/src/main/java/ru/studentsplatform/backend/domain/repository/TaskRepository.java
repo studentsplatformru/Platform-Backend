@@ -10,9 +10,9 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    @Query("select att from Task att where att.scheduleUserCell.id = :userCellId")
-    List<Task> findByScheduleUserCellId(@Param("userCellId") Long userCellId);
+	@Query("select att from Task att where att.scheduleUserCell.id = :userCellId")
+	List<Task> findByScheduleUserCellId(@Param("userCellId") Long userCellId);
 
-    @Query("select att from Task att where att.scheduleUserCell.user.id = :userId")
-    List<Task> findByUserId(@Param("userId") Long userId);
+	@Query("select att from Task att where att.scheduleUserCell.user.id = :userId")
+	List<Task> findByUserId(@Param("userId") Long userId);
 }

@@ -18,8 +18,8 @@ public class MainController {
 
 	@GetMapping
 	public ResponseEntity getMain() {
-		eMailSender.send("krylov.sergey.1999@yandex.ru", "Test", "Test body");
-		eMailSender.send("krylov.sergey.1999@yandex.ru", "Test", "Test body");
+		eMailSender.random();
+		eMailSender.random();
 		return ResponseEntity.ok("Hello world");
 	}
 }

@@ -12,7 +12,6 @@ import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
-import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.service.exception.core.BusinessException;
 
 import java.util.Arrays;
@@ -115,7 +114,7 @@ class TaskServiceImplTest {
 	 * в впротивном случае бросит бизнесс-исключение.
 	 */
 	@Test
-	void addFilesTest(){
+	void addFilesTest() {
 		var task = mock(Task.class);
 		var file = mock(MultipartFile.class);
 		var attachment = mock(TaskAttachment.class);
@@ -124,18 +123,18 @@ class TaskServiceImplTest {
 		assertTrue(taskService.addFilesForTask(2L, Arrays.asList(file)));
 		MultipartFile nullFile = null;
 		assertThrows(BusinessException.class,
-				() -> taskService.addFilesForTask(3L,Arrays.asList(nullFile)));
+				() -> taskService.addFilesForTask(3L, Arrays.asList(nullFile)));
 		assertThrows(BusinessException.class,
-				() -> taskService.addFilesForTask(3L,null));
+				() -> taskService.addFilesForTask(3L, null));
 	}
 
 	@Test
-	void getByUserCell(){
+	void getByUserCell() {
 		assertEquals(taskService.getByUserCell(2L), taskRepository.findByScheduleUserCellId(2L));
 	}
 
 	@Test
-	void getByUser(){
+	void getByUser() {
 		assertEquals(taskService.getByUser(2L), taskRepository.findByUserId(2L));
 	}
 }

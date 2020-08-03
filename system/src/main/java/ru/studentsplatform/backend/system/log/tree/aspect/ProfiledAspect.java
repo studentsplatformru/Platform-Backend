@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.studentsplatform.backend.system.log.tree.service.TreeLoggerService;
 
-import java.util.Arrays;
-
 /**
  * Аспект который позволяет отслеживать вызовы методов классов помеченных аннотацией Profiled
  * и показывать время выполнения. В данный момент не может отследить вызов методов внутри одного класса и покажет только

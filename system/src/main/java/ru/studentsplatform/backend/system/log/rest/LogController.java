@@ -14,7 +14,7 @@ import ru.studentsplatform.backend.system.rest.AbstractController;
  */
 @RestController
 @RequestMapping(AbstractController.BASE_URL + "/log")
-public class LogController extends AbstractController {
+public class LogController implements AbstractController {
 
 	private final LogHelper logHelper;
 
