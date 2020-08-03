@@ -1,12 +1,12 @@
-package ru.studentsplatform.backend.tlgrmbot.bot.commands;
+package ru.studentsplatform.backend.telegrambot.commands;
 
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
-import ru.studentsplatform.backend.tlgrmbot.bot.Text;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.service.BotService;
+import ru.studentsplatform.backend.telegrambot.statemachine.service.BotService;
+import ru.studentsplatform.backend.telegrambot.Text;
 
 /**
  * Комманда /set_info позволяет внести в базу данных информацию о пользователе Telegram.

@@ -1,9 +1,9 @@
-package ru.studentsplatform.backend.tlgrmbot.bot.statemachine.persist;
+package ru.studentsplatform.backend.telegrambot.statemachine.persist;
 
 import org.springframework.statemachine.StateMachineContext;
 import org.springframework.statemachine.StateMachinePersist;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.event.TelegramBotEvent;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotState;
+import ru.studentsplatform.backend.telegrambot.statemachine.event.TelegramBotEvent;
+import ru.studentsplatform.backend.telegrambot.statemachine.state.TelegramBotState;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot;
+package ru.studentsplatform.backend.telegrambot;
 
 public enum Text {
     STATE_NEW_NOTIFICATION("Возможно, вам необходимо начать с команды /set_info"),

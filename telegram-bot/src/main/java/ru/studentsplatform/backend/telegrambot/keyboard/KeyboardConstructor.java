@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot.keyboard;
+package ru.studentsplatform.backend.telegrambot.keyboard;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;

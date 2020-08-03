@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot.statemachine.service;
+package ru.studentsplatform.backend.telegrambot.statemachine.service;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -15,9 +15,9 @@ import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.studentsplatform.backend.entities.model.enums.UniversityEnum;
 import ru.studentsplatform.backend.service.crud.PlaceStudyService;
-import ru.studentsplatform.backend.tlgrmbot.bot.Text;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.event.TelegramBotEvent;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotState;
+import ru.studentsplatform.backend.telegrambot.statemachine.event.TelegramBotEvent;
+import ru.studentsplatform.backend.telegrambot.statemachine.state.TelegramBotState;
+import ru.studentsplatform.backend.telegrambot.Text;
 
 import java.util.Map;
 

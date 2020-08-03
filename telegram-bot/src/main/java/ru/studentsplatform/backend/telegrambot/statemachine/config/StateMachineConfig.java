@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot.statemachine.config;
+package ru.studentsplatform.backend.telegrambot.statemachine.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,13 +10,13 @@ import org.springframework.statemachine.config.builders.StateMachineStateConfigu
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
 import org.springframework.statemachine.persist.DefaultStateMachinePersister;
 import org.springframework.statemachine.persist.StateMachinePersister;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.actions.ErrorAction;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.actions.SetInfoAction;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.actions.SpbuAction;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.actions.SpbuGroupAction;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.event.TelegramBotEvent;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.persist.UniversityStateMachinePersister;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotState;
+import ru.studentsplatform.backend.telegrambot.statemachine.actions.ErrorAction;
+import ru.studentsplatform.backend.telegrambot.statemachine.actions.SetInfoAction;
+import ru.studentsplatform.backend.telegrambot.statemachine.actions.SpbuAction;
+import ru.studentsplatform.backend.telegrambot.statemachine.actions.SpbuGroupAction;
+import ru.studentsplatform.backend.telegrambot.statemachine.event.TelegramBotEvent;
+import ru.studentsplatform.backend.telegrambot.statemachine.persist.UniversityStateMachinePersister;
+import ru.studentsplatform.backend.telegrambot.statemachine.state.TelegramBotState;
 
 import java.util.EnumSet;
 

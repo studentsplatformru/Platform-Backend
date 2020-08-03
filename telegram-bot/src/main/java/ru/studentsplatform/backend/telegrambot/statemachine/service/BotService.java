@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot.statemachine.service;
+package ru.studentsplatform.backend.telegrambot.statemachine.service;
 
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Update;

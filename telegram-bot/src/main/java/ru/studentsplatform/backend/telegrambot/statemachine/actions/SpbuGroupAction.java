@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot.statemachine.actions;
+package ru.studentsplatform.backend.telegrambot.statemachine.actions;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -11,8 +11,8 @@ import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.studentsplatform.backend.entities.model.university.University;
 import ru.studentsplatform.backend.service.crud.PlaceStudyService;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.event.TelegramBotEvent;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state.TelegramBotState;
+import ru.studentsplatform.backend.telegrambot.statemachine.event.TelegramBotEvent;
+import ru.studentsplatform.backend.telegrambot.statemachine.state.TelegramBotState;
 
 /**
  * Действие, выполняемое при событии SPBU_GROUP. Сохраняет информацию о пользователе в базу данных.

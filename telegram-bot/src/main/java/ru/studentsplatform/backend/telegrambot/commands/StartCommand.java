@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot.commands;
+package ru.studentsplatform.backend.telegrambot.commands;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.studentsplatform.backend.tlgrmbot.bot.Text;
+import ru.studentsplatform.backend.telegrambot.Text;
 
 /**
  * Команда приветствия при начале работы с ботом.

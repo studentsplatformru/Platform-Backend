@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot;
+package ru.studentsplatform.backend.telegrambot;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

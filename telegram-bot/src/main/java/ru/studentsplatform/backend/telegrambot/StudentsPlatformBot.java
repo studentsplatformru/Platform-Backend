@@ -1,8 +1,9 @@
-package ru.studentsplatform.backend.tlgrmbot.bot;
+package ru.studentsplatform.backend.telegrambot;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -11,11 +12,11 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.studentsplatform.backend.entities.model.enums.Emoji;
-import ru.studentsplatform.backend.tlgrmbot.bot.commands.HelpCommand;
-import ru.studentsplatform.backend.tlgrmbot.bot.commands.ScheduleCommand;
-import ru.studentsplatform.backend.tlgrmbot.bot.commands.SetInfoCommand;
-import ru.studentsplatform.backend.tlgrmbot.bot.commands.StartCommand;
-import ru.studentsplatform.backend.tlgrmbot.bot.statemachine.service.BotService;
+import ru.studentsplatform.backend.telegrambot.commands.StartCommand;
+import ru.studentsplatform.backend.telegrambot.statemachine.service.BotService;
+import ru.studentsplatform.backend.telegrambot.commands.HelpCommand;
+import ru.studentsplatform.backend.telegrambot.commands.ScheduleCommand;
+import ru.studentsplatform.backend.telegrambot.commands.SetInfoCommand;
 
 import javax.annotation.PostConstruct;
 
@@ -24,6 +25,8 @@ import javax.annotation.PostConstruct;
  * а также обработку входящих update от пользователя.
  */
 @Service
+//@PropertySource("application.yml")
+@ConfigurationProperties("telegram-bot")
 public class StudentsPlatformBot extends TelegramLongPollingCommandBot {
 
     private static final Logger LOGGER = LogManager.getLogger(StudentsPlatformBot.class);

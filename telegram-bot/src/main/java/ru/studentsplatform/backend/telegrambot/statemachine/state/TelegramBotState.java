@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot.statemachine.state;
+package ru.studentsplatform.backend.telegrambot.statemachine.state;
 
 public enum TelegramBotState {
     NEW,
