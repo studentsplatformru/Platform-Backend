@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class CustomInfoContributor  implements InfoContributor {
     @Override
     public void contribute(Info.Builder builder) {
-        builder.withDetail("customInfo","This is custom info indicator. You can add your application data. " +
+        builder.withDetail("actuator","This is custom info indicator. You can add your application data. " +
                 "You can share application persistent data from here");
     }
 }
