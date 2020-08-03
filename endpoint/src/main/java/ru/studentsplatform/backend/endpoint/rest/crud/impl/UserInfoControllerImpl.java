@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.endpoint.rest.crud;
+package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.dto.user.UserInfoDTO;
 import ru.studentsplatform.backend.endpoint.mapper.UserInfoMapper;
-import ru.studentsplatform.backend.endpoint.rest.UserInfoController;
+import ru.studentsplatform.backend.endpoint.rest.crud.UserInfoController;
 import ru.studentsplatform.backend.service.crud.impl.UserInfoServiceImpl;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 

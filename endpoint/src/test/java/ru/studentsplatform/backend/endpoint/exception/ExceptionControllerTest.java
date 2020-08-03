@@ -10,7 +10,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import ru.studentsplatform.backend.endpoint.EndpointApplication;
-import ru.studentsplatform.backend.endpoint.rest.MainController;
+import ru.studentsplatform.backend.endpoint.rest.main.MainController;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.exception.core.BusinessExceptionController;

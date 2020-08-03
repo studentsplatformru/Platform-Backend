@@ -18,7 +18,7 @@ import java.util.List;
 @Transactional
 @Service
 public class UserServiceImpl implements UserService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserInfoServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	private final UserRepository userRepository;
 

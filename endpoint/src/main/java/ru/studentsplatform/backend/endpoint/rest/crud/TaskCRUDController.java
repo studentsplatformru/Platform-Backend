@@ -1,15 +1,14 @@
-package ru.studentsplatform.backend.endpoint.rest;
+package ru.studentsplatform.backend.endpoint.rest.crud;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import ru.studentsplatform.backend.domain.dto.TaskDTO;
+import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
  * Контроллер, служащий для создания задач для студентов.
  * Позволяет создать сущность с необходимыми параметрами, а также прикреплять к ней файлы.
  */
-public interface TaskController extends AbstractCRUDController<TaskDTO> {
+public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 
 	String BASE_URL = AbstractCRUDController.BASE_URL + "/task";
 
@@ -31,7 +30,6 @@ public interface TaskController extends AbstractCRUDController<TaskDTO> {
 	 * @return Ответ со статусом 200(ok),
 	 * содержащий сведения о том, удачно ли прикреплены все полученные файлы.
 	 */
-	@Transactional
 	@PostMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}/file")
 	ResponseEntity<Boolean> taskAddFiles(@PathVariable(name = "userId") Long userId,
 										 @PathVariable(name = "cellId") Long cellId,
@@ -47,7 +45,6 @@ public interface TaskController extends AbstractCRUDController<TaskDTO> {
 	 * @param fileId Id файла дял загрузки
 	 * @return тело веб-страницы
 	 */
-	@Transactional
 	@GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}/file/{fileId}")
 	ResponseEntity<Resource> getFileRelatedToTask(@PathVariable(name = "userId") Long userId,
 												  @PathVariable(name = "cellId") Long cellId,
@@ -62,7 +59,6 @@ public interface TaskController extends AbstractCRUDController<TaskDTO> {
 	 * @param dto    Объект, содержащий данные, полученные от пользователя.
 	 * @return Ответ со статусом 200(ok), содержащий сведения о сохраненной сущности.
 	 */
-	@Transactional
 	@PostMapping("user/{userId}/schedule/cell/{cellId}/task")
 	ResponseEntity<TaskDTO> createTask(@PathVariable(name = "userId") Long userId,
 									   @PathVariable(name = "cellId") Long cellId,
@@ -75,7 +71,6 @@ public interface TaskController extends AbstractCRUDController<TaskDTO> {
 	 * @param cellId Id ячейки расписания пользователя, к которой прикреплены задачи
 	 * @return Ответ с кодом 200(ok), содержащий сведения о всех задачах, закрепленных за ячейкой
 	 */
-	@Transactional
 	@GetMapping("user/{userId}/schedule/cell/{cellId}/tasks")
 	ResponseEntity<List<TaskDTO>> getAllTasks(@PathVariable(name = "userId") Long userId,
 											  @PathVariable(name = "cellId") Long cellId);
@@ -88,11 +83,72 @@ public interface TaskController extends AbstractCRUDController<TaskDTO> {
 	 * @param taskId Id задачи студента
 	 * @return Ответ с кодом 200(ok), содержащий сведения о задаче
 	 */
-	@Transactional
 	@GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}")
 	ResponseEntity<TaskDTO> getTask(@PathVariable(name = "userId") Long userId,
 									@PathVariable(name = "cellId") Long cellId,
 									@PathVariable(name = "taskId") Long taskId);
 
+	/**
+	 * Возвращает сведения о задачах для конкретного пользователя
+	 * по степени их завершенности.
+	 *
+	 * @param userId Id пользователя, которому принадлежит задача
+	 * @param cellId Id ячейки расписания пользователя, к которой прикреплена задача
+	 * @param taskId Id задачи студента
+	 * @param isDone Завершена ли задача
+	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
+	 */
+	@GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}/isDone/{isDone}")
+	ResponseEntity<List<TaskDTO>> getByDoneTaskForUser(@PathVariable(name = "userId") Long userId,
+													   @PathVariable(name = "cellId") Long cellId,
+													   @PathVariable(name = "taskId") Long taskId,
+													   @PathVariable(name = "isDone") Boolean isDone);
+
+	/**
+	 * Возвращает сведения о задачах для конкретного пользователя
+	 * по семестру.
+	 *
+	 * @param userId Id пользователя, которому принадлежит задача
+	 * @param cellId Id ячейки расписания пользователя, к которой прикреплена задача
+	 * @param taskId Id задачи студента
+	 * @param semester номер семестра
+	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
+	 */
+	@GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}/semester/{semester}")
+	ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(@PathVariable(name = "userId") Long userId,
+														   @PathVariable(name = "cellId") Long cellId,
+														   @PathVariable(name = "taskId") Long taskId,
+														   @PathVariable(name = "semester") Long semester);
+
+	/**
+	 * Возвращает сведения о задачах для конкретного пользователя
+	 * по предмету.
+	 *
+	 * @param userId Id пользователя, которому принадлежит задача
+	 * @param cellId Id ячейки расписания пользователя, к которой прикреплена задача
+	 * @param taskId Id задачи студента
+	 * @param subjectId Id предмета
+	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
+	 */
+	@GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}/subject/{subjectId}")
+	ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(@PathVariable(name = "userId") Long userId,
+														  @PathVariable(name = "cellId") Long cellId,
+														  @PathVariable(name = "taskId") Long taskId,
+														  @PathVariable(name = "subjectId") Long subjectId);
+
+	/**
+	 * Возвращает сведения о задачах для группы студентов.
+	 *
+	 * @param userId Id пользователя, которому принадлежит задача
+	 * @param cellId Id ячейки расписания пользователя, к которой прикреплена задача
+	 * @param taskId Id задачи студента
+	 * @param groupID Id группы студентов
+	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
+	 */
+	@GetMapping("user/{userId}/schedule/cell/{cellId}/task/{taskId}/group/{subjectId}")
+	ResponseEntity<List<TaskDTO>> getTaskByGroup(@PathVariable(name = "userId") Long userId,
+														  @PathVariable(name = "cellId") Long cellId,
+														  @PathVariable(name = "taskId") Long taskId,
+														  @PathVariable(name = "groupId") Long groupID);
 }
 

@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.endpoint.rest.crud;
+package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import ru.studentsplatform.backend.domain.dto.TaskDTO;
+import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
 import ru.studentsplatform.backend.endpoint.mapper.TaskMapper;
-import ru.studentsplatform.backend.endpoint.rest.TaskController;
+import ru.studentsplatform.backend.endpoint.rest.crud.TaskCRUDController;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;
@@ -24,8 +24,8 @@ import java.util.List;
 
 @Profiled
 @RestController
-@RequestMapping(TaskController.BASE_URL)
-public class TaskControllerImpl implements TaskController {
+@RequestMapping(TaskCRUDController.BASE_URL)
+public class TaskCRUDControllerImpl implements TaskCRUDController {
 	private final TaskMapper taskMapper;
 
 	private final TaskServiceImpl taskService;
@@ -39,8 +39,8 @@ public class TaskControllerImpl implements TaskController {
 	 * @param taskService           Сервис с методами для работы с Task
 	 * @param taskAttachmentService Сервис с методами для работы с файлами, прикрепленными к Task
 	 */
-	public TaskControllerImpl(TaskMapper taskMapper,
-							  TaskServiceImpl taskService, TaskAttachmentService taskAttachmentService) {
+	public TaskCRUDControllerImpl(TaskMapper taskMapper,
+								  TaskServiceImpl taskService, TaskAttachmentService taskAttachmentService) {
 		this.taskMapper = taskMapper;
 		this.taskService = taskService;
 		this.taskAttachmentService = taskAttachmentService;
@@ -119,6 +119,55 @@ public class TaskControllerImpl implements TaskController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"").
 						contentType(MediaType.parseMediaType(file.getContentType()))
 				.body(new ByteArrayResource(file.getContent()));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<List<TaskDTO>> getByDoneTaskForUser(Long userId,
+															  Long cellId,
+															  Long taskId,
+															  Boolean isDone) {
+		var entityList = taskService.getByIsDoneByUserId(userId, isDone);
+		var result = taskMapper.listTaskToTaskDTO(entityList);
+		return ResponseEntity.ok(result);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(Long userId,
+																  Long cellId,
+																  Long taskId,
+																  Long semester) {
+		var entityList = taskService.getBySemesterForUser(userId, semester);
+		var result = taskMapper.listTaskToTaskDTO(entityList);
+		return ResponseEntity.ok(result);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(Long userId,
+																 Long cellId,
+																 Long taskId,
+																 Long subjectId) {
+		var entityList = taskService.getBySubjectForUser(userId, subjectId);
+		var result = taskMapper.listTaskToTaskDTO(entityList);
+		return ResponseEntity.ok(result);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<List<TaskDTO>> getTaskByGroup(Long userId, Long cellId, Long taskId, Long groupID) {
+		var entityList = taskService.getByTeamId(groupID);
+		var result = taskMapper.listTaskToTaskDTO(entityList);
+		return ResponseEntity.ok(result);
 	}
 
 	//TODO: redirect to createTask() method

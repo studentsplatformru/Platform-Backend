@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.endpoint.rest;
+package ru.studentsplatform.backend.endpoint.rest.crud;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import ru.studentsplatform.backend.system.rest.AbstractController;
 
 import java.util.List;
 
-public interface AbstractCRUDController<DTO> extends AbstractController {
-	String BASE_URL = AbstractController.BASE_URL;
+public interface AbstractCRUDController<DTO> {
+	String BASE_URL = "/api";
 
 	@PostMapping("/create")
 	ResponseEntity<DTO> create(@RequestBody DTO dto);

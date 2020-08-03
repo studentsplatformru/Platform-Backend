@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.studentsplatform.backend.entities.model.university.University;
 
 @Repository
-public interface UniversityRepository extends JpaRepository<University, String> {
+public interface UniversityRepository extends JpaRepository<University, Long> {
 }

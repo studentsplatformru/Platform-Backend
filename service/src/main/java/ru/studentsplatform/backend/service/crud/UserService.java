@@ -23,6 +23,8 @@ public interface UserService extends AbstractService<User> {
 	 *
 	 * @param id id сущности в таблице user, которую надо получить.
 	 * @return найденная сущность
+	 * @throws ru.studentsplatform.backend.system.exception.core.BusinessException
+	 * - если пользователь не найден (ServiceExceptionReason.USER_NOT_FOUND)
 	 */
 	@Override
 	User getById(Long id);
@@ -40,6 +42,9 @@ public interface UserService extends AbstractService<User> {
 	 *
 	 * @param updatedEntity новые данные.
 	 * @param id            id обновляемой сущности.
+	 * @return обновленная сущность.
+	 * @throws ru.studentsplatform.backend.system.exception.core.BusinessException
+	 * - если пользователь не найден (ServiceExceptionReason.USER_NOT_FOUND)
 	 */
 	@Override
 	User update(User updatedEntity, Long id);
