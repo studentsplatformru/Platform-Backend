@@ -6,6 +6,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.studentsplatform.backend.entities.model.university.Task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -38,9 +40,12 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 			"and att.scheduleUserCell.discipline.subject.id = :subjectId")
 	List<Task> findBySubjectIdForTeam(@Param("subjectId") Long subjectId, @Param("teamId") Long teamId);
 
-	@Query("select att from Task att join fetch  att.attachments " +
+	@Query("select att from Task att left join fetch  att.attachments " +
 			"where att.scheduleUserCell.user.id = :userId " +
 			"and att.scheduleUserCell.scheduleCell.startClass >= :startTime " +
-			"and att.scheduleUserCell.scheduleCell.startClass <= :endTime")
-	List<Task> findByStartEndTimeForUser(Long userId, OffsetDateTime startTime, OffsetDateTime endTime);
+			"and att.scheduleUserCell.scheduleCell.endClass <= :endTime")
+	List<Task> findByStartEndTimeForUser(
+			@Param("userId") Long userId,
+			@Param("startTime") OffsetDateTime startTime,
+			@Param("endTime") OffsetDateTime endTime);
 }
