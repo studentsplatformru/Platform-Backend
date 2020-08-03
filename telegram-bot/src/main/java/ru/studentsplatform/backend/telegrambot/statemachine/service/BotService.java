@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.tlgrmbot.bot.statemachine.service;
+package ru.studentsplatform.backend.telegrambot.statemachine.service;
 
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -7,7 +7,7 @@ import org.telegram.telegrambots.meta.bots.AbsSender;
 
 public interface BotService {
 
-	void setInfo(AbsSender absSender, User user, Chat chat);
+    void setInfo(AbsSender absSender, User user, Chat chat);
 
-	void define(Update update, AbsSender absSender);
+    void define(Update update, AbsSender absSender);
 }
