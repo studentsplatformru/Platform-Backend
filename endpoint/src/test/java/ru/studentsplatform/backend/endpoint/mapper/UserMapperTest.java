@@ -2,6 +2,10 @@ package ru.studentsplatform.backend.endpoint.mapper;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.studentsplatform.backend.domain.dto.user.UserDTO;
 import ru.studentsplatform.backend.entities.model.user.User;
 
@@ -10,10 +14,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith({MockitoExtension.class})
 class UserMapperTest {
 
+	@Mock
+	DisciplineMapper disciplineMapper;
+
+	@InjectMocks
 	UserMapper mapper = new UserMapperImpl();
 
+	/**
+	 * Проверка того, что маппер может создать DTO на основе сущности
+	 */
 	@Test
 	void userToUserDTOTest() {
 		User user = new User();
@@ -29,6 +41,9 @@ class UserMapperTest {
 		Assert.assertEquals(user.getPassword(), dto.getPassword());
 	}
 
+	/**
+	 * Проверка того, что маппер способен создать сущность на основе DTO
+	 */
 	@Test
 	void userDTOtoUserTest() {
 		UserDTO userDTO = new UserDTO();
@@ -45,6 +60,9 @@ class UserMapperTest {
 		Assert.assertEquals(userDTO.getPassword(), entity.getPassword());
 	}
 
+	/**
+	 * Проверка того, что маппер способен создать лист DTO на основе листа сущностей
+	 */
 	@Test
 	void listUserToUserDTOTest() {
 		List<User> userList = new LinkedList<>();
@@ -57,6 +75,9 @@ class UserMapperTest {
 		assertEquals(3L, userDTOS.get(1).getId());
 	}
 
+	/**
+	 * Проверка того, что маппер способен создать лист сущностей на основе листа DTO
+	 */
 	@Test
 	void listUserDTOtoUserTest() {
 		List<UserDTO> userDTOS = new LinkedList<>();

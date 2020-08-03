@@ -151,12 +151,6 @@
                 <version>${telegrambot.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.telegram</groupId>
-                <artifactId>telegrambots-abilities</artifactId>
-                <version>${telegrambot.version}</version>
-            </dependency>
-
             <!-- HTML-parsing-->
             <dependency>
                 <groupId>org.jsoup</groupId>

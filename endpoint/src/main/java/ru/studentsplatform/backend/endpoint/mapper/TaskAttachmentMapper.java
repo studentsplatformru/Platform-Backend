@@ -3,7 +3,7 @@ package ru.studentsplatform.backend.endpoint.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import ru.studentsplatform.backend.domain.dto.TaskAttachmentDTO;
+import ru.studentsplatform.backend.domain.dto.utility.TaskAttachmentDTO;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
