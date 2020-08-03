@@ -13,11 +13,11 @@ import org.telegram.telegrambots.ApiContextInitializer;
 @EnableJpaRepositories(basePackages = "ru.studentsplatform.backend.domain.repository")
 public class EndpointApplication {
 
-    {
-        ApiContextInitializer.init();
-    }
+	{
+		ApiContextInitializer.init();
+	}
 
-    public static void main(String[] args) {
-        SpringApplication.run(EndpointApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(EndpointApplication.class, args);
+	}
 }

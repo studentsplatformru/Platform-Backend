@@ -2,7 +2,6 @@ package ru.studentsplatform.backend.endpoint.mapper;
 
 import org.junit.jupiter.api.Test;
 import ru.studentsplatform.backend.domain.dto.TaskAttachmentDTO;
-import ru.studentsplatform.backend.endpoint.mapper.TaskAttachmentMapperImpl;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
 

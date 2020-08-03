@@ -18,7 +18,7 @@ public class TreeMethodCallService {
 	 * Метод создает "ветку" дерева.
 	 *
 	 * @param joinPointHelper Информация о точке входа
-	 * @param index Уровень вложенности вызова
+	 * @param index           Уровень вложенности вызова
 	 * @return "Ветка дерева"
 	 */
 	public TreeMethodCall beginCall(JoinPointHelper joinPointHelper, int index) {
@@ -34,7 +34,7 @@ public class TreeMethodCallService {
 	 * Метод завершает создание "ветки" дерева.
 	 *
 	 * @param treeMethodCall "Ветка" дерева
-	 * @param returnValue Возвращаемое значение
+	 * @param returnValue    Возвращаемое значение
 	 */
 	public void endCall(TreeMethodCall treeMethodCall, String returnValue) {
 		treeMethodCall.setEnd(System.currentTimeMillis());
@@ -45,7 +45,7 @@ public class TreeMethodCallService {
 	 * Метод создает ROOT "ветку" дерева.
 	 *
 	 * @param joinPointHelper Информация о точке входа
-	 * @param index Уровень вложенности вызова
+	 * @param index           Уровень вложенности вызова
 	 * @return "Ветка дерева"
 	 */
 	public TreeMethodCall beginRootCall(JoinPointHelper joinPointHelper, int index) {

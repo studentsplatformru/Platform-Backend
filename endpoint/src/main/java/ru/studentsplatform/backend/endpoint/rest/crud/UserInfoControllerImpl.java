@@ -19,81 +19,82 @@ import java.util.List;
 @RestController
 @RequestMapping(UserInfoController.BASE_URL)
 public class UserInfoControllerImpl implements UserInfoController {
-    private final UserInfoMapper userInfoMapper;
+	private final UserInfoMapper userInfoMapper;
 
-    private final UserInfoServiceImpl userInfoService;
+	private final UserInfoServiceImpl userInfoService;
 
-    /**
-     * Конструктор.
-     * @param userInfoMapper userMapper маппер, преобразующий UserInfoDTO в сущность UserInfo и наоборот.
-     * @param userInfoService userService CRUD сервис UserInfo.
-     */
-    public UserInfoControllerImpl(UserInfoMapper userInfoMapper, UserInfoServiceImpl userInfoService) {
-        this.userInfoMapper = userInfoMapper;
-        this.userInfoService = userInfoService;
-    }
+	/**
+	 * Конструктор.
+	 *
+	 * @param userInfoMapper  userMapper маппер, преобразующий UserInfoDTO в сущность UserInfo и наоборот.
+	 * @param userInfoService userService CRUD сервис UserInfo.
+	 */
+	public UserInfoControllerImpl(UserInfoMapper userInfoMapper, UserInfoServiceImpl userInfoService) {
+		this.userInfoMapper = userInfoMapper;
+		this.userInfoService = userInfoService;
+	}
 
-    /**
-     *{@inheritDoc}
-     */
-    @Override
-    public ResponseEntity<UserInfoDTO> create(UserInfoDTO dto) {
-        var userInfo = userInfoMapper.userInfoDTOtoUserInfo(dto);
-        userInfo = userInfoService.create(userInfo);
-        var result = userInfoMapper.userInfoToUserInfoDTO(userInfo);
-        return ResponseEntity.ok(result);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<UserInfoDTO> create(UserInfoDTO dto) {
+		var userInfo = userInfoMapper.userInfoDTOtoUserInfo(dto);
+		userInfo = userInfoService.create(userInfo);
+		var result = userInfoMapper.userInfoToUserInfoDTO(userInfo);
+		return ResponseEntity.ok(result);
+	}
 
-    /**
-     *{@inheritDoc}
-     */
-    @Override
-    public ResponseEntity<Boolean> uploadImage(Long userInfoId, MultipartFile file) {
-        return ResponseEntity.ok(userInfoService.uploadImage(file, userInfoId));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<Boolean> uploadImage(Long userInfoId, MultipartFile file) {
+		return ResponseEntity.ok(userInfoService.uploadImage(file, userInfoId));
+	}
 
-    /**
-     *{@inheritDoc}
-     */
-    @Override
-    public ResponseEntity<UserInfoDTO> getById(Long id) {
-        return ResponseEntity.ok(userInfoMapper.userInfoToUserInfoDTO(userInfoService.getById(id)));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<UserInfoDTO> getById(Long id) {
+		return ResponseEntity.ok(userInfoMapper.userInfoToUserInfoDTO(userInfoService.getById(id)));
+	}
 
-    /**
-     *{@inheritDoc}
-     */
-    @Override
-    public ResponseEntity<List<UserInfoDTO>> getAll() {
-        return ResponseEntity.ok(userInfoMapper.listUserInfoToUserInfoDTO(userInfoService.getAll()));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<List<UserInfoDTO>> getAll() {
+		return ResponseEntity.ok(userInfoMapper.listUserInfoToUserInfoDTO(userInfoService.getAll()));
+	}
 
-    /**
-     *{@inheritDoc}
-     */
-    @Override
-    public ResponseEntity<UserInfoDTO> update(UserInfoDTO dto, Long id) {
-        var entity = userInfoMapper.userInfoDTOtoUserInfo(dto);
-        return ResponseEntity.ok(userInfoMapper.userInfoToUserInfoDTO(userInfoService.update(entity, id)));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<UserInfoDTO> update(UserInfoDTO dto, Long id) {
+		var entity = userInfoMapper.userInfoDTOtoUserInfo(dto);
+		return ResponseEntity.ok(userInfoMapper.userInfoToUserInfoDTO(userInfoService.update(entity, id)));
+	}
 
-    /**
-     *{@inheritDoc}
-     */
-    @Override
-    public ResponseEntity<Boolean> delete(Long id) {
-        return ResponseEntity.ok(userInfoService.delete(id));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<Boolean> delete(Long id) {
+		return ResponseEntity.ok(userInfoService.delete(id));
+	}
 
-    /**
-     *{@inheritDoc}
-     */
-    @Override
-    public ResponseEntity<ByteArrayResource> getImage(Long userInfoId) {
-        var userInfo = userInfoService.getById(userInfoId);
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(userInfo.getImgType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + userInfo.getImgName() + "\"")
-                .body(new ByteArrayResource(userInfo.getImg()));
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<ByteArrayResource> getImage(Long userInfoId) {
+		var userInfo = userInfoService.getById(userInfoId);
+		return ResponseEntity.ok()
+				.contentType(MediaType.parseMediaType(userInfo.getImgType()))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment:filename=\"" + userInfo.getImgName() + "\"")
+				.body(new ByteArrayResource(userInfo.getImg()));
+	}
 }

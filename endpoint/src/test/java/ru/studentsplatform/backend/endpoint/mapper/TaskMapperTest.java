@@ -7,8 +7,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.studentsplatform.backend.domain.dto.TaskAttachmentDTO;
 import ru.studentsplatform.backend.domain.dto.TaskDTO;
-import ru.studentsplatform.backend.endpoint.mapper.TaskAttachmentMapperImpl;
-import ru.studentsplatform.backend.endpoint.mapper.TaskMapperImpl;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.university.Task;
 

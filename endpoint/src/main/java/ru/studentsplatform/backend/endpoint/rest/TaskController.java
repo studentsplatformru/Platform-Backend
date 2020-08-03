@@ -20,6 +20,7 @@ import java.util.List;
 public interface TaskController extends AbstractCRUDController<TaskDTO> {
 
 	String BASE_URL = AbstractCRUDController.BASE_URL + "/task";
+
 	/**
 	 * Позволяет прикреплять к студенческой задаче файлы с решением.
 	 *
@@ -78,6 +79,7 @@ public interface TaskController extends AbstractCRUDController<TaskDTO> {
 	@GetMapping("user/{userId}/schedule/cell/{cellId}/tasks")
 	ResponseEntity<List<TaskDTO>> getAllTasks(@PathVariable(name = "userId") Long userId,
 											  @PathVariable(name = "cellId") Long cellId);
+
 	/**
 	 * Возвращает сведения о задаче с выбраным Id.
 	 *
