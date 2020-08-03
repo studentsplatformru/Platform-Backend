@@ -3,6 +3,7 @@ package ru.studentsplatform.backend.entities.model.schedule;
 import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.enums.UniversityRoleEnum;
+import ru.studentsplatform.backend.entities.model.university.Discipline;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.entities.model.user.User;
 
@@ -24,6 +25,10 @@ public class ScheduleUserCell extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usr_id")
 	private User user;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "discipline_id")
+	private Discipline discipline;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "schedule_cell")

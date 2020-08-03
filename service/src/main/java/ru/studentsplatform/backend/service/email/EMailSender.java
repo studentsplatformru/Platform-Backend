@@ -12,7 +12,6 @@ import java.util.List;
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  */
 public interface EMailSender {
-
 	/**
 	 * Метод для отправки сообщений без вложенных файлов.
 	 *

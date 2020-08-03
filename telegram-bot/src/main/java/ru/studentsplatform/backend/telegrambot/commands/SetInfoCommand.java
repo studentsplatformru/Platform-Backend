@@ -14,28 +14,28 @@ import ru.studentsplatform.backend.telegrambot.Text;
 @Service
 public class SetInfoCommand extends BotCommand {
 
-    private final BotService botService;
+	private final BotService botService;
 
-    /**
-     * Конструктор. Присваивает имя и описание команды.
-     *
-     * @param botService позволяет изменить состояние пользователя с помощью
-     *                   {@link org.springframework.statemachine.StateMachine}.
-     */
-    public SetInfoCommand(BotService botService) {
-        super("set_info", Text.SET_INFO_DESCRIPTION.toString());
-        this.botService = botService;
-    }
+	/**
+	 * Конструктор. Присваивает имя и описание команды.
+	 *
+	 * @param botService позволяет изменить состояние пользователя с помощью
+	 *                   {@link org.springframework.statemachine.StateMachine}.
+	 */
+	public SetInfoCommand(BotService botService) {
+		super("set_info", Text.SET_INFO_DESCRIPTION.toString());
+		this.botService = botService;
+	}
 
-    /**
-     * Выполняет последовательность действий для записи информации о пользователе.
-     *
-     * @param absSender объект Telegram-bot для выполнения действия
-     * @param user      объект пользователя Telegram
-     * @param chat      объект диалога пользователя с ботом
-     * @param arguments аргументы, передаваемые с командой (в данном случае не влияет на логику)
-     */
-    public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
-        botService.setInfo(absSender, user, chat);
-    }
+	/**
+	 * Выполняет последовательность действий для записи информации о пользователе.
+	 *
+	 * @param absSender объект Telegram-bot для выполнения действия
+	 * @param user      объект пользователя Telegram
+	 * @param chat      объект диалога пользователя с ботом
+	 * @param arguments аргументы, передаваемые с командой (в данном случае не влияет на логику)
+	 */
+	public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
+		botService.setInfo(absSender, user, chat);
+	}
 }

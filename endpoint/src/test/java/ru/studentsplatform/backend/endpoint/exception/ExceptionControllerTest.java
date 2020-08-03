@@ -10,7 +10,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import ru.studentsplatform.backend.endpoint.EndpointApplication;
-import ru.studentsplatform.backend.endpoint.rest.MainController;
+import ru.studentsplatform.backend.endpoint.rest.main.MainController;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.exception.core.BusinessExceptionController;
@@ -31,69 +31,69 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ExceptionControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @MockBean
-    private MainController controller;
+	@MockBean
+	private MainController controller;
 
-    @Test
-    public void pageNotFoundTest() throws Exception {
+	@Test
+	public void pageNotFoundTest() throws Exception {
 
-        MvcResult mvcResult = this.mockMvc
-                .perform(get("/some/wrong/path"))
-                .andExpect(status().is4xxClientError())
-                .andExpect(content().contentType("application/json"))
-                .andReturn();
+		MvcResult mvcResult = this.mockMvc
+				.perform(get("/some/wrong/path"))
+				.andExpect(status().is4xxClientError())
+				.andExpect(content().contentType("application/json"))
+				.andReturn();
 
-        MockHttpServletResponse response = mvcResult.getResponse();
+		MockHttpServletResponse response = mvcResult.getResponse();
 
-        Assert.assertNull(response.getErrorMessage());
+		Assert.assertNull(response.getErrorMessage());
 
-        Assert.assertTrue(response.getContentAsString(StandardCharsets.UTF_8)
-                .contains("\"message\":\"Упс, страница не найдена.\""));
+		Assert.assertTrue(response.getContentAsString(StandardCharsets.UTF_8)
+				.contains("\"message\":\"Упс, страница не найдена.\""));
 
-    }
+	}
 
-    @Test
-    public void serverErrorTest() throws Exception {
-        
-        given(controller.getMain())
-                .willThrow(new ArrayIndexOutOfBoundsException("Test exception"));
+	@Test
+	public void serverErrorTest() throws Exception {
 
-        MvcResult mvcResult = this.mockMvc
-                .perform(get("/"))
-                .andExpect(status().is5xxServerError())
-                .andExpect(content().contentType("application/json"))
-                .andReturn();
+		given(controller.getMain())
+				.willThrow(new ArrayIndexOutOfBoundsException("Test exception"));
 
-        MockHttpServletResponse response = mvcResult.getResponse();
+		MvcResult mvcResult = this.mockMvc
+				.perform(get("/"))
+				.andExpect(status().is5xxServerError())
+				.andExpect(content().contentType("application/json"))
+				.andReturn();
 
-        Assert.assertNull(response.getErrorMessage());
+		MockHttpServletResponse response = mvcResult.getResponse();
 
-        Assert.assertTrue(response.getContentAsString(StandardCharsets.UTF_8)
-                .contains("\"message\":\"Что-то пошло не так.\""));
+		Assert.assertNull(response.getErrorMessage());
 
-    }
+		Assert.assertTrue(response.getContentAsString(StandardCharsets.UTF_8)
+				.contains("\"message\":\"Что-то пошло не так.\""));
 
-    @Test
-    public void businessExceptionTest() throws Exception {
+	}
 
-        given(controller.getMain())
-                .willThrow(new BusinessException(ServiceExceptionReason.USER_NOT_FOUND, 34));
+	@Test
+	public void businessExceptionTest() throws Exception {
 
-        MvcResult mvcResult = this.mockMvc
-                .perform(get("/"))
-                .andExpect(content().contentType("application/json"))
-                .andReturn();
+		given(controller.getMain())
+				.willThrow(new BusinessException(ServiceExceptionReason.USER_NOT_FOUND, 34));
 
-        MockHttpServletResponse response = mvcResult.getResponse();
+		MvcResult mvcResult = this.mockMvc
+				.perform(get("/"))
+				.andExpect(content().contentType("application/json"))
+				.andReturn();
 
-        Assert.assertNull(response.getErrorMessage());
+		MockHttpServletResponse response = mvcResult.getResponse();
 
-        Assert.assertTrue(response.getContentAsString(StandardCharsets.UTF_8)
-                .contains("\"message\":\"Пользователь с Id 34 не найден\""));
+		Assert.assertNull(response.getErrorMessage());
 
-    }
+		Assert.assertTrue(response.getContentAsString(StandardCharsets.UTF_8)
+				.contains("\"message\":\"Пользователь с Id 34 не найден\""));
+
+	}
 
 }

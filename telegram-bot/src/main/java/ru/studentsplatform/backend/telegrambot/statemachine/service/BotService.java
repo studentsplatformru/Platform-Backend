@@ -7,7 +7,7 @@ import org.telegram.telegrambots.meta.bots.AbsSender;
 
 public interface BotService {
 
-    void setInfo(AbsSender absSender, User user, Chat chat);
+	void setInfo(AbsSender absSender, User user, Chat chat);
 
-    void define(Update update, AbsSender absSender);
+	void define(Update update, AbsSender absSender);
 }

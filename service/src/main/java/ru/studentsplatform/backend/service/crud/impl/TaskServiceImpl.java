@@ -11,12 +11,14 @@ import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.TaskService;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
-import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.system.helper.CollectionUtils;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Transactional
 @Profiled
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -29,7 +31,7 @@ public class TaskServiceImpl implements TaskService {
 	/**
 	 * Консруктор.
 	 *
-	 * @param taskRepository		Репозиторий
+	 * @param taskRepository        Репозиторий
 	 * @param taskAttachmentService Сервис прикрепляемых к task файлов
 	 */
 	public TaskServiceImpl(TaskRepository taskRepository,
@@ -44,7 +46,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public Task create(Task task) {
 		if (task.getScheduleUserCell() == null || task.getScheduleUserCell().getId() == null) {
-			throw new BusinessException(ServiceExceptionReason.SCHEDULE_CELL_NOT_FOUND, task.getTaskName());
+			throw new BusinessException(ServiceExceptionReason.SCHEDULE_CELL_NOT_FOUND, task.getId());
 		}
 		return taskRepository.save(task);
 	}
@@ -94,7 +96,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public boolean addFilesForTask(Long taskId, List<MultipartFile> files) {
 		if (CollectionUtils.notEmpty(files)) {
-			for (MultipartFile file: files) {
+			for (MultipartFile file : files) {
 				if (file == null) {
 					throw new BusinessException(ServiceExceptionReason.NULL_FILE_EXCEPTION, taskId);
 				}
@@ -121,5 +123,37 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public List<Task> getByUser(Long userId) {
 		return taskRepository.findByUserId(userId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Task> getByIsDoneByUserId(Long userId, Boolean isDone) {
+		return taskRepository.findByIsDoneByUserId(userId, isDone);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Task> getBySemesterForUser(Long userId, Long semester) {
+		return taskRepository.findBySemesterByUserId(userId, semester);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Task> getBySubjectForUser(Long userId, Long subjectId) {
+		return taskRepository.findBySubjectIdByUserId(userId, subjectId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Task> getByTeamId(Long teamId) {
+		return taskRepository.findByTeamId(teamId);
 	}
 }

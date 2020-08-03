@@ -18,27 +18,27 @@ import ru.studentsplatform.backend.telegrambot.Text;
  */
 public class SetInfoAction extends AbstractAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(SetInfoAction.class);
+	private static final Logger LOGGER = LogManager.getLogger(SetInfoAction.class);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void execute(StateContext<TelegramBotState, TelegramBotEvent> stateContext) {
-        Chat chat = (Chat) stateContext.getExtendedState().getVariables().remove("Chat");
-        AbsSender absSender = (AbsSender) stateContext.getExtendedState().getVariables().remove("AbsSender");
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void execute(StateContext<TelegramBotState, TelegramBotEvent> stateContext) {
+		Chat chat = (Chat) stateContext.getExtendedState().getVariables().remove("Chat");
+		AbsSender absSender = (AbsSender) stateContext.getExtendedState().getVariables().remove("AbsSender");
 
-        logEvent(stateContext, LOGGER);
+		logEvent(stateContext, LOGGER);
 
-        SendMessage message = new SendMessage()
-                .setChatId(chat.getId())
-                .setText(Text.SET_INFO_MESSAGE.toString())
-                .setReplyMarkup(KeyboardConstructor.getUniversitiesKeyboard());
+		SendMessage message = new SendMessage()
+				.setChatId(chat.getId())
+				.setText(Text.SET_INFO_MESSAGE.toString())
+				.setReplyMarkup(KeyboardConstructor.getUniversitiesKeyboard());
 
-        try {
-            absSender.execute(message);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
+		try {
+			absSender.execute(message);
+		} catch (TelegramApiException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -4,22 +4,50 @@ import ru.studentsplatform.backend.entities.model.university.PlaceStudy;
 
 import java.util.List;
 
-/**
- * @author Perevalov Pavel (28.07.2020)
- */
 public interface PlaceStudyService extends AbstractService<PlaceStudy> {
-    @Override
-    PlaceStudy create(PlaceStudy newPlaceStudy);
 
-    @Override
-    PlaceStudy getById(Long id);
+	/**
+	 * Сохраняет сущность в БД.
+	 *
+	 * @param newPlaceStudy Объект сущности для сохранения
+	 * @return Сохраненная сущность
+	 */
+	@Override
+	PlaceStudy create(PlaceStudy newPlaceStudy);
 
-    @Override
-    List<PlaceStudy> getAll();
+	/**
+	 * Производит поиск сущности в БД.
+	 *
+	 * @param id Id искомой сущности
+	 * @return Искомая сущность
+	 */
+	@Override
+	PlaceStudy getById(Long id);
 
-    @Override
-    PlaceStudy update(PlaceStudy updatedPlaceStudy, Long id);
+	/**
+	 * Производит поиск всех сущностей данного типа в БД.
+	 *
+	 * @return Лист искомых сущностей
+	 */
+	@Override
+	List<PlaceStudy> getAll();
 
-    @Override
-    boolean delete(Long id);
+	/**
+	 * Производит обновление сущности в БД заданными параметрами.
+	 *
+	 * @param updatedPlaceStudy параметры для обновления сущности
+	 * @param id                Id сущности, которая должна быть обновлена.
+	 * @return обновлённая сущность.
+	 */
+	@Override
+	PlaceStudy update(PlaceStudy updatedPlaceStudy, Long id);
+
+	/**
+	 * Производит удаление сущности из БД.
+	 *
+	 * @param id Id сущности, которая должна быть удалена
+	 * @return успешено ли прошло удаление
+	 */
+	@Override
+	boolean delete(Long id);
 }

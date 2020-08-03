@@ -17,7 +17,7 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 	COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F002", "Комментарий с Id %d не найден"),
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "F003", "Пользователь с Id %d не найден"),
 	SCHEDULE_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "F004",
-			"Отметка в расписании, связанная с задачей с именем %s, не найдена"),
+			"Ячейка расписания с Id %d, не найдена"),
 	NO_UPLOADED_FILES_FOUND(HttpStatus.NOT_FOUND, "F005",
 			"Не найдено ни одного загружаемого файла к задаче с Id %d"),
 	FILE_INDEX_NOT_EXIST(HttpStatus.NOT_FOUND, "F006",
@@ -28,7 +28,23 @@ public enum ServiceExceptionReason implements BusinessExceptionReason {
 			"Информация о пользователе с id %d уже существует"),
 	NULL_IMAGE_FILE(HttpStatus.BAD_REQUEST, "F009",
 			"Файл изображения пуст"),
-	USER_INFO_NOT_FOUND(HttpStatus.NOT_FOUND, "F010", "Информация о пользователе с Id %d не найдена");
+	USER_INFO_NOT_FOUND(HttpStatus.NOT_FOUND, "F010", "Информация о пользователе с Id %d не найдена"),
+	FACULTY_NOT_FOUND(HttpStatus.NOT_FOUND, "F011", "Информация об институте с Id %d не найдена"),
+	DIRECTION_NOT_FOUND(HttpStatus.NOT_FOUND, "F012", "Информация о направлении с Id %d не найдена"),
+	DEPARTMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F013", "Информация о кафедре с Id %d не найдена"),
+	TEAM_NOT_FOUND(HttpStatus.NOT_FOUND, "F014", "Информация о группе с Id %d не найдена"),
+	USER_ALREADY_EXISTS(HttpStatus.CONFLICT, "F015",
+			"Пользователь с id %d уже существует"),
+	SUBJECT_NOT_FOUND(HttpStatus.NOT_FOUND, "F016",
+			"Информация о предмете с Id %d не найдена"),
+	PLACE_STUDY_NOT_FOUND(HttpStatus.NOT_FOUND, "F017",
+			"Информация о месте проведения занятий с Id %d не найдена"),
+	DISCIPLINE_NOT_FOUND(HttpStatus.NOT_FOUND, "F018",
+			"Информация о дисциплине с Id %d не найдена"),
+	UNIVERSITY_NOT_FOUND(HttpStatus.NOT_FOUND, "F019", "Информация об университете с id %d не найдена"),
+	SCHEDULE_USER_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "F020",
+			"Ячейка расписания с id %d пользователя  не найдена");
+
 
 	private final HttpStatus status;
 	private final String code;
