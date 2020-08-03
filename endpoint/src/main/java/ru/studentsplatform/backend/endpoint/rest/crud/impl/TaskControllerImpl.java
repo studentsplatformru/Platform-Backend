@@ -121,6 +121,36 @@ public class TaskControllerImpl implements TaskController {
 				.body(new ByteArrayResource(file.getContent()));
 	}
 
+	@Override
+	public ResponseEntity<List<TaskDTO>> getIsDoneTaskForUser(Long userId,
+															  Long cellId,
+															  Long taskId,
+															  Boolean isDone) {
+		var entityList = taskService.getByIsDoneByUserId(userId, isDone);
+		var result = taskMapper.listTaskToTaskDTO(entityList);
+		return ResponseEntity.ok(result);
+	}
+
+	@Override
+	public ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(Long userId,
+																  Long cellId,
+																  Long taskId,
+																  Long semester) {
+		var entityList = taskService.getBySemesterForUser(userId, semester);
+		var result = taskMapper.listTaskToTaskDTO(entityList);
+		return ResponseEntity.ok(result);
+	}
+
+	@Override
+	public ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(Long userId,
+																 Long cellId,
+																 Long taskId,
+																 Long subjectId) {
+		var entityList = taskService.getBySubjectForUser(userId, subjectId);
+		var result = taskMapper.listTaskToTaskDTO(entityList);
+		return ResponseEntity.ok(result);
+	}
+
 	//TODO: redirect to createTask() method
 	@Override
 	public ResponseEntity<TaskDTO> create(TaskDTO dto) {

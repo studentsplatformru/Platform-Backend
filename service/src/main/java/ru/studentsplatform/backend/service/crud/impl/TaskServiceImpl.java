@@ -14,9 +14,11 @@ import ru.studentsplatform.backend.system.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.system.helper.CollectionUtils;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Transactional
 @Profiled
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -121,5 +123,29 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public List<Task> getByUser(Long userId) {
 		return taskRepository.findByUserId(userId);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Task> getByIsDoneByUserId(Long userId, Boolean isDone) {
+		return taskRepository.findByIsDoneByUserId(userId, isDone);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Task> getBySemesterForUser(Long userId, Long semester) {
+		return taskRepository.findBySemesterByUserId(userId, semester);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Task> getBySubjectForUser(Long userId, Long subjectId) {
+		return taskRepository.findBySubjectIdByUserId(userId, subjectId);
 	}
 }

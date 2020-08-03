@@ -15,6 +15,7 @@ import ru.studentsplatform.backend.system.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.annotation.Profiled;
 import ru.studentsplatform.backend.system.helper.CollectionUtils;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -22,6 +23,7 @@ import java.util.NoSuchElementException;
 /**
  * @author Krylov Sergey (26.07.2020)
  */
+@Transactional
 @Profiled
 @Service
 public class TaskAttachmentServiceImpl implements TaskAttachmentService {
