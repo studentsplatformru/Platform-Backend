@@ -19,58 +19,58 @@ import ru.studentsplatform.backend.telegrambot.Text;
  * @author Timo Schulz (Mit0x2)
  */
 public class HelpCommand extends BotCommand {
-	/**
-	 * Логгер.
-	 */
-	private static final Logger LOGGER = LogManager.getLogger(HelpCommand.class);
-	private final ICommandRegistry commandRegistry;
+    /**
+     * Логгер.
+     */
+    private static final Logger LOGGER = LogManager.getLogger(HelpCommand.class);
+    private final ICommandRegistry commandRegistry;
 
-	/**
-	 * Конструктор. Присваивает имя и описание команды.
-	 *
-	 * @param commandRegistry Объект бота, для отображения всех зарегистрированных команд.
-	 */
-	public HelpCommand(ICommandRegistry commandRegistry) {
-		super("help", Text.HELP_DESCRIPTION.toString());
-		this.commandRegistry = commandRegistry;
-	}
+    /**
+     * Конструктор. Присваивает имя и описание команды.
+     *
+     * @param commandRegistry Объект бота, для отображения всех зарегистрированных команд.
+     */
+    public HelpCommand(ICommandRegistry commandRegistry) {
+        super("help", Text.HELP_DESCRIPTION.toString());
+        this.commandRegistry = commandRegistry;
+    }
 
-	/**
-	 * Предоставляет пользователю список зарегестрированных комманд бота.
-	 *
-	 * @param absSender объект Telegram-bot для выполнения действия
-	 * @param user      объект пользователя Telegram
-	 * @param chat      объект диалога пользователя с ботом
-	 * @param arguments аргументы, передаваемые с командой (в данном случае не влияет на логику)
-	 */
-	public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
+    /**
+     * Предоставляет пользователю список зарегестрированных комманд бота.
+     *
+     * @param absSender объект Telegram-bot для выполнения действия
+     * @param user      объект пользователя Telegram
+     * @param chat      объект диалога пользователя с ботом
+     * @param arguments аргументы, передаваемые с командой (в данном случае не влияет на логику)
+     */
+    public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
 
-		StringBuilder helpMessageBuilder = new StringBuilder("<b>Help</b>\n");
-		helpMessageBuilder.append("These are the registered commands for this Bot:\n\n");
+        StringBuilder helpMessageBuilder = new StringBuilder("<b>Help</b>\n");
+        helpMessageBuilder.append("These are the registered commands for this Bot:\n\n");
 
-		for (IBotCommand botCommand : commandRegistry.getRegisteredCommands()) {
-			helpMessageBuilder.append(botCommand.toString()).append("\n\n");
-		}
+        for (IBotCommand botCommand : commandRegistry.getRegisteredCommands()) {
+            helpMessageBuilder.append(botCommand.toString()).append("\n\n");
+        }
 
-		SendMessage helpMessage = new SendMessage();
-		helpMessage.setChatId(chat.getId().toString());
-		helpMessage.enableHtml(true);
-		helpMessage.setText(helpMessageBuilder.toString());
+        SendMessage helpMessage = new SendMessage();
+        helpMessage.setChatId(chat.getId().toString());
+        helpMessage.enableHtml(true);
+        helpMessage.setText(helpMessageBuilder.toString());
 
-		printMessage(absSender, helpMessage);
-	}
+        printMessage(absSender, helpMessage);
+    }
 
-	/**
-	 * Отправляет сообщение пользователю в чат.
-	 *
-	 * @param absSender   объект Telegram-bot для выполнения действия
-	 * @param helpMessage объект сообщения
-	 */
-	private void printMessage(AbsSender absSender, SendMessage helpMessage) {
-		try {
-			absSender.execute(helpMessage);
-		} catch (TelegramApiException e) {
-			e.printStackTrace();
-		}
-	}
+    /**
+     * Отправляет сообщение пользователю в чат.
+     *
+     * @param absSender   объект Telegram-bot для выполнения действия
+     * @param helpMessage объект сообщения
+     */
+    private void printMessage(AbsSender absSender, SendMessage helpMessage) {
+        try {
+            absSender.execute(helpMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
 }
