@@ -40,6 +40,7 @@ public interface UserInfoService extends AbstractService<UserInfo> {
 	 *
 	 * @param updatedEntity сущность user info с новыми данными.
 	 * @param id            id обновляемой сущности.
+	 * @return Обновленная сущность
 	 */
 	@Override
 	UserInfo update(UserInfo updatedEntity, Long id);
