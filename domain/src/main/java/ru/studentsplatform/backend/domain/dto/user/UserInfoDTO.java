@@ -9,13 +9,13 @@ import ru.studentsplatform.backend.domain.dto.BaseDTO;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserInfoDTO extends BaseDTO {
-    private Long userId;
+	private Long userId;
 
-    private String firstName;
+	private String firstName;
 
-    private String lastName;
+	private String lastName;
 
-    private String patronymic;
+	private String patronymic;
 
-    private String phoneNumber;
+	private String phoneNumber;
 }

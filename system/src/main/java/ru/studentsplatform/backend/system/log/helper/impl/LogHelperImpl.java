@@ -1,10 +1,10 @@
-package ru.studentsplatform.backend.system.log.impl;
+package ru.studentsplatform.backend.system.log.helper.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.system.log.LogHelper;
+import ru.studentsplatform.backend.system.log.helper.LogHelper;
 
 import java.io.FileInputStream;
 import java.io.IOException;

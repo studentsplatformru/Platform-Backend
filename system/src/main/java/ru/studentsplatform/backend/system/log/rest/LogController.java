@@ -1,10 +1,11 @@
-package ru.studentsplatform.backend.system.rest;
+package ru.studentsplatform.backend.system.log.rest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.studentsplatform.backend.system.log.LogHelper;
+import ru.studentsplatform.backend.system.log.helper.LogHelper;
+import ru.studentsplatform.backend.system.rest.AbstractController;
 
 /**
  * Контроллер позволяющий вызывать утилитные методы для просмотра или скачивания логов.
@@ -13,7 +14,7 @@ import ru.studentsplatform.backend.system.log.LogHelper;
  */
 @RestController
 @RequestMapping(AbstractController.BASE_URL + "/log")
-public class LogController extends AbstractController {
+public class LogController implements AbstractController {
 
 	private final LogHelper logHelper;
 
