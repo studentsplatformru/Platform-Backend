@@ -80,8 +80,8 @@ class UserServiceImplTest {
 	void updateTest() {
 		User new_user = new User();
 		doReturn(true, false).when(userRepository).existsById(1L);
-		doReturn(user).when(userRepository).saveAndFlush(user);
-		Assert.assertEquals(user, service.update(new_user, 1L));
+		doReturn(new_user).when(userRepository).saveAndFlush(new_user);
+		Assert.assertEquals(new_user, service.update(new_user, 1L));
 
 		Assert.assertThrows(BusinessException.class, () -> service.update(new_user, 1L));
 	}

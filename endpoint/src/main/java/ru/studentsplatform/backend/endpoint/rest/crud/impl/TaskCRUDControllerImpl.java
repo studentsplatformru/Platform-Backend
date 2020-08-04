@@ -1,10 +1,7 @@
 package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
-import org.springframework.cglib.core.Predicate;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -166,9 +163,24 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	}
 
 	@Override
-	public ResponseEntity getFiltered(@QuerydslPredicate(root = Task.class) Predicate predicate, Pageable pageable) {
-		var result = taskMapper.listTaskToTaskDTO(taskService.getFiltered(predicate, pageable));
-		return ResponseEntity.ok(result);
+	public ResponseEntity<List<TaskDTO>> getFiltered(Long userId,
+													 Long usrCellId,
+													 Long subjectId,
+													 Long groupId,
+													 Integer semester,
+													 OffsetDateTime startTime,
+													 OffsetDateTime endTime) {
+		try {
+			var entities = taskService.
+					getFiltered(userId, usrCellId, subjectId, groupId,
+							semester, startTime, endTime);
+			var result = taskMapper.listTaskToTaskDTO(entities);
+
+			return ResponseEntity.ok(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	//TODO: redirect to createTask() method

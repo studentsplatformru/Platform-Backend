@@ -2,9 +2,7 @@ package ru.studentsplatform.backend.service.crud.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cglib.core.Predicate;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
@@ -167,7 +165,9 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public List<Task> getFiltered(Predicate predicate, Pageable pageable) {
-		return taskRepository.findAllFiltered(predicate, pageable);
+	public List<Task> getFiltered(Long userId, Long usrCellId, Long subjectId, Long groupId,
+								  Integer semester, OffsetDateTime startTime, OffsetDateTime endTime) {
+
+		return taskRepository.findFiltered(userId, usrCellId, subjectId, groupId, semester, startTime, endTime);
 	}
 }

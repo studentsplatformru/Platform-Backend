@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.entities.model.university;
 
-import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 
 import javax.persistence.Column;
@@ -13,7 +12,6 @@ import javax.persistence.Table;
 /**
  * Кафедра в университете.
  */
-@Data
 @Entity
 @Table(name = "department")
 public class Department extends BaseEntity {
@@ -24,4 +22,19 @@ public class Department extends BaseEntity {
 	@JoinColumn(name = "faculty_id")
 	private Faculty faculty;
 
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public Faculty getFaculty() {
+		return faculty;
+	}
+
+	public void setFaculty(Faculty faculty) {
+		this.faculty = faculty;
+	}
 }
