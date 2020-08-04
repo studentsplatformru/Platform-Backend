@@ -114,57 +114,6 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Task> getByUserCell(Long userCellId) {
-		return taskRepository.findByScheduleUserCellId(userCellId);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getByUser(Long userId) {
-		return taskRepository.findByUserId(userId);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getByIsDoneByUserId(Long userId, Boolean isDone) {
-		return taskRepository.findByIsDoneByUserId(userId, isDone);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getBySemesterForUser(Long userId, Integer semester) {
-		return taskRepository.findBySemesterByUserId(userId, semester);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getBySubjectForUser(Long userId, Long subjectId) {
-		return taskRepository.findBySubjectIdByUserId(userId, subjectId);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getBySubjectIdForTeam(Long teamId, Long subjectId) {
-		return taskRepository.findBySubjectIdForTeam(subjectId, teamId);
-	}
-	/**
-	 * {@inheritDoc}
-	 */
-	public List<Task> getByStartEndTimeForUser(Long userId, OffsetDateTime startTime, OffsetDateTime endTime) {
-		return taskRepository.findByStartEndTimeForUser(userId, startTime, endTime);
-	}
-
-	@Override
 	public List<Task> getFiltered(Long userId, Long usrCellId, Long subjectId, Long groupId,
 								  Integer semester, OffsetDateTime startTime, OffsetDateTime endTime) {
 

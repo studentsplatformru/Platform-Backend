@@ -67,66 +67,17 @@ public interface TaskService extends AbstractService<Task> {
 	boolean addFilesForTask(Long taskId, List<MultipartFile> files);
 
 	/**
-	 * Найти все задачи, закрепленные за ячейкой расписания пользователя.
+	 * Найти задачи с учетом заданных фильтрующих параметров.
 	 *
-	 * @param userCellId Id ячейки расписания пользователя
-	 * @return Лист задач, принадлежащих к ячейке
+	 * @param userId Id пользователя, которому принадежит задача
+	 * @param usrCellId Id ячейки полшьзовательского расписания
+	 * @param subjectId Id предмета, для которого создана задача
+	 * @param groupId Id группы студентов, в которой сотоит владелец задачи
+	 * @param semester Семестр, в который была получена задача
+	 * @param startTime Временные рамки получения задач: начало
+	 * @param endTime Временные рамки получения задачи: конец
+	 * @return Лист задач, найденный с учетом всех фильтров
 	 */
-	List<Task> getByUserCell(Long userCellId);
-
-	/**
-	 * Найти все задачи, закрепленные за пользователем.
-	 *
-	 * @param userId Id пользователя
-	 * @return Лист задач, закрепленных за пользователем
-	 */
-	List<Task> getByUser(Long userId);
-
-	/**
-	 * Найти все задачи по завершенности, закрепленные за пользователем.
-	 *
-	 * @param userId Id пользователя
-	 * @param isDone Выполнена ли задача
-	 * @return Лист задач, закрепленных за пользователем
-	 */
-	List<Task> getByIsDoneByUserId(Long userId, Boolean isDone);
-
-	/**
-	 * Найти все задачи в выбраном семестре, закрепленные за пользователем.
-	 *
-	 * @param userId   Id пользователя
-	 * @param semester Выбраный семестр
-	 * @return Лист задач, закрепленных за пользователем
-	 */
-	List<Task> getBySemesterForUser(Long userId, Integer semester);
-
-	/**
-	 * Найти все задачи по выбраному предмету, закрепленные за пользователем.
-	 *
-	 * @param userId    Id пользователя
-	 * @param subjectId Выбраный предмет
-	 * @return Лист задач, закрепленных за пользователем
-	 */
-	List<Task> getBySubjectForUser(Long userId, Long subjectId);
-
-	/**
-	 * Найти все задачи по студенческой группе.
-	 *
-	 * @param subjectId Id предмета
-	 * @param teamId Id группы, поиск задач которой выполняется
-	 * @return Лист задач, струдентов определенной группы
-	 */
-	List<Task> getBySubjectIdForTeam(Long subjectId, Long teamId);
-
-	/**
-	 * Найти все задачи пользователя в данных временных рамках .
-	 * @param userId Id пользователя.
-	 * @param startTime нижняя граница времени.
-	 * @param endTime верхняя граница времени.
-	 * @return список сущностей Task.
-	 */
-	List<Task> getByStartEndTimeForUser(Long userId, OffsetDateTime startTime, OffsetDateTime endTime);
-
 	List<Task> getFiltered(Long userId,
 						   Long usrCellId,
 						   Long subjectId,
@@ -134,5 +85,4 @@ public interface TaskService extends AbstractService<Task> {
 						   Integer semester,
 						   OffsetDateTime startTime,
 						   OffsetDateTime endTime);
-
 }

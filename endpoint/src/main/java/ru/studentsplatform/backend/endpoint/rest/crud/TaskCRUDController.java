@@ -57,15 +57,6 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 									   @RequestBody TaskDTO dto);
 
 	/**
-	 * Возвращает сведения о всех задачах, прикрепленных к ячейке расписания пользователя.
-	 *
-	 * @param cellId Id ячейки расписания пользователя, к которой прикреплены задачи
-	 * @return Ответ с кодом 200(ok), содержащий сведения о всех задачах, закрепленных за ячейкой
-	 */
-	@GetMapping("/cell/{cellId}")
-	ResponseEntity<List<TaskDTO>> getAllTasksForCell(@PathVariable(name = "cellId") Long cellId);
-
-	/**
 	 * Возвращает сведения о задаче с выбраным Id.
 	 *
 	 * @param taskId Id задачи студента
@@ -75,67 +66,17 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	ResponseEntity<TaskDTO> getTask(@PathVariable(name = "taskId") Long taskId);
 
 	/**
-	 * Возвращает сведения о задачах для конкретного пользователя
-	 * по степени их завершенности.
+	 * Найти задачи с учетом заданных фильтрующих параметров.
 	 *
-	 * @param userId Id пользователя, которому принадлежит задача
-	 * @param isDone Завершена ли задача
-	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
+	 * @param userId Id пользователя, которому принадежит задача
+	 * @param usrCellId Id ячейки полшьзовательского расписания
+	 * @param subjectId Id предмета, для которого создана задача
+	 * @param groupId Id группы студентов, в которой сотоит владелец задачи
+	 * @param semester Семестр, в который была получена задача
+	 * @param startTime Временные рамки получения задач: начало
+	 * @param endTime Временные рамки получения задачи: конец
+	 * @return Ответ, содержащий Лист найденных задач
 	 */
-	@GetMapping("/user/{userId}/isDone/{isDone}")
-	ResponseEntity<List<TaskDTO>> getByDoneTaskForUser(@PathVariable(name = "userId") Long userId,
-													   @PathVariable(name = "isDone") Boolean isDone);
-
-	/**
-	 * Возвращает сведения о задачах для конкретного пользователя
-	 * по семестру.
-	 *
-	 * @param userId Id пользователя, которому принадлежит задача
-	 * @param semester номер семестра
-	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
-	 */
-	@GetMapping("/user/{userId}/semester/{semester}")
-	ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(@PathVariable(name = "userId") Long userId,
-														   @PathVariable(name = "semester") Integer semester);
-
-	/**
-	 * Возвращает сведения о задачах для конкретного пользователя
-	 * по предмету.
-	 *
-	 * @param userId Id пользователя, которому принадлежит задача
-	 * @param subjectId Id предмета
-	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
-	 */
-	@GetMapping("/user/{userId}/subject/{subjectId}")
-	ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(@PathVariable(name = "userId") Long userId,
-														  @PathVariable(name = "subjectId") Long subjectId);
-
-	/**
-	 * Возвращает сведения о задачах для группы студентов.
-	 *
-	 * @param subjectId Id предмета
-	 * @param groupID Id группы студентов
-	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
-	 */
-	@GetMapping("/subject/{subjectId}/group/{groupId}")
-	ResponseEntity<List<TaskDTO>> getTaskByGroup(@PathVariable(name = "subjectId") Long subjectId,
-												 @PathVariable(name = "groupId") Long groupID);
-
-	/**
-	 * Возвращает список всех задач данного пользователя.
-	 * @param userId
-	 * @param startTime
-	 * @param endTime
-	 * @return Ответ с кодом 200(ok), содержащий список задач и свединия о них.
-	 */
-	@GetMapping("/user/{userId}/getTasks")
-	ResponseEntity<List<TaskDTO>> getTaskByStartEndTimeForUser(
-			@PathVariable(name = "userId") Long userId,
-			@RequestParam(value = "start-time", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-					OffsetDateTime startTime,
-			@RequestParam(value = "end-time", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-					OffsetDateTime endTime);
-
 	@GetMapping("/filter")
 	ResponseEntity<List<TaskDTO>> getFiltered(@RequestParam(name = "userId", required = false) Long userId,
 											  @RequestParam(name = "userCellId", required = false) Long usrCellId,
