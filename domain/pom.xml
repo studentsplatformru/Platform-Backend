@@ -28,10 +28,6 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>net.n2oapp.criteria</groupId>
-            <artifactId>criteria-api</artifactId>
-        </dependency>
     </dependencies>
 
 </project>
