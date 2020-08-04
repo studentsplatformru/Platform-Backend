@@ -143,10 +143,10 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 											  @RequestParam(name = "groupId", required = false) Long groupId,
 											  @RequestParam(name = "semester", required = false) Integer semester,
 											  @RequestParam(value = "startTime", required = false)
-											  @DateTimeFormat(pattern = "dd/MM/yyyy")
+											  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 													  OffsetDateTime startTime,
 											  @RequestParam(value = "endTime", required = false)
-											  @DateTimeFormat(pattern = "dd/MM/yyyy")
+											  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 													  OffsetDateTime endTime);
 
 }
