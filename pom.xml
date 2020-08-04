@@ -189,6 +189,13 @@
                 <artifactId>querydsl-apt</artifactId>
                 <version>4.3.1</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/com.querydsl/querydsl-core -->
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-core</artifactId>
+                <version>4.3.1</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>
@@ -206,11 +213,29 @@
                         </goals>
                         <configuration>
                             <outputDirectory>target/generated-sources/java</outputDirectory>
-                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+                            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
                         </configuration>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.querydsl</groupId>
+                        <artifactId>querydsl-apt</artifactId>
+                        <version>4.3.1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.querydsl</groupId>
+                        <artifactId>querydsl-jpa</artifactId>
+                        <version>4.3.1</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.querydsl</groupId>
+                        <artifactId>querydsl-core</artifactId>
+                        <version>4.3.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
