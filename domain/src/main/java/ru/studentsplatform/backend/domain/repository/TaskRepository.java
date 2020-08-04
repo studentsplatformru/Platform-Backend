@@ -1,7 +1,10 @@
 package ru.studentsplatform.backend.domain.repository;
 
+import org.springframework.cglib.core.Predicate;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -9,8 +12,12 @@ import ru.studentsplatform.backend.entities.model.university.Task;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Long> {
+public interface TaskRepository extends JpaRepository<Task, Long>, QuerydslPredicateExecutor<Task> {
+
+	List<Task> findAllFiltered(Predicate predicate, Pageable pageable);
+
 	@Query("select att from Task att join fetch  att.attachments " +
 			"where att.scheduleUserCell.id = :userCellId")
 	List<Task> findByScheduleUserCellId(@Param("userCellId") Long userCellId);

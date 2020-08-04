@@ -1,6 +1,9 @@
 package ru.studentsplatform.backend.endpoint.rest.crud;
 
+import org.springframework.cglib.core.Predicate;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
+import ru.studentsplatform.backend.entities.model.university.Task;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -135,6 +139,9 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 					OffsetDateTime startTime,
 			@RequestParam(value = "end-time", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 					OffsetDateTime endTime);
+
+	@GetMapping("/filter")
+	ResponseEntity getFiltered(@QuerydslPredicate(root = Task.class) Predicate predicate, Pageable pageable);
 
 }
 

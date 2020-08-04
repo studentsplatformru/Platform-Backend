@@ -1,5 +1,7 @@
 package ru.studentsplatform.backend.service.crud;
 
+import org.springframework.cglib.core.Predicate;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.entities.model.university.Task;
 
@@ -126,5 +128,7 @@ public interface TaskService extends AbstractService<Task> {
 	 * @return список сущностей Task.
 	 */
 	List<Task> getByStartEndTimeForUser(Long userId, OffsetDateTime startTime, OffsetDateTime endTime);
+
+	List<Task> getFiltered(Predicate predicate, Pageable pageable);
 
 }
