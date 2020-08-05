@@ -66,6 +66,11 @@ public interface TaskService extends AbstractService<Task> {
 	 */
 	boolean addFilesForTask(Long taskId, List<MultipartFile> files);
 
+	/**
+	 * Возвращает список задач, найденных с учетом фильтров.
+	 * @param predicate Предикат, содержащий в себе все поступающие фильтры
+	 * @return список задач
+	 */
 	List<Task> getMyFiltered(Predicate predicate);
 
 }

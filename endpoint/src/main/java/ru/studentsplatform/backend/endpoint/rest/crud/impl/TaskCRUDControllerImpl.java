@@ -1,13 +1,9 @@
 package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import com.querydsl.core.types.Predicate;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
-import org.springframework.data.web.config.EnableSpringDataWebSupport;
-import org.springframework.data.web.config.QuerydslWebConfiguration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +21,9 @@ import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.util.Arrays;
 import java.util.List;
-@EnableWebMvc
-@EnableJpaRepositories
-@EnableSpringDataWebSupport
-@Import(QuerydslWebConfiguration.class)
+
 @Profiled
+@EnableWebMvc
 @RestController
 @RequestMapping(TaskCRUDController.BASE_URL)
 public class TaskCRUDControllerImpl implements TaskCRUDController {
@@ -101,6 +95,9 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 				.body(new ByteArrayResource(file.getContent()));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<TaskDTO> create(TaskDTO dto) {
 		var entity = taskMapper.taskDTOToTask(dto);
@@ -108,18 +105,27 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 		return ResponseEntity.ok(result);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<TaskDTO> getById(Long id) {
 		var result = taskMapper.taskToTaskDTO(taskService.getById(id));
 		return ResponseEntity.ok(result);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<List<TaskDTO>> getAll() {
 		var result = taskMapper.listTaskToTaskDTO(taskService.getAll());
 		return ResponseEntity.ok(result);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<TaskDTO> update(TaskDTO updatedInstanceRequest, Long id) {
 		var entity = taskMapper.taskDTOToTask(updatedInstanceRequest);
@@ -127,11 +133,17 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 		return ResponseEntity.ok(result);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<Boolean> delete(Long id) {
 		return ResponseEntity.ok(taskService.delete(id));
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<List<TaskDTO>> getFiltered(@QuerydslPredicate(root = Task.class) Predicate predicate) {
 		return ResponseEntity.ok(taskMapper.listTaskToTaskDTO(

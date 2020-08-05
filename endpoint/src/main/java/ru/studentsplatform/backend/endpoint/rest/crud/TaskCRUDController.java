@@ -64,6 +64,12 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	@GetMapping("/{taskId}")
 	ResponseEntity<TaskDTO> getTask(@PathVariable(name = "taskId") Long taskId);
 
+	/**
+	 * Возвращает сведения о задачах с учетом примененных фильтров.
+	 *
+	 * @param predicate Предикат,содержащий в себе все выбранные фильтры
+	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
+	 */
 	@GetMapping("/myfilter")
 	ResponseEntity<List<TaskDTO>> getFiltered(Predicate predicate);
 }

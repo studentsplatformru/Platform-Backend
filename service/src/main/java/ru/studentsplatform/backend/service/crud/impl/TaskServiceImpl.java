@@ -112,6 +112,9 @@ public class TaskServiceImpl implements TaskService {
 		throw new BusinessException(ServiceExceptionReason.NO_UPLOADED_FILES_FOUND, taskId);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Task> getMyFiltered(Predicate predicate) {
 		return StreamSupport.stream(taskRepository.findAll(predicate).spliterator(),
