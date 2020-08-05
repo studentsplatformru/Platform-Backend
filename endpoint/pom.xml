@@ -38,6 +38,11 @@
             <artifactId>migration</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ru.studentsplatform</groupId>
+            <artifactId>notification</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

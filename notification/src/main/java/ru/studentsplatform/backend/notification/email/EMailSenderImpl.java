@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service.email;
+package ru.studentsplatform.backend.notification.email;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
@@ -8,7 +8,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
