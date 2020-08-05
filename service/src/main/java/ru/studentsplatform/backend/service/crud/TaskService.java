@@ -71,6 +71,6 @@ public interface TaskService extends AbstractService<Task> {
 	 * @param predicate Предикат, содержащий в себе все поступающие фильтры
 	 * @return список задач
 	 */
-	List<Task> getMyFiltered(Predicate predicate);
+	List<Task> getByFilters(Predicate predicate);
 
 }

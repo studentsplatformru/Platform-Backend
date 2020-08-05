@@ -116,7 +116,7 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Task> getMyFiltered(Predicate predicate) {
+	public List<Task> getByFilters(Predicate predicate) {
 		return StreamSupport.stream(taskRepository.findAll(predicate).spliterator(),
 				false).collect(Collectors.toList());
 	}

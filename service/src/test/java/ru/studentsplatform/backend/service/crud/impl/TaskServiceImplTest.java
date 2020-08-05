@@ -1,5 +1,7 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import com.querydsl.core.types.Predicate;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,11 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.university.Task;
+import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -128,4 +133,16 @@ class TaskServiceImplTest {
 				() -> taskService.addFilesForTask(3L, null));
 	}
 
+	/**
+	 * Test for getBYFilters method
+	 *
+	 * @see ru.studentsplatform.backend.service.crud.TaskService#getByFilters(Predicate)
+	 */
+	@Test
+	void getByFiltersTest() {
+		Predicate predicate = null;
+		List<Task> task = new LinkedList<Task>();
+		doReturn(task).when(taskRepository).findAll(predicate);
+		Assert.assertEquals(task, taskService.getByFilters(predicate));
+	}
 }

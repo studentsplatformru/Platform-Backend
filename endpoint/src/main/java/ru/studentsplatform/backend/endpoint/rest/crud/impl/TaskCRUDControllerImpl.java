@@ -3,7 +3,6 @@ package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 import com.querydsl.core.types.Predicate;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -145,8 +144,8 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<TaskDTO>> getFiltered(@QuerydslPredicate(root = Task.class) Predicate predicate) {
+	public ResponseEntity<List<TaskDTO>> getFiltered(Predicate predicate) {
 		return ResponseEntity.ok(taskMapper.listTaskToTaskDTO(
-				taskService.getMyFiltered(predicate)));
+				taskService.getByFilters(predicate)));
 	}
 }
