@@ -128,13 +128,4 @@ class TaskServiceImplTest {
 				() -> taskService.addFilesForTask(3L, null));
 	}
 
-	@Test
-	void getByUserCell() {
-		assertEquals(taskService.getByUserCell(2L), taskRepository.findByScheduleUserCellId(2L));
-	}
-
-	@Test
-	void getByUser() {
-		assertEquals(taskService.getByUser(2L), taskRepository.findByUserId(2L));
-	}
 }

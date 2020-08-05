@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
-import ru.studentsplatform.backend.domain.repository.TaskRepository;
 import ru.studentsplatform.backend.endpoint.mapper.TaskMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.TaskCRUDController;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -24,8 +23,6 @@ import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 @EnableWebMvc
@@ -57,18 +54,6 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 
 		Task task = taskService.getById(taskId);
 		TaskDTO result = taskMapper.taskToTaskDTO(task);
-
-		return ResponseEntity.ok(result);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<TaskDTO>> getAllTasksForCell(Long cellId) {
-
-		List<Task> taskList = taskService.getByUserCell(cellId);
-		List<TaskDTO> result = taskMapper.listTaskToTaskDTO(taskList);
 
 		return ResponseEntity.ok(result);
 	}
@@ -116,106 +101,35 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 				.body(new ByteArrayResource(file.getContent()));
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<TaskDTO>> getByDoneTaskForUser(Long userId,
-															  Boolean isDone) {
-		var entityList = taskService.getByIsDoneByUserId(userId, isDone);
-		var result = taskMapper.listTaskToTaskDTO(entityList);
-		return ResponseEntity.ok(result);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(Long userId,
-																  Integer semester) {
-		var entityList = taskService.getBySemesterForUser(userId, semester);
-		var result = taskMapper.listTaskToTaskDTO(entityList);
-		return ResponseEntity.ok(result);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(Long userId,
-																 Long subjectId) {
-		var entityList = taskService.getBySubjectForUser(userId, subjectId);
-		var result = taskMapper.listTaskToTaskDTO(entityList);
-		return ResponseEntity.ok(result);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<TaskDTO>> getTaskByGroup(Long subjectId,
-														Long groupID) {
-		var entityList = taskService.getBySubjectIdForTeam(subjectId, groupID);
-		var result = taskMapper.listTaskToTaskDTO(entityList);
-		return ResponseEntity.ok(result);
-	}
-
-	@Override
-	public ResponseEntity<List<TaskDTO>> getTaskByStartEndTimeForUser(
-			Long userId, OffsetDateTime startTime, OffsetDateTime endTime) {
-		var list = taskService.getByStartEndTimeForUser(userId, startTime, endTime);
-		return ResponseEntity.ok(taskMapper.listTaskToTaskDTO(list));
-	}
-
-	@Override
-	public ResponseEntity<List<TaskDTO>> getFiltered(Long userId,
-													 Long usrCellId,
-													 Long subjectId,
-													 Long groupId,
-													 Integer semester,
-													 OffsetDateTime startTime,
-													 OffsetDateTime endTime) {
-		try {
-			var entities = taskService.
-					getFiltered(userId, usrCellId, subjectId, groupId,
-							semester, startTime, endTime);
-			var result = taskMapper.listTaskToTaskDTO(entities);
-
-			return ResponseEntity.ok(result);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	//TODO: redirect to createTask() method
 	@Override
 	public ResponseEntity<TaskDTO> create(TaskDTO dto) {
-		return null;
+		var entity = taskMapper.taskDTOToTask(dto);
+		var result = taskMapper.taskToTaskDTO(taskService.create(entity));
+		return ResponseEntity.ok(result);
 	}
 
-	//TODO: redirect to getTask() method
 	@Override
 	public ResponseEntity<TaskDTO> getById(Long id) {
-		return null;
+		var result = taskMapper.taskToTaskDTO(taskService.getById(id));
+		return ResponseEntity.ok(result);
 	}
 
-	//TODO
 	@Override
 	public ResponseEntity<List<TaskDTO>> getAll() {
-		return null;
+		var result = taskMapper.listTaskToTaskDTO(taskService.getAll());
+		return ResponseEntity.ok(result);
 	}
 
-	//TODO
 	@Override
 	public ResponseEntity<TaskDTO> update(TaskDTO updatedInstanceRequest, Long id) {
-		return null;
+		var entity = taskMapper.taskDTOToTask(updatedInstanceRequest);
+		var result = taskMapper.taskToTaskDTO(taskService.update(entity, id));
+		return ResponseEntity.ok(result);
 	}
 
-	//TODO
 	@Override
 	public ResponseEntity<Boolean> delete(Long id) {
-		return null;
+		return ResponseEntity.ok(taskService.delete(id));
 	}
 
 	@Override

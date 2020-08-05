@@ -2,7 +2,6 @@ package ru.studentsplatform.backend.endpoint.rest.crud;
 
 import com.querydsl.core.types.Predicate;
 import org.springframework.core.io.Resource;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -58,15 +56,6 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 									   @RequestBody TaskDTO dto);
 
 	/**
-	 * Возвращает сведения о всех задачах, прикрепленных к ячейке расписания пользователя.
-	 *
-	 * @param cellId Id ячейки расписания пользователя, к которой прикреплены задачи
-	 * @return Ответ с кодом 200(ok), содержащий сведения о всех задачах, закрепленных за ячейкой
-	 */
-	@GetMapping("/cell/{cellId}")
-	ResponseEntity<List<TaskDTO>> getAllTasksForCell(@PathVariable(name = "cellId") Long cellId);
-
-	/**
 	 * Возвращает сведения о задаче с выбраным Id.
 	 *
 	 * @param taskId Id задачи студента
@@ -75,80 +64,6 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	@GetMapping("/{taskId}")
 	ResponseEntity<TaskDTO> getTask(@PathVariable(name = "taskId") Long taskId);
 
-	/**
-	 * Возвращает сведения о задачах для конкретного пользователя
-	 * по степени их завершенности.
-	 *
-	 * @param userId Id пользователя, которому принадлежит задача
-	 * @param isDone Завершена ли задача
-	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
-	 */
-	@GetMapping("/user/{userId}/isDone/{isDone}")
-	ResponseEntity<List<TaskDTO>> getByDoneTaskForUser(@PathVariable(name = "userId") Long userId,
-													   @PathVariable(name = "isDone") Boolean isDone);
-
-	/**
-	 * Возвращает сведения о задачах для конкретного пользователя
-	 * по семестру.
-	 *
-	 * @param userId Id пользователя, которому принадлежит задача
-	 * @param semester номер семестра
-	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
-	 */
-	@GetMapping("/user/{userId}/semester/{semester}")
-	ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(@PathVariable(name = "userId") Long userId,
-														   @PathVariable(name = "semester") Integer semester);
-
-	/**
-	 * Возвращает сведения о задачах для конкретного пользователя
-	 * по предмету.
-	 *
-	 * @param userId Id пользователя, которому принадлежит задача
-	 * @param subjectId Id предмета
-	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
-	 */
-	@GetMapping("/user/{userId}/subject/{subjectId}")
-	ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(@PathVariable(name = "userId") Long userId,
-														  @PathVariable(name = "subjectId") Long subjectId);
-
-	/**
-	 * Возвращает сведения о задачах для группы студентов.
-	 *
-	 * @param subjectId Id предмета
-	 * @param groupID Id группы студентов
-	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
-	 */
-	@GetMapping("/subject/{subjectId}/group/{groupId}")
-	ResponseEntity<List<TaskDTO>> getTaskByGroup(@PathVariable(name = "subjectId") Long subjectId,
-												 @PathVariable(name = "groupId") Long groupID);
-
-	/**
-	 * Возвращает список всех задач данного пользователя.
-	 * @param userId
-	 * @param startTime
-	 * @param endTime
-	 * @return Ответ с кодом 200(ok), содержащий список задач и свединия о них.
-	 */
-	@GetMapping("/user/{userId}/getTasks")
-	ResponseEntity<List<TaskDTO>> getTaskByStartEndTimeForUser(
-			@PathVariable(name = "userId") Long userId,
-			@RequestParam(value = "start-time", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-					OffsetDateTime startTime,
-			@RequestParam(value = "end-time", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-					OffsetDateTime endTime);
-
-	@GetMapping("/filter")
-	ResponseEntity<List<TaskDTO>> getFiltered(@RequestParam(name = "userId", required = false) Long userId,
-											  @RequestParam(name = "userCellId", required = false) Long usrCellId,
-											  @RequestParam(value = "subjectId", required = false) Long subjectId,
-											  @RequestParam(name = "groupId", required = false) Long groupId,
-											  @RequestParam(name = "semester", required = false) Integer semester,
-											  @RequestParam(value = "startTime", required = false)
-											  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-													  OffsetDateTime startTime,
-											  @RequestParam(value = "endTime", required = false)
-											  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-													  OffsetDateTime endTime);
 	@GetMapping("/myfilter")
 	ResponseEntity<List<TaskDTO>> getFiltered(Predicate predicate);
 }
