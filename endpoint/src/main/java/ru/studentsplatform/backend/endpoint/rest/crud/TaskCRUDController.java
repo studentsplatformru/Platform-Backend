@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
 import ru.studentsplatform.backend.entities.model.university.Task;
 
@@ -69,7 +70,7 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	/**
 	 * Возвращает сведения о задачах с учетом примененных фильтров.
 	 *
-	 * @param predicate Предикат,содержащий в себе все выбранные фильтры
+	 * @param taskFilterDTO Предикат,содержащий в себе все выбранные фильтры
 	 *                  Фильтры указываются следующим образом:
 	 *                  Если необходимо вывести задачи с определенным значением поля,
 	 *                  то указываем в параметрах поиска %имя_поля%=%значение_поля%
@@ -88,6 +89,6 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
 	 */
 	@GetMapping("/filter")
-	ResponseEntity<List<TaskDTO>> getFiltered(@QuerydslPredicate(root = Task.class) Predicate predicate);
+	ResponseEntity<List<TaskDTO>> getFiltered(@RequestBody TaskFilterDTO taskFilterDTO);
 }
 

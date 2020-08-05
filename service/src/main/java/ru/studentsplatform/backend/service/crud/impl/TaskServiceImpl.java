@@ -1,12 +1,16 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
+import ru.studentsplatform.backend.entities.model.university.QTask;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.TaskService;
@@ -16,6 +20,7 @@ import ru.studentsplatform.backend.system.helper.CollectionUtils;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -116,8 +121,32 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Task> getByFilters(Predicate predicate) {
-		return StreamSupport.stream(taskRepository.findAll(predicate).spliterator(),
+	public List<Task> getByFilters(TaskFilterDTO taskFilterDTO) {
+		QTask qTask = QTask.task;
+		BooleanBuilder where = new BooleanBuilder();
+		if (taskFilterDTO.getStartTime() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.startClass.goe(taskFilterDTO.getStartTime()));
+		}
+		if (taskFilterDTO.getEndTime() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.endClass.loe(taskFilterDTO.getEndTime()));
+		}
+		if (taskFilterDTO.getUserId() != null) {
+			where.and(qTask.scheduleUserCell.user.id.eq(taskFilterDTO.getUserId()));
+		}
+		if (taskFilterDTO.getSubjectId() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.subject.id.eq(taskFilterDTO.getSubjectId()));
+		}
+		if (taskFilterDTO.getGroupId() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.team.id.eq(taskFilterDTO.getGroupId()));
+		}
+		if(taskFilterDTO.getSemestr() != null) {
+			where.and(qTask.scheduleUserCell.discipline.semester.eq(taskFilterDTO.getSemestr());
+		}
+		if (taskFilterDTO.getUserCellId() != null) {
+			where.and(qTask.scheduleUserCell.id.eq(taskFilterDTO.getUserCellId());
+		}
+
+		return StreamSupport.stream(taskRepository.findAll(where).spliterator(),
 				false).collect(Collectors.toList());
 	}
 }

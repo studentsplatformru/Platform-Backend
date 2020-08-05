@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.multipart.MultipartFile;
+import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -140,9 +141,9 @@ class TaskServiceImplTest {
 	 */
 	@Test
 	void getByFiltersTest() {
-		Predicate predicate = null;
+		TaskFilterDTO taskFilterDTO = null;
 		List<Task> task = new LinkedList<Task>();
-		doReturn(task).when(taskRepository).findAll(predicate);
-		Assert.assertEquals(task, taskService.getByFilters(predicate));
+		doReturn(task).when(taskRepository).findAll( (Predicate)null);
+		Assert.assertEquals(task, taskService.getByFilters(taskFilterDTO));
 	}
 }

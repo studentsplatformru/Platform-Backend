@@ -2,6 +2,7 @@ package ru.studentsplatform.backend.service.crud;
 
 import com.querydsl.core.types.Predicate;
 import org.springframework.web.multipart.MultipartFile;
+import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
 import ru.studentsplatform.backend.entities.model.university.Task;
 
 import java.util.List;
@@ -68,9 +69,9 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Возвращает список задач, найденных с учетом фильтров.
-	 * @param predicate Предикат, содержащий в себе все поступающие фильтры
+	 * @param taskFilterDTO Предикат, содержащий в себе все поступающие фильтры
 	 * @return список задач
 	 */
-	List<Task> getByFilters(Predicate predicate);
+	List<Task> getByFilters(TaskFilterDTO taskFilterDTO);
 
 }
