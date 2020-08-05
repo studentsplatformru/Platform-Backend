@@ -68,9 +68,24 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	 * Возвращает сведения о задачах с учетом примененных фильтров.
 	 *
 	 * @param predicate Предикат,содержащий в себе все выбранные фильтры
+	 *                  Фильтры указываются следующим образом:
+	 *                  Если необходимо вывести задачи с определенным значением поля,
+	 *                  то указываем в параметрах поиска %имя_поля%=%значение_поля%
+	 *                  Пример: /filter?id=1 - выводит все задачи с id = 1.
+	 *                  Имя поля соответствует имени поля в Task(сущность)
+	 *                  Если поле находится в сущности, которая связана с Task, то
+	 *                  необходимо указать путь до этого поля
+	 *                  Пример: /filter?scheduleUserCell.id=1 - выводит все задачи привязанные к
+	 *                  ячейке расписания с id=1.
+	 *                  Чтобы вывести все задачи, привязанные к ячейкам расписания, дата занятий которых
+	 *                  поздее заданной даты, необходимо указать /filter?scheduleUserCell.scheduleCell.startClass=%дата%
+	 *                  Раньше заданной даты: /filter?scheduleUserCell.scheduleCell.endClass=%дата%
+	 *                  Между двумя датами:
+	 *                  /filter?scheduleUserCell.scheduleCell.startClass=%нижняя_дата%&
+	 *                  scheduleUserCell.scheduleCell.endClass=%верхняя_дата%
 	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
 	 */
-	@GetMapping("/myfilter")
+	@GetMapping("/filter")
 	ResponseEntity<List<TaskDTO>> getFiltered(Predicate predicate);
 }
 
