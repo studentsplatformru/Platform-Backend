@@ -7,6 +7,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -48,6 +49,7 @@ public class EMailSenderImpl implements EMailSender {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Async
 	@Override
 	public void send(@NonNull String to, String subject, String body) {
 
@@ -64,6 +66,7 @@ public class EMailSenderImpl implements EMailSender {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Async
 	@Override
 	public void send(
 			@NonNull String to, String subject,
@@ -98,6 +101,7 @@ public class EMailSenderImpl implements EMailSender {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Async
 	@Override
 	public void send(
 			@NonNull String to, String subject,
