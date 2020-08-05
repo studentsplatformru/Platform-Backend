@@ -23,8 +23,10 @@ public interface TaskRepository extends JpaRepository<Task, Long>,
 	 */
 	@Override
 	default void customize(QuerydslBindings querydslBindings, QTask qTask) {
-		querydslBindings.bind(qTask.scheduleUserCell.scheduleCell.startClass).first((path, value) -> path.goe(value));
-		querydslBindings.bind(qTask.scheduleUserCell.scheduleCell.endClass).first((path, value) -> path.loe(value));
+		querydslBindings.bind(qTask.scheduleUserCell.scheduleCell.startClass)
+				.as("start-time").first((path, value) -> path.goe(value));
+		querydslBindings.bind(qTask.scheduleUserCell.scheduleCell.endClass)
+				.as("end-time").first((path, value) -> path.loe(value));
 	}
 
 }
