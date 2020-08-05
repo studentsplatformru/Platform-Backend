@@ -28,7 +28,7 @@ import java.util.Scanner;
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  */
 @Service
-@Profiled
+//@Profiled
 public class EMailSenderImpl implements EMailSender {
 
 	private final JavaMailSender javaMailSender;

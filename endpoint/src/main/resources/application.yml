@@ -24,15 +24,27 @@ spring:
           lob:
             non_contextual_creation: true
     show-sql: false
+# для миграции
   flyway:
     enabled: false
     baseline-on-migrate: true
     baseline-version: 0
+# для обработки 404
   mvc:
     throw-exception-if-no-handler-found: true
-# зависимость может понадобиться в будущем
-#  resources:
-#    add-mappings: false
+#properties form EMailSender
+  mail:
+    host: smtp.gmail.com
+    #    here must be application mail password
+    password: test789test
+    #    here must be application mail username
+    username: studentplatform.no.reply@gmail.com
+    port: 465
+    protocol: smtps
+
+#must be false in production
+mail:
+ debug: true
 
 logging:
   file:
