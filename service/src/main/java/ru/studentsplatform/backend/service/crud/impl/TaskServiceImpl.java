@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import com.querydsl.core.types.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,6 +19,8 @@ import javax.transaction.Transactional;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Transactional
 @Profiled
@@ -169,5 +172,11 @@ public class TaskServiceImpl implements TaskService {
 								  Integer semester, OffsetDateTime startTime, OffsetDateTime endTime) {
 
 		return taskRepository.findFiltered(userId, usrCellId, subjectId, groupId, semester, startTime, endTime);
+	}
+
+	@Override
+	public List<Task> getMyFiltered(Predicate predicate) {
+		return StreamSupport.stream(taskRepository.findAll(predicate).spliterator(),
+				false).collect(Collectors.toList());
 	}
 }

@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.endpoint.rest.crud;
 
+import com.querydsl.core.types.Predicate;
 import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -148,6 +149,7 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 											  @RequestParam(value = "endTime", required = false)
 											  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 													  OffsetDateTime endTime);
-
+	@GetMapping("/myfilter")
+	ResponseEntity<List<TaskDTO>> getFiltered(Predicate predicate);
 }
 

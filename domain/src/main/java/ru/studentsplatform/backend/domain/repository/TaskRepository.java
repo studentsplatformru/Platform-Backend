@@ -1,10 +1,14 @@
 package ru.studentsplatform.backend.domain.repository;
 
+import com.querydsl.core.types.dsl.DateExpression;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
+import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import ru.studentsplatform.backend.entities.model.university.QTask;
 import ru.studentsplatform.backend.entities.model.university.Task;
 
 import java.time.OffsetDateTime;
@@ -12,7 +16,13 @@ import java.util.List;
 
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Long>, QuerydslPredicateExecutor<Task> {
+public interface TaskRepository extends JpaRepository<Task, Long>,
+		QuerydslPredicateExecutor<Task>, QuerydslBinderCustomizer<QTask> {
+	@Override
+	default void customize(QuerydslBindings querydslBindings, QTask qTask) {
+		querydslBindings.bind(qTask.scheduleUserCell.scheduleCell.startClass).first((path, value) -> path.goe(value));
+		querydslBindings.bind(qTask.scheduleUserCell.scheduleCell.endClass).first((path, value) -> path.loe(value));
+	}
 
 	@Query("select att from Task att join fetch  att.attachments " +
 			"where att.scheduleUserCell.id = :userCellId")

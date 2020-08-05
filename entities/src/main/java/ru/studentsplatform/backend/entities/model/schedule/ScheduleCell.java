@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.entities.model.schedule;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.enums.ClassTypeEnum;
 import ru.studentsplatform.backend.entities.model.university.Subject;
@@ -19,8 +20,10 @@ import java.time.OffsetDateTime;
 @Table(name = "schedule_cell")
 public class ScheduleCell extends BaseEntity {
 
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private OffsetDateTime startClass;
 
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private OffsetDateTime endClass;
 
 	@Column(name = "type")

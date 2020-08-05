@@ -1,14 +1,22 @@
 package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
+import com.querydsl.core.types.Predicate;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.data.web.config.QuerydslWebConfiguration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
+import ru.studentsplatform.backend.domain.repository.TaskRepository;
 import ru.studentsplatform.backend.endpoint.mapper.TaskMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.TaskCRUDController;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -17,9 +25,13 @@ import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+@EnableWebMvc
+@EnableJpaRepositories
+@EnableSpringDataWebSupport
+@Import(QuerydslWebConfiguration.class)
 @Profiled
 @RestController
 @RequestMapping(TaskCRUDController.BASE_URL)
@@ -30,15 +42,8 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 
 	private final TaskAttachmentService taskAttachmentService;
 
-	/**
-	 * Конструктор.
-	 *
-	 * @param taskMapper            Task маппер
-	 * @param taskService           Сервис с методами для работы с Task
-	 * @param taskAttachmentService Сервис с методами для работы с файлами, прикрепленными к Task
-	 */
-	public TaskCRUDControllerImpl(TaskMapper taskMapper,
-								  TaskServiceImpl taskService, TaskAttachmentService taskAttachmentService) {
+	public TaskCRUDControllerImpl(TaskMapper taskMapper, TaskServiceImpl taskService,
+								  TaskAttachmentService taskAttachmentService) {
 		this.taskMapper = taskMapper;
 		this.taskService = taskService;
 		this.taskAttachmentService = taskAttachmentService;
@@ -211,5 +216,11 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	@Override
 	public ResponseEntity<Boolean> delete(Long id) {
 		return null;
+	}
+
+	@Override
+	public ResponseEntity<List<TaskDTO>> getFiltered(@QuerydslPredicate(root = Task.class) Predicate predicate) {
+		return ResponseEntity.ok(taskMapper.listTaskToTaskDTO(
+				taskService.getMyFiltered(predicate)));
 	}
 }
