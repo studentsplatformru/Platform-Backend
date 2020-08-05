@@ -16,7 +16,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 	@Query("select att from Task att left join fetch  att.attachments " +
 			"where (:userId is null or att.scheduleUserCell.user.id = :userId) " +
 			"and (:subjectId is null or att.scheduleUserCell.discipline.subject.id = :subjectId) " +
-			"and (:groupId is null or att.scheduleUserCell.user.team.id = :userId) " +
+			"and (:groupId is null or att.scheduleUserCell.user.team.id = :groupId) " +
 			"and (:usrCellId is null or att.scheduleUserCell.id = :usrCellId) " +
 			"and (:semester is null or att.scheduleUserCell.discipline.semester = :semester) " +
 			"and (coalesce(:startTime, null) is null or att.scheduleUserCell.scheduleCell.startClass >= :startTime) " +
