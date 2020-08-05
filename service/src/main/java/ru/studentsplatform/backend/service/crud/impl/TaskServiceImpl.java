@@ -139,11 +139,11 @@ public class TaskServiceImpl implements TaskService {
 		if (taskFilterDTO.getGroupId() != null) {
 			where.and(qTask.scheduleUserCell.scheduleCell.team.id.eq(taskFilterDTO.getGroupId()));
 		}
-		if(taskFilterDTO.getSemestr() != null) {
-			where.and(qTask.scheduleUserCell.discipline.semester.eq(taskFilterDTO.getSemestr());
+		if (taskFilterDTO.getSemestr() != null) {
+			where.and(qTask.scheduleUserCell.discipline.semester.eq(taskFilterDTO.getSemestr()));
 		}
 		if (taskFilterDTO.getUserCellId() != null) {
-			where.and(qTask.scheduleUserCell.id.eq(taskFilterDTO.getUserCellId());
+			where.and(qTask.scheduleUserCell.id.eq(taskFilterDTO.getUserCellId()));
 		}
 
 		return StreamSupport.stream(taskRepository.findAll(where).spliterator(),

@@ -1,11 +1,13 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.multipart.MultipartFile;
@@ -141,9 +143,10 @@ class TaskServiceImplTest {
 	 */
 	@Test
 	void getByFiltersTest() {
-		TaskFilterDTO taskFilterDTO = null;
+		TaskFilterDTO taskFilterDTO = new TaskFilterDTO();
+		taskFilterDTO.setGroupId(null);
 		List<Task> task = new LinkedList<Task>();
-		doReturn(task).when(taskRepository).findAll( (Predicate)null);
+		doReturn(task).when(taskRepository).findAll(Mockito.any(BooleanBuilder.class));
 		Assert.assertEquals(task, taskService.getByFilters(taskFilterDTO));
 	}
 }
