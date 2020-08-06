@@ -2,8 +2,8 @@ package ru.studentsplatform.backend.notification;
 
 import ru.studentsplatform.backend.entities.model.user.User;
 
-public interface NotifyMapper {
+public interface NotifyController {
 
-    void sendNotification(User user, MessageType type);
+    void sendNotification(String user, MessageType type, String ...args);
 
 }

@@ -10,10 +10,14 @@ management:
 
 spring:
   datasource:
-    platform: postgres
-    url: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/mainDB
+#    platform: postgres
+#    url: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/mainDB
+#    username: postgres
+#    password: password256
+
+    url: jdbc:postgresql://localhost:5432/platform_test_db
     username: postgres
-    password: password256
+    password: root
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -22,7 +26,7 @@ spring:
       hibernate:
         jdbc:
           lob:
-            non_contextual_creation: true
+            non_contextual_creation: false
     show-sql: false
 # для миграции
   flyway:
@@ -41,6 +45,13 @@ spring:
     username: studentplatform.no.reply@gmail.com
     port: 465
     protocol: smtps
+# зависимости для избедания блокировки потока
+    properties:
+      mail:
+        smtp:
+          timeout: 3000
+          writetimeout: 5000
+          connectiontimeout: 5000
 
 #must be false in production
 mail:

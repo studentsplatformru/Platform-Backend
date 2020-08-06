@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.notification.EMailSender;
+import ru.studentsplatform.backend.notification.MessageType;
+import ru.studentsplatform.backend.notification.NotifyController;
 
 
 //@Profiled
@@ -12,7 +14,7 @@ import ru.studentsplatform.backend.notification.EMailSender;
 public class MainController {
 
 	@Autowired
-	private EMailSender sender;
+	private NotifyController controller;
 
 	@GetMapping
 	public ResponseEntity getMain() {
@@ -22,7 +24,10 @@ public class MainController {
 	@GetMapping("mail")
 	public ResponseEntity<String> sendMail(
 	) {
-		sender.send("kar-dan2000@yandex.ru", "test subject", "test body, pal");
+		controller.sendNotification(
+				"kar-dan2000@yandex.ru",
+				MessageType.EMAIL_CONFIRMATION,
+				"test body, pal");
 		return ResponseEntity.ok("Send");
 	}
 }

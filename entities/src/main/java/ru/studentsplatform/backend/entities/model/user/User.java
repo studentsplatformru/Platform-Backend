@@ -29,15 +29,16 @@ public class User extends BaseEntity {
 	private String password;
 
 	@Column(name = "telegram_id")
-	private String telegram_id;
+	private String telegramId;
 
 	@Column(name = "vk_id")
-	private String vk_id;
+	private String vkId;
 
-	@Column(name = "notification_type",
-			columnDefinition = "varchar(255) default EMAIL")
+	@Column(name = "notification_type"
+			, columnDefinition = "varchar(255) default 'Email'"
+	)
 	@Enumerated(EnumType.STRING)
-	private NotificationType notification_type;
+	private NotificationType notificationType;
 
 	@Column(name = "university_role")
 	@Enumerated(EnumType.STRING)

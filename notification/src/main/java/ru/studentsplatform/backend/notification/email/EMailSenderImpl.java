@@ -45,7 +45,7 @@ public class EMailSenderImpl implements EMailSender {
 
 	/**
 	 * @param javaMailSender утлилитный сприноговая реализация,
-	 *                       которая обеспечивает логику отправки сообщения на более низком уровне.
+	 * которая обеспечивает логику отправки сообщения на более низком уровне.
 	 */
 	public EMailSenderImpl(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
@@ -100,7 +100,8 @@ public class EMailSenderImpl implements EMailSender {
 
 		} catch (MessagingException e) {
 
-			e.printStackTrace();
+			logger.error(e.toString());
+
 		}
 	}
 
@@ -138,7 +139,8 @@ public class EMailSenderImpl implements EMailSender {
 
 		} catch (MessagingException e) {
 
-			e.printStackTrace();
+			logger.error(e.toString());
+
 		}
 	}
 
@@ -186,7 +188,8 @@ public class EMailSenderImpl implements EMailSender {
 
 		} catch (MessagingException e) {
 
-			e.printStackTrace();
+			logger.error(e.toString());
+
 		}
 	}
 
