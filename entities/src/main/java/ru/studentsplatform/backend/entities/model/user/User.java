@@ -2,23 +2,15 @@ package ru.studentsplatform.backend.entities.model.user;
 
 import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
+import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.enums.UniversityRoleEnum;
 import ru.studentsplatform.backend.entities.model.university.Discipline;
 import ru.studentsplatform.backend.entities.model.university.PlaceStudy;
 import ru.studentsplatform.backend.entities.model.university.Team;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Класс всех пользователей.
@@ -35,6 +27,17 @@ public class User extends BaseEntity {
 
 	@Column(name = "password", nullable = false)
 	private String password;
+
+	@Column(name = "telegram_id")
+	private String telegram_id;
+
+	@Column(name = "vk_id")
+	private String vk_id;
+
+	@Column(name = "notification_type",
+			columnDefinition = "varchar(255) default EMAIL")
+	@Enumerated(EnumType.STRING)
+	private NotificationType notification_type;
 
 	@Column(name = "university_role")
 	@Enumerated(EnumType.STRING)

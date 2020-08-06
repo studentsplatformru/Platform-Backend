@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.notification.email;
+package ru.studentsplatform.backend.notification;
 
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;

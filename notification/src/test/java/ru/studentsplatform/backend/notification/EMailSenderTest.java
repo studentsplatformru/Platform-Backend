@@ -10,7 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.util.ReflectionTestUtils;
-import ru.studentsplatform.backend.notification.email.EMailSender;
 import ru.studentsplatform.backend.notification.email.EMailSenderImpl;
 
 

@@ -15,6 +15,11 @@
         <!-- Modules App -->
         <dependency>
             <groupId>ru.studentsplatform</groupId>
+            <artifactId>domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.studentsplatform</groupId>
             <artifactId>system</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -1,5 +1,7 @@
 package ru.studentsplatform.backend.notification.email;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.lang.NonNull;
@@ -9,6 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import ru.studentsplatform.backend.notification.EMailSender;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -30,6 +33,8 @@ import java.util.Scanner;
 @Service
 //@Profiled
 public class EMailSenderImpl implements EMailSender {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private final JavaMailSender javaMailSender;
 	/**
@@ -70,7 +75,8 @@ public class EMailSenderImpl implements EMailSender {
 	@Override
 	public void send(
 			@NonNull String to, String subject,
-			String body, String contentPath) throws IOException {
+			String body, String contentPath)
+			throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -105,7 +111,8 @@ public class EMailSenderImpl implements EMailSender {
 	@Override
 	public void send(
 			@NonNull String to, String subject,
-			String body, List<String> contentPaths) throws IOException {
+			String body, List<String> contentPaths)
+			throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -138,10 +145,12 @@ public class EMailSenderImpl implements EMailSender {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Async
 	@Override
 	public void sendHtml(
 			@NonNull String to, String subject,
-			String htmlPath, @Nullable List<String> contentPaths) throws IOException {
+			String htmlPath, @Nullable List<String> contentPaths)
+			throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
