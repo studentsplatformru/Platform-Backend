@@ -24,6 +24,9 @@ public class ScheduleUserCell extends BaseEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@Column(name = "presence")
+	private Boolean presence;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "discipline_id")
 	private Discipline discipline;
@@ -45,6 +48,14 @@ public class ScheduleUserCell extends BaseEntity {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Boolean getPresence() {
+		return presence;
+	}
+
+	public void setPresence(Boolean presence) {
+		this.presence = presence;
 	}
 
 	public Discipline getDiscipline() {

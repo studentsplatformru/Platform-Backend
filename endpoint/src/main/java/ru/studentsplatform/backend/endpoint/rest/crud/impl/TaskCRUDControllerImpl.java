@@ -1,7 +1,5 @@
 package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +13,6 @@ import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
 import ru.studentsplatform.backend.endpoint.mapper.TaskMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.TaskCRUDController;
-import ru.studentsplatform.backend.entities.model.university.QTask;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.impl.TaskServiceImpl;

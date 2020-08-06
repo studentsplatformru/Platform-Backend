@@ -10,6 +10,7 @@ import java.util.List;
 public class ScheduleUserCellDTO extends BaseDTO {
 
 	private Long userId;
+	private Boolean presence;
 	private Long scheduleCellId;
 	private String universityRole;
 	private List<TaskDTO> tasks;

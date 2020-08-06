@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud;
 
+import ru.studentsplatform.backend.domain.dto.ScheduleUserCellFilterDTO;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 
 import java.util.List;
@@ -50,4 +51,12 @@ public interface ScheduleUserCellService extends AbstractService<ScheduleUserCel
 	 */
 	@Override
 	boolean delete(Long id);
+
+	/**
+	 * Позволяет получить посещения студентов студентов по определенным фльтрам.
+	 * @param filter DTO, содержащий фильтрующие параметры
+	 * @return лист обхектов студенческого расписания
+	 */
+	List<ScheduleUserCell> getFilteredPresence(ScheduleUserCellFilterDTO filter);
+
 }
