@@ -85,7 +85,7 @@ public class ScheduleUserCellCRUDControllerImpl implements ScheduleUserCellCRUDC
 	@Override
 	public ResponseEntity<List<ScheduleUserCellDTO>> getFiltered(ScheduleUserCellFilterDTO filter) {
 		return ResponseEntity.ok(scheduleUserCellMapper.listScheduleUserCellToScheduleUserCellDTO(
-				scheduleUserCellService.getFilteredPresence(filter)));
+				scheduleUserCellService.getFiltered(filter)));
 	}
 
 	/**
@@ -94,9 +94,9 @@ public class ScheduleUserCellCRUDControllerImpl implements ScheduleUserCellCRUDC
 	@Override
 	public ResponseEntity<String> getFilteredPresencePercent(ScheduleUserCellFilterDTO filter) {
 		filter.setPresence(null);
-		int allUserLessons = scheduleUserCellService.getFilteredPresence(filter).size();
+		int allUserLessons = scheduleUserCellService.getFiltered(filter).size();
 		filter.setPresence(true);
-		int lessonsWithPresence = scheduleUserCellService.getFilteredPresence(filter).size();
+		int lessonsWithPresence = scheduleUserCellService.getFiltered(filter).size();
 
 		double percent = ((double) lessonsWithPresence / allUserLessons) * 100;
 		return ResponseEntity.ok(percent + "%");

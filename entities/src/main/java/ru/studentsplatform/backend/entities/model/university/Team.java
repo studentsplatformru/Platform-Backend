@@ -19,7 +19,7 @@ import java.util.List;
 @Table(name = "team")
 public class Team extends BaseEntity {
 	@Column(name = "semester")
-	private Long semester;
+	private Integer semester;
 
 	@Column(name = "team_name")
 	private String teamName;
@@ -32,11 +32,11 @@ public class Team extends BaseEntity {
 	@JoinColumn(name = "direction_id")
 	private Direction direction;
 
-	public Long getSemester() {
+	public Integer getSemester() {
 		return semester;
 	}
 
-	public void setSemester(Long semester) {
+	public void setSemester(Integer semester) {
 		this.semester = semester;
 	}
 

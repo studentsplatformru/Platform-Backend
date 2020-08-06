@@ -29,7 +29,6 @@ public interface ScheduleCellMapper {
 			@Mapping(target = "startClass", source = "entity.startClass"),
 			@Mapping(target = "endClass", source = "entity.endClass"),
 			@Mapping(target = "type", source = "entity.type"),
-			@Mapping(target = "semester", source = "entity.semester"),
 			@Mapping(target = "teamId", source = "entity.team.id"),
 			@Mapping(target = "subjectId", source = "entity.subject.id")
 
@@ -49,7 +48,6 @@ public interface ScheduleCellMapper {
 			@Mapping(target = "startClass", source = "dto.startClass"),
 			@Mapping(target = "endClass", source = "dto.endClass"),
 			@Mapping(target = "type", source = "dto.type"),
-			@Mapping(target = "semester", source = "dto.semester"),
 			@Mapping(target = "team.id", source = "dto.teamId"),
 			@Mapping(target = "subject.id", source = "dto.subjectId")
 

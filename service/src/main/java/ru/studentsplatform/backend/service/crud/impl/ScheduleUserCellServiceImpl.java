@@ -91,7 +91,7 @@ public class ScheduleUserCellServiceImpl implements ScheduleUserCellService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<ScheduleUserCell> getFilteredPresence(ScheduleUserCellFilterDTO filter) {
+	public List<ScheduleUserCell> getFiltered(ScheduleUserCellFilterDTO filter) {
 		QScheduleUserCell userCell = QScheduleUserCell.scheduleUserCell;
 		BooleanBuilder where = new BooleanBuilder();
 		if (filter.getUserId() != null) {
@@ -115,7 +115,7 @@ public class ScheduleUserCellServiceImpl implements ScheduleUserCellService {
 		}
 
 		if (filter.getSemester() != null) {
-			where.and(userCell.scheduleCell.semester.eq(filter.getSemester()));
+			where.and(userCell.discipline.semester.eq(filter.getSemester()));
 		}
 
 		if (filter.getPresence() != null) {

@@ -1,14 +1,23 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import com.querydsl.core.BooleanBuilder;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
+import ru.studentsplatform.backend.domain.dto.ScheduleUserCellFilterDTO;
+import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
 import ru.studentsplatform.backend.domain.repository.ScheduleUserCellRepository;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
+import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,7 +30,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ScheduleUserCellServiceTest {
+public class ScheduleUserCellServiceImplTest {
 	@Mock
 	private ScheduleUserCellRepository scheduleUserCellRepository;
 
@@ -87,5 +96,14 @@ public class ScheduleUserCellServiceTest {
 
 		doThrow(EmptyResultDataAccessException.class).when(scheduleUserCellRepository).deleteById(anyLong());
 		assertFalse(scheduleUserCellService.delete(anyLong()));
+	}
+
+	@Test
+	void getFilteredTest() {
+		ScheduleUserCellFilterDTO scheduleUserCellFilterDTO = new ScheduleUserCellFilterDTO();
+		scheduleUserCellFilterDTO.setDisciplineId(null);
+		List<Task> task = new LinkedList<Task>();
+		doReturn(task).when(scheduleUserCellRepository).findAll(Mockito.any(BooleanBuilder.class));
+		Assert.assertEquals(task, scheduleUserCellService.getFiltered(scheduleUserCellFilterDTO));
 	}
 }

@@ -57,6 +57,6 @@ public interface ScheduleUserCellService extends AbstractService<ScheduleUserCel
 	 * @param filter DTO, содержащий фильтрующие параметры
 	 * @return лист обхектов студенческого расписания
 	 */
-	List<ScheduleUserCell> getFilteredPresence(ScheduleUserCellFilterDTO filter);
+	List<ScheduleUserCell> getFiltered(ScheduleUserCellFilterDTO filter);
 
 }

@@ -30,12 +30,10 @@ public class TeamMapperTest {
 		Team entity = new Team();
 		Direction direction = new Direction();
 		direction.setId(1L);
-		entity.setSemester(2L);
 		entity.setDirection(direction);
 		entity.setTeamName("test");
 		TeamDTO dto = mapper.teamToTeamDTO(entity);
 		assertEquals(dto.getDirectionId(), entity.getDirection().getId());
-		assertEquals(dto.getSemester(), entity.getSemester());
 		assertEquals(dto.getTeamName(), entity.getTeamName());
 	}
 

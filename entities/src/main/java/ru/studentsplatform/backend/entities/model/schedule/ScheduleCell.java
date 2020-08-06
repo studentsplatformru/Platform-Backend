@@ -26,8 +26,6 @@ public class ScheduleCell extends BaseEntity {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private OffsetDateTime endClass;
 
-	private Integer semester;
-
 	@Column(name = "type")
 	@Enumerated(EnumType.STRING)
 	private ClassTypeEnum type;
@@ -39,14 +37,6 @@ public class ScheduleCell extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "subject_id")
 	private Subject subject;
-
-	public Integer getSemester() {
-		return semester;
-	}
-
-	public void setSemester(Integer semester) {
-		this.semester = semester;
-	}
 
 	public OffsetDateTime getStartClass() {
 		return startClass;
