@@ -4,8 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import ru.studentsplatform.backend.domain.dto.ScheduleUserCellFilterDTO;
 import ru.studentsplatform.backend.domain.dto.schedule.ScheduleUserCellDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.ScheduleUserCellFilterPOJO;
 
 import java.util.List;
 
@@ -62,7 +62,7 @@ public interface ScheduleUserCellCRUDController extends AbstractCRUDController<S
 	 * @return Список объектов с параметрами ячеек посещения.
 	 */
 	@GetMapping("/filter")
-	ResponseEntity<List<ScheduleUserCellDTO>> getFiltered(@RequestBody ScheduleUserCellFilterDTO filter);
+	ResponseEntity<List<ScheduleUserCellDTO>> getFiltered(@RequestBody ScheduleUserCellFilterPOJO filter);
 
 	/**
 	 * Позволяет найти процентное соотношение посещенных пар в рамках заданных фильтров.
@@ -70,6 +70,6 @@ public interface ScheduleUserCellCRUDController extends AbstractCRUDController<S
 	 * @return Процент выполненных задач
 	 */
 	@GetMapping("/filteredPercentage")
-	ResponseEntity<String> getFilteredPresencePercent(@RequestBody ScheduleUserCellFilterDTO filter);
+	ResponseEntity<String> getFilteredPresencePercent(@RequestBody ScheduleUserCellFilterPOJO filter);
 
 }

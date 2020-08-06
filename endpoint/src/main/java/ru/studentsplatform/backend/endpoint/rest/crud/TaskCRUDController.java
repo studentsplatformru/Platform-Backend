@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.TaskFilterPOJO;
 
 import java.util.List;
 
@@ -86,7 +86,7 @@ public interface TaskCRUDController extends AbstractCRUDController<TaskDTO> {
 	 * @return Ответ с кодом 200(ok), содержащий сведения о задачах
 	 */
 	@GetMapping("/filter")
-	ResponseEntity<List<TaskDTO>> getFiltered(@RequestBody TaskFilterDTO taskFilterDTO);
+	ResponseEntity<List<TaskDTO>> getFiltered(@RequestBody TaskFilterPOJO taskFilterDTO);
 
 }
 

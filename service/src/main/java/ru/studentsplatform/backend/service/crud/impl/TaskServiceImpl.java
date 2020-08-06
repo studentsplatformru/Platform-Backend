@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.TaskFilterPOJO;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
 import ru.studentsplatform.backend.entities.model.university.QTask;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -118,7 +118,7 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Task> getByFilters(TaskFilterDTO taskFilterDTO) {
+	public List<Task> getByFilters(TaskFilterPOJO taskFilterDTO) {
 		QTask qTask = QTask.task;
 		BooleanBuilder where = new BooleanBuilder();
 		if (taskFilterDTO.getStartTime() != null) {

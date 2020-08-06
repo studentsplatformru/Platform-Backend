@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.TaskFilterPOJO;
 import ru.studentsplatform.backend.endpoint.mapper.TaskMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.TaskCRUDController;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -144,7 +144,7 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<TaskDTO>> getFiltered(TaskFilterDTO taskFilterDTO) {
+	public ResponseEntity<List<TaskDTO>> getFiltered(TaskFilterPOJO taskFilterDTO) {
 		return ResponseEntity.ok(taskMapper.listTaskToTaskDTO(
 				taskService.getByFilters(taskFilterDTO)));
 	}

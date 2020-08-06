@@ -1,11 +1,11 @@
-package ru.studentsplatform.backend.domain.dto;
+package ru.studentsplatform.backend.domain.pojo.filters;
 
 import lombok.Data;
 
 import java.time.OffsetDateTime;
 
 @Data
-public class TaskFilterDTO {
+public class TaskFilterPOJO {
 	private OffsetDateTime startTime;
 	private OffsetDateTime endTime;
 	private Long subjectId;

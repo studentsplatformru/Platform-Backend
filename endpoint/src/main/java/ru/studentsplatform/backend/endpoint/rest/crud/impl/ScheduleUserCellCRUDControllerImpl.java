@@ -3,8 +3,8 @@ package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.studentsplatform.backend.domain.dto.ScheduleUserCellFilterDTO;
 import ru.studentsplatform.backend.domain.dto.schedule.ScheduleUserCellDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.ScheduleUserCellFilterPOJO;
 import ru.studentsplatform.backend.endpoint.mapper.ScheduleUserCellMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.ScheduleUserCellCRUDController;
 import ru.studentsplatform.backend.service.crud.impl.ScheduleUserCellServiceImpl;
@@ -83,7 +83,7 @@ public class ScheduleUserCellCRUDControllerImpl implements ScheduleUserCellCRUDC
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<ScheduleUserCellDTO>> getFiltered(ScheduleUserCellFilterDTO filter) {
+	public ResponseEntity<List<ScheduleUserCellDTO>> getFiltered(ScheduleUserCellFilterPOJO filter) {
 		return ResponseEntity.ok(scheduleUserCellMapper.listScheduleUserCellToScheduleUserCellDTO(
 				scheduleUserCellService.getFiltered(filter)));
 	}
@@ -92,7 +92,7 @@ public class ScheduleUserCellCRUDControllerImpl implements ScheduleUserCellCRUDC
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<String> getFilteredPresencePercent(ScheduleUserCellFilterDTO filter) {
+	public ResponseEntity<String> getFilteredPresencePercent(ScheduleUserCellFilterPOJO filter) {
 		filter.setPresence(null);
 		int allUserLessons = scheduleUserCellService.getFiltered(filter).size();
 		filter.setPresence(true);

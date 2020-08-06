@@ -9,8 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
-import ru.studentsplatform.backend.domain.dto.ScheduleUserCellFilterDTO;
-import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.ScheduleUserCellFilterPOJO;
 import ru.studentsplatform.backend.domain.repository.ScheduleUserCellRepository;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -100,7 +99,7 @@ public class ScheduleUserCellServiceImplTest {
 
 	@Test
 	void getFilteredTest() {
-		ScheduleUserCellFilterDTO scheduleUserCellFilterDTO = new ScheduleUserCellFilterDTO();
+		ScheduleUserCellFilterPOJO scheduleUserCellFilterDTO = new ScheduleUserCellFilterPOJO();
 		scheduleUserCellFilterDTO.setDisciplineId(null);
 		List<Task> task = new LinkedList<Task>();
 		doReturn(task).when(scheduleUserCellRepository).findAll(Mockito.any(BooleanBuilder.class));

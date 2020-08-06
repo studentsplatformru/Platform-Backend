@@ -1,6 +1,6 @@
 package ru.studentsplatform.backend.service.crud;
 
-import ru.studentsplatform.backend.domain.dto.ScheduleUserCellFilterDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.ScheduleUserCellFilterPOJO;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 
 import java.util.List;
@@ -57,6 +57,6 @@ public interface ScheduleUserCellService extends AbstractService<ScheduleUserCel
 	 * @param filter DTO, содержащий фильтрующие параметры
 	 * @return лист обхектов студенческого расписания
 	 */
-	List<ScheduleUserCell> getFiltered(ScheduleUserCellFilterDTO filter);
+	List<ScheduleUserCell> getFiltered(ScheduleUserCellFilterPOJO filter);
 
 }

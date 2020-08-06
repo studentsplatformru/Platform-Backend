@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.studentsplatform.backend.domain.dto.ScheduleUserCellFilterDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.ScheduleUserCellFilterPOJO;
 import ru.studentsplatform.backend.domain.repository.ScheduleUserCellRepository;
 import ru.studentsplatform.backend.entities.model.schedule.QScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
@@ -91,7 +91,7 @@ public class ScheduleUserCellServiceImpl implements ScheduleUserCellService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<ScheduleUserCell> getFiltered(ScheduleUserCellFilterDTO filter) {
+	public List<ScheduleUserCell> getFiltered(ScheduleUserCellFilterPOJO filter) {
 		QScheduleUserCell userCell = QScheduleUserCell.scheduleUserCell;
 		BooleanBuilder where = new BooleanBuilder();
 		if (filter.getUserId() != null) {
