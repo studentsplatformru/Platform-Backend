@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.service.crud;
 
-import com.querydsl.core.types.Predicate;
 import org.springframework.web.multipart.MultipartFile;
 import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
 import ru.studentsplatform.backend.entities.model.university.Task;

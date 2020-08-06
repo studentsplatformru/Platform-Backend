@@ -1,8 +1,6 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,7 +18,6 @@ import ru.studentsplatform.backend.system.helper.CollectionUtils;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -139,8 +136,8 @@ public class TaskServiceImpl implements TaskService {
 		if (taskFilterDTO.getGroupId() != null) {
 			where.and(qTask.scheduleUserCell.scheduleCell.team.id.eq(taskFilterDTO.getGroupId()));
 		}
-		if (taskFilterDTO.getSemestr() != null) {
-			where.and(qTask.scheduleUserCell.discipline.semester.eq(taskFilterDTO.getSemestr()));
+		if (taskFilterDTO.getSemester() != null) {
+			where.and(qTask.scheduleUserCell.discipline.semester.eq(taskFilterDTO.getSemester()));
 		}
 		if (taskFilterDTO.getUserCellId() != null) {
 			where.and(qTask.scheduleUserCell.id.eq(taskFilterDTO.getUserCellId()));

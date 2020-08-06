@@ -11,6 +11,6 @@ public class TaskFilterDTO {
 	private Long subjectId;
 	private Long groupId;
 	private Long userCellId;
-	private Integer semestr;
+	private Integer semester;
 	private Long userId;
 }
