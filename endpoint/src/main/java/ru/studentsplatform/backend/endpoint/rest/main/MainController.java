@@ -27,7 +27,7 @@ public class MainController {
 		controller.sendNotification(
 				"kar-dan2000@yandex.ru",
 				MessageType.EMAIL_CONFIRMATION,
-				"test body, pal");
+				"https://www.google.com/");
 		return ResponseEntity.ok("Send");
 	}
 }

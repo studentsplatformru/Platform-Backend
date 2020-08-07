@@ -7,6 +7,7 @@ import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.notification.EMailSender;
 import ru.studentsplatform.backend.notification.NotifyController;
 import ru.studentsplatform.backend.notification.MessageType;
+import ru.studentsplatform.backend.notification.service.EmailTemplateService;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -16,6 +17,9 @@ public class NotifyControllerImpl implements NotifyController {
 
     @Autowired
     private EMailSender eMailSender;
+
+    @Autowired
+    private EmailTemplateService templateService;
 
     @Override
     public void sendNotification(String user, MessageType messageType, String ...args) {
@@ -39,12 +43,12 @@ public class NotifyControllerImpl implements NotifyController {
 
     private void sendEmail(String user, MessageType messageType, String ...args){
 
+        String html = templateService.getEmailTemplate(messageType, args);
 
         try {
             eMailSender.sendHtml(user,
                     "Students Platform",
-
-                    "notification\\src\\main\\resources\\templates\\" + messageType + ".html",
+                    html,
                     null);
         } catch (IOException ignored) {
 

@@ -151,7 +151,7 @@ public class EMailSenderImpl implements EMailSender {
 	@Override
 	public void sendHtml(
 			@NonNull String to, String subject,
-			String htmlPath, @Nullable List<String> contentPaths)
+			String html, @Nullable List<String> contentPaths)
 			throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
@@ -159,13 +159,6 @@ public class EMailSenderImpl implements EMailSender {
 		try {
 
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-			Scanner scanner = new Scanner(
-					Paths.get(htmlPath),
-					StandardCharsets.UTF_8.name());
-			//здесь мы можем использовать разделитель, например: "\\A", "\\Z" или "\\z"
-			String html = scanner.useDelimiter("\\A").next();
-			scanner.close();
 
 			message.setSubject(subject, "UTF-8");
 			message.setContent(html, "text/html; charset=UTF-8");
