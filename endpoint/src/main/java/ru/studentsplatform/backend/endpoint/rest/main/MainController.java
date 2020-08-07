@@ -25,8 +25,8 @@ public class MainController {
 	) {
 		controller.sendNotification(
 				"kar-dan2000@yandex.ru",
-				MessageType.EMAIL_CONFIRMATION,
-				"https://www.google.com/");
+				MessageType.MARK_NOTIFICATION,
+				"Математика", "4");
 		return ResponseEntity.ok("Send");
 	}
 }

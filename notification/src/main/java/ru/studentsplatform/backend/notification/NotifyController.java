@@ -9,6 +9,11 @@ import ru.studentsplatform.backend.notification.enumerated.MessageType;
  */
 public interface NotifyController {
 
+    /**
+     * Метод для для отправки уведомлений пользователям.
+     *
+     * @param type устанавливается необходимый {@link MessageType} и
+     */
     void sendNotification(String user, MessageType type, String ...args);
 
 }
