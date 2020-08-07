@@ -4,6 +4,7 @@ public enum MessageType {
 //    REGISTRATION,
 //    MARK_NOTIFICATION,
 //    TASK_ASSIGMENT,
+    // продумать комменты к каждому шаблону
     EMAIL_CONFIRMATION("notification\\src\\main\\resources\\templates\\EMAIL_CONFIRMATION.html", 1);
 
     private final String path;
