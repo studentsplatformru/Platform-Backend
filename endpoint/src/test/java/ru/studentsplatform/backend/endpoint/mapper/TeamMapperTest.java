@@ -44,7 +44,7 @@ public class TeamMapperTest {
 	void teamDTOToTeamTest() {
 		TeamDTO dto = new TeamDTO();
 		dto.setDirectionId(1L);
-		dto.setSemester(2L);
+		dto.setSemester(2);
 		dto.setTeamName("test");
 		Team entity = mapper.teamDTOToTeam(dto);
 		assertEquals(dto.getDirectionId(), entity.getDirection().getId());
