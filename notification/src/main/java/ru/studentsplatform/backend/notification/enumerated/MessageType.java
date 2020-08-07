@@ -1,6 +1,13 @@
-package ru.studentsplatform.backend.notification;
+package ru.studentsplatform.backend.notification.enumerated;
 
-public enum MessageType {
+import ru.studentsplatform.backend.notification.MessageTypeInterface;
+
+/**
+ * Реализация {@link MessageTypeInterface}.
+ *
+ * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
+ */
+public enum MessageType implements MessageTypeInterface {
 //    REGISTRATION,
 //    MARK_NOTIFICATION,
 //    TASK_ASSIGMENT,

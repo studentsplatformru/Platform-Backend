@@ -1,6 +1,6 @@
-package ru.studentsplatform.backend.notification.service;
+package ru.studentsplatform.backend.notification;
 
-import ru.studentsplatform.backend.notification.MessageType;
+import ru.studentsplatform.backend.notification.enumerated.MessageType;
 
 /**
  * Обрабатывает аргументы и по типу сообщения и

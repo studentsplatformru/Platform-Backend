@@ -3,8 +3,8 @@ package ru.studentsplatform.backend.notification.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.notification.EMailSender;
-import ru.studentsplatform.backend.notification.MessageType;
+import ru.studentsplatform.backend.notification.EmailTemplateService;
+import ru.studentsplatform.backend.notification.enumerated.MessageType;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
