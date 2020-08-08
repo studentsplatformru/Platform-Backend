@@ -13,5 +13,5 @@ public class ScheduleCellDTO extends BaseDTO {
 	private String type;
 	private Long teamId;
 	private Long subjectId;
-
+	private Integer semester;
 }

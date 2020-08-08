@@ -11,11 +11,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.multipart.MultipartFile;
-import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.TaskFilterPOJO;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.university.Task;
-import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.entities.model.utility.TaskAttachment;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
@@ -143,7 +142,7 @@ class TaskServiceImplTest {
 	 */
 	@Test
 	void getByFiltersTest() {
-		TaskFilterDTO taskFilterDTO = new TaskFilterDTO();
+		TaskFilterPOJO taskFilterDTO = new TaskFilterPOJO();
 		taskFilterDTO.setGroupId(null);
 		List<Task> task = new LinkedList<Task>();
 		doReturn(task).when(taskRepository).findAll(Mockito.any(BooleanBuilder.class));

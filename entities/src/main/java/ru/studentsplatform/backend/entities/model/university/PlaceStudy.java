@@ -37,8 +37,6 @@ public class PlaceStudy extends BaseEntity {
 	@JoinColumn(name = "team_id", nullable = false)
 	private Team team;
 
-	private int semester;
-
 	public User getUser() {
 		return user;
 	}
@@ -85,13 +83,5 @@ public class PlaceStudy extends BaseEntity {
 
 	public void setTeam(Team team) {
 		this.team = team;
-	}
-
-	public int getSemester() {
-		return semester;
-	}
-
-	public void setSemester(int semester) {
-		this.semester = semester;
 	}
 }

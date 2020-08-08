@@ -39,6 +39,8 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
+
+        <!-- Позволяет генерировать query объекты для использования в запросах -->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-core</artifactId>

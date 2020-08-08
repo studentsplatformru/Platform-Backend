@@ -1,7 +1,7 @@
 package ru.studentsplatform.backend.service.crud;
 
 import org.springframework.web.multipart.MultipartFile;
-import ru.studentsplatform.backend.domain.dto.TaskFilterDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.TaskFilterPOJO;
 import ru.studentsplatform.backend.entities.model.university.Task;
 
 import java.util.List;
@@ -71,6 +71,6 @@ public interface TaskService extends AbstractService<Task> {
 	 * @param taskFilterDTO Предикат, содержащий в себе все поступающие фильтры
 	 * @return список задач
 	 */
-	List<Task> getByFilters(TaskFilterDTO taskFilterDTO);
+	List<Task> getByFilters(TaskFilterPOJO taskFilterDTO);
 
 }

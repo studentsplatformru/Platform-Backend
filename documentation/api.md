@@ -25,3 +25,11 @@
     - **http://localhost:8080/api/task/subject/1/group/1** - *Поиск заданий по предмету с Id = 1 у группы студенов с Id = 1*  
     - **http://localhost:8080/api/task/1/file/1/** - *Получить файл с Id = 1, прикрепленный к task c Id = 2*
     
+- ScheduleUserCell
+    -POST
+    
+    -GET
+    - **http://localhost:8080/api/schedule_user_cell/getFiltered** - *Получить сведения о scheduleUserCell по заданным фильтрам*
+    - **http://localhost:8080/api/schedule_user_cell/filteredPercentage** - *Получить сведения о процентноим отношении посещенных занятий по заданным фильрам*
+
+    
