@@ -59,4 +59,13 @@ public interface ScheduleUserCellService extends AbstractService<ScheduleUserCel
 	 */
 	List<ScheduleUserCell> getFiltered(ScheduleUserCellFilterPOJO filter);
 
+	/**
+	 * Возвращает строку, описывающую процентное отношение посещенных занятий по
+	 * заданным фильрам.
+	 *
+	 * @param filter объект, содержащий поля с фильтрами
+	 * @return процентное отношение посещенных занятий
+	 */
+	String getFilteredPercentage(ScheduleUserCellFilterPOJO filter);
+
 }

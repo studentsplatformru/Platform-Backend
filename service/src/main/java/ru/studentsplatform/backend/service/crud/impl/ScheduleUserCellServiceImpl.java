@@ -92,8 +92,11 @@ public class ScheduleUserCellServiceImpl implements ScheduleUserCellService {
 	 */
 	@Override
 	public List<ScheduleUserCell> getFiltered(ScheduleUserCellFilterPOJO filter) {
+		//Создаём query объект
 		QScheduleUserCell userCell = QScheduleUserCell.scheduleUserCell;
 		BooleanBuilder where = new BooleanBuilder();
+
+		// Если фильтр == null - пропускаем проверку с его участием
 		if (filter.getUserId() != null) {
 			where.and(userCell.user.id.eq(filter.getUserId()));
 		}
@@ -124,5 +127,19 @@ public class ScheduleUserCellServiceImpl implements ScheduleUserCellService {
 
 		return StreamSupport.stream(scheduleUserCellRepository.findAll(where).spliterator(),
 				false).collect(Collectors.toList());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getFilteredPercentage(ScheduleUserCellFilterPOJO filter) {
+		filter.setPresence(null);
+		double allUserLessons = getFiltered(filter).size();
+		filter.setPresence(true);
+		double lessonsWithPresence = getFiltered(filter).size();
+
+		double percent = (lessonsWithPresence / allUserLessons) * 100;
+		return percent + "%";
 	}
 }

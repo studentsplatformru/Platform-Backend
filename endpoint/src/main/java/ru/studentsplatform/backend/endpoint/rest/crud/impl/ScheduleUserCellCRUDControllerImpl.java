@@ -3,6 +3,7 @@ package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ru.studentsplatform.backend.domain.dto.schedule.ScheduleUserCellDTO;
 import ru.studentsplatform.backend.domain.pojo.filters.ScheduleUserCellFilterPOJO;
 import ru.studentsplatform.backend.endpoint.mapper.ScheduleUserCellMapper;
@@ -13,6 +14,7 @@ import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import java.util.List;
 
 @Profiled
+@EnableWebMvc
 @RestController
 @RequestMapping(ScheduleUserCellCRUDController.BASE_URL)
 public class ScheduleUserCellCRUDControllerImpl implements ScheduleUserCellCRUDController {
@@ -93,12 +95,7 @@ public class ScheduleUserCellCRUDControllerImpl implements ScheduleUserCellCRUDC
 	 */
 	@Override
 	public ResponseEntity<String> getFilteredPresencePercent(ScheduleUserCellFilterPOJO filter) {
-		filter.setPresence(null);
-		int allUserLessons = scheduleUserCellService.getFiltered(filter).size();
-		filter.setPresence(true);
-		int lessonsWithPresence = scheduleUserCellService.getFiltered(filter).size();
-
-		double percent = ((double) lessonsWithPresence / allUserLessons) * 100;
-		return ResponseEntity.ok(percent + "%");
+		var result = scheduleUserCellService.getFilteredPercentage(filter);
+		return ResponseEntity.ok(result);
 	}
 }

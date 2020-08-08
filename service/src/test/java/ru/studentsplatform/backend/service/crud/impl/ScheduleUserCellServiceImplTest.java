@@ -101,8 +101,24 @@ public class ScheduleUserCellServiceImplTest {
 	void getFilteredTest() {
 		ScheduleUserCellFilterPOJO scheduleUserCellFilterDTO = new ScheduleUserCellFilterPOJO();
 		scheduleUserCellFilterDTO.setDisciplineId(null);
-		List<Task> task = new LinkedList<Task>();
-		doReturn(task).when(scheduleUserCellRepository).findAll(Mockito.any(BooleanBuilder.class));
-		Assert.assertEquals(task, scheduleUserCellService.getFiltered(scheduleUserCellFilterDTO));
+		List<ScheduleUserCell> scheduleUserCells = new LinkedList<>();
+		doReturn(scheduleUserCells).when(scheduleUserCellRepository).findAll(Mockito.any(BooleanBuilder.class));
+		Assert.assertEquals(scheduleUserCells, scheduleUserCellService.getFiltered(scheduleUserCellFilterDTO));
+	}
+
+	@Test
+	void getFilteredPercentageTest() {
+		ScheduleUserCellFilterPOJO scheduleUserCellFilterPOJO = mock(ScheduleUserCellFilterPOJO.class);
+
+		List<ScheduleUserCell> allCells = new LinkedList<>();
+		allCells.add(new ScheduleUserCell());
+		allCells.add(new ScheduleUserCell());
+
+		List<ScheduleUserCell> cellWithPresence = new LinkedList<>();
+		cellWithPresence.add(new ScheduleUserCell());
+
+		doReturn(allCells, cellWithPresence).when(scheduleUserCellRepository).findAll(Mockito.any(BooleanBuilder.class));
+		var result = scheduleUserCellService.getFilteredPercentage(scheduleUserCellFilterPOJO);
+		assertEquals(result, "50.0%");
 	}
 }
