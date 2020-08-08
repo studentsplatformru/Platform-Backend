@@ -20,7 +20,7 @@ public interface NotifyService {
      * @param messageType устанавливается необходимый {@link MessageType}.
      * @param args необходимые для подстановки в шаблон значения.
      */
-    void sendNotification(User user, MessageType messageType, String ...args);
+    void sendNotification(User user, MessageType messageType, String... args);
 
     /**
      * Метод c определённый типом отправки уведомлений.

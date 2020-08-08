@@ -1,11 +1,14 @@
-package ru.studentsplatform.backend.notification.controller;
+package ru.studentsplatform.backend.notification.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.user.User;
-import ru.studentsplatform.backend.notification.*;
+import ru.studentsplatform.backend.notification.BotTemplateService;
+import ru.studentsplatform.backend.notification.EMailSender;
+import ru.studentsplatform.backend.notification.HtmlTemplateService;
+import ru.studentsplatform.backend.notification.NotifyService;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
 
 import java.io.IOException;
@@ -48,7 +51,7 @@ public class NotifyServiceImpl implements NotifyService {
      * {@inheritDoc}
      */
     @Override
-    public void sendNotification(User user, MessageType messageType, String ...args) {
+    public void sendNotification(User user, MessageType messageType, String... args) {
 
         this.sendNotification(user, messageType, user.getNotificationType(), args);
 
@@ -69,13 +72,13 @@ public class NotifyServiceImpl implements NotifyService {
 
             this.sendEmail(user, message, args);
 
-        }else if (notificationType == NotificationType.Telegram) {
+        } else if (notificationType == NotificationType.Telegram) {
 
             message = botTemplateService.getBotTemplate(messageType, args);
 
             this.sendTelegram(user, message, args);
 
-        }else if (notificationType == NotificationType.VK) {
+        } else if (notificationType == NotificationType.VK) {
 
             message = botTemplateService.getBotTemplate(messageType, args);
 
@@ -95,7 +98,7 @@ public class NotifyServiceImpl implements NotifyService {
         String message = htmlTemplateService.getHtmlTemplate(messageType, args);
         String botMessage = botTemplateService.getBotTemplate(messageType, args);
 
-        for (User user : users){
+        for (User user : users) {
 
             if (notificationTypes.contains(NotificationType.Email)) {
 
@@ -118,7 +121,7 @@ public class NotifyServiceImpl implements NotifyService {
      * {@inheritDoc}
      */
     @Override
-    public void sendEmail(User user, String message, String... args){
+    public void sendEmail(User user, String message, String... args) {
 
         try {
             eMailSender.sendHtml(
@@ -136,7 +139,7 @@ public class NotifyServiceImpl implements NotifyService {
      * {@inheritDoc}
      */
     @Override
-    public void sendVK(User user, String message, String... args){
+    public void sendVK(User user, String message, String... args) {
 
         // Получение адреса отправки user.getVkId()
         try {
@@ -152,7 +155,7 @@ public class NotifyServiceImpl implements NotifyService {
      * {@inheritDoc}
      */
     @Override
-    public void sendTelegram(User user, String message, String... args){
+    public void sendTelegram(User user, String message, String... args) {
 
         // Получение адреса отправки user.getTelegramId()
         try {

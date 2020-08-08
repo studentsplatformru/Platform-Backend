@@ -19,9 +19,11 @@ public interface HtmlTemplateService {
      *        Получает {@link MessageType} для отпределения типа шаблона
      * @param args
      *        Получает на вход необходимые данные для замены в шаблоне
+     * @return
+     *        Html документ для оптравки через почту.
      *
      * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
      */
-    String getHtmlTemplate(MessageType type, String ...args);
+    String getHtmlTemplate(MessageType type, String... args);
 
 }

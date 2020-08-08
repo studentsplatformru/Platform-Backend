@@ -31,10 +31,11 @@ public class HtmlTemplateServiceImpl implements HtmlTemplateService {
     @Override
     public String getHtmlTemplate(MessageType type, String... args) {
 
-        if (type.getParameterCount() != args.length)
+        if (type.getParameterCount() != args.length){
             throw new IllegalArgumentException("Неправильное количство элементов");
+        }
 
-        try(Scanner scanner = new Scanner(
+        try (Scanner scanner = new Scanner(
                 Paths.get(type.getPath()),
                 StandardCharsets.UTF_8.name())) {
 

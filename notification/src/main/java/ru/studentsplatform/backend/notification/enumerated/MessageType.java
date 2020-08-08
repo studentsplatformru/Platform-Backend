@@ -5,14 +5,14 @@ package ru.studentsplatform.backend.notification.enumerated;
  *
  * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
  */
-public enum MessageType{
+public enum MessageType {
     //    TASK_ASSIGMENT,
     //    REGISTRATION,
     //    WELCOME,
     /**
      * Параметры:
-     * 1-й : Предмет получения оценки
-     * 2-й : Оценка по предмету
+     * 1-й : Предмет получения оценки.
+     * 2-й : Оценка по предмету.
      */
     MARK_NOTIFICATION(
             "notification\\src\\main\\resources\\templates\\mark_notification.html",
@@ -20,7 +20,7 @@ public enum MessageType{
             "У Вас новая оценка!\n %s : %s"),
     /**
      * Параметры:
-     * 1-й : Ссылка на подтверждение email
+     * 1-й : Ссылка на подтверждение email.
      */
     EMAIL_CONFIRMATION(
             "notification\\src\\main\\resources\\templates\\email_confirmation.html",
@@ -32,8 +32,9 @@ public enum MessageType{
     private final int parameterCount;
 
     /**
-     * @param path               Путь к шаблону
-     * @param parameterCount     Количество вставляемых параметров
+     * @param path               Путь к шаблону.
+     * @param parameterCount     Количество вставляемых параметров.
+     * @param botPattern         шаблон в фрмате строки для сообщений через бота.
      */
     MessageType(String path, int parameterCount, String botPattern) {
         this.path = path;

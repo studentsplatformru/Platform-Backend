@@ -19,8 +19,10 @@ public interface BotTemplateService {
      *        Получает {@link MessageType} для отпределения типа шаблона
      * @param args
      *        Получает на вход необходимые данные для замены в шаблоне
+     *@return
+     *        Сообщение для оптравки через бота.
      *
      * @author Danila K (karnacevich5323537@gmail.com) (08.08.2020).
      */
-    String getBotTemplate(MessageType type, String ...args);
+    String getBotTemplate(MessageType type, String... args);
 }

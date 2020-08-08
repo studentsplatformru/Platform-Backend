@@ -20,8 +20,9 @@ public class BotTemplateServiceImpl implements BotTemplateService {
     @Override
     public String getBotTemplate(MessageType type, String... args) {
 
-        if (type.getParameterCount() != args.length)
+        if (type.getParameterCount() != args.length){
             throw new IllegalArgumentException("Неправильное количство элементов");
+        }
 
         return String.format(type.getBotPattern(), args);
 
