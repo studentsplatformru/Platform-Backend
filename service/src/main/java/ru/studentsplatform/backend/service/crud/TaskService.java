@@ -68,9 +68,9 @@ public interface TaskService extends AbstractService<Task> {
 
 	/**
 	 * Возвращает список задач, найденных с учетом фильтров.
-	 * @param taskFilterDTO Предикат, содержащий в себе все поступающие фильтры
+	 * @param taskFilterPOJO Объект, содержащий в себе все поступающие фильтры
 	 * @return список задач
 	 */
-	List<Task> getByFilters(TaskFilterPOJO taskFilterDTO);
+	List<Task> getByFilters(TaskFilterPOJO taskFilterPOJO);
 
 }
