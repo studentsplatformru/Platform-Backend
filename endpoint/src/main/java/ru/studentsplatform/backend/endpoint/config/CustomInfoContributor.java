@@ -4,7 +4,6 @@ package ru.studentsplatform.backend.endpoint.config;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.stereotype.Component;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * Настраиваемая страница для /actuator/info.

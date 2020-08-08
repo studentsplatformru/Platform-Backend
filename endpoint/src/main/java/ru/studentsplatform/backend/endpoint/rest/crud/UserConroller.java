@@ -4,7 +4,6 @@ package ru.studentsplatform.backend.endpoint.rest.crud;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.user.UserDTO;
 
 import java.util.List;
