@@ -118,29 +118,35 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Task> getByFilters(TaskFilterPOJO taskFilterDTO) {
+	public List<Task> getByFilters(TaskFilterPOJO taskFilterPOJO) {
+		// Получение статического инстанса QTask'a - класса для генерации строк, связанных с Task (сущностью задач).
 		QTask qTask = QTask.task;
+		// Билдер предиката, который потом вставляется в FindAll().
 		BooleanBuilder where = new BooleanBuilder();
-		if (taskFilterDTO.getStartTime() != null) {
-			where.and(qTask.scheduleUserCell.scheduleCell.startClass.goe(taskFilterDTO.getStartTime()));
+		// Проверяем, задан ли вообще фильтр.
+		if (taskFilterPOJO.getStartTime() != null) {
+			// Если да, то добавляем в предикат соответствующее выражение (в данном случае больше
+			// чем заданное начальное время). Выражение само по себе предикат. Как раз для получения
+			// выражения нужны Q class'ы. А потом эти выражения комбинируем с помощью билдера.
+			where.and(qTask.scheduleUserCell.scheduleCell.startClass.goe(taskFilterPOJO.getStartTime()));
 		}
-		if (taskFilterDTO.getEndTime() != null) {
-			where.and(qTask.scheduleUserCell.scheduleCell.endClass.loe(taskFilterDTO.getEndTime()));
+		if (taskFilterPOJO.getEndTime() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.endClass.loe(taskFilterPOJO.getEndTime()));
 		}
-		if (taskFilterDTO.getUserId() != null) {
-			where.and(qTask.scheduleUserCell.user.id.eq(taskFilterDTO.getUserId()));
+		if (taskFilterPOJO.getUserId() != null) {
+			where.and(qTask.scheduleUserCell.user.id.eq(taskFilterPOJO.getUserId()));
 		}
-		if (taskFilterDTO.getSubjectId() != null) {
-			where.and(qTask.scheduleUserCell.scheduleCell.subject.id.eq(taskFilterDTO.getSubjectId()));
+		if (taskFilterPOJO.getSubjectId() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.subject.id.eq(taskFilterPOJO.getSubjectId()));
 		}
-		if (taskFilterDTO.getGroupId() != null) {
-			where.and(qTask.scheduleUserCell.scheduleCell.team.id.eq(taskFilterDTO.getGroupId()));
+		if (taskFilterPOJO.getGroupId() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.team.id.eq(taskFilterPOJO.getGroupId()));
 		}
-		if (taskFilterDTO.getSemester() != null) {
-			where.and(qTask.scheduleUserCell.discipline.semester.eq(taskFilterDTO.getSemester()));
+		if (taskFilterPOJO.getSemester() != null) {
+			where.and(qTask.scheduleUserCell.discipline.semester.eq(taskFilterPOJO.getSemester()));
 		}
-		if (taskFilterDTO.getUserCellId() != null) {
-			where.and(qTask.scheduleUserCell.id.eq(taskFilterDTO.getUserCellId()));
+		if (taskFilterPOJO.getUserCellId() != null) {
+			where.and(qTask.scheduleUserCell.id.eq(taskFilterPOJO.getUserCellId()));
 		}
 
 		return StreamSupport.stream(taskRepository.findAll(where).spliterator(),
