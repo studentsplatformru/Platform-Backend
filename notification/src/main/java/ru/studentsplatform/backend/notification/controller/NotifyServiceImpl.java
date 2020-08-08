@@ -50,7 +50,17 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendNotification(User user, MessageType messageType, String ...args) {
 
-        NotificationType notificationType = user.getNotificationType();
+        this.sendNotification(user, messageType, user.getNotificationType(), args);
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendNotification(User user, MessageType messageType,
+                                 NotificationType notificationType,
+                                 String... args) {
         String message;
 
         if (notificationType == NotificationType.Email) {
