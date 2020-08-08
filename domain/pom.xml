@@ -27,10 +27,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!-- Удобная генерация sql запросов(дополнение к spring jpa,
+         применяем для фильтрации сущностей -->
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-jpa</artifactId>
-            <version>4.3.1</version>
         </dependency>
 
     </dependencies>

@@ -119,9 +119,15 @@ public class TaskServiceImpl implements TaskService {
 	 */
 	@Override
 	public List<Task> getByFilters(TaskFilterDTO taskFilterDTO) {
+		// Получение статического инстанса QTask'a - класса для генерации строк, связанных с Task (сущностью задач).
 		QTask qTask = QTask.task;
+		// Билдер предиката, который потом вставляется в FindAll().
 		BooleanBuilder where = new BooleanBuilder();
+		// Проверяем, задан ли вообще фильтр.
 		if (taskFilterDTO.getStartTime() != null) {
+			// Если да, то добавляем в предикат соответствующее выражение (в данном случае больше
+			// чем заданное начальное время). Выражение само по себе предикат. Как раз для получения
+			// выражения нужны Q class'ы. А потом эти выражения комбинируем с помощью билдера.
 			where.and(qTask.scheduleUserCell.scheduleCell.startClass.goe(taskFilterDTO.getStartTime()));
 		}
 		if (taskFilterDTO.getEndTime() != null) {
