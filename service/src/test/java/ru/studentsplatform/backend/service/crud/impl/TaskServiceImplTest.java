@@ -138,14 +138,14 @@ class TaskServiceImplTest {
 	/**
 	 * Test for getBYFilters method
 	 *
-	 * @see ru.studentsplatform.backend.service.crud.TaskService#getByFilters(Predicate)
+	 * @see ru.studentsplatform.backend.service.crud.TaskService#getByFilters(TaskFilterPOJO)
 	 */
 	@Test
 	void getByFiltersTest() {
-		TaskFilterPOJO taskFilterDTO = new TaskFilterPOJO();
-		taskFilterDTO.setGroupId(null);
+		TaskFilterPOJO taskFilterPOJO = new TaskFilterPOJO();
+		taskFilterPOJO.setGroupId(null);
 		List<Task> task = new LinkedList<Task>();
 		doReturn(task).when(taskRepository).findAll(Mockito.any(BooleanBuilder.class));
-		Assert.assertEquals(task, taskService.getByFilters(taskFilterDTO));
+		Assert.assertEquals(task, taskService.getByFilters(taskFilterPOJO));
 	}
 }
