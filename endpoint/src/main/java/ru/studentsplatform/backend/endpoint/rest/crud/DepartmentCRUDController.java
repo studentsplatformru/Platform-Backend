@@ -47,6 +47,7 @@ public interface DepartmentCRUDController extends AbstractCRUDController<Departm
 	@Override
 	ResponseEntity<DepartmentDTO> update(@RequestBody DepartmentDTO departmentDTO, @PathVariable Long id);
 
+
 	@Override
 	ResponseEntity<Boolean> delete(@PathVariable Long id);
 }

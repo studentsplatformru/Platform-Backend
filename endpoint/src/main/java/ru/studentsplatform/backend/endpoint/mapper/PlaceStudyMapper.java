@@ -30,8 +30,7 @@ public interface PlaceStudyMapper {
 			@Mapping(target = "facultyId", source = "entity.faculty.id"),
 			@Mapping(target = "departmentId", source = "entity.department.id"),
 			@Mapping(target = "directionId", source = "entity.direction.id"),
-			@Mapping(target = "teamId", source = "entity.team.id"),
-			@Mapping(target = "semester", source = "entity.semester")
+			@Mapping(target = "teamId", source = "entity.team.id")
 	})
 	PlaceStudyDTO placeStudyToPlaceStudyDTO(PlaceStudy entity);
 
@@ -50,8 +49,7 @@ public interface PlaceStudyMapper {
 			@Mapping(target = "faculty.id", source = "dto.facultyId"),
 			@Mapping(target = "department.id", source = "dto.departmentId"),
 			@Mapping(target = "direction.id", source = "dto.directionId"),
-			@Mapping(target = "team.id", source = "dto.teamId"),
-			@Mapping(target = "semester", source = "dto.semester")
+			@Mapping(target = "team.id", source = "dto.teamId")
 	})
 	PlaceStudy placeStudyDTOToPlaceStudy(PlaceStudyDTO dto);
 

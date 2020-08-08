@@ -1,11 +1,14 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import com.querydsl.core.BooleanBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ru.studentsplatform.backend.domain.pojo.filters.TaskFilterPOJO;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
+import ru.studentsplatform.backend.entities.model.university.QTask;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.TaskService;
@@ -17,6 +20,8 @@ import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Transactional
 @Profiled
@@ -113,47 +118,32 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Task> getByUserCell(Long userCellId) {
-		return taskRepository.findByScheduleUserCellId(userCellId);
-	}
+	public List<Task> getByFilters(TaskFilterPOJO taskFilterDTO) {
+		QTask qTask = QTask.task;
+		BooleanBuilder where = new BooleanBuilder();
+		if (taskFilterDTO.getStartTime() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.startClass.goe(taskFilterDTO.getStartTime()));
+		}
+		if (taskFilterDTO.getEndTime() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.endClass.loe(taskFilterDTO.getEndTime()));
+		}
+		if (taskFilterDTO.getUserId() != null) {
+			where.and(qTask.scheduleUserCell.user.id.eq(taskFilterDTO.getUserId()));
+		}
+		if (taskFilterDTO.getSubjectId() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.subject.id.eq(taskFilterDTO.getSubjectId()));
+		}
+		if (taskFilterDTO.getGroupId() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.team.id.eq(taskFilterDTO.getGroupId()));
+		}
+		if (taskFilterDTO.getSemester() != null) {
+			where.and(qTask.scheduleUserCell.discipline.semester.eq(taskFilterDTO.getSemester()));
+		}
+		if (taskFilterDTO.getUserCellId() != null) {
+			where.and(qTask.scheduleUserCell.id.eq(taskFilterDTO.getUserCellId()));
+		}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getByUser(Long userId) {
-		return taskRepository.findByUserId(userId);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getByIsDoneByUserId(Long userId, Boolean isDone) {
-		return taskRepository.findByIsDoneByUserId(userId, isDone);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getBySemesterForUser(Long userId, Long semester) {
-		return taskRepository.findBySemesterByUserId(userId, semester);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getBySubjectForUser(Long userId, Long subjectId) {
-		return taskRepository.findBySubjectIdByUserId(userId, subjectId);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getByTeamId(Long teamId) {
-		return taskRepository.findByTeamId(teamId);
+		return StreamSupport.stream(taskRepository.findAll(where).spliterator(),
+				false).collect(Collectors.toList());
 	}
 }

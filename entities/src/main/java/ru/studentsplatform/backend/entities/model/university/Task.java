@@ -33,7 +33,7 @@ public class Task extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private ScheduleUserCell scheduleUserCell;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "task_id")
 	private List<TaskAttachment> attachments;
 

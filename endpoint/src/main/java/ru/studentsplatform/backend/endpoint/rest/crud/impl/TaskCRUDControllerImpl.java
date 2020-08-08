@@ -5,13 +5,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ru.studentsplatform.backend.domain.dto.university.TaskDTO;
+import ru.studentsplatform.backend.domain.pojo.filters.TaskFilterPOJO;
 import ru.studentsplatform.backend.endpoint.mapper.TaskMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.TaskCRUDController;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -23,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Profiled
+@EnableWebMvc
 @RestController
 @RequestMapping(TaskCRUDController.BASE_URL)
 public class TaskCRUDControllerImpl implements TaskCRUDController {
@@ -32,15 +32,8 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 
 	private final TaskAttachmentService taskAttachmentService;
 
-	/**
-	 * Конструктор.
-	 *
-	 * @param taskMapper            Task маппер
-	 * @param taskService           Сервис с методами для работы с Task
-	 * @param taskAttachmentService Сервис с методами для работы с файлами, прикрепленными к Task
-	 */
-	public TaskCRUDControllerImpl(TaskMapper taskMapper,
-								  TaskServiceImpl taskService, TaskAttachmentService taskAttachmentService) {
+	public TaskCRUDControllerImpl(TaskMapper taskMapper, TaskServiceImpl taskService,
+								  TaskAttachmentService taskAttachmentService) {
 		this.taskMapper = taskMapper;
 		this.taskService = taskService;
 		this.taskAttachmentService = taskAttachmentService;
@@ -50,9 +43,7 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<TaskDTO> getTask(@PathVariable(name = "userId") Long userId,
-										   @PathVariable(name = "cellId") Long cellId,
-										   @PathVariable(name = "taskId") Long taskId) {
+	public ResponseEntity<TaskDTO> getTask(Long taskId) {
 
 		Task task = taskService.getById(taskId);
 		TaskDTO result = taskMapper.taskToTaskDTO(task);
@@ -64,22 +55,8 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<TaskDTO>> getAllTasks(@PathVariable(name = "userId") Long userId,
-													 @PathVariable(name = "cellId") Long cellId) {
-
-		List<Task> taskList = taskService.getByUserCell(cellId);
-		List<TaskDTO> result = taskMapper.listTaskToTaskDTO(taskList);
-
-		return ResponseEntity.ok(result);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<TaskDTO> createTask(@PathVariable(name = "userId") Long userId,
-											  @PathVariable(name = "cellId") Long cellId,
-											  @RequestBody TaskDTO dto) {
+	public ResponseEntity<TaskDTO> createTask(Long cellId,
+											  TaskDTO dto) {
 
 		dto.setScheduleUserCellId(cellId);
 		var task = taskMapper.taskDTOToTask(dto);
@@ -93,10 +70,8 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<Boolean> taskAddFiles(@PathVariable(name = "userId") Long userId,
-												@PathVariable(name = "cellId") Long cellId,
-												@PathVariable(name = "taskId") Long taskId,
-												@RequestParam(name = "file") MultipartFile... files) {
+	public ResponseEntity<Boolean> taskAddFiles(Long taskId,
+												MultipartFile... files) {
 
 		var result = taskService.addFilesForTask(taskId, Arrays.asList(files));
 
@@ -107,10 +82,8 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<Resource> getFileRelatedToTask(@PathVariable(name = "userId") Long userId,
-														 @PathVariable(name = "cellId") Long cellId,
-														 @PathVariable(name = "taskId") Long taskId,
-														 @PathVariable(name = "fileId") Long fileId) {
+	public ResponseEntity<Resource> getFileRelatedToTask(Long taskId,
+														 Long fileId) {
 
 		var file = taskAttachmentService.getByFileId(taskId, fileId);
 		var fileName = file.getFileName();
@@ -125,78 +98,54 @@ public class TaskCRUDControllerImpl implements TaskCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<TaskDTO>> getByDoneTaskForUser(Long userId,
-															  Long cellId,
-															  Long taskId,
-															  Boolean isDone) {
-		var entityList = taskService.getByIsDoneByUserId(userId, isDone);
-		var result = taskMapper.listTaskToTaskDTO(entityList);
-		return ResponseEntity.ok(result);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<TaskDTO>> getTaskBySemesterForUser(Long userId,
-																  Long cellId,
-																  Long taskId,
-																  Long semester) {
-		var entityList = taskService.getBySemesterForUser(userId, semester);
-		var result = taskMapper.listTaskToTaskDTO(entityList);
-		return ResponseEntity.ok(result);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<TaskDTO>> getTaskBySubjectForUser(Long userId,
-																 Long cellId,
-																 Long taskId,
-																 Long subjectId) {
-		var entityList = taskService.getBySubjectForUser(userId, subjectId);
-		var result = taskMapper.listTaskToTaskDTO(entityList);
-		return ResponseEntity.ok(result);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<TaskDTO>> getTaskByGroup(Long userId, Long cellId, Long taskId, Long groupID) {
-		var entityList = taskService.getByTeamId(groupID);
-		var result = taskMapper.listTaskToTaskDTO(entityList);
-		return ResponseEntity.ok(result);
-	}
-
-	//TODO: redirect to createTask() method
-	@Override
 	public ResponseEntity<TaskDTO> create(TaskDTO dto) {
-		return null;
+		var entity = taskMapper.taskDTOToTask(dto);
+		var result = taskMapper.taskToTaskDTO(taskService.create(entity));
+		return ResponseEntity.ok(result);
 	}
 
-	//TODO: redirect to getTask() method
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<TaskDTO> getById(Long id) {
-		return null;
+		var result = taskMapper.taskToTaskDTO(taskService.getById(id));
+		return ResponseEntity.ok(result);
 	}
 
-	//TODO: redirect to getAllTasks() method
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<List<TaskDTO>> getAll() {
-		return null;
+		var result = taskMapper.listTaskToTaskDTO(taskService.getAll());
+		return ResponseEntity.ok(result);
 	}
 
-	//TODO
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<TaskDTO> update(TaskDTO updatedInstanceRequest, Long id) {
-		return null;
+		var entity = taskMapper.taskDTOToTask(updatedInstanceRequest);
+		var result = taskMapper.taskToTaskDTO(taskService.update(entity, id));
+		return ResponseEntity.ok(result);
 	}
 
-	//TODO
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ResponseEntity<Boolean> delete(Long id) {
-		return null;
+		return ResponseEntity.ok(taskService.delete(id));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<List<TaskDTO>> getFiltered(TaskFilterPOJO taskFilterDTO) {
+		return ResponseEntity.ok(taskMapper.listTaskToTaskDTO(
+				taskService.getByFilters(taskFilterDTO)));
 	}
 }
