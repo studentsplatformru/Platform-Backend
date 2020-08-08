@@ -1,13 +1,11 @@
 package ru.studentsplatform.backend.notification.enumerated;
 
-import ru.studentsplatform.backend.notification.MessageTypeInterface;
-
 /**
- * Реализация {@link MessageTypeInterface}.
+ * Enum для описания типа сообщения.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
  */
-public enum MessageType implements MessageTypeInterface {
+public enum MessageType{
     //    TASK_ASSIGMENT,
     //    REGISTRATION,
     //    WELCOME,
@@ -16,24 +14,31 @@ public enum MessageType implements MessageTypeInterface {
      * 1-й : Предмет получения оценки
      * 2-й : Оценка по предмету
      */
-    MARK_NOTIFICATION("notification\\src\\main\\resources\\templates\\mark_notification.html", 2),
-
+    MARK_NOTIFICATION(
+            "notification\\src\\main\\resources\\templates\\mark_notification.html",
+            2,
+            "У Вас новая оценка!\n %s : %s"),
     /**
      * Параметры:
      * 1-й : Ссылка на подтверждение email
      */
-    EMAIL_CONFIRMATION("notification\\src\\main\\resources\\templates\\email_confirmation.html", 1);
+    EMAIL_CONFIRMATION(
+            "notification\\src\\main\\resources\\templates\\email_confirmation.html",
+            1,
+            "Пожалуйства, поддтвердите свой email:\n %s");
 
     private final String path;
+    private final String botPattern;
     private final int parameterCount;
 
     /**
      * @param path               Путь к шаблону
      * @param parameterCount     Количество вставляемых параметров
      */
-    MessageType(String path, int parameterCount) {
+    MessageType(String path, int parameterCount, String botPattern) {
         this.path = path;
         this.parameterCount = parameterCount;
+        this.botPattern = botPattern;
     }
 
     public String getPath() {
@@ -42,5 +47,9 @@ public enum MessageType implements MessageTypeInterface {
 
     public int getParameterCount() {
         return parameterCount;
+    }
+
+    public String getBotPattern() {
+        return botPattern;
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
-import ru.studentsplatform.backend.notification.NotifyController;
+import ru.studentsplatform.backend.notification.NotifyService;
 
 
 //@Profiled
@@ -13,7 +13,7 @@ import ru.studentsplatform.backend.notification.NotifyController;
 public class MainController {
 
 	@Autowired
-	private NotifyController controller;
+	private NotifyService controller;
 
 	@GetMapping
 	public ResponseEntity getMain() {

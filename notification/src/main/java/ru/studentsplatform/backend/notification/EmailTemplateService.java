@@ -4,7 +4,8 @@ import ru.studentsplatform.backend.notification.enumerated.MessageType;
 
 /**
  * Обрабатывает аргументы и по типу сообщения и
- * возвращает необходимый шаблон.
+ * возвращает необходимый шаблон в виде html
+ * необходимый для отправки по почте.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
  */

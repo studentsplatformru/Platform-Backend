@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * Реализация {@link EmailTemplateService}
  * Обрабатывает аргументы по типу сообщения и
- * возвращает необходимый шаблон.
+ * возвращает необходимый шаблон в виде html.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
  */
@@ -39,6 +39,7 @@ public class EmailTemplateServiceImpl implements EmailTemplateService{
                 StandardCharsets.UTF_8.name())) {
 
             //здесь мы можем использовать разделитель, например: "\\A", "\\Z" или "\\z"
+            // Реализован своебразный костыль, т.к. нет возможности использовать String.format();
             String html = scanner.useDelimiter("\\A").next().replaceAll("0%", "&&");
 
             return String.format(html, args).replaceAll("&&", "0%");
