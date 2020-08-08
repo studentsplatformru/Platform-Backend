@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Утилитный класс для отправки сообщения.
+ * Утилитный класс для отправки сообщения через email.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  */

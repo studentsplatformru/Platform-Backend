@@ -1,6 +1,10 @@
 package ru.studentsplatform.backend.notification;
 
+import ru.studentsplatform.backend.entities.model.enums.NotificationType;
+import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
+
+import java.util.List;
 
 /**
  * Централизованный сервис для отправки уведомлений пользователям.
@@ -12,36 +16,48 @@ public interface NotifyService {
     /**
      * Метод для для отправки уведомлений пользователям.
      *
-     * @param MessageType устанавливается необходимый {@link MessageType}.
+     * @param messageType устанавливается необходимый {@link MessageType}.
      * @param args необходимые для подстановки в шаблон значения.
      * @param user полользователь для отправки.
      */
-    void sendNotification(String user, MessageType MessageType, String ...args);
+    void sendNotification(User user, MessageType messageType, String ...args);
+
+    /**
+     * Метод для для отправки уведомлений пользователям.
+     *
+     * @param notificationTypes получаются необходимые способы
+     * отправки уведомления.
+     * @param messageType тип сообщения в виде {@link MessageType}.
+     * @param args необходимые для подстановки в шаблон значения.
+     * @param users полользователи для отправки.
+     */
+    void sendNotification(List<User> users, List<NotificationType> notificationTypes,
+                          MessageType messageType, String ...args);
 
     /**
      * Реализация оправки сообщения черерз Email-сервис.
      *
-     * @param MessageType устанавливается необходимый {@link MessageType}.
+     * @param message получает ноебходимое сообщение для отправки.
      * @param args необходимые для подстановки в шаблон значения.
      * @param user полользователь для отправки.
      */
-    void sendEmail(String user, MessageType MessageType, String... args);
+    void sendEmail(User user, String message, String... args);
 
     /**
      * Реализация оправки сообщения черерз VK-сервис.
      *
-     * @param MessageType устанавливается необходимый {@link MessageType}.
+     * @param message получает ноебходимое сообщение для отправки.
      * @param args необходимые для подстановки в шаблон значения.
      * @param user полользователь для отправки.
      */
-    void sendVK(String user, MessageType MessageType, String... args);
+    void sendVK(User user, String message, String... args);
 
     /**
      * Реализация оправки сообщения черерз Telegram-сервис.
      *
-     * @param MessageType устанавливается необходимый {@link MessageType}.
+     * @param message получает ноебходимое сообщение для отправки.
      * @param args необходимые для подстановки в шаблон значения.
      * @param user полользователь для отправки.
      */
-    void sendTelegram(String user, MessageType MessageType, String... args);
+    void sendTelegram(User user, String message, String... args);
 }

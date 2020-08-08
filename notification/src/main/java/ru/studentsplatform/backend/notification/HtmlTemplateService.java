@@ -9,7 +9,7 @@ import ru.studentsplatform.backend.notification.enumerated.MessageType;
  *
  * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
  */
-public interface EmailTemplateService {
+public interface HtmlTemplateService {
 
     /**
      * Обрабатывает аргументы и по типу сообщения и
@@ -22,6 +22,6 @@ public interface EmailTemplateService {
      *
      * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
      */
-    String getEmailTemplate(MessageType type, String ...args);
+    String getHtmlTemplate(MessageType type, String ...args);
 
 }
