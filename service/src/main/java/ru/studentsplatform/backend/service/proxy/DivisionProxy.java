@@ -11,7 +11,7 @@ import java.util.List;
 
 @Profiled
 @FeignClient(name = "getDivision", url = "https://timetable.spbu.ru/api/v1/study/divisions/")
-public interface CreateDivisionProxy {
+public interface DivisionProxy {
 	@GetMapping()
 	List<DivisionDTO> getDivisions();
 

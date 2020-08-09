@@ -10,15 +10,15 @@ public class ProgramLevelDTO {
 	@JsonProperty("StudyLevelName")
 	private String programLevel;
 	@JsonProperty("StudyProgramCombinations")
-	List<ProgramCombination> programCombinations;
+	private List<ProgramCombination> programCombinations;
 
-	private static class ProgramCombination{
+	private static class ProgramCombination {
 		@JsonProperty("Name")
-		private String CombinationName;
+		private String combinationName;
 		@JsonProperty("AdmissionYears")
 		private List<Group> admissionYears;
 
-		private static class Group{
+		private static class Group {
 			@JsonProperty("StudyProgramId")
 			private String programId;
 			@JsonProperty("YearNumber")

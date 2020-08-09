@@ -6,33 +6,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.spbu.DivisionDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.ProgramLevelDTO;
-import ru.studentsplatform.backend.service.proxy.CreateDivisionProxy;
+import ru.studentsplatform.backend.service.proxy.DivisionProxy;
 
 import java.util.List;
 @RestController
 @RequestMapping("/spbu/divisions")
 public class GetDivisions {
 
-	private final CreateDivisionProxy proxy;
+	private final DivisionProxy proxy;
 
-	public GetDivisions(CreateDivisionProxy proxy) {
+	public GetDivisions(DivisionProxy proxy) {
 		this.proxy = proxy;
 	}
 
 	@GetMapping
-	List<DivisionDTO>getDivisions(){
+	List<DivisionDTO> getDivisions() {
 
 		return proxy.getDivisions();
 	}
 
 	@GetMapping("/levels/{alias}")
-	List<ProgramLevelDTO> getProgramLevels(@PathVariable(name = "alias") String alias){
-		var dtos = proxy.getProgramLevels(alias);
+	List<ProgramLevelDTO> getProgramLevels(@PathVariable(name = "alias") String alias) {
 
-		for (ProgramLevelDTO dto:
-				dtos) {
-			System.out.println(dto);
-		}
-		return dtos;
+		return proxy.getProgramLevels(alias);
 	}
 }
