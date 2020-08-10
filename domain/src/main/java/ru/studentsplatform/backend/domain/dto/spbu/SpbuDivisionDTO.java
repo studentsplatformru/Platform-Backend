@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class DivisionDTO {
+public class SpbuDivisionDTO {
 	@JsonProperty("Oid")
 	private String oid;
 	@JsonProperty("Alias")
