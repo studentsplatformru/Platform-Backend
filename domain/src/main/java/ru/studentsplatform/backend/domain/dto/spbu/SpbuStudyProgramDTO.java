@@ -7,9 +7,7 @@ import lombok.Data;
 public class SpbuStudyProgramDTO {
 
 	@JsonProperty("StudyProgramId")
-	private String programId;
-	@JsonProperty("YearNumber")
-	private Integer year;
+	private Long programId;
 	@JsonProperty("PublicDivisionAlias")
 	private String alias;
 
