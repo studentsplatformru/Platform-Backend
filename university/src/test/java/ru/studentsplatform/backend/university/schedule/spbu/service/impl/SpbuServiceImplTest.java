@@ -1,11 +1,16 @@
 package ru.studentsplatform.backend.university.schedule.spbu.service.impl;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramCombinationDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramLevelDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuScheduleDayDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
+import ru.studentsplatform.backend.domain.repository.spbu.SpbuTeamRepository;
 
 import java.util.LinkedList;
 
@@ -16,9 +21,14 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author Archie-Vian (sas-artamonov@yandex.ru) 10.08.2020
  */
+@ExtendWith(MockitoExtension.class)
 class SpbuServiceImplTest {
 
-	private SpbuServiceImpl service = new SpbuServiceImpl();
+	@Mock
+	private SpbuTeamRepository repository;
+
+	@InjectMocks
+	private SpbuServiceImpl service;
 
 	/**
 	 * Проверка способности метода разворачивать класс-оболочку SpbuProgramLevelDTO.

@@ -1,9 +1,11 @@
 package ru.studentsplatform.backend.university.schedule.spbu.service;
 
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
+import ru.studentsplatform.backend.domain.dto.spbu.SpbuGroupDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramLevelDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuScheduleDayDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
+import ru.studentsplatform.backend.entities.model.spbu.SpbuTeam;
 
 import java.util.List;
 
@@ -22,4 +24,11 @@ public interface SpbuService {
 	 * @return список занятий
 	 */
 	List<SpbuEventDTO> eventUnwrap(List<SpbuScheduleDayDTO> days);
+
+	/**
+	 * Сохраняет студенческую группу в БД.
+	 * @param dto Данные о студенческой группе
+	 * @return Созданная группа
+	 */
+	SpbuTeam create(SpbuGroupDTO dto, String alias);
 }

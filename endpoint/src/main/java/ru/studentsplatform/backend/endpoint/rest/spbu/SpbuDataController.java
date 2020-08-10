@@ -1,5 +1,8 @@
 package ru.studentsplatform.backend.endpoint.rest.spbu;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +11,6 @@ import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuGroupDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
-import ru.studentsplatform.backend.entities.model.university.Team;
 import ru.studentsplatform.backend.service.crud.TeamService;
 import ru.studentsplatform.backend.service.proxy.SpbuProxy;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuService;
@@ -25,15 +27,14 @@ import java.util.List;
 @RequestMapping("/spbu")
 public class SpbuDataController {
 
+	Logger logger = LoggerFactory.getLogger(SpbuDataController.class);
+
 	private final SpbuProxy proxy;
 	private final SpbuService service;
-	private final TeamService teamService;
-
 
 	public SpbuDataController(SpbuProxy proxy, SpbuService service, TeamService teamService) {
 		this.proxy = proxy;
 		this.service = service;
-		this.teamService = teamService;
 	}
 
 	/**
@@ -90,23 +91,25 @@ public class SpbuDataController {
 		return service.eventUnwrap(proxy.getDays(id, startTime, endTime).getDays());
 	}
 
-	@GetMapping("groups/hardLoadUp")
-	public void saveAllGroupsToDB(){
-		List<SpbuGroupDTO> teams = new LinkedList<>();
+	/**
+	 * Сохраняет в БД все группы для выбранного направления.
+	 * @param alias Сокращённое наименование подготовки
+	 */
+	@GetMapping("division/{alias}/saveAllGroups")
+	public ResponseEntity<String> saveAllGroupsToDB(@PathVariable(name = "alias") String alias){
 
-		for (SpbuDivisionDTO division: getDivisions()) {
-			for (SpbuStudyProgramDTO program : getProgramLevels(division.getAlias())) {
+			for (SpbuStudyProgramDTO program : getProgramLevels(alias)) {
 				try{
 					for (SpbuGroupDTO group : getGroups(program.getProgramId().toString())) {
-						var team = new Team();
-						team.setTeamName(group.getName());
-						team.setId(group.getId());
-						Thread.sleep(200);
+						service.create(group,alias);
+						Thread.sleep(100);
 					}
-				} catch (NullPointerException | InterruptedException ignored){return;}
+				} catch (NullPointerException | InterruptedException ignored){
+					logger.error("Error occurred while group saving!");
+					return ResponseEntity.ok("Groups not fully saved for alias " + alias);
+				}
 
 			}
-		}
-		System.out.println("-----------------------------------УСПЕХ!-----------------------------------------");
+			return ResponseEntity.ok("Groups saved for alias " + alias);
 	}
 }
