@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.university.schedule.spbu;
+package ru.studentsplatform.backend.endpoint.rest.spbu;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
