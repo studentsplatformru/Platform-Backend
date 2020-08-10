@@ -8,9 +8,12 @@ import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuGroupDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
+import ru.studentsplatform.backend.entities.model.university.Team;
+import ru.studentsplatform.backend.service.crud.TeamService;
 import ru.studentsplatform.backend.service.proxy.SpbuProxy;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuService;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,11 +27,13 @@ public class SpbuDataController {
 
 	private final SpbuProxy proxy;
 	private final SpbuService service;
+	private final TeamService teamService;
 
 
-	public SpbuDataController(SpbuProxy proxy, SpbuService service) {
+	public SpbuDataController(SpbuProxy proxy, SpbuService service, TeamService teamService) {
 		this.proxy = proxy;
 		this.service = service;
+		this.teamService = teamService;
 	}
 
 	/**
@@ -83,5 +88,25 @@ public class SpbuDataController {
 													   @PathVariable(name = "start") String startTime,
 													   @PathVariable(name = "end") String endTime) {
 		return service.eventUnwrap(proxy.getDays(id, startTime, endTime).getDays());
+	}
+
+	@GetMapping("groups/hardLoadUp")
+	public void saveAllGroupsToDB(){
+		List<SpbuGroupDTO> teams = new LinkedList<>();
+
+		for (SpbuDivisionDTO division: getDivisions()) {
+			for (SpbuStudyProgramDTO program : getProgramLevels(division.getAlias())) {
+				try{
+					for (SpbuGroupDTO group : getGroups(program.getProgramId().toString())) {
+						var team = new Team();
+						team.setTeamName(group.getName());
+						team.setId(group.getId());
+						Thread.sleep(200);
+					}
+				} catch (NullPointerException | InterruptedException ignored){return;}
+
+			}
+		}
+		System.out.println("-----------------------------------УСПЕХ!-----------------------------------------");
 	}
 }

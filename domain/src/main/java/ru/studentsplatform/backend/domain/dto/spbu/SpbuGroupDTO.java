@@ -7,7 +7,7 @@ import lombok.Data;
 public class SpbuGroupDTO {
 
 	@JsonProperty("StudentGroupId")
-	private Integer id;
+	private Long id;
 	@JsonProperty("StudentGroupName")
 	private String name;
 
