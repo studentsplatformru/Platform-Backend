@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.user.UserDTO;
 import ru.studentsplatform.backend.endpoint.mapper.UserMapper;
-import ru.studentsplatform.backend.endpoint.rest.crud.UserConroller;
+import ru.studentsplatform.backend.endpoint.rest.crud.UserController;
 import ru.studentsplatform.backend.service.crud.impl.UserServiceImpl;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
@@ -13,8 +13,8 @@ import java.util.List;
 
 @Profiled
 @RestController
-@RequestMapping(UserConroller.BASE_URL)
-public class UserControllerImpl implements UserConroller {
+@RequestMapping(UserController.BASE_URL)
+public class UserControllerImpl implements UserController {
 	private final UserMapper userMapper;
 
 	private final UserServiceImpl userService;
