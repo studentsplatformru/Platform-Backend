@@ -11,6 +11,7 @@ import ru.studentsplatform.backend.domain.dto.spbu.SpbuTeamDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
 import ru.studentsplatform.backend.endpoint.mapper.spbu.SpbuTeamMapper;
 import ru.studentsplatform.backend.service.proxy.SpbuProxy;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuService;
 
 import java.util.LinkedList;
@@ -21,6 +22,7 @@ import java.util.List;
  *
  * @author Archie-Vian (sas-artamonov@yandex.ru) 10.08.2020
  */
+@Profiled
 @RestController
 @RequestMapping("/spbu")
 public class SpbuDataControllerImpl implements SpbuDataController {
@@ -119,6 +121,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 */
 	public ResponseEntity<String> saveAllGroupsToDB(String alias) {
 
+		new Thread(() -> {
 			for (SpbuStudyProgramDTO program : getStudyPrograms(alias)) {
 				try {
 					for (SpbuTeamDTO group : getGroups(program.getProgramId().toString())) {
@@ -128,10 +131,10 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 					}
 				} catch (NullPointerException | InterruptedException ignored) {
 					logger.error("Error occurred while group saving!");
-					return ResponseEntity.ok("Error occurred while saving roups for alias " + alias);
 				}
 
 			}
-			return ResponseEntity.ok("Groups saved for alias " + alias);
+		}).start();
+		return ResponseEntity.ok("Groups saving started for alias: " + alias);
 	}
 }

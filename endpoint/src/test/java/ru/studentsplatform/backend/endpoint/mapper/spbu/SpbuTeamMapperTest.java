@@ -43,6 +43,9 @@ public class SpbuTeamMapperTest {
 		assertEquals(dto.getAlias(), entity.getAlias());
 	}
 
+	/**
+	 * Проверка возможности создать список DTO на основе списка сущностей.
+	 */
 	@Test
 	void ListSpbuTeamDTOToTeam(){
 		List<SpbuTeamDTO> spbuTeamDTOS = new LinkedList<>();
@@ -61,6 +64,9 @@ public class SpbuTeamMapperTest {
 		assertEquals("TEST", spbuTeams.get(1).getAlias());
 	}
 
+	/**
+	 * Проверка возможности создать список сущностей на основе списка DTO.
+	 */
 	@Test
 	void ListSpbuTeamToTeamDTO(){
 		List<SpbuTeam> spbuTeams = new LinkedList<>();
