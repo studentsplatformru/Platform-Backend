@@ -1,7 +1,6 @@
 package ru.studentsplatform.backend.university.schedule.spbu.service;
 
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
-import ru.studentsplatform.backend.domain.dto.spbu.SpbuGroupDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramLevelDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuScheduleDayDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
@@ -27,8 +26,15 @@ public interface SpbuService {
 
 	/**
 	 * Сохраняет студенческую группу в БД.
-	 * @param dto Данные о студенческой группе
+	 * @param team Студенческая группа
 	 * @return Созданная группа
 	 */
-	SpbuTeam create(SpbuGroupDTO dto, String alias);
+	SpbuTeam create(SpbuTeam team);
+
+	/**
+	 * Находит SpbuTeam по её имени.
+	 * @param name Имя студенческой группы СПБГУ
+	 * @return Объект студенческой группы спбгу
+	 */
+	SpbuTeam getByName(String name);
 }

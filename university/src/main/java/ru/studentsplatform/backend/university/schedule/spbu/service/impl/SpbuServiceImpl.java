@@ -2,7 +2,6 @@ package ru.studentsplatform.backend.university.schedule.spbu.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
-import ru.studentsplatform.backend.domain.dto.spbu.SpbuGroupDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramCombinationDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramLevelDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuScheduleDayDTO;
@@ -55,12 +54,15 @@ public class SpbuServiceImpl implements SpbuService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SpbuTeam create(SpbuGroupDTO dto, String alias) {
-		SpbuTeam team = new SpbuTeam();
-		team.setId(dto.getId());
-		team.setName(dto.getName());
-		team.setAlias(alias);
-
+	public SpbuTeam create(SpbuTeam team) {
 		return repository.save(team);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public SpbuTeam getByName(String name) {
+		return repository.findByName(name);
 	}
 }

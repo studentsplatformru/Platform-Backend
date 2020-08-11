@@ -1,7 +1,5 @@
 package ru.studentsplatform.backend.entities.model.spbu;
 
-import ru.studentsplatform.backend.entities.model.BaseEntity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,10 +12,10 @@ public class SpbuTeam {
 	@Id
 	private Long id;
 
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	private String name;
 
-	@Column(name = "alias")
+	@Column(name = "alias", nullable = false)
 	private String alias;
 
 	public String getAlias() {

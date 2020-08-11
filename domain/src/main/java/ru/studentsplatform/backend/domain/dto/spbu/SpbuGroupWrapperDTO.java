@@ -9,6 +9,6 @@ import java.util.List;
 public class SpbuGroupWrapperDTO {
 
 	@JsonProperty("Groups")
-	private List<SpbuGroupDTO> groups;
+	private List<SpbuTeamDTO> groups;
 
 }

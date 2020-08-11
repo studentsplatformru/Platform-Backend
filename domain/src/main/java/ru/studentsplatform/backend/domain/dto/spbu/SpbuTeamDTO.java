@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class SpbuGroupDTO {
+public class SpbuTeamDTO {
 
 	@JsonProperty("StudentGroupId")
 	private Long id;
 	@JsonProperty("StudentGroupName")
 	private String name;
+
+	private String alias;
 
 }
