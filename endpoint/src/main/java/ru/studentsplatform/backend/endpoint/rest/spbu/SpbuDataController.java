@@ -12,6 +12,8 @@ import java.util.List;
 
 /**
  * Интерфейс контроллера, связанного с получением данных о группах и занятиях СПБГУ.
+ *
+ * @author Archie-Vian (sas-artamonov@yandex.ru) 10.08.2020
  */
 public interface SpbuDataController {
 

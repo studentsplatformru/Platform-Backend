@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Класс, содержащий контроллеры для получения сведений из API СПБГУ.
+ * Класс контроллера для получения сведений из API СПБГУ.
  *
  * @author Archie-Vian (sas-artamonov@yandex.ru) 10.08.2020
  */
