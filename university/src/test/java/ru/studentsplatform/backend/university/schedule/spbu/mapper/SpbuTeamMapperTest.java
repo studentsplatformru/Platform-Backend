@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.endpoint.mapper.spbu;
+package ru.studentsplatform.backend.university.schedule.spbu.mapper;
 
 import org.junit.jupiter.api.Test;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuTeamDTO;

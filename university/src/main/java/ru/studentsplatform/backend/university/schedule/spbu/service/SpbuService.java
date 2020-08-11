@@ -37,4 +37,10 @@ public interface SpbuService {
 	 * @return Объект студенческой группы спбгу
 	 */
 	SpbuTeam getByName(String name);
+
+	/**
+	 * Запускает поток сохранения сех групп для определенного направления.
+	 * @param alias сокращённое наименование направления
+	 */
+	void saveAllAliasGroups(String alias);
 }

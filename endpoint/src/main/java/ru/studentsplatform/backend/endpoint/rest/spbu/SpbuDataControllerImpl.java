@@ -9,7 +9,6 @@ import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuTeamDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
-import ru.studentsplatform.backend.endpoint.mapper.spbu.SpbuTeamMapper;
 import ru.studentsplatform.backend.service.proxy.SpbuProxy;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuService;
@@ -31,75 +30,60 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 
 	private final SpbuProxy proxy;
 	private final SpbuService service;
-	private final SpbuTeamMapper mapper;
 
-	public SpbuDataControllerImpl(SpbuProxy proxy, SpbuService service, SpbuTeamMapper mapper) {
+	public SpbuDataControllerImpl(SpbuProxy proxy, SpbuService service) {
 		this.proxy = proxy;
 		this.service = service;
-		this.mapper = mapper;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<SpbuDivisionDTO> getDivisions() {
-			return proxy.getDivisions();
+	public ResponseEntity<List<SpbuDivisionDTO>> getDivisions() {
+			return ResponseEntity.ok(proxy.getDivisions());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<SpbuStudyProgramDTO> getStudyPrograms(String alias) {
+	public ResponseEntity<List<SpbuStudyProgramDTO>> getStudyPrograms(String alias) {
 		try {
-			return service.studyProgramUnwrap(proxy.getProgramLevels(alias));
+			return ResponseEntity.ok(service.studyProgramUnwrap(proxy.getProgramLevels(alias)));
 		} catch (NullPointerException e) {
-			return new LinkedList<>();
+			return ResponseEntity.ok(new LinkedList<>());
 		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<SpbuTeamDTO> getGroups(String id) {
+	public ResponseEntity<List<SpbuTeamDTO>> getGroups(String id) {
 		try {
-			return proxy.getGroups(id).getGroups();
+			return ResponseEntity.ok(proxy.getGroups(id).getGroups());
 		} catch (NullPointerException e) {
-			return new LinkedList<>();
+			return ResponseEntity.ok(new LinkedList<>());
 		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<SpbuEventDTO> getNextWeekEventsById(String id) {
+	public ResponseEntity<List<SpbuEventDTO>> getNextWeekEventsById(String id) {
 		try {
-			return service.eventUnwrap(proxy.getDays(id).getDays());
+			return ResponseEntity.ok(service.eventUnwrap(proxy.getDays(id).getDays()));
 		} catch (NullPointerException e) {
-			return new LinkedList<>();
+			return ResponseEntity.ok(new LinkedList<>());
 		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<SpbuEventDTO> getEventsByIdForTimeInterval(String id, String startTime, String endTime) {
+	public ResponseEntity<List<SpbuEventDTO>> getEventsByIdForTimeInterval(String id, String startTime, String endTime) {
 		try {
-			return service.eventUnwrap(proxy.getDays(id, startTime, endTime).getDays());
+			return ResponseEntity.ok(service.eventUnwrap(proxy.getDays(id, startTime, endTime).getDays()));
 		} catch (NullPointerException e) {
-			return new LinkedList<>();
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<SpbuEventDTO> getNextWeekEventsByName(String name) {
-		try {
-			var id = service.getByName(name).getId().toString();
-			return service.eventUnwrap(proxy.getDays(id).getDays());
-		} catch (NullPointerException e) {
-			return new LinkedList<>();
+			return ResponseEntity.ok(new LinkedList<>());
 		}
 	}
 
@@ -107,12 +91,25 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<SpbuEventDTO> getEventsByNameForTimeInterval(String name, String startTime, String endTime) {
+	public ResponseEntity<List<SpbuEventDTO>> getNextWeekEventsByName(String name) {
 		try {
 			var id = service.getByName(name).getId().toString();
-			return service.eventUnwrap(proxy.getDays(id, startTime, endTime).getDays());
+			return ResponseEntity.ok(service.eventUnwrap(proxy.getDays(id).getDays()));
 		} catch (NullPointerException e) {
-			return new LinkedList<>();
+			return ResponseEntity.ok(new LinkedList<>());
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<List<SpbuEventDTO>> getEventsByNameForTimeInterval(String name, String startTime, String endTime) {
+		try {
+			var id = service.getByName(name).getId().toString();
+			return ResponseEntity.ok(service.eventUnwrap(proxy.getDays(id, startTime, endTime).getDays()));
+		} catch (NullPointerException e) {
+			return ResponseEntity.ok(new LinkedList<>());
 		}
 	}
 
@@ -120,21 +117,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 * {@inheritDoc}
 	 */
 	public ResponseEntity<String> saveAllGroupsToDB(String alias) {
-
-		new Thread(() -> {
-			for (SpbuStudyProgramDTO program : getStudyPrograms(alias)) {
-				try {
-					for (SpbuTeamDTO group : getGroups(program.getProgramId().toString())) {
-						group.setAlias(alias);
-						service.create(mapper.spbuTeamDTOToSpbuTeam(group));
-						Thread.sleep(100);
-					}
-				} catch (NullPointerException | InterruptedException ignored) {
-					logger.error("Error occurred while group saving!");
-				}
-
-			}
-		}).start();
+		service.saveAllAliasGroups(alias);
 		return ResponseEntity.ok("Groups saving started for alias: " + alias);
 	}
 }
