@@ -33,7 +33,10 @@ spring:
 # зависимость может понадобиться в будущем
 #  resources:
 #    add-mappings: false
+feign:
 
+  okhttp:
+    enabled: true
 logging:
   file:
     name: "log"

@@ -7,8 +7,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.telegram.telegrambots.ApiContextInitializer;
+import ru.studentsplatform.backend.endpoint.config.Feignconf;
 
-@EnableFeignClients(basePackages = "ru.studentsplatform.backend.service")
+@EnableFeignClients(basePackages = "ru.studentsplatform.backend.service", defaultConfiguration = Feignconf.class)
 @SpringBootApplication
 @ComponentScan(basePackages = {"ru.studentsplatform.backend.*"})
 @EntityScan(basePackages = {"ru.studentsplatform.backend.*"})

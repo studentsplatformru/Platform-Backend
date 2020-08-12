@@ -40,8 +40,49 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 * {@inheritDoc}
 	 */
 	public ResponseEntity<List<SpbuDivisionDTO>> getDivisions() {
-			return ResponseEntity.ok(proxy.getDivisions());
+//		Proxy newproxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("166.98.140.51", 3128));
+//		OkHttpClient okHttpClient = new OkHttpClient.Builder().proxy(newproxy).build();
+//		Feign.builder()
+//				.client(new feign.okhttp.OkHttpClient(okHttpClient))
+//				.target(SpbuProxy.class, "https://timetable.spbu.ru/api/v1/");
+//		for (int i = 0; i < 1500; i++) {
+//			try {
+//				Thread.sleep(20);
+//				proxy.getDivisions();
+//				System.out.println((float) i / 1500f * 100f + "%");
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		return ResponseEntity.ok(proxy.getDivisions());
 	}
+
+//		HttpHost proxy = new HttpHost("166.98.140.51", 3128);
+//		DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(proxy);
+//		CloseableHttpClient httpClient
+//				= HttpClients.custom()
+//				.setSSLHostnameVerifier(new NoopHostnameVerifier())
+//				.setRoutePlanner(routePlanner)
+//				.build();
+//		HttpComponentsClientHttpRequestFactory requestFactory
+//				= new HttpComponentsClientHttpRequestFactory();
+//		requestFactory.setHttpClient(httpClient);
+//		ResponseEntity<SpbuDivisionDTO[]> response
+//				= new RestTemplate(requestFactory).exchange(
+//				"https://timetable.spbu.ru/api/v1/study/divisions", HttpMethod.GET, null, SpbuDivisionDTO[].class);
+//
+
+//		for (int i = 0; i < 1500; i++) {
+//			try {
+//				Thread.sleep(10);
+//				proxy.getDivisions();
+//				System.out.println((float) i / 1500f * 100f + "%");
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return null;
+
 
 	/**
 	 * {@inheritDoc}
