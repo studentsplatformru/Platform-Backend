@@ -29,7 +29,7 @@ public interface SpbuDataController {
 	 * @param alias сокращённое наименование направления подготовки
 	 * @return		список DTO направлений подготовки
 	 */
-	@GetMapping("/division/levels/{alias}")
+	@GetMapping("/division/{alias}/programs")
 	ResponseEntity<List<SpbuStudyProgramDTO>> getStudyPrograms(@PathVariable(name = "alias") String alias);
 
 	/**
@@ -37,7 +37,7 @@ public interface SpbuDataController {
 	 * @param id Id программы обучения
 	 * @return	 список студенческих групп
 	 */
-	@GetMapping("division/{id}/groups")
+	@GetMapping("program/{id}/groups")
 	ResponseEntity<List<SpbuTeamDTO>> getGroups(@PathVariable(name = "id") String id);
 
 	/**
