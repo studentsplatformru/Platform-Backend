@@ -87,21 +87,39 @@ public class SpbuServiceImpl implements SpbuService {
 	@Override
 	public void saveAllAliasGroups(String alias) {
 		new Thread(() -> {
-			for (SpbuStudyProgramDTO program : studyProgramUnwrap(proxy.getProgramLevels(alias))) {
-				try {
-					for (SpbuTeamDTO group : proxy.getGroups(program.getProgramId().toString()).getGroups()) {
-						group.setAlias(alias);
-						var team = mapper.spbuTeamDTOToSpbuTeam(group);
-						create(team);
-
-						Thread.sleep(100);
-					}
-				} catch (NullPointerException | InterruptedException ignored) {
-					logger.error("Error occurred while group saving!");
-				}
-
-			}
+			iteratePrograms(alias);
 			logger.info("Finished groups saving for alias: " + alias);
 		}).start();
 	}
+
+	/**
+	 * Перечисляет список программ обучения, вызывая для каждой метод сохранения групп.
+	 * @param alias Сокращённое наименования направления
+	 */
+	private void iteratePrograms(String alias) {
+		for (SpbuStudyProgramDTO program : studyProgramUnwrap(proxy.getProgramLevels(alias))) {
+			try {
+				saveGroupList(proxy.getGroups(program.getProgramId().toString()).getGroups(), alias);
+			} catch (NullPointerException | InterruptedException ignored) {
+				logger.error("Error occurred while group saving!");
+			}
+		}
+	}
+
+	/**
+	 * Сохраняет список групп.
+	 * @param groups список групп для сохранения
+	 * @param alias сокращённое наименование направления
+	 * @throws InterruptedException метод имеет задержку выполнения, требуется обработка
+	 */
+	private void saveGroupList(List<SpbuTeamDTO> groups, String alias) throws InterruptedException {
+		for (SpbuTeamDTO group : groups) {
+			group.setAlias(alias);
+			var team = mapper.spbuTeamDTOToSpbuTeam(group);
+			create(team);
+
+			Thread.sleep(100);
+		}
+	}
+
 }

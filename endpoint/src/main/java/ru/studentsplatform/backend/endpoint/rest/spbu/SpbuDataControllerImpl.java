@@ -79,7 +79,9 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	/**
 	 * {@inheritDoc}
 	 */
-	public ResponseEntity<List<SpbuEventDTO>> getEventsByIdForTimeInterval(String id, String startTime, String endTime) {
+	public ResponseEntity<List<SpbuEventDTO>> getEventsByIdForTimeInterval(String id,
+																		   String startTime,
+																		   String endTime) {
 		try {
 			return ResponseEntity.ok(service.eventUnwrap(proxy.getDays(id, startTime, endTime).getDays()));
 		} catch (NullPointerException e) {
@@ -104,7 +106,9 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<SpbuEventDTO>> getEventsByNameForTimeInterval(String name, String startTime, String endTime) {
+	public ResponseEntity<List<SpbuEventDTO>> getEventsByNameForTimeInterval(String name,
+																			 String startTime,
+																			 String endTime) {
 		try {
 			var id = service.getByName(name).getId().toString();
 			return ResponseEntity.ok(service.eventUnwrap(proxy.getDays(id, startTime, endTime).getDays()));
