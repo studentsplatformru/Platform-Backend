@@ -18,11 +18,7 @@
     
     -GET
     - **http://localhost:8080/api/task/1/** - *Получить сведения о task c Id = 1*
-    - **http://localhost:8080/api/task/cell/1/** - *Получить сведения о всех task, привязанных к ячейке с Id = 1*
-    - **http://localhost:8080/api/task/user/1/isDone/false** - *Поиск невыполненных заданий у пользователя с Id = 1*
-    - **http://localhost:8080/api/task/user/1/semester/1/** - *Поиск заданий у пользователя с Id = 1 в первом семестре*
-    - **http://localhost:8080/api/task/user/1/subject/2/** - *Поиск заданий у пользователя с Id = 1 по предмету с Id = 2*
-    - **http://localhost:8080/api/task/subject/1/group/1** - *Поиск заданий по предмету с Id = 1 у группы студенов с Id = 1*  
+    - **http://localhost:8080/api/task/filter** - *Получить сведения о task c Id = 1*
     - **http://localhost:8080/api/task/1/file/1/** - *Получить файл с Id = 1, прикрепленный к task c Id = 2*
     
 - ScheduleUserCell
