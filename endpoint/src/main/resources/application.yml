@@ -28,15 +28,18 @@ spring:
     enabled: false
     baseline-on-migrate: true
     baseline-version: 0
+
   mvc:
     throw-exception-if-no-handler-found: true
 # зависимость может понадобиться в будущем
 #  resources:
 #    add-mappings: false
 feign:
-
   okhttp:
     enabled: true
+  proxy:
+    ip: "166.98.140.51"
+    port: 3128
 logging:
   file:
     name: "log"
