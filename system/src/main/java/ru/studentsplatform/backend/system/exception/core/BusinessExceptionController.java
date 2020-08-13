@@ -29,6 +29,7 @@ public class BusinessExceptionController {
 	@ResponseBody
 	public ExceptionDto exception(BusinessException exception) {
 		logger.error(exception.getMessage());
+		exception.printStackTrace();
 		return new ExceptionDto(exception.getMessage(), exception.getStatus());
 	}
 
@@ -44,6 +45,7 @@ public class BusinessExceptionController {
 	@ResponseBody
 	public ExceptionDto exceptionNOTFOUND(Exception exception) {
 		logger.error(exception.getMessage());
+		exception.printStackTrace();
 		return new ExceptionDto("Упс, страница не найдена.", HttpStatus.NOT_FOUND);
 	}
 
@@ -58,6 +60,7 @@ public class BusinessExceptionController {
 	@ResponseBody
 	public ExceptionDto serverException(Exception exception) {
 		logger.error(exception.getMessage());
+		exception.printStackTrace();
 		return new ExceptionDto("Что-то пошло не так.", HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

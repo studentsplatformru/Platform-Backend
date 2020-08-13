@@ -27,6 +27,7 @@ public interface ScheduleUserCellMapper {
 			@Mapping(target = "createdBy", source = "entity.createdBy"),
 			@Mapping(target = "modifiedBy", source = "entity.modifiedBy"),
 			@Mapping(target = "userId", source = "entity.user.id"),
+			@Mapping(target = "presence", source = "entity.presence"),
 			@Mapping(target = "scheduleCellId", source = "entity.scheduleCell.id"),
 			@Mapping(target = "universityRole", source = "entity.universityRole"),
 			@Mapping(target = "tasks", source = "entity.tasks")
@@ -46,6 +47,7 @@ public interface ScheduleUserCellMapper {
 			@Mapping(target = "createdBy", source = "dto.createdBy"),
 			@Mapping(target = "modifiedBy", source = "dto.modifiedBy"),
 			@Mapping(target = "user.id", source = "dto.userId"),
+			@Mapping(target = "presence", source = "dto.presence"),
 			@Mapping(target = "scheduleCell.id", source = "dto.scheduleCellId"),
 			@Mapping(target = "universityRole", source = "dto.universityRole"),
 			@Mapping(target = "tasks", source = "dto.tasks")

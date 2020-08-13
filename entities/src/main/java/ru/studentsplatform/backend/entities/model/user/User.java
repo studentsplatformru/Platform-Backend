@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.entities.model.user;
 
-import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.enums.UniversityRoleEnum;
@@ -25,7 +24,6 @@ import java.util.List;
 /**
  * Класс всех пользователей.
  */
-@Data
 @Entity
 @Table(name = "usr")
 public class User extends BaseEntity {
@@ -64,11 +62,68 @@ public class User extends BaseEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Discipline> disciplines;
 
+
 	public NotificationType getNotificationType() {
 		return notificationType;
 	}
 
 	public void setNotificationType(NotificationType notificationType) {
 		this.notificationType = notificationType;
+
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public UniversityRoleEnum getUniversityRole() {
+		return universityRole;
+	}
+
+	public void setUniversityRole(UniversityRoleEnum universityRole) {
+		this.universityRole = universityRole;
+	}
+
+	public PlaceStudy getPlaceStudy() {
+		return placeStudy;
+	}
+
+	public void setPlaceStudy(PlaceStudy placeStudy) {
+		this.placeStudy = placeStudy;
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
+	public List<Discipline> getDisciplines() {
+		return disciplines;
+	}
+
+	public void setDisciplines(List<Discipline> disciplines) {
+		this.disciplines = disciplines;
+
 	}
 }

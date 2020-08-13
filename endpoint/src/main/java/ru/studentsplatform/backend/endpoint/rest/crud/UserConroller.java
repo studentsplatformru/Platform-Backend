@@ -2,6 +2,8 @@ package ru.studentsplatform.backend.endpoint.rest.crud;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import ru.studentsplatform.backend.domain.dto.user.UserDTO;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public interface UserConroller extends AbstractCRUDController<UserDTO> {
 	 * @return созданный объект.
 	 */
 	@Override
-	ResponseEntity<UserDTO> create(UserDTO dto);
+	ResponseEntity<UserDTO> create(@RequestBody UserDTO dto);
 
 	/**
 	 * Получает запись из БД по заданному id.
@@ -31,7 +33,7 @@ public interface UserConroller extends AbstractCRUDController<UserDTO> {
 	 * @return найденная запись.
 	 */
 	@Override
-	ResponseEntity<UserDTO> getById(Long id);
+	ResponseEntity<UserDTO> getById(@PathVariable Long id);
 
 	/**
 	 * Получает все записи из БД.
@@ -49,7 +51,7 @@ public interface UserConroller extends AbstractCRUDController<UserDTO> {
 	 * @return обновленная запись.
 	 */
 	@Override
-	ResponseEntity<UserDTO> update(UserDTO dto, Long id);
+	ResponseEntity<UserDTO> update(@RequestBody UserDTO dto, @PathVariable Long id);
 
 	/**
 	 * Удаляет запись c данным id из БД.
@@ -58,5 +60,5 @@ public interface UserConroller extends AbstractCRUDController<UserDTO> {
 	 * @return true в случае успешного удаления, false в случае если запись не существует.
 	 */
 	@Override
-	ResponseEntity<Boolean> delete(Long id);
+	ResponseEntity<Boolean> delete(@PathVariable Long id);
 }

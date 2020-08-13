@@ -1,12 +1,17 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Predicate;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.multipart.MultipartFile;
+import ru.studentsplatform.backend.domain.pojo.filters.TaskFilterPOJO;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 import ru.studentsplatform.backend.entities.model.university.Task;
@@ -15,6 +20,8 @@ import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -128,13 +135,17 @@ class TaskServiceImplTest {
 				() -> taskService.addFilesForTask(3L, null));
 	}
 
+	/**
+	 * Test for getBYFilters method
+	 *
+	 * @see ru.studentsplatform.backend.service.crud.TaskService#getByFilters(TaskFilterPOJO)
+	 */
 	@Test
-	void getByUserCell() {
-		assertEquals(taskService.getByUserCell(2L), taskRepository.findByScheduleUserCellId(2L));
-	}
-
-	@Test
-	void getByUser() {
-		assertEquals(taskService.getByUser(2L), taskRepository.findByUserId(2L));
+	void getByFiltersTest() {
+		TaskFilterPOJO taskFilterPOJO = new TaskFilterPOJO();
+		taskFilterPOJO.setGroupId(null);
+		List<Task> task = new LinkedList<Task>();
+		doReturn(task).when(taskRepository).findAll(Mockito.any(BooleanBuilder.class));
+		Assert.assertEquals(task, taskService.getByFilters(taskFilterPOJO));
 	}
 }
