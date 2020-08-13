@@ -1,14 +1,11 @@
 package ru.studentsplatform.backend.endpoint.config;
 
 import okhttp3.OkHttpClient;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Класс конфигурации feign. Устанавливает HTTP Proxy для выполнения запросов.
@@ -33,7 +30,4 @@ public class FeignConfig {
 		//"166.98.140.51" 3128
 	}
 
-	void getRandomProxy(){
-
-	}
 }
