@@ -8,6 +8,7 @@ public class SpbuTeamDTO {
 
 	@JsonProperty("StudentGroupId")
 	private Long id;
+
 	@JsonProperty("StudentGroupName")
 	private String name;
 

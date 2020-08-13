@@ -84,12 +84,8 @@
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>4.7.2</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-okhttp -->
+
+        <!-- Конфигурация Feign proxy  -->
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-okhttp</artifactId>

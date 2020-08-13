@@ -8,9 +8,10 @@ import java.util.List;
 @Data
 public class SpbuProgramCombinationDTO {
 
-		@JsonProperty("Name")
-		private String combinationName;
-		@JsonProperty("AdmissionYears")
-		private List<SpbuStudyProgramDTO> studyPrograms;
+	@JsonProperty("Name")
+	private String combinationName;
+
+	@JsonProperty("AdmissionYears")
+	private List<SpbuStudyProgramDTO> studyPrograms;
 
 }

@@ -1,7 +1,7 @@
 package ru.studentsplatform.backend.endpoint.config;
 
 public enum Proxies {
-	P1("166.98.140.51", 3128), P2("144.217.101.245", 3129);
+	P1("166.98.140.51", 3128), P2("95.216.68.90", 3128);
 	private String ip;
 	private Integer port;
 

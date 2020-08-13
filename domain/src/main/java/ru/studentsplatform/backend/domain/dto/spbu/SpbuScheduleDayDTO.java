@@ -11,6 +11,7 @@ public class SpbuScheduleDayDTO {
 
 	@JsonProperty("DayString")
 	private String datName;
+
 	@JsonProperty("Day")
 	private Date dayDate;
 

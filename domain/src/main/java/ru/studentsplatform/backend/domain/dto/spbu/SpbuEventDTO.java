@@ -11,6 +11,7 @@ public class SpbuEventDTO {
 
 	@JsonProperty("Subject")
 	private String subject;
+
 	@JsonProperty("DateWithTimeIntervalString")
 	private String dayWithTimeInterval;
 

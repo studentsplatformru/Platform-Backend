@@ -5,10 +5,13 @@ import lombok.Data;
 
 @Data
 public class SpbuDivisionDTO {
+
 	@JsonProperty("Oid")
 	private String oid;
+
 	@JsonProperty("Alias")
 	private String alias;
+
 	@JsonProperty("Name")
 	private String name;
 

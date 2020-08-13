@@ -18,7 +18,7 @@
     
     -GET
     - **http://localhost:8080/api/task/1/** - *Получить сведения о task c Id = 1*
-    - **http://localhost:8080/api/task/filter** - *Получить сведения о task c Id = 1*
+    - **http://localhost:8080/api/task/filter** - *Получить сведения о task по заданным фильтрам*
     - **http://localhost:8080/api/task/1/file/1/** - *Получить файл с Id = 1, прикрепленный к task c Id = 2*
     
 - ScheduleUserCell

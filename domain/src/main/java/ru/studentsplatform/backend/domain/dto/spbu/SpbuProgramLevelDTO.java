@@ -7,11 +7,12 @@ import java.util.List;
 
 @Data
 public class SpbuProgramLevelDTO {
+
 	@JsonProperty("StudyLevelName")
 	private String programLevel;
+
 	@JsonProperty("StudyProgramCombinations")
 	private List<SpbuProgramCombinationDTO> programCombinations;
-
 
 }
 
