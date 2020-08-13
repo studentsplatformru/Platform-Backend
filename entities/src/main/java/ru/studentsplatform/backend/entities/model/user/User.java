@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.entities.model.user;
 
-import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.enums.UniversityRoleEnum;
@@ -141,5 +140,7 @@ public class User extends BaseEntity {
 
 	public void setNotificationType(NotificationType notificationType) {
 		this.notificationType = notificationType;
+
 	}
+
 }

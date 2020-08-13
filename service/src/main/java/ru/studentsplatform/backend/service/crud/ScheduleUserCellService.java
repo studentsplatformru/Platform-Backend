@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.service.crud;
 
+import ru.studentsplatform.backend.domain.pojo.filters.ScheduleUserCellFilterPOJO;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 
 import java.util.List;
@@ -50,4 +51,21 @@ public interface ScheduleUserCellService extends AbstractService<ScheduleUserCel
 	 */
 	@Override
 	boolean delete(Long id);
+
+	/**
+	 * Позволяет получить посещения студентов студентов по определенным фльтрам.
+	 * @param filter DTO, содержащий фильтрующие параметры
+	 * @return лист обхектов студенческого расписания
+	 */
+	List<ScheduleUserCell> getFiltered(ScheduleUserCellFilterPOJO filter);
+
+	/**
+	 * Возвращает строку, описывающую процентное отношение посещенных занятий по
+	 * заданным фильрам.
+	 *
+	 * @param filter объект, содержащий поля с фильтрами
+	 * @return процентное отношение посещенных занятий
+	 */
+	String getFilteredPercentage(ScheduleUserCellFilterPOJO filter);
+
 }

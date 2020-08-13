@@ -1,11 +1,14 @@
 package ru.studentsplatform.backend.service.crud.impl;
 
+import com.querydsl.core.BooleanBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ru.studentsplatform.backend.domain.pojo.filters.TaskFilterPOJO;
 import ru.studentsplatform.backend.domain.repository.TaskRepository;
+import ru.studentsplatform.backend.entities.model.university.QTask;
 import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.service.crud.TaskAttachmentService;
 import ru.studentsplatform.backend.service.crud.TaskService;
@@ -17,6 +20,8 @@ import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Transactional
 @Profiled
@@ -113,47 +118,38 @@ public class TaskServiceImpl implements TaskService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Task> getByUserCell(Long userCellId) {
-		return taskRepository.findByScheduleUserCellId(userCellId);
-	}
+	public List<Task> getByFilters(TaskFilterPOJO taskFilterPOJO) {
+		// Получение статического инстанса QTask'a - класса для генерации строк, связанных с Task (сущностью задач).
+		QTask qTask = QTask.task;
+		// Билдер предиката, который потом вставляется в FindAll().
+		BooleanBuilder where = new BooleanBuilder();
+		// Проверяем, задан ли вообще фильтр.
+		if (taskFilterPOJO.getStartTime() != null) {
+			// Если да, то добавляем в предикат соответствующее выражение (в данном случае больше
+			// чем заданное начальное время). Выражение само по себе предикат. Как раз для получения
+			// выражения нужны Q class'ы. А потом эти выражения комбинируем с помощью билдера.
+			where.and(qTask.scheduleUserCell.scheduleCell.startClass.goe(taskFilterPOJO.getStartTime()));
+		}
+		if (taskFilterPOJO.getEndTime() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.endClass.loe(taskFilterPOJO.getEndTime()));
+		}
+		if (taskFilterPOJO.getUserId() != null) {
+			where.and(qTask.scheduleUserCell.user.id.eq(taskFilterPOJO.getUserId()));
+		}
+		if (taskFilterPOJO.getSubjectId() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.subject.id.eq(taskFilterPOJO.getSubjectId()));
+		}
+		if (taskFilterPOJO.getGroupId() != null) {
+			where.and(qTask.scheduleUserCell.scheduleCell.team.id.eq(taskFilterPOJO.getGroupId()));
+		}
+		if (taskFilterPOJO.getSemester() != null) {
+			where.and(qTask.scheduleUserCell.discipline.semester.eq(taskFilterPOJO.getSemester()));
+		}
+		if (taskFilterPOJO.getUserCellId() != null) {
+			where.and(qTask.scheduleUserCell.id.eq(taskFilterPOJO.getUserCellId()));
+		}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getByUser(Long userId) {
-		return taskRepository.findByUserId(userId);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getByIsDoneByUserId(Long userId, Boolean isDone) {
-		return taskRepository.findByIsDoneByUserId(userId, isDone);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getBySemesterForUser(Long userId, Long semester) {
-		return taskRepository.findBySemesterByUserId(userId, semester);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getBySubjectForUser(Long userId, Long subjectId) {
-		return taskRepository.findBySubjectIdByUserId(userId, subjectId);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Task> getByTeamId(Long teamId) {
-		return taskRepository.findByTeamId(teamId);
+		return StreamSupport.stream(taskRepository.findAll(where).spliterator(),
+				false).collect(Collectors.toList());
 	}
 }

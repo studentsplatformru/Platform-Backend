@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.entities.model.schedule;
 
-import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 import ru.studentsplatform.backend.entities.model.enums.UniversityRoleEnum;
 import ru.studentsplatform.backend.entities.model.university.Discipline;
@@ -18,13 +17,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 
-@Data
 @Entity
 @Table(name = "schedule_user_cell")
 public class ScheduleUserCell extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "usr_id")
+	@JoinColumn(name = "user_id")
 	private User user;
+
+	@Column(name = "presence")
+	private Boolean presence;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "discipline_id")
@@ -40,4 +41,52 @@ public class ScheduleUserCell extends BaseEntity {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "scheduleUserCell")
 	private List<Task> tasks;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Boolean getPresence() {
+		return presence;
+	}
+
+	public void setPresence(Boolean presence) {
+		this.presence = presence;
+	}
+
+	public Discipline getDiscipline() {
+		return discipline;
+	}
+
+	public void setDiscipline(Discipline discipline) {
+		this.discipline = discipline;
+	}
+
+	public ScheduleCell getScheduleCell() {
+		return scheduleCell;
+	}
+
+	public void setScheduleCell(ScheduleCell scheduleCell) {
+		this.scheduleCell = scheduleCell;
+	}
+
+	public UniversityRoleEnum getUniversityRole() {
+		return universityRole;
+	}
+
+	public void setUniversityRole(UniversityRoleEnum universityRole) {
+		this.universityRole = universityRole;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
 }

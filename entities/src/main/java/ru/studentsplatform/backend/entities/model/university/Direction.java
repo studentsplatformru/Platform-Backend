@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.entities.model.university;
 
-import lombok.Data;
 import ru.studentsplatform.backend.entities.model.BaseEntity;
 
 import javax.persistence.Column;
@@ -18,7 +17,6 @@ import java.util.List;
  * Например: Прикладная математика и информатика
  * </p>
  */
-@Data
 @Entity
 @Table(name = "direction")
 public class Direction extends BaseEntity {
@@ -41,4 +39,36 @@ public class Direction extends BaseEntity {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "direction")
 	private List<Team> teams;
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public String getDirectionCode() {
+		return directionCode;
+	}
+
+	public void setDirectionCode(String directionCode) {
+		this.directionCode = directionCode;
+	}
+
+	public Faculty getFaculty() {
+		return faculty;
+	}
+
+	public void setFaculty(Faculty faculty) {
+		this.faculty = faculty;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
 }

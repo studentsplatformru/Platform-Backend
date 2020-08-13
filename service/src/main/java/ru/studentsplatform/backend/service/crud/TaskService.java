@@ -1,6 +1,7 @@
 package ru.studentsplatform.backend.service.crud;
 
 import org.springframework.web.multipart.MultipartFile;
+import ru.studentsplatform.backend.domain.pojo.filters.TaskFilterPOJO;
 import ru.studentsplatform.backend.entities.model.university.Task;
 
 import java.util.List;
@@ -66,54 +67,10 @@ public interface TaskService extends AbstractService<Task> {
 	boolean addFilesForTask(Long taskId, List<MultipartFile> files);
 
 	/**
-	 * Найти все задачи, закрепленные за ячейкой расписания пользователя.
-	 *
-	 * @param userCellId Id ячейки расписания пользователя
-	 * @return Лист задач, принадлежащих к ячейке
+	 * Возвращает список задач, найденных с учетом фильтров.
+	 * @param taskFilterPOJO Объект, содержащий в себе все поступающие фильтры
+	 * @return список задач
 	 */
-	List<Task> getByUserCell(Long userCellId);
-
-	/**
-	 * Найти все задачи, закрепленные за пользователем.
-	 *
-	 * @param userId Id пользователя
-	 * @return Лист задач, закрепленных за пользователем
-	 */
-	List<Task> getByUser(Long userId);
-
-	/**
-	 * Найти все задачи по завершенности, закрепленные за пользователем.
-	 *
-	 * @param userId Id пользователя
-	 * @param isDone Выполнена ли задача
-	 * @return Лист задач, закрепленных за пользователем
-	 */
-	List<Task> getByIsDoneByUserId(Long userId, Boolean isDone);
-
-	/**
-	 * Найти все задачи в выбраном семестре, закрепленные за пользователем.
-	 *
-	 * @param userId   Id пользователя
-	 * @param semester Выбраный семестр
-	 * @return Лист задач, закрепленных за пользователем
-	 */
-	List<Task> getBySemesterForUser(Long userId, Long semester);
-
-	/**
-	 * Найти все задачи по выбраному предмету, закрепленные за пользователем.
-	 *
-	 * @param userId    Id пользователя
-	 * @param subjectId Выбраный предмет
-	 * @return Лист задач, закрепленных за пользователем
-	 */
-	List<Task> getBySubjectForUser(Long userId, Long subjectId);
-
-	/**
-	 * Найти все задачи по студенческой группе.
-	 *
-	 * @param teamId Id группы, поиск задач которой выполняется
-	 * @return Лист задач, струдентов определенной группы
-	 */
-	List<Task> getByTeamId(Long teamId);
+	List<Task> getByFilters(TaskFilterPOJO taskFilterPOJO);
 
 }
