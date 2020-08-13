@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.telegram.telegrambots.ApiContextInitializer;
 import ru.studentsplatform.backend.endpoint.config.FeignConfig;
 
-@EnableFeignClients(basePackages = "ru.studentsplatform.backend.service", defaultConfiguration = FeignConfig.class)
+@EnableFeignClients(basePackages = "ru.studentsplatform.backend.service")  //defaultConfiguration = FeignConfig.class  Добавить параметры к аннотации, если планируется использовать прокси
 @SpringBootApplication
 @ComponentScan(basePackages = {"ru.studentsplatform.backend.*"})
 @EntityScan(basePackages = {"ru.studentsplatform.backend.*"})

@@ -37,9 +37,12 @@ spring:
 feign:
   okhttp:
     enabled: true
-  proxy:
-    ip: "166.98.140.51"
-    port: 3128
+  client:
+    config:
+      feignName:
+        connectTimeout: 5000
+        readTimeout: 5000
+
 logging:
   file:
     name: "log"

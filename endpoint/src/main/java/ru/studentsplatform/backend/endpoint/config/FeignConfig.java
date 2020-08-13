@@ -7,17 +7,19 @@ import org.springframework.context.annotation.Configuration;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Класс конфигурации feign. Устанавливает HTTP Proxy для выполнения запросов.
  */
-@Configuration
+//@Configuration     <-- раскомментировать, если планируется использовать proxy!
 public class FeignConfig {
 
-	@Value("${feign.proxy.ip}")
-	private String ip;
-	@Value("${feign.proxy.port}")
-	private Integer port;
+	private String ip = Proxies.P1.getIp();
+	private Integer port = Proxies.P1.getPort();
+
+
 
 	/**
 	 * Метод настройки proxy.
@@ -29,5 +31,9 @@ public class FeignConfig {
 		OkHttpClient okHttpClient = new OkHttpClient.Builder().proxy(newproxy).build();
 		return new feign.okhttp.OkHttpClient(okHttpClient);
 		//"166.98.140.51" 3128
+	}
+
+	void getRandomProxy(){
+
 	}
 }
