@@ -27,6 +27,7 @@ public interface NotifyService {
      *
      * @param user полользователь для отправки.
      * @param messageType устанавливается необходимый {@link MessageType}.
+     * @param notificationType устанавливается необходимый способ отправки уведомления.
      * @param args необходимые для подстановки в шаблон значения.
      */
     void sendNotification(User user, MessageType messageType,
@@ -43,7 +44,7 @@ public interface NotifyService {
      * @param args необходимые для подстановки в шаблон значения.
      */
     void sendNotification(List<User> users, List<NotificationType> notificationTypes,
-                          MessageType messageType, String ...args);
+                          MessageType messageType, String... args);
 
     /**
      * Реализация оправки сообщения черерз Email-сервис.

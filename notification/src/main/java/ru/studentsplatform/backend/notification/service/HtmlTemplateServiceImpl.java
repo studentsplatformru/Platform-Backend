@@ -31,7 +31,7 @@ public class HtmlTemplateServiceImpl implements HtmlTemplateService {
     @Override
     public String getHtmlTemplate(MessageType type, String... args) {
 
-        if (type.getParameterCount() != args.length){
+        if (type.getParameterCount() != args.length) {
             throw new IllegalArgumentException("Неправильное количство элементов");
         }
 
