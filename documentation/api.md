@@ -18,11 +18,7 @@
     
     -GET
     - **http://localhost:8080/api/task/1/** - *Получить сведения о task c Id = 1*
-    - **http://localhost:8080/api/task/cell/1/** - *Получить сведения о всех task, привязанных к ячейке с Id = 1*
-    - **http://localhost:8080/api/task/user/1/isDone/false** - *Поиск невыполненных заданий у пользователя с Id = 1*
-    - **http://localhost:8080/api/task/user/1/semester/1/** - *Поиск заданий у пользователя с Id = 1 в первом семестре*
-    - **http://localhost:8080/api/task/user/1/subject/2/** - *Поиск заданий у пользователя с Id = 1 по предмету с Id = 2*
-    - **http://localhost:8080/api/task/subject/1/group/1** - *Поиск заданий по предмету с Id = 1 у группы студенов с Id = 1*  
+    - **http://localhost:8080/api/task/filter** - *Получить сведения о task по заданным фильтрам*
     - **http://localhost:8080/api/task/1/file/1/** - *Получить файл с Id = 1, прикрепленный к task c Id = 2*
     
 - ScheduleUserCell
@@ -31,5 +27,18 @@
     -GET
     - **http://localhost:8080/api/schedule_user_cell/getFiltered** - *Получить сведения о scheduleUserCell по заданным фильтрам*
     - **http://localhost:8080/api/schedule_user_cell/filteredPercentage** - *Получить сведения о процентноим отношении посещенных занятий по заданным фильрам*
+    
+- SPBU API
+    -GET
+    - **http://localhost:8080/spbu/divisions** - *Получить список направлений подготовки*
+    - **http://localhost:8080/spbu/division/MATH/programs** - *Получить список програм обучения для направления MATH*
+    - **http://localhost:8080/spbu/program/10035/groups** - *Получить список студенческих групп для программы обучения с Id 10035*
+    - **http://localhost:8080/spbu/group/249301/events"** - *Получить сведения о занятиях группы с Id 249301 на следующую неделю*
+    - **http://localhost:8080/spbu/group/249301/events/25-03-2020/14-04-2020"** - *Получить сведения о занятиях группы с Id 249301 за период с 25-03-2020 по 14-04-2020*
+    - **http://localhost:8080/spbu/group/name/18.М02-х/events"** - *Получить сведения о занятиях группы 18.М02-х на следующую неделю*
+    - **http://localhost:8080/spbu/group/name/18.М02-х/events/25-03-2020/14-04-2020"** - *Получить сведения о занятиях группы 18.М02-х за период с 25-03-2020 по 14-04-2020*
+    - **http://localhost:8080/spbu/division/MATH/saveAllGroups"** - *Записать все группы направления MATH в БД*
+   
+    
 
     

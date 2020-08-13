@@ -28,11 +28,20 @@ spring:
     enabled: false
     baseline-on-migrate: true
     baseline-version: 0
+
   mvc:
     throw-exception-if-no-handler-found: true
 # зависимость может понадобиться в будущем
 #  resources:
 #    add-mappings: false
+feign:
+  okhttp:
+    enabled: true
+  client:
+    config:
+      feignName:
+        connectTimeout: 5000
+        readTimeout: 5000
 
 logging:
   file:

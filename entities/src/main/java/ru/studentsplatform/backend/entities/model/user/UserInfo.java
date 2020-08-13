@@ -14,8 +14,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user_info")
 public class UserInfo extends BaseEntity {
-	@OneToOne(fetch = FetchType.LAZY)
+
 	@MapsId
+	@OneToOne(fetch = FetchType.LAZY)
 	private User user;
 
 	/**
