@@ -63,4 +63,12 @@ public class User extends BaseEntity {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Discipline> disciplines;
+
+	public NotificationType getNotificationType() {
+		return notificationType;
+	}
+
+	public void setNotificationType(NotificationType notificationType) {
+		this.notificationType = notificationType;
+	}
 }
