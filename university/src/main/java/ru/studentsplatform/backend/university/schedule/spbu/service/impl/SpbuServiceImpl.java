@@ -93,7 +93,7 @@ public class SpbuServiceImpl implements SpbuService {
 
 			} catch (NullPointerException | feign.RetryableException e) {
 				logger.warn("Current proxy is forbidden, changing proxy...");
-					changeProxy();
+				changeProxy();
 				logger.warn("Reattempting to save groups for alias: " + alias + "...");
 
 				saveAllAliasGroups(alias);
