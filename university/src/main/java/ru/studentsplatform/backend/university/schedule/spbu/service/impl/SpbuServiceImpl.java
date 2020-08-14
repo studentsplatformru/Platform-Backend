@@ -11,7 +11,8 @@ import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuTeamDTO;
 import ru.studentsplatform.backend.domain.repository.spbu.SpbuTeamRepository;
 import ru.studentsplatform.backend.entities.model.spbu.SpbuTeam;
-import ru.studentsplatform.backend.service.proxy.SpbuProxy;
+import ru.studentsplatform.backend.service.proxy.FeignConfig;
+import ru.studentsplatform.backend.service.proxy.Proxies;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import ru.studentsplatform.backend.university.schedule.spbu.mapper.SpbuTeamMapper;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuService;
@@ -23,17 +24,15 @@ import java.util.List;
 @Profiled
 public class SpbuServiceImpl implements SpbuService {
 
+
 	private final Logger logger = LoggerFactory.getLogger(SpbuServiceImpl.class);
 
 	private final SpbuTeamRepository repository;
 
-	private final SpbuProxy proxy;
-
 	private final SpbuTeamMapper mapper;
 
-	public SpbuServiceImpl(SpbuTeamRepository repository, SpbuProxy proxy, SpbuTeamMapper mapper) {
+	public SpbuServiceImpl(SpbuTeamRepository repository, SpbuTeamMapper mapper) {
 		this.repository = repository;
-		this.proxy = proxy;
 		this.mapper = mapper;
 	}
 
@@ -86,9 +85,20 @@ public class SpbuServiceImpl implements SpbuService {
 	 */
 	@Override
 	public void saveAllAliasGroups(String alias) {
+		logger.info("Initiating groups saving for alias: " + alias);
 		new Thread(() -> {
-			iteratePrograms(alias);
-			logger.info("Finished groups saving for alias: " + alias);
+			try {
+				iteratePrograms(alias);
+				logger.info("Finished groups saving for alias: " + alias + "!");
+
+			} catch (NullPointerException | feign.RetryableException e) {
+				logger.warn("Current proxy is forbidden, changing proxy...");
+					changeProxy();
+				logger.warn("Reattempting to save groups for alias: " + alias + "...");
+
+				saveAllAliasGroups(alias);
+			}
+
 		}).start();
 	}
 
@@ -96,10 +106,11 @@ public class SpbuServiceImpl implements SpbuService {
 	 * Перечисляет список программ обучения, вызывая для каждой метод сохранения групп.
 	 * @param alias Сокращённое наименования направления
 	 */
-	private void iteratePrograms(String alias) {
-		for (SpbuStudyProgramDTO program : studyProgramUnwrap(proxy.getProgramLevels(alias))) {
+	private void iteratePrograms(String alias) throws feign.RetryableException {
+		for (SpbuStudyProgramDTO program : studyProgramUnwrap(FeignConfig.getSpbuProxy().getProgramLevels(alias))) {
 			try {
-				saveGroupList(proxy.getGroups(program.getProgramId().toString()).getGroups(), alias);
+				saveGroupList(FeignConfig.getSpbuProxy()
+						.getGroups(program.getProgramId().toString()).getGroups(), alias);
 			} catch (NullPointerException | InterruptedException ignored) {
 				logger.error("Error occurred while group saving!");
 			}
@@ -114,12 +125,21 @@ public class SpbuServiceImpl implements SpbuService {
 	 */
 	private void saveGroupList(List<SpbuTeamDTO> groups, String alias) throws InterruptedException {
 		for (SpbuTeamDTO group : groups) {
+			logger.info("Saving group " + group.getName() + "...");
 			group.setAlias(alias);
 			var team = mapper.spbuTeamDTOToSpbuTeam(group);
 			create(team);
 
 			Thread.sleep(100);
 		}
+	}
+
+	/**
+	 * Меняет текущий proxy на следующий в Proxies Enum.
+	 */
+	private void changeProxy() {
+		FeignConfig.changeProxy();
+		logger.info("Switching to IP " + Proxies.current().getIp() + ", port " + Proxies.current().getPort());
 	}
 
 }

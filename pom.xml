@@ -28,6 +28,8 @@
         <springstatemachine.version>2.2.0.RELEASE</springstatemachine.version>
         <querydsl.version>4.3.1</querydsl.version>
         <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
+        <feign.okHttp.version>10.2.0</feign.okHttp.version>
+        <feign.jackson.version>11.0</feign.jackson.version>
     </properties>
 
     <modules>
@@ -90,10 +92,17 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- Конфигурация Feign proxy  -->
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${feign.okHttp.version}</version>
+            </dependency>
+            <!-- Encoder/Decoder for feign client builder -->
             <dependency>
                 <groupId>io.github.openfeign</groupId>
                 <artifactId>feign-jackson</artifactId>
-                <version>11.0</version>
+                <version>${feign.jackson.version}</version>
             </dependency>
 
             <dependency>
@@ -193,23 +202,6 @@
                 <version>${log4j.version}</version>
             </dependency>
 
-            <!-- Библиотека для составления запросов на языке Java -->
-            <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-jpa</artifactId>
-                <version>${querydsl.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-apt</artifactId>
-                <version>${querydsl.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-core</artifactId>
-                <version>${querydsl.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -235,17 +227,17 @@
                     <dependency>
                         <groupId>com.querydsl</groupId>
                         <artifactId>querydsl-apt</artifactId>
-                        <version>4.3.1</version>
+                        <version>${querydsl.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>com.querydsl</groupId>
                         <artifactId>querydsl-jpa</artifactId>
-                        <version>4.3.1</version>
+                        <version>${querydsl.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>com.querydsl</groupId>
                         <artifactId>querydsl-core</artifactId>
-                        <version>4.3.1</version>
+                        <version>${querydsl.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>

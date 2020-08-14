@@ -9,7 +9,7 @@ import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuTeamDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
-import ru.studentsplatform.backend.service.proxy.SpbuProxy;
+import ru.studentsplatform.backend.service.proxy.FeignConfig;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuService;
 
@@ -28,11 +28,10 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 
 	private final Logger logger = LoggerFactory.getLogger(SpbuDataControllerImpl.class);
 
-	private final SpbuProxy proxy;
+
 	private final SpbuService service;
 
-	public SpbuDataControllerImpl(SpbuProxy proxy, SpbuService service) {
-		this.proxy = proxy;
+	public SpbuDataControllerImpl(SpbuService service) {
 		this.service = service;
 	}
 
@@ -40,7 +39,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 * {@inheritDoc}
 	 */
 	public ResponseEntity<List<SpbuDivisionDTO>> getDivisions() {
-		return ResponseEntity.ok(proxy.getDivisions());
+		return ResponseEntity.ok(FeignConfig.getSpbuProxy().getDivisions());
 	}
 
 	/**
@@ -48,7 +47,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 */
 	public ResponseEntity<List<SpbuStudyProgramDTO>> getStudyPrograms(String alias) {
 		try {
-			return ResponseEntity.ok(service.studyProgramUnwrap(proxy.getProgramLevels(alias)));
+			return ResponseEntity.ok(service.studyProgramUnwrap(FeignConfig.getSpbuProxy().getProgramLevels(alias)));
 		} catch (NullPointerException e) {
 			return ResponseEntity.ok(new LinkedList<>());
 		}
@@ -59,7 +58,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 */
 	public ResponseEntity<List<SpbuTeamDTO>> getGroups(String id) {
 		try {
-			return ResponseEntity.ok(proxy.getGroups(id).getGroups());
+			return ResponseEntity.ok(FeignConfig.getSpbuProxy().getGroups(id).getGroups());
 		} catch (NullPointerException e) {
 			return ResponseEntity.ok(new LinkedList<>());
 		}
@@ -70,7 +69,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 */
 	public ResponseEntity<List<SpbuEventDTO>> getNextWeekEventsById(String id) {
 		try {
-			return ResponseEntity.ok(service.eventUnwrap(proxy.getDays(id).getDays()));
+			return ResponseEntity.ok(service.eventUnwrap(FeignConfig.getSpbuProxy().getDays(id).getDays()));
 		} catch (NullPointerException e) {
 			return ResponseEntity.ok(new LinkedList<>());
 		}
@@ -83,7 +82,8 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 																		   String startTime,
 																		   String endTime) {
 		try {
-			return ResponseEntity.ok(service.eventUnwrap(proxy.getDays(id, startTime, endTime).getDays()));
+			return ResponseEntity.ok(service.eventUnwrap(FeignConfig.getSpbuProxy()
+					.getDays(id, startTime, endTime).getDays()));
 		} catch (NullPointerException e) {
 			return ResponseEntity.ok(new LinkedList<>());
 		}
@@ -96,7 +96,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	public ResponseEntity<List<SpbuEventDTO>> getNextWeekEventsByName(String name) {
 		try {
 			var id = service.getByName(name).getId().toString();
-			return ResponseEntity.ok(service.eventUnwrap(proxy.getDays(id).getDays()));
+			return ResponseEntity.ok(service.eventUnwrap(FeignConfig.getSpbuProxy().getDays(id).getDays()));
 		} catch (NullPointerException e) {
 			return ResponseEntity.ok(new LinkedList<>());
 		}
@@ -111,7 +111,8 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 																			 String endTime) {
 		try {
 			var id = service.getByName(name).getId().toString();
-			return ResponseEntity.ok(service.eventUnwrap(proxy.getDays(id, startTime, endTime).getDays()));
+			return ResponseEntity
+					.ok(service.eventUnwrap(FeignConfig.getSpbuProxy().getDays(id, startTime, endTime).getDays()));
 		} catch (NullPointerException e) {
 			return ResponseEntity.ok(new LinkedList<>());
 		}

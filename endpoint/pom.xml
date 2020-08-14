@@ -85,12 +85,6 @@
             <artifactId>telegrambots</artifactId>
         </dependency>
 
-        <!-- Конфигурация Feign proxy  -->
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-okhttp</artifactId>
-            <version>10.2.0</version>
-        </dependency>
 
     </dependencies>
 
