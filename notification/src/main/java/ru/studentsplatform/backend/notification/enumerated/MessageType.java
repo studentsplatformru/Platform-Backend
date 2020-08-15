@@ -15,7 +15,7 @@ public enum MessageType {
      * 2-й : Оценка по предмету.
      */
     MARK_NOTIFICATION(
-            "notification\\src\\main\\resources\\templates\\mark_notification.html",
+            "notification/src/main/resources/templates/mark_notification.html",
             2,
             "У Вас новая оценка!\n %s : %s"),
     /**
