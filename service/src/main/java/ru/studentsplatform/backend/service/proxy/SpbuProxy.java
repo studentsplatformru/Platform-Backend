@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.service.proxy;
 
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
@@ -17,7 +16,6 @@ import java.util.List;
  * @author Archive-Vian (sas-artamonov@yandex.ru) 10.08.2020
  */
 @Profiled
-@FeignClient(name = "getDivision", url = "https://timetable.spbu.ru/api/v1/")
 public interface SpbuProxy {
 
 	/**
@@ -32,7 +30,7 @@ public interface SpbuProxy {
 	 * @param alias Сокращённое наименование програм обучения
 	 * @return Список уровней програм Обучения (бакалавр, магистратуа, и.т.д)
 	 */
-	@GetMapping("study/divisions/{alias}/programs/levels")
+	@GetMapping(value = "study/divisions/{alias}/programs/levels")
 	List<SpbuProgramLevelDTO> getProgramLevels(@PathVariable(name = "alias") String alias);
 
 	/**

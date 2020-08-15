@@ -37,11 +37,6 @@ spring:
 feign:
   okhttp:
     enabled: true
-  client:
-    config:
-      feignName:
-        connectTimeout: 5000
-        readTimeout: 5000
 
 logging:
   file:
