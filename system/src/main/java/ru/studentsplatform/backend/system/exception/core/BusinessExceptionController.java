@@ -45,7 +45,6 @@ public class BusinessExceptionController {
 	@ResponseBody
 	public ExceptionDto exceptionNOTFOUND(Exception exception) {
 		logger.error(exception.getMessage());
-		exception.printStackTrace();
 		return new ExceptionDto("Упс, страница не найдена.", HttpStatus.NOT_FOUND);
 	}
 
