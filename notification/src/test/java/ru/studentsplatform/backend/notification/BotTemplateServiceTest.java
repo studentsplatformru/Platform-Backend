@@ -10,6 +10,8 @@ import ru.studentsplatform.backend.notification.service.BotTemplateServiceImpl;
 
 /**
  * Тесты для {@link BotTemplateService}
+ *
+ * @author Danila K (karnacevich5323537@gmail.com) (15.08.2020).
  */
 @ExtendWith(MockitoExtension.class)
 public class BotTemplateServiceTest {

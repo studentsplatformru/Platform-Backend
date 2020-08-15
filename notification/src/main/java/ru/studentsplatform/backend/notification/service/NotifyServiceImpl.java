@@ -117,11 +117,7 @@ public class NotifyServiceImpl implements NotifyService {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void sendEmail(User user, String message, String... args) {
+    private void sendEmail(User user, String message, String... args) {
 
         try {
             eMailSender.sendHtml(
@@ -135,11 +131,7 @@ public class NotifyServiceImpl implements NotifyService {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void sendVK(User user, String message, String... args) {
+    private void sendVK(User user, String message, String... args) {
 
         // Получение адреса отправки user.getVkId()
         try {
@@ -151,11 +143,7 @@ public class NotifyServiceImpl implements NotifyService {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void sendTelegram(User user, String message, String... args) {
+    private void sendTelegram(User user, String message, String... args) {
 
         // Получение адреса отправки user.getTelegramId()
         try {

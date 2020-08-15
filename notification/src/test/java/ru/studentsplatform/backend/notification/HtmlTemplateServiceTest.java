@@ -8,14 +8,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
 import ru.studentsplatform.backend.notification.service.HtmlTemplateServiceImpl;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
-import java.util.Scanner;
 
 /**
  * Тесты для {@link HtmlTemplateService}
+ *
+ * @author Danila K (karnacevich5323537@gmail.com) (15.08.2020).
  */
 @ExtendWith(MockitoExtension.class)
 public class HtmlTemplateServiceTest {
