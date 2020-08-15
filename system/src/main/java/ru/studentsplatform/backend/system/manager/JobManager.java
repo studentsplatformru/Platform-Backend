@@ -34,7 +34,7 @@ public class JobManager {
      *            реализованная в {@link Runnable}.
      * @param delay Задержка задачи в миллисекундах.
      */
-    public void handle(Runnable job, long delay){
+    public void handle(Runnable job, long delay) {
 
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -60,7 +60,7 @@ public class JobManager {
      * @param stringDate Дата для выполнения задачи
      *                   в формате dd.MM.yyyy HH:mm:ss
      */
-    public void handle(Runnable job, String stringDate){
+    public void handle(Runnable job, String stringDate) {
 
         TimerTask timerTask = new TimerTask() {
             @Override
