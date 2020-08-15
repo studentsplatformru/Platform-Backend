@@ -18,7 +18,6 @@ public interface UserMapper {
 			@Mapping(target = "createdBy", source = "entity.createdBy"),
 			@Mapping(target = "email", source = "entity.email"),
 			@Mapping(target = "password", source = "entity.password"),
-			@Mapping(target = "userInfoId", source = "entity.userInfo.id"),
 			@Mapping(target = "universityRole", source = "entity.universityRole"),
 			@Mapping(target = "placeStudyId", source = "entity.placeStudy.id"),
 			@Mapping(target = "teamId", source = "entity.team.id"),
@@ -32,7 +31,6 @@ public interface UserMapper {
 			@Mapping(target = "createdBy", source = "dto.createdBy"),
 			@Mapping(target = "email", source = "dto.email"),
 			@Mapping(target = "password", source = "dto.password"),
-			@Mapping(target = "userInfo.id", source = "dto.userInfoId"),
 			@Mapping(target = "universityRole", source = "dto.universityRole"),
 			@Mapping(target = "team.id", source = "dto.teamId"),
 			@Mapping(target = "disciplines", source = "dto.disciplines")

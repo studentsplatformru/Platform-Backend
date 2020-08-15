@@ -29,6 +29,7 @@ spring:
     enabled: false
     baseline-on-migrate: true
     baseline-version: 0
+
 # для обработки 404
   mvc:
     throw-exception-if-no-handler-found: true
@@ -52,6 +53,10 @@ spring:
 #must be false in production
 mail:
  debug: true
+feign:
+  okhttp:
+    enabled: true
+
 
 logging:
   file:

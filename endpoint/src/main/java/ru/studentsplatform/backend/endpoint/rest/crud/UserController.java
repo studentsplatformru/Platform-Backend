@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Контроллер user , позволяющий создать,удалить,получить,обновить user (CRUD контроллер).
  */
-public interface UserConroller extends AbstractCRUDController<UserDTO> {
+public interface UserController extends AbstractCRUDController<UserDTO> {
 	/**
 	 * Маппинг контроллера.
 	 */
