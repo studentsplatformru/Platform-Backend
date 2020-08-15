@@ -22,18 +22,6 @@ public class ProfiledAspect {
 		this.treeLoggerService = treeLoggerService;
 	}
 
-//	@Pointcut("@within(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)" +
-//			" || @annotation(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)")
-//	void profiled() {
-//	}
-
-//	@AfterThrowing(pointcut = "profiled()", throwing = "e")
-//	public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-//		log.error("Exception in {}.{}()",
-//				joinPoint.getSignature().getDeclaringTypeName(),
-//				joinPoint.getSignature().getName());
-//	}
-
 	/**
 	 * Аспект который позволяет замерить время выполнения и логгирует его с параметрами.
 	 *

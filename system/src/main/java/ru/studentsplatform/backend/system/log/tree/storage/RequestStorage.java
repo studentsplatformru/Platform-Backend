@@ -3,6 +3,7 @@ package ru.studentsplatform.backend.system.log.tree.storage;
 import ru.studentsplatform.backend.system.log.tree.domain.TreeMethodCall;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -17,7 +18,7 @@ public class RequestStorage {
 	 *
 	 * @return Список "веток"
 	 */
-	public static ArrayList<TreeMethodCall> getRequestStorage() {
+	public static List<TreeMethodCall> getRequestStorage() {
 		var treeMethodCalls = REQUEST_STORAGE.get();
 		if (treeMethodCalls == null) {
 			treeMethodCalls = new ArrayList<>();

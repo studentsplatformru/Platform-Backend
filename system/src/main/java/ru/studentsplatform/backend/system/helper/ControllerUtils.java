@@ -37,7 +37,8 @@ public class ControllerUtils {
 			LOGGER.error("Список бизнес ошибок: {}", cbe.getMessage());
 			throw new Fault(cbe, null);
 		} catch (Exception exception) {
-			LOGGER.error("Непредвиденная ошибка: {}", exception.getMessage());
+			LOGGER.error("Непредвиденная ошибка: {} - {}", exception.getClass(), exception.getMessage());
+			LOGGER.error("{}", exception.getStackTrace()[0].toString());
 			throw new Fault(exception, null);
 		}
 	}
