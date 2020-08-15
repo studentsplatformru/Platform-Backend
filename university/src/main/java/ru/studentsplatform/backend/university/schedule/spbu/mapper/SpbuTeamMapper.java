@@ -13,6 +13,7 @@ public interface SpbuTeamMapper {
 
 	/**
 	 * Создаёт DTO на основе сущности SpbuTeam.
+	 *
 	 * @param entity объект студенческой группы СПБГУ
 	 * @return DTO студенческой группы СПБГУ
 	 */
@@ -25,6 +26,7 @@ public interface SpbuTeamMapper {
 
 	/**
 	 * Создаёт объект студенческой группы на основе DTO.
+	 *
 	 * @param dto DTO студенческой группы
 	 * @return объект студенческой группы
 	 */
@@ -37,6 +39,7 @@ public interface SpbuTeamMapper {
 
 	/**
 	 * Создаёт список DTO студенческих групп на основе списка объектов студенчких групп.
+	 *
 	 * @param entity список объектов студенческих групп
 	 * @return список DTO
 	 */
@@ -44,6 +47,7 @@ public interface SpbuTeamMapper {
 
 	/**
 	 * Создаёт список студенческих групп на основе списка DTO студенчких групп.
+	 *
 	 * @param dto список DTO студенческих групп
 	 * @return список объектов гупп СПБГУ
 	 */

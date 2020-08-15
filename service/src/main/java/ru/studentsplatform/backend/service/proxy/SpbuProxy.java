@@ -11,7 +11,7 @@ import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import java.util.List;
 
 /**
- * Класс посылает запросы к api распиания СПБГУ.
+ * Класс посылает запросы к api расписания СПбГУ.
  *
  * @author Archive-Vian (sas-artamonov@yandex.ru) 10.08.2020
  */
@@ -20,6 +20,7 @@ public interface SpbuProxy {
 
 	/**
 	 * Получение всех направлений подготовки.
+	 *
 	 * @return Список DTO програм обучения
 	 */
 	@GetMapping("study/divisions/")
@@ -27,6 +28,7 @@ public interface SpbuProxy {
 
 	/**
 	 * Получение програм обучения для направления.
+	 *
 	 * @param alias Сокращённое наименование програм обучения
 	 * @return Список уровней програм Обучения (бакалавр, магистратуа, и.т.д)
 	 */
@@ -35,6 +37,7 @@ public interface SpbuProxy {
 
 	/**
 	 * Получение списка групп для конкретной программы обучения.
+	 *
 	 * @param id Id Программы обучения
 	 * @return Объект, содержащий список програм обучения
 	 */
@@ -43,6 +46,7 @@ public interface SpbuProxy {
 
 	/**
 	 * Получение занятий для оределенной группы на следующую неделю.
+	 *
 	 * @param id Id студенческой группы
 	 * @return Объект, содержащий список дней с занятиями
 	 */
@@ -51,13 +55,14 @@ public interface SpbuProxy {
 
 	/**
 	 * Получение занятий для оределенной группы за определенный период.
-	 * @param id Id студенческой группы
+	 *
+	 * @param id        Id студенческой группы
 	 * @param startTime Начало перида
-	 * @param endTime Конец периода
+	 * @param endTime   Конец периода
 	 * @return Объект, содержащий список дней с занятиями
 	 */
 	@GetMapping("groups/{id}/events/{start}/{end}")
-	SpbuScheduleDayWrapperDTO getDays(@PathVariable(name = "id")String id,
+	SpbuScheduleDayWrapperDTO getDays(@PathVariable(name = "id") String id,
 									  @PathVariable(name = "start") String startTime,
 									  @PathVariable(name = "end") String endTime);
 }

@@ -10,11 +10,13 @@ import ru.studentsplatform.backend.system.log.tree.domain.JoinPointHelper;
 import ru.studentsplatform.backend.system.log.tree.domain.TreeMethodCall;
 import ru.studentsplatform.backend.system.log.tree.storage.RequestStorage;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * Сервис отвечающий за дерево логов.
+ *
  * @author Krylov Sergey (30.07.2020)
  */
 @Service
@@ -29,12 +31,12 @@ public class TreeLoggerService {
 	}
 
 	/**
-	 * Метод профилирования, реализует логгику логгирования.
+	 * Метод профилирования, реализует логику логгирования.
 	 *
 	 * @param joinPoint Точка входа
 	 * @return Результат
 	 */
-	public Object profile(ProceedingJoinPoint joinPoint) {
+	public Object profile(ProceedingJoinPoint joinPoint) throws Throwable {
 		var joinPointHelper = getJoinPointHelper(joinPoint);
 		var dataStorage = RequestStorage.getRequestStorage();
 		var indexStorage = RequestStorage.getIndexStorage();
@@ -44,7 +46,8 @@ public class TreeLoggerService {
 			treeMethodCall = before(dataStorage, indexStorage, joinPointHelper);
 			result = joinPoint.proceed();
 		} catch (Throwable throwable) {
-			after(treeMethodCall, dataStorage, indexStorage, result);
+			after(treeMethodCall, dataStorage, indexStorage, throwable.getMessage());
+			throw throwable;
 		} finally {
 			after(treeMethodCall, dataStorage, indexStorage, result);
 		}
@@ -59,10 +62,10 @@ public class TreeLoggerService {
 		return new JoinPointHelper(className, methodName, args);
 	}
 
-	private TreeMethodCall before(ArrayList<TreeMethodCall> dataStorage,
+	private TreeMethodCall before(List<TreeMethodCall> dataStorage,
 								  AtomicInteger indexStorage,
 								  JoinPointHelper joinPointHelper) {
-		TreeMethodCall treeMethodCall = null;
+		TreeMethodCall treeMethodCall;
 		var index = indexStorage.get();
 		if (CollectionUtils.empty(dataStorage)) {
 			treeMethodCall = treeMethodCallService.beginRootCall(joinPointHelper, index);
@@ -75,7 +78,7 @@ public class TreeLoggerService {
 	}
 
 	private void after(TreeMethodCall treeMethodCall,
-					   ArrayList<TreeMethodCall> dataStorage,
+					   List<TreeMethodCall> dataStorage,
 					   AtomicInteger indexStorage,
 					   Object result) {
 		var ind = indexStorage.decrementAndGet();

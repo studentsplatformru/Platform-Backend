@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.system.exception.core;
+package ru.studentsplatform.backend.system.exception;
 
 import org.springframework.http.HttpStatus;
 
@@ -22,7 +22,7 @@ public interface BusinessExceptionReason {
 	 *
 	 * @return паттерн для формирования сообщения ошибки
 	 */
-	String getMessagePattern();
+	MessageWithParams getMessageWithParams();
 
 	/**
 	 * Возвращает статус ошибки исключения.

@@ -1,13 +1,8 @@
 package ru.studentsplatform.backend.system.log.tree.aspect;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.studentsplatform.backend.system.log.tree.service.TreeLoggerService;
@@ -20,25 +15,11 @@ import ru.studentsplatform.backend.system.log.tree.service.TreeLoggerService;
 @Aspect
 @Component
 public class ProfiledAspect {
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
-
 	private final TreeLoggerService treeLoggerService;
 
 	@Autowired
 	public ProfiledAspect(TreeLoggerService treeLoggerService) {
 		this.treeLoggerService = treeLoggerService;
-	}
-
-	@Pointcut("@within(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)" +
-			" || @annotation(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)")
-	void profiled() {
-	}
-
-	@AfterThrowing(pointcut = "profiled()", throwing = "e")
-	public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-		log.error("Exception in {}.{}()",
-				joinPoint.getSignature().getDeclaringTypeName(),
-				joinPoint.getSignature().getName());
 	}
 
 	/**
@@ -50,7 +31,7 @@ public class ProfiledAspect {
 	 */
 	@Around("@within(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)" +
 			" || @annotation(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)")
-	public Object logAround(ProceedingJoinPoint joinPoint) {
+	public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
 		return treeLoggerService.profile(joinPoint);
 	}
 }

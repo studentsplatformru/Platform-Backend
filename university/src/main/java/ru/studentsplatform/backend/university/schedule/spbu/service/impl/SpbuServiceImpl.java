@@ -37,7 +37,6 @@ public class SpbuServiceImpl implements SpbuService {
 	}
 
 	/**
-	 *
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -46,7 +45,7 @@ public class SpbuServiceImpl implements SpbuService {
 
 		var studyPrograms = new LinkedList<SpbuStudyProgramDTO>();
 
-		for (SpbuProgramLevelDTO dto: programLevels) {
+		for (SpbuProgramLevelDTO dto : programLevels) {
 			programCombinations.addAll(dto.getProgramCombinations());
 		}
 		programLevels.forEach(dto -> programCombinations.addAll(dto.getProgramCombinations()));
@@ -104,6 +103,7 @@ public class SpbuServiceImpl implements SpbuService {
 
 	/**
 	 * Перечисляет список программ обучения, вызывая для каждой метод сохранения групп.
+	 *
 	 * @param alias Сокращённое наименования направления
 	 */
 	private void iteratePrograms(String alias) throws feign.RetryableException {
@@ -119,8 +119,9 @@ public class SpbuServiceImpl implements SpbuService {
 
 	/**
 	 * Сохраняет список групп.
+	 *
 	 * @param groups список групп для сохранения
-	 * @param alias сокращённое наименование направления
+	 * @param alias  сокращённое наименование направления
 	 * @throws InterruptedException метод имеет задержку выполнения, требуется обработка
 	 */
 	private void saveGroupList(List<SpbuTeamDTO> groups, String alias) throws InterruptedException {

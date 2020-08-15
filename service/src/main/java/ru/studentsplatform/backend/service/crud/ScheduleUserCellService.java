@@ -54,6 +54,7 @@ public interface ScheduleUserCellService extends AbstractService<ScheduleUserCel
 
 	/**
 	 * Позволяет получить посещения студентов студентов по определенным фльтрам.
+	 *
 	 * @param filter DTO, содержащий фильтрующие параметры
 	 * @return лист обхектов студенческого расписания
 	 */

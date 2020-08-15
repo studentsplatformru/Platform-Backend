@@ -42,7 +42,7 @@ public interface ScheduleUserCellCRUDController extends AbstractCRUDController<S
 	 * Обновляет данные записи в таблице scheduleUserCell.
 	 *
 	 * @param scheduleUserCellDTO Данные для обновления
-	 * @param id         		  Id записи, которая будет обновлена
+	 * @param id                  Id записи, которая будет обновлена
 	 * @return Параметры обновленной записи
 	 */
 	@Override
@@ -54,11 +54,12 @@ public interface ScheduleUserCellCRUDController extends AbstractCRUDController<S
 
 	/**
 	 * Позволяет найти ячейки посещения по заданным фильтрам.
+	 *
 	 * @param filter DTO, содержащий параметры для фильтрации
 	 *               Чтобы вывести все ячейки расписаний, дата начала занятий которых:
-	 * 				 поздее заданной даты, необходимо указать startTime
-	 * 				 Раньше заданной даты - endTime
-	 * 				 Между двумя датами - artTime & endTime вместе.
+	 *               поздее заданной даты, необходимо указать startTime
+	 *               Раньше заданной даты - endTime
+	 *               Между двумя датами - artTime & endTime вместе.
 	 * @return Список объектов с параметрами ячеек посещения.
 	 */
 	@GetMapping("/filter")
@@ -66,6 +67,7 @@ public interface ScheduleUserCellCRUDController extends AbstractCRUDController<S
 
 	/**
 	 * Позволяет найти процентное соотношение посещенных пар в рамках заданных фильтров.
+	 *
 	 * @param filter Параметры, в рамках которых будет происходить поиск.
 	 * @return Процент выполненных задач
 	 */

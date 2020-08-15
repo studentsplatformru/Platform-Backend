@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import ru.studentsplatform.backend.system.exception.core.Fault;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface AbstractCRUDController<DTO> {
 	ResponseEntity<DTO> create(@RequestBody DTO dto);
 
 	@GetMapping("/{id}")
-	ResponseEntity<DTO> getById(@PathVariable Long id);
+	ResponseEntity<DTO> getById(@PathVariable Long id) throws Fault;
 
 	@GetMapping
 	ResponseEntity<List<DTO>> getAll();

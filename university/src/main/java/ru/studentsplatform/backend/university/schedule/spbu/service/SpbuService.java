@@ -12,6 +12,7 @@ public interface SpbuService {
 
 	/**
 	 * Достаёт программы обучения из класса-оболочки.
+	 *
 	 * @param programLevelDTO уровни программ обучения
 	 * @return программы обучения
 	 */
@@ -19,6 +20,7 @@ public interface SpbuService {
 
 	/**
 	 * Достает занятия из объекта дня.
+	 *
 	 * @param days список дней
 	 * @return список занятий
 	 */
@@ -26,6 +28,7 @@ public interface SpbuService {
 
 	/**
 	 * Сохраняет студенческую группу в БД.
+	 *
 	 * @param team Студенческая группа
 	 * @return Созданная группа
 	 */
@@ -33,6 +36,7 @@ public interface SpbuService {
 
 	/**
 	 * Находит SpbuTeam по её имени.
+	 *
 	 * @param name Имя студенческой группы СПБГУ
 	 * @return Объект студенческой группы спбгу
 	 */
@@ -40,6 +44,7 @@ public interface SpbuService {
 
 	/**
 	 * Запускает поток сохранения сех групп для определенного направления.
+	 *
 	 * @param alias сокращённое наименование направления
 	 */
 	void saveAllAliasGroups(String alias);

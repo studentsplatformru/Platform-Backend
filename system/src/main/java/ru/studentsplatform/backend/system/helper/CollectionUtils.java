@@ -13,7 +13,7 @@ import java.util.Set;
  * @author Krylov Sergey (26.07.2020)
  */
 public class CollectionUtils {
-	public CollectionUtils() {
+	private CollectionUtils() {
 	}
 
 	/**
