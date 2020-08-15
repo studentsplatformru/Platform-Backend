@@ -72,7 +72,7 @@ public class TreeMethodCallService {
 		for (var i = 0; i < size; i++) {
 			var call = dataStorage.get(i);
 			if (i == 0) {
-				var layerFuture = dataStorage.get(1).getLayer();
+				var layerFuture = dataStorage.get(0).getLayer();
 				var line = createTab(call.getLayer()) + createBranch(-1, 0, layerFuture)
 						+ createLine(call);
 				tree.append(line);
