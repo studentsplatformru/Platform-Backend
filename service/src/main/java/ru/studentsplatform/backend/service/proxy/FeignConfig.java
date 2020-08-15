@@ -29,7 +29,9 @@ public class FeignConfig {
 	 */
 	private static void instantiateFeignHttpClient(Proxies proxy) {
 		Proxy newProxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxy.getIp(), proxy.getPort()));
-		OkHttpClient okHttpClient = new OkHttpClient.Builder().proxy(newProxy).build();
+		OkHttpClient okHttpClient = new OkHttpClient.Builder()
+//				.proxy(newProxy)
+				.build();
 
 		spbuProxy = Feign.builder().client(new feign.okhttp.OkHttpClient(okHttpClient))
 				.encoder(new JacksonEncoder())
