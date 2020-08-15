@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import ru.studentsplatform.backend.domain.dto.university.FacultyDTO;
+import ru.studentsplatform.backend.system.exception.core.Fault;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public interface FacultyCRUDController extends AbstractCRUDController<FacultyDTO
 	 * @return параметры искомой записи
 	 */
 	@Override
-	ResponseEntity<FacultyDTO> getById(@PathVariable Long id);
+	ResponseEntity<FacultyDTO> getById(@PathVariable Long id) throws Fault;
 
 	/**
 	 * Возвращает параметры всех записей в таблице faculty.

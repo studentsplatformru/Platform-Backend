@@ -11,7 +11,7 @@ import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import java.util.List;
 
 /**
- * Класс посылает запросы к api распиания СПБГУ.
+ * Класс посылает запросы к api расписания СПбГУ.
  *
  * @author Archive-Vian (sas-artamonov@yandex.ru) 10.08.2020
  */

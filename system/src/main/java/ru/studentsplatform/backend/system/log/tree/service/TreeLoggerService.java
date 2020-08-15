@@ -34,7 +34,7 @@ public class TreeLoggerService {
 	 * @param joinPoint Точка входа
 	 * @return Результат
 	 */
-	public Object profile(ProceedingJoinPoint joinPoint) {
+	public Object profile(ProceedingJoinPoint joinPoint) throws Throwable {
 		var joinPointHelper = getJoinPointHelper(joinPoint);
 		var dataStorage = RequestStorage.getRequestStorage();
 		var indexStorage = RequestStorage.getIndexStorage();
@@ -45,6 +45,7 @@ public class TreeLoggerService {
 			result = joinPoint.proceed();
 		} catch (Throwable throwable) {
 			after(treeMethodCall, dataStorage, indexStorage, result);
+			throw throwable;
 		} finally {
 			after(treeMethodCall, dataStorage, indexStorage, result);
 		}

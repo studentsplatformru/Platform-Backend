@@ -13,7 +13,7 @@ import ru.studentsplatform.backend.endpoint.EndpointApplication;
 import ru.studentsplatform.backend.endpoint.rest.main.MainController;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
-import ru.studentsplatform.backend.system.exception.core.BusinessExceptionController;
+import ru.studentsplatform.backend.system.exception.rest.BusinessExceptionController;
 
 import java.nio.charset.StandardCharsets;
 

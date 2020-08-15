@@ -20,8 +20,6 @@ import ru.studentsplatform.backend.system.log.tree.service.TreeLoggerService;
 @Aspect
 @Component
 public class ProfiledAspect {
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
-
 	private final TreeLoggerService treeLoggerService;
 
 	@Autowired
@@ -29,17 +27,17 @@ public class ProfiledAspect {
 		this.treeLoggerService = treeLoggerService;
 	}
 
-	@Pointcut("@within(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)" +
-			" || @annotation(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)")
-	void profiled() {
-	}
+//	@Pointcut("@within(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)" +
+//			" || @annotation(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)")
+//	void profiled() {
+//	}
 
-	@AfterThrowing(pointcut = "profiled()", throwing = "e")
-	public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-		log.error("Exception in {}.{}()",
-				joinPoint.getSignature().getDeclaringTypeName(),
-				joinPoint.getSignature().getName());
-	}
+//	@AfterThrowing(pointcut = "profiled()", throwing = "e")
+//	public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
+//		log.error("Exception in {}.{}()",
+//				joinPoint.getSignature().getDeclaringTypeName(),
+//				joinPoint.getSignature().getName());
+//	}
 
 	/**
 	 * Аспект который позволяет замерить время выполнения и логгирует его с параметрами.
@@ -50,7 +48,7 @@ public class ProfiledAspect {
 	 */
 	@Around("@within(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)" +
 			" || @annotation(ru.studentsplatform.backend.system.log.tree.annotation.Profiled)")
-	public Object logAround(ProceedingJoinPoint joinPoint) {
+	public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
 		return treeLoggerService.profile(joinPoint);
 	}
 }

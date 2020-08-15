@@ -1,45 +1,37 @@
 package ru.studentsplatform.backend.system.exception.core;
 
 import org.springframework.http.HttpStatus;
-
-import java.util.Objects;
+import ru.studentsplatform.backend.system.exception.BusinessExceptionReason;
+import ru.studentsplatform.backend.system.exception.domain.BusinessExceptionData;
 
 /**
- * Исключения для бизнес ошибок.
+ * Исключение для бизнес ошибки.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  */
 public class BusinessException extends RuntimeException {
+	private static final long serialVersionUID = 8144390758971119153L;
 
-	/**
-	 * Причина возникновения исключения.
-	 */
-	private final BusinessExceptionReason reason;
-
-	/**
-	 * Параметры исключения.
-	 */
-	private final Object[] parameters;
+	private final BusinessExceptionData businessExceptionData;
 
 	public BusinessException(BusinessExceptionReason reason, Object... parameters) {
-		this.reason = reason;
-		this.parameters = parameters;
+		this.businessExceptionData = new BusinessExceptionData(reason, parameters);
 	}
 
 	public BusinessExceptionReason getReason() {
-		return reason;
+		return businessExceptionData.getReason();
 	}
 
 	public Object[] getParameters() {
-		return parameters;
+		return businessExceptionData.getParameters();
 	}
 
 	public String getCode() {
-		return reason.getCode();
+		return businessExceptionData.getReason().getCode();
 	}
 
 	public HttpStatus getStatus() {
-		return reason.getStatus();
+		return businessExceptionData.getReason().getStatus();
 	}
 
 	/**
@@ -50,9 +42,6 @@ public class BusinessException extends RuntimeException {
 	 */
 	@Override
 	public String getMessage() {
-		return Objects.isNull(parameters)
-				? reason.getMessagePattern()
-				: String.format(reason.getMessagePattern(), parameters);
+		return businessExceptionData.getMessage();
 	}
-
 }

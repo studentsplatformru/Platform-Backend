@@ -5,11 +5,6 @@ import org.junit.jupiter.api.Test;
 import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
-import static ru.studentsplatform.backend.service.exception.ServiceExceptionReason.COMMENT_NOT_FOUND;
-import static ru.studentsplatform.backend.service.exception.ServiceExceptionReason.NOTE_NOT_FOUND;
-import static ru.studentsplatform.backend.service.exception.ServiceExceptionReason.UNEXPECTED_ERROR;
-import static ru.studentsplatform.backend.service.exception.ServiceExceptionReason.USER_NOT_FOUND;
-
 /**
  * Тесты для {@link BusinessException} с использованием
  * enum {@link ServiceExceptionReason}.
@@ -26,7 +21,7 @@ public class ExceptionTest {
 
 		try {
 
-			throw new BusinessException(NOTE_NOT_FOUND, 1);
+			throw new BusinessException(ServiceExceptionReason.NOTE_NOT_FOUND, 1);
 
 		} catch (BusinessException e) {
 
@@ -36,36 +31,10 @@ public class ExceptionTest {
 					e.getMessage().contains("1"));
 
 			Assert.assertEquals(
-					e.getReason(), NOTE_NOT_FOUND);
+					e.getReason(), ServiceExceptionReason.NOTE_NOT_FOUND);
 
 			Assert.assertTrue(
 					e.getStatus().is4xxClientError());
-
-		}
-	}
-
-	/**
-	 * Тест исключения в случае ошибки сервера.
-	 */
-	@Test
-	public void test_UNEXPECTED_ERROR() {
-
-		try {
-
-			throw new BusinessException(UNEXPECTED_ERROR, "Exception for test");
-
-		} catch (BusinessException e) {
-
-			Assert.assertEquals("UNEXPECTED_ERROR", e.getCode());
-
-			Assert.assertFalse(
-					e.getMessage().contains("Exception for test"));
-
-			Assert.assertEquals(
-					e.getReason(), UNEXPECTED_ERROR);
-
-			Assert.assertTrue(
-					e.getStatus().is5xxServerError());
 
 		}
 	}
@@ -78,7 +47,7 @@ public class ExceptionTest {
 
 		try {
 
-			throw new BusinessException(COMMENT_NOT_FOUND, 1);
+			throw new BusinessException(ServiceExceptionReason.COMMENT_NOT_FOUND, 1);
 
 		} catch (BusinessException e) {
 
@@ -88,7 +57,7 @@ public class ExceptionTest {
 					e.getMessage().contains("1"));
 
 			Assert.assertEquals(
-					e.getReason(), COMMENT_NOT_FOUND);
+					e.getReason(), ServiceExceptionReason.COMMENT_NOT_FOUND);
 
 			Assert.assertTrue(
 					e.getStatus().is4xxClientError());
@@ -104,7 +73,7 @@ public class ExceptionTest {
 
 		try {
 
-			throw new BusinessException(USER_NOT_FOUND, 1);
+			throw new BusinessException(ServiceExceptionReason.USER_NOT_FOUND, 1);
 
 		} catch (BusinessException e) {
 
@@ -114,7 +83,7 @@ public class ExceptionTest {
 					e.getMessage().contains("1"));
 
 			Assert.assertEquals(
-					e.getReason(), USER_NOT_FOUND);
+					e.getReason(), ServiceExceptionReason.USER_NOT_FOUND);
 
 			Assert.assertTrue(
 					e.getStatus().is4xxClientError());
