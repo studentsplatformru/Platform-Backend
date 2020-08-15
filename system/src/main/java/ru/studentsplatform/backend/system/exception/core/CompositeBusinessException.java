@@ -14,6 +14,11 @@ import java.util.stream.Collectors;
 public class CompositeBusinessException extends RuntimeException {
 	private final List<BusinessExceptionData> businessExceptionDataList;
 
+	/**
+	 * Конструктор.
+	 *
+	 * @param businessExceptionDataList Список исключений.
+	 */
 	public CompositeBusinessException(List<BusinessExceptionData> businessExceptionDataList) {
 		if (CollectionUtils.empty(businessExceptionDataList)) {
 			throw new IllegalArgumentException("Исключение не может быть инициализировано пустым списком.");

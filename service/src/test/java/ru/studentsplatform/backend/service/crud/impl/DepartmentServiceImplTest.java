@@ -10,7 +10,9 @@ import ru.studentsplatform.backend.domain.repository.DepartmentRepository;
 import ru.studentsplatform.backend.domain.repository.FacultyRepository;
 import ru.studentsplatform.backend.entities.model.university.Department;
 import ru.studentsplatform.backend.entities.model.university.Faculty;
+import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
+import ru.studentsplatform.backend.system.helper.TestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -65,7 +67,12 @@ public class DepartmentServiceImplTest {
 		when(departmentRepository.findById(2L)).thenReturn(java.util.Optional.of(department));
 
 		assertEquals(departmentRepository.findById(2L).orElseThrow(), departmentService.getById(2L));
-		assertThrows(BusinessException.class, () -> departmentService.getById(3L));
+
+		var id = 3L;
+		TestUtils.checkException(
+				() -> departmentService.getById(id),
+				new BusinessException(ServiceExceptionReason.DEPARTMENT_NOT_FOUND, id)
+		);
 	}
 
 	/**

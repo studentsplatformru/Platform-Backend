@@ -47,7 +47,7 @@ public class SpbuTeamMapperTest {
 	 * Проверка возможности создать список DTO на основе списка сущностей.
 	 */
 	@Test
-	void ListSpbuTeamDTOToTeam(){
+	void ListSpbuTeamDTOToTeam() {
 		List<SpbuTeamDTO> spbuTeamDTOS = new LinkedList<>();
 		SpbuTeamDTO dto = new SpbuTeamDTO();
 		dto.setId(5L);
@@ -68,7 +68,7 @@ public class SpbuTeamMapperTest {
 	 * Проверка возможности создать список сущностей на основе списка DTO.
 	 */
 	@Test
-	void ListSpbuTeamToTeamDTO(){
+	void ListSpbuTeamToTeamDTO() {
 		List<SpbuTeam> spbuTeams = new LinkedList<>();
 		SpbuTeam entity = new SpbuTeam();
 		entity.setId(5L);

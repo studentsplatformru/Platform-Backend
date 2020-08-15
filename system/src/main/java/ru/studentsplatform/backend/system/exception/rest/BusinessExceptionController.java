@@ -61,6 +61,6 @@ public class BusinessExceptionController {
 	public ExceptionDTO serverException(Exception exception) {
 		logger.error(exception.getMessage());
 		exception.printStackTrace();
-		return new ExceptionDTO("Что-то пошло не так.", HttpStatus.INTERNAL_SERVER_ERROR, exception.getClass().getName());
+		return new ExceptionDTO("Ошибка.", HttpStatus.INTERNAL_SERVER_ERROR, exception.getClass().getName());
 	}
 }

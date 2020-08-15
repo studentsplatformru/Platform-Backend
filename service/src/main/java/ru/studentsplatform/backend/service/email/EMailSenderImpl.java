@@ -66,9 +66,10 @@ public class EMailSenderImpl implements EMailSender {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void send(
-			@NonNull String to, String subject,
-			String body, String contentPath) throws IOException {
+	public void send(@NonNull String to,
+					 String subject,
+					 String body,
+					 String contentPath) throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -100,9 +101,10 @@ public class EMailSenderImpl implements EMailSender {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void send(
-			@NonNull String to, String subject,
-			String body, List<String> contentPaths) throws IOException {
+	public void send(@NonNull String to,
+					 String subject,
+					 String body,
+					 List<String> contentPaths) throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -136,9 +138,10 @@ public class EMailSenderImpl implements EMailSender {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void sendHtml(
-			@NonNull String to, String subject,
-			String htmlPath, @Nullable List<String> contentPaths) throws IOException {
+	public void sendHtml(@NonNull String to,
+						 String subject,
+						 String htmlPath,
+						 @Nullable List<String> contentPaths) throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 

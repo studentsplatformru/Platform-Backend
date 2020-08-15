@@ -7,5 +7,5 @@ import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
 
 @Repository
 public interface ScheduleUserCellRepository extends JpaRepository<ScheduleUserCell, Long>,
-											QuerydslPredicateExecutor<ScheduleUserCell> {
+		QuerydslPredicateExecutor<ScheduleUserCell> {
 }

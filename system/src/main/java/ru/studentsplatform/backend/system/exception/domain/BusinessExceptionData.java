@@ -44,11 +44,15 @@ public class BusinessExceptionData {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 		BusinessExceptionData that = (BusinessExceptionData) o;
-		return Arrays.equals(parameters, that.parameters) &&
-				Objects.equals(reason, that.reason);
+		return Arrays.equals(parameters, that.parameters)
+				&& Objects.equals(reason, that.reason);
 	}
 
 	@Override
