@@ -17,8 +17,8 @@ import org.telegram.telegrambots.ApiContextInitializer;
 @EnableJpaRepositories(basePackages = "ru.studentsplatform.backend.domain.repository")
 @EnableAsync
 public class EndpointApplication {
-    public static void main(String[] args) {
-        ApiContextInitializer.init();
-        SpringApplication.run(EndpointApplication.class, args);
-    }
+	public static void main(String[] args) {
+		ApiContextInitializer.init();
+		SpringApplication.run(EndpointApplication.class, args);
+	}
 }

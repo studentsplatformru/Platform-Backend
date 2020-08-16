@@ -28,7 +28,8 @@ public class FacultyServiceImpl implements FacultyService {
 	private final FacultyRepository facultyRepository;
 	private final UniversityRepository universityRepository;
 
-	public FacultyServiceImpl(FacultyRepository facultyRepository, UniversityRepository universityRepository) {
+	public FacultyServiceImpl(FacultyRepository facultyRepository,
+							  UniversityRepository universityRepository) {
 		this.facultyRepository = facultyRepository;
 		this.universityRepository = universityRepository;
 	}

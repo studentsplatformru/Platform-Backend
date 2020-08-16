@@ -15,7 +15,7 @@ import ru.studentsplatform.backend.entities.model.spbu.SpbuTeam;
 
 import java.util.LinkedList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
@@ -43,7 +43,7 @@ class SpbuServiceImplTest {
 		studPrograms.get(0).setProgramId(111L);
 
 		var combinations = new LinkedList<SpbuProgramCombinationDTO>();
-		combinations.add( new SpbuProgramCombinationDTO());
+		combinations.add(new SpbuProgramCombinationDTO());
 		combinations.get(0).setStudyPrograms(studPrograms);
 
 		var levels = new LinkedList<SpbuProgramLevelDTO>();
@@ -84,7 +84,7 @@ class SpbuServiceImplTest {
 	 * Проверка того, что метод возвращает наденный по имени объект SpbuTeam.
 	 */
 	@Test
-	void getByNameTest(){
+	void getByNameTest() {
 		var team = new SpbuTeam();
 		team.setName("test");
 		doReturn(team).when(repository).findByName(team.getName());

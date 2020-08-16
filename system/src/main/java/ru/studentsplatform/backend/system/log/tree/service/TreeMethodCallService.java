@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.system.log.tree.domain.JoinPointHelper;
 import ru.studentsplatform.backend.system.log.tree.domain.TreeMethodCall;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Вспомогательный сервис для дерева логгирования.
@@ -63,11 +63,12 @@ public class TreeMethodCallService {
 	 * @param dataStorage Список веток.
 	 * @return Дерево вызова представленное строкой
 	 */
-	public String createTree(ArrayList<TreeMethodCall> dataStorage) {
+	public String createTree(List<TreeMethodCall> dataStorage) {
 		var tree = new StringBuilder();
 		var totalTime = dataStorage.get(0).getEnd() - dataStorage.get(0).getStart();
-		tree.append("\n└──ROOT ");
-		tree.append(totalTime + "ms\n");
+		tree.append("\n└──ROOT ")
+				.append(totalTime)
+				.append("ms\n");
 		var size = dataStorage.size();
 		for (var i = 0; i < size; i++) {
 			var call = dataStorage.get(i);

@@ -7,9 +7,12 @@ import ru.studentsplatform.backend.domain.dto.university.FacultyDTO;
 import ru.studentsplatform.backend.endpoint.mapper.FacultyMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.FacultyCRUDController;
 import ru.studentsplatform.backend.service.crud.FacultyService;
+import ru.studentsplatform.backend.system.exception.core.Fault;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.util.List;
+
+import static ru.studentsplatform.backend.system.helper.ControllerUtils.handleExceptions;
 
 /**
  * @author Archie-Vian (sas-aramonov@yandex.ru) 01.08.2020
@@ -47,9 +50,8 @@ public class FacultyCRUDControllerImpl implements FacultyCRUDController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<FacultyDTO> getById(Long id) {
-		var result = mapper.facultyToFacultyDTO(service.getById(id));
-		return ResponseEntity.ok(result);
+	public ResponseEntity<FacultyDTO> getById(Long id) throws Fault {
+		return handleExceptions(() -> ResponseEntity.ok(mapper.facultyToFacultyDTO(service.getById(id))));
 	}
 
 	/**

@@ -1,7 +1,8 @@
 package ru.studentsplatform.backend.service.exception;
 
 import org.springframework.http.HttpStatus;
-import ru.studentsplatform.backend.system.exception.core.BusinessExceptionReason;
+import ru.studentsplatform.backend.system.exception.BusinessExceptionReason;
+import ru.studentsplatform.backend.system.exception.MessageWithParams;
 
 /**
  * Реализация {@link BusinessExceptionReason}.
@@ -9,64 +10,54 @@ import ru.studentsplatform.backend.system.exception.core.BusinessExceptionReason
  * @author Danila K (karnacevich5323537@gmail.com) (23.07.2020). feat. Krylov Sergey (krylov.sergey.1999@yandex.ru)
  */
 public enum ServiceExceptionReason implements BusinessExceptionReason {
+	// Бизнес-ошибки - E
+	// Информационные ошибки - I
 
-	UNEXPECTED_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "UNEXPECTED_ERROR", "Непредвиденная ошибка"),
-
-	// Ошибки целлостности данных
-	NOTE_NOT_FOUND(HttpStatus.NOT_FOUND, "F001", "Запись с Id %d не найдена"),
-	COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F002", "Комментарий с Id %d не найден"),
-	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "F003", "Пользователь с Id %d не найден"),
-	SCHEDULE_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "F004",
-			"Ячейка расписания с Id %d, не найдена"),
-	NO_UPLOADED_FILES_FOUND(HttpStatus.NOT_FOUND, "F005",
-			"Не найдено ни одного загружаемого файла к задаче с Id %d"),
-	FILE_INDEX_NOT_EXIST(HttpStatus.NOT_FOUND, "F006",
-			"Файла с ID %d не существует в задаче с Id %d"),
-	NULL_FILE_EXCEPTION(HttpStatus.BAD_REQUEST, "F007",
-			"Отсутствет содержимое загружаемого в задачу c Id %d файла"),
-	USER_INFO_ALREADY_EXISTS(HttpStatus.CONFLICT, "F008",
-			"Информация о пользователе с id %d уже существует"),
-	NULL_IMAGE_FILE(HttpStatus.BAD_REQUEST, "F009",
-			"Файл изображения пуст"),
-	USER_INFO_NOT_FOUND(HttpStatus.NOT_FOUND, "F010", "Информация о пользователе с Id %d не найдена"),
-	FACULTY_NOT_FOUND(HttpStatus.NOT_FOUND, "F011", "Информация об институте с Id %d не найдена"),
-	DIRECTION_NOT_FOUND(HttpStatus.NOT_FOUND, "F012", "Информация о направлении с Id %d не найдена"),
-	DEPARTMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "F013", "Информация о кафедре с Id %d не найдена"),
-	TEAM_NOT_FOUND(HttpStatus.NOT_FOUND, "F014", "Информация о группе с Id %d не найдена"),
-	USER_ALREADY_EXISTS(HttpStatus.CONFLICT, "F015",
-			"Пользователь с id %d уже существует"),
-	SUBJECT_NOT_FOUND(HttpStatus.NOT_FOUND, "F016",
-			"Информация о предмете с Id %d не найдена"),
-	PLACE_STUDY_NOT_FOUND(HttpStatus.NOT_FOUND, "F017",
-			"Информация о месте проведения занятий с Id %d не найдена"),
-	DISCIPLINE_NOT_FOUND(HttpStatus.NOT_FOUND, "F018",
-			"Информация о дисциплине с Id %d не найдена"),
-	UNIVERSITY_NOT_FOUND(HttpStatus.NOT_FOUND, "F019", "Информация об университете с id %d не найдена"),
-	SCHEDULE_USER_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "F020",
-			"Ячейка расписания с id %d пользователя  не найдена");
-
+	// Ошибки целостности данных
+	NOTE_NOT_FOUND(HttpStatus.NOT_FOUND, "D001", ErrorMessageWithParams.D001),
+	COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "D002", ErrorMessageWithParams.D002),
+	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "D003", ErrorMessageWithParams.D003),
+	SCHEDULE_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "D004", ErrorMessageWithParams.D004),
+	NO_UPLOADED_FILES_FOUND(HttpStatus.NOT_FOUND, "D005", ErrorMessageWithParams.D005),
+	FILE_INDEX_NOT_EXIST(HttpStatus.NOT_FOUND, "D006", ErrorMessageWithParams.D006),
+	NULL_FILE_EXCEPTION(HttpStatus.BAD_REQUEST, "D007", ErrorMessageWithParams.D007),
+	USER_INFO_ALREADY_EXISTS(HttpStatus.CONFLICT, "D008", ErrorMessageWithParams.D008),
+	NULL_IMAGE_FILE(HttpStatus.BAD_REQUEST, "D009", ErrorMessageWithParams.D009),
+	USER_INFO_NOT_FOUND(HttpStatus.NOT_FOUND, "D010", ErrorMessageWithParams.D010),
+	FACULTY_NOT_FOUND(HttpStatus.NOT_FOUND, "D011", ErrorMessageWithParams.D011),
+	DIRECTION_NOT_FOUND(HttpStatus.NOT_FOUND, "D012", ErrorMessageWithParams.D012),
+	DEPARTMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "D013", ErrorMessageWithParams.D013),
+	TEAM_NOT_FOUND(HttpStatus.NOT_FOUND, "D014", ErrorMessageWithParams.D014),
+	USER_ALREADY_EXISTS(HttpStatus.CONFLICT, "D015", ErrorMessageWithParams.D015),
+	SUBJECT_NOT_FOUND(HttpStatus.NOT_FOUND, "D016", ErrorMessageWithParams.D016),
+	PLACE_STUDY_NOT_FOUND(HttpStatus.NOT_FOUND, "D017", ErrorMessageWithParams.D017),
+	DISCIPLINE_NOT_FOUND(HttpStatus.NOT_FOUND, "D018", ErrorMessageWithParams.D018),
+	UNIVERSITY_NOT_FOUND(HttpStatus.NOT_FOUND, "D019", ErrorMessageWithParams.D019),
+	SCHEDULE_USER_CELL_NOT_FOUND(HttpStatus.NOT_FOUND, "D020", ErrorMessageWithParams.D020);
 
 	private final HttpStatus status;
 	private final String code;
-	private final String messagePattern;
+	private final MessageWithParams messageWithParams;
 
 	/**
-	 * @param status         Статус ошибки
-	 * @param code           Код ошибки
-	 * @param messagePattern Паттерн для формирования текста ошибки
+	 * @param status            Статус ошибки
+	 * @param code              Код ошибки
+	 * @param messageWithParams Паттерн для формирования текста ошибки
 	 */
-	ServiceExceptionReason(HttpStatus status, String code, String messagePattern) {
+	ServiceExceptionReason(HttpStatus status,
+						   String code,
+						   MessageWithParams messageWithParams) {
 		this.status = status;
 		this.code = code;
-		this.messagePattern = messagePattern;
+		this.messageWithParams = messageWithParams;
 	}
 
 	public String getCode() {
 		return code;
 	}
 
-	public String getMessagePattern() {
-		return messagePattern;
+	public MessageWithParams getMessageWithParams() {
+		return messageWithParams;
 	}
 
 	public HttpStatus getStatus() {

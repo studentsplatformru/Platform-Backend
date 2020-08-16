@@ -18,7 +18,8 @@ import java.util.List;
 public interface SpbuDataController {
 
 	/**
-	 * Получение списка направлений поготовки.
+	 * Получение списка направлений подготовки.
+	 *
 	 * @return список DTO направлений подготовки
 	 */
 	@GetMapping("/divisions")
@@ -26,64 +27,71 @@ public interface SpbuDataController {
 
 	/**
 	 * Получение программ обучения.
+	 *
 	 * @param alias сокращённое наименование направления подготовки
-	 * @return		список DTO направлений подготовки
+	 * @return список DTO направлений подготовки
 	 */
 	@GetMapping("/division/{alias}/programs")
 	ResponseEntity<List<SpbuStudyProgramDTO>> getStudyPrograms(@PathVariable(name = "alias") String alias);
 
 	/**
 	 * Получение студенческих групп.
+	 *
 	 * @param id Id программы обучения
-	 * @return	 список студенческих групп
+	 * @return список студенческих групп
 	 */
 	@GetMapping("program/{id}/groups")
 	ResponseEntity<List<SpbuTeamDTO>> getGroups(@PathVariable(name = "id") String id);
 
 	/**
-	 * Получение заниятий на следующую неделю.
+	 * Получение занятий на следующую неделю.
+	 *
 	 * @param id Id студенческой группы
-	 * @return	 список занятий
+	 * @return список занятий
 	 */
 	@GetMapping("group/{id}/events")
 	ResponseEntity<List<SpbuEventDTO>> getNextWeekEventsById(@PathVariable(name = "id") String id);
 
 	/**
 	 * Получение списка занятий за определенный период.
-	 * @param id 		Id студенческой группы
+	 *
+	 * @param id        Id студенческой группы
 	 * @param startTime начало периода
-	 * @param endTime 	конец периода
-	 * @return 			список занятий
+	 * @param endTime   конец периода
+	 * @return список занятий
 	 */
 	@GetMapping("group/{id}/events/{start}/{end}")
-	ResponseEntity<List<SpbuEventDTO>> getEventsByIdForTimeInterval(@PathVariable(name = "id")String id,
-													   @PathVariable(name = "start") String startTime,
-													   @PathVariable(name = "end") String endTime);
+	ResponseEntity<List<SpbuEventDTO>> getEventsByIdForTimeInterval(@PathVariable(name = "id") String id,
+																	@PathVariable(name = "start") String startTime,
+																	@PathVariable(name = "end") String endTime);
 
 	/**
 	 * Получение заниятий на следующую неделю.
-	 * @param name 		имя студенческой группы
-	 * @return 			список занятий
+	 *
+	 * @param name имя студенческой группы
+	 * @return список занятий
 	 */
 	@GetMapping("group/name/{name}/events")
 	ResponseEntity<List<SpbuEventDTO>> getNextWeekEventsByName(@PathVariable(name = "name") String name);
 
 	/**
 	 * Получение списка занятий за определенный период.
-	 * @param name 		имя студенческой группы
+	 *
+	 * @param name      имя студенческой группы
 	 * @param startTime начало периода
-	 * @param endTime 	конец периода
-	 * @return 			список занятий
+	 * @param endTime   конец периода
+	 * @return список занятий
 	 */
 	@GetMapping("group/name/{name}/events/{start}/{end}")
-	ResponseEntity<List<SpbuEventDTO>> getEventsByNameForTimeInterval(@PathVariable(name = "name")String name,
-													@PathVariable(name = "start") String startTime,
-													@PathVariable(name = "end") String endTime);
+	ResponseEntity<List<SpbuEventDTO>> getEventsByNameForTimeInterval(@PathVariable(name = "name") String name,
+																	  @PathVariable(name = "start") String startTime,
+																	  @PathVariable(name = "end") String endTime);
 
 	/**
 	 * Сохраняет в БД все группы для выбранного направления.
+	 *
 	 * @param alias Сокращённое наименование подготовки
-	 * @return 		Ответ с кодом 200 и сообщением о результате сохранения
+	 * @return Ответ с кодом 200 и сообщением о результате сохранения
 	 */
 	@GetMapping("division/{alias}/saveAllGroups")
 	ResponseEntity<String> saveAllGroupsToDB(@PathVariable(name = "alias") String alias);

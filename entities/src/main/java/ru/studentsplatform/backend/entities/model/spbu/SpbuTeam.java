@@ -22,16 +22,16 @@ public class SpbuTeam {
 		return alias;
 	}
 
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public void setAlias(String alias) {
-		this.alias = alias;
 	}
 
 	public String getName() {

@@ -29,6 +29,7 @@ import java.util.List;
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  */
 @Service
+
 public class EMailSenderImpl implements EMailSender {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -70,10 +71,10 @@ public class EMailSenderImpl implements EMailSender {
 	 */
 	@Async
 	@Override
-	public void send(
-			@NonNull String to, String subject,
-			String body, String contentPath)
-			throws IOException {
+	public void send(@NonNull String to,
+					 String subject,
+					 String body,
+					 String contentPath) throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -107,10 +108,10 @@ public class EMailSenderImpl implements EMailSender {
 	 */
 	@Async
 	@Override
-	public void send(
-			@NonNull String to, String subject,
-			String body, List<String> contentPaths)
-			throws IOException {
+	public void send(@NonNull String to,
+					 String subject,
+					 String body,
+					 List<String> contentPaths) throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -146,10 +147,10 @@ public class EMailSenderImpl implements EMailSender {
 	 */
 	@Async
 	@Override
-	public void sendHtml(
-			@NonNull String to, String subject,
-			String html, @Nullable List<String> contentPaths)
-			throws IOException {
+	public void sendHtml(@NonNull String to,
+						 String subject,
+						 String html,
+						 @Nullable List<String> contentPaths) throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
 

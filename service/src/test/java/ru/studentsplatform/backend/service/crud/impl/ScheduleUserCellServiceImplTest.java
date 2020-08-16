@@ -12,7 +12,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import ru.studentsplatform.backend.domain.pojo.filters.ScheduleUserCellFilterPOJO;
 import ru.studentsplatform.backend.domain.repository.ScheduleUserCellRepository;
 import ru.studentsplatform.backend.entities.model.schedule.ScheduleUserCell;
-import ru.studentsplatform.backend.entities.model.university.Task;
 import ru.studentsplatform.backend.system.exception.core.BusinessException;
 
 import java.util.LinkedList;
