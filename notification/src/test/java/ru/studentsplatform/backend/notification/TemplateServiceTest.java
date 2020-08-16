@@ -5,36 +5,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
-import ru.studentsplatform.backend.notification.service.BotTemplateServiceImpl;
+import ru.studentsplatform.backend.notification.service.TemplateServiceImpl;
 
 /**
- * Тесты для {@link BotTemplateService}
+ * Тесты для {@link TemplateService}
  *
  * @author Danila K (karnacevich5323537@gmail.com) (15.08.2020).
  */
 @ExtendWith(MockitoExtension.class)
-public class BotTemplateServiceTest {
+public class TemplateServiceTest {
 
-    private BotTemplateService botTemplateService;
+    private TemplateService templateService;
 
     @BeforeEach
     void before() {
-        botTemplateService = new BotTemplateServiceImpl();
-    }
-
-    /**
-     * Тест на получение текстового шаблона.
-     */
-    @Test
-    public void getTemplate() {
-
-        Assert.assertEquals(
-                "У Вас новая оценка!\n Test : 5",
-                botTemplateService.getBotTemplate(
-                        MessageType.MARK_NOTIFICATION,
-                        "Test", "5"));
-
+        templateService = new TemplateServiceImpl();
     }
 
     /**
@@ -45,10 +32,11 @@ public class BotTemplateServiceTest {
 
         Assert.assertThrows(
                 IllegalArgumentException.class,
-                ()-> botTemplateService.getBotTemplate(
+                ()-> templateService.getTemplate(
                         MessageType.MARK_NOTIFICATION,
+                        NotificationType.Email,
                         "Test" )
-                );
+        );
 
     }
 }

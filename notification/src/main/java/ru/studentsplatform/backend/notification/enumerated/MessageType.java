@@ -23,9 +23,18 @@ public enum MessageType {
      * 1-й : Ссылка на подтверждение email.
      */
     EMAIL_CONFIRMATION(
-            "notification\\src\\main\\resources\\templates\\email_confirmation.html",
+            "notification/src/main/resources/templates/email_confirmation.html",
             1,
-            "Пожалуйста, поддтвердите свой email:\n %s");
+            "Пожалуйста, поддтвердите свой email:\n %s"),
+
+    /**
+     * Параметры:
+     * 1-й : Свободное сообщение.
+     */
+    CUSTOM(
+            "-",
+            1,
+            "-");
 
     private final String path;
     private final String botPattern;

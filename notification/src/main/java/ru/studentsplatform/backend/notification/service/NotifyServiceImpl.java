@@ -5,13 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.user.User;
-import ru.studentsplatform.backend.notification.BotTemplateService;
 import ru.studentsplatform.backend.notification.EMailSender;
-import ru.studentsplatform.backend.notification.HtmlTemplateService;
+import ru.studentsplatform.backend.notification.TemplateService;
 import ru.studentsplatform.backend.notification.NotifyService;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
+import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,6 +22,7 @@ import java.util.List;
  *
  * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
  */
+@Profiled
 @Service
 public class NotifyServiceImpl implements NotifyService {
 
@@ -28,23 +30,18 @@ public class NotifyServiceImpl implements NotifyService {
 
     private final EMailSender eMailSender;
 
-    private final HtmlTemplateService htmlTemplateService;
-
-    private final BotTemplateService botTemplateService;
+    private final TemplateService templateService;
 
 
     /**
      * @param eMailSender сервис для отправки email сообщений.
-     * @param htmlTemplateService сервис для обработки html уведомлений.
-     * @param botTemplateService сервис для обработки строковых уведомлений.
+     * @param templateService сервис для обработки шаблона уведомлений.
      */
     public NotifyServiceImpl(
             EMailSender eMailSender,
-            HtmlTemplateService htmlTemplateService,
-            BotTemplateService botTemplateService) {
+            TemplateService templateService) {
         this.eMailSender = eMailSender;
-        this.htmlTemplateService = htmlTemplateService;
-        this.botTemplateService = botTemplateService;
+        this.templateService = templateService;
     }
 
     /**
@@ -52,9 +49,7 @@ public class NotifyServiceImpl implements NotifyService {
      */
     @Override
     public void sendNotification(User user, MessageType messageType, String... args) {
-
         this.sendNotification(user, messageType, user.getNotificationType(), args);
-
     }
 
     /**
@@ -64,27 +59,20 @@ public class NotifyServiceImpl implements NotifyService {
     public void sendNotification(User user, MessageType messageType,
                                  NotificationType notificationType,
                                  String... args) {
-        String message;
+        this.sendNotification(Collections.singletonList(user),
+                Collections.singletonList(notificationType),
+                messageType, args);
+    }
 
-        if (notificationType == NotificationType.Email) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendNotification(User user,
+                                 List<NotificationType> notificationTypes,
+                                 MessageType messageType, String... args) {
+        this.sendNotification(Collections.singletonList(user), notificationTypes, messageType, args);
 
-            message = htmlTemplateService.getHtmlTemplate(messageType, args);
-
-            this.sendEmail(user, message, args);
-
-        } else if (notificationType == NotificationType.Telegram) {
-
-            message = botTemplateService.getBotTemplate(messageType, args);
-
-            this.sendTelegram(user, message, args);
-
-        } else if (notificationType == NotificationType.VK) {
-
-            message = botTemplateService.getBotTemplate(messageType, args);
-
-            this.sendVK(user, message, args);
-
-        }
     }
 
     /**
@@ -95,8 +83,8 @@ public class NotifyServiceImpl implements NotifyService {
                                  List<NotificationType> notificationTypes,
                                  MessageType messageType, String... args) {
 
-        String message = htmlTemplateService.getHtmlTemplate(messageType, args);
-        String botMessage = botTemplateService.getBotTemplate(messageType, args);
+        String message = templateService.getTemplate(messageType, NotificationType.Email, args);
+        String botMessage = templateService.getTemplate(messageType, NotificationType.Telegram, args);
 
         for (User user : users) {
 
@@ -117,6 +105,47 @@ public class NotifyServiceImpl implements NotifyService {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendNotification(List<User> users,
+                                 NotificationType notificationType,
+                                 MessageType messageType, String... args) {
+
+        this.sendNotification(users, Collections.singletonList(notificationType), messageType, args);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendNotification(List<User> users,
+                                 MessageType messageType, String... args) {
+
+        String message = templateService.getTemplate(messageType, NotificationType.Email, args);
+        String botMessage = templateService.getTemplate(messageType, NotificationType.Telegram, args);
+
+        for (User user : users) {
+
+            if (user.getNotificationType() == NotificationType.Email) {
+
+                this.sendEmail(user, message, args);
+            }
+            if (user.getNotificationType() == NotificationType.Telegram) {
+
+                this.sendTelegram(user, botMessage, args);
+
+            }
+            if (user.getNotificationType() == NotificationType.VK) {
+
+                this.sendVK(user, botMessage, args);
+
+            }
+        }
+    }
+
+    // отправка сообщения через email
     private void sendEmail(User user, String message, String... args) {
 
         try {
@@ -131,24 +160,26 @@ public class NotifyServiceImpl implements NotifyService {
         }
     }
 
+    // отправка сообщения через vk-бота
     private void sendVK(User user, String message, String... args) {
 
         // Получение адреса отправки user.getVkId()
         try {
 
-            // telegramSender.sendMessage(user.getVkId(), message);
+            // VKSender.sendMessage(user.getVkId(), message, args);
             throw new NoSuchMethodException();
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
     }
 
+    // отправка сообщения через telegram-бота
     private void sendTelegram(User user, String message, String... args) {
 
         // Получение адреса отправки user.getTelegramId()
         try {
 
-            // telegramSender.sendMessage(user.getTelegramId(), message);
+            // telegramSender.sendMessage(user.getTelegramId(), message, args);
             throw new NoSuchMethodException();
         } catch (NoSuchMethodException e) {
             e.printStackTrace();

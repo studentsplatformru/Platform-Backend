@@ -6,5 +6,4 @@ import ru.studentsplatform.backend.entities.model.user.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User getUserById(Long id);
 }

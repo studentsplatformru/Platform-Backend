@@ -29,7 +29,6 @@ import java.util.List;
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  */
 @Service
-//@Profiled
 public class EMailSenderImpl implements EMailSender {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());

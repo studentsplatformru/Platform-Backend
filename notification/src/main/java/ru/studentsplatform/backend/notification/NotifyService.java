@@ -33,6 +33,17 @@ public interface NotifyService {
     void sendNotification(User user, MessageType messageType,
                           NotificationType notificationType,
                           String... args);
+    /**
+     * Метод для для отправки уведомлений пользователям.
+     *
+     * @param user полользователь для отправки.
+     * @param notificationTypes получаются необходимые способы
+     * отправки уведомления.
+     * @param messageType тип сообщения в виде {@link MessageType}.
+     * @param args необходимые для подстановки в шаблон значения.
+     */
+    void sendNotification(User user, List<NotificationType> notificationTypes,
+                          MessageType messageType, String... args);
 
     /**
      * Метод для для отправки уведомлений пользователям.
@@ -45,5 +56,25 @@ public interface NotifyService {
      */
     void sendNotification(List<User> users, List<NotificationType> notificationTypes,
                           MessageType messageType, String... args);
+
+    /**
+     * Метод для для отправки уведомлений пользователям.
+     *
+     * @param users полользователи для отправки.
+     * @param notificationType способ отправки уведомления.
+     * @param messageType тип сообщения в виде {@link MessageType}.
+     * @param args необходимые для подстановки в шаблон значения.
+     */
+    void sendNotification(List<User> users, NotificationType notificationType,
+                          MessageType messageType, String... args);
+
+    /**
+     * Метод для для отправки уведомлений пользователям.
+     *
+     * @param users полользователи для отправки.
+     * @param messageType тип сообщения в виде {@link MessageType}.
+     * @param args необходимые для подстановки в шаблон значения.
+     */
+    void sendNotification(List<User> users, MessageType messageType, String... args);
 
 }

@@ -2,7 +2,6 @@ package ru.studentsplatform.backend.notification;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -13,6 +12,8 @@ import ru.studentsplatform.backend.notification.enumerated.MessageType;
 import ru.studentsplatform.backend.notification.service.NotifyServiceImpl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -30,10 +31,7 @@ public class NotifyServiceTest {
     private EMailSender eMailSender;
 
     @Mock
-    private HtmlTemplateService htmlTemplateService;
-
-    @Mock
-    private BotTemplateService botTemplateService;
+    private TemplateService templateService;
 
     @InjectMocks
     private NotifyServiceImpl notifyService;
@@ -50,13 +48,15 @@ public class NotifyServiceTest {
         user.setEmail("someemail@email.com");
 
         doReturn("content path")
-                .when(htmlTemplateService)
-                .getHtmlTemplate(MessageType.EMAIL_CONFIRMATION, "some test");
+                .when(templateService)
+                .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Email,
+                        "some test");
 
         notifyService.sendNotification(user, MessageType.EMAIL_CONFIRMATION, "some test");
 
-        verify(htmlTemplateService, Mockito.times(1))
-                .getHtmlTemplate(MessageType.EMAIL_CONFIRMATION, "some test");
+        verify(templateService, Mockito.times(1))
+                .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Email,
+                        "some test");
 
         verify(eMailSender, Mockito.times(1))
                 .sendHtml(
@@ -66,6 +66,55 @@ public class NotifyServiceTest {
                         eq(null)
                 );
 
+    }
+
+    /**
+     * Тестируется отправка сообщения через email-сервис.
+     *
+     * @throws IOException в случае неправильного пути.
+     */
+    @Test
+    public void testEmailNotificationWithManyUsers() throws IOException {
+
+        List<User> users = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            User user = new User();
+            user.setNotificationType(NotificationType.Email);
+            user.setEmail("someemail@email.com");
+            users.add(user);
+        }
+
+        List<NotificationType> types = new ArrayList<>();
+
+        types.add(NotificationType.Email);
+        types.add(NotificationType.Telegram);
+
+        doReturn("content path")
+                .when(templateService)
+                .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Email,
+                        "some test");
+
+        notifyService.sendNotification(users, types, MessageType.EMAIL_CONFIRMATION, "some test");
+
+        verify(templateService, Mockito.times(1))
+                .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Email,
+                        "some test");
+
+        verify(templateService, Mockito.times(1))
+                .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Telegram,
+                        "some test");
+
+        verify(eMailSender, Mockito.times(10))
+                .sendHtml(
+                        eq("someemail@email.com"),
+                        eq("Students Platform"),
+                        eq("content path"),
+                        eq(null)
+                );
+
+        // will throw NoSuchMethodException
+        // + add telegram realization
     }
 
     /**
@@ -80,10 +129,12 @@ public class NotifyServiceTest {
 
         notifyService.sendNotification(user, MessageType.EMAIL_CONFIRMATION, "some test");
 
-        verify(botTemplateService, Mockito.times(1))
-                .getBotTemplate(MessageType.EMAIL_CONFIRMATION, "some test");
+        verify(templateService, Mockito.times(1))
+                .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Telegram,
+                        "some test");
 
         // will throw NoSuchMethodException
+        // + add telegram realization
     }
 
 }
