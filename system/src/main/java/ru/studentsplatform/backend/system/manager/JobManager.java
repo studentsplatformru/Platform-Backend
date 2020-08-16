@@ -42,10 +42,8 @@ public class JobManager {
                 job.run();
 
                 logger.info(
-                        "In " +
-                                LocalDateTime.ofInstant(Instant.now(),
-                                        ZoneId.systemDefault()) +
-                                " Task done");
+                        "In " + LocalDateTime.ofInstant(Instant.now(),
+                                ZoneId.systemDefault()) + " Task done");
             }
         };
 
@@ -68,20 +66,15 @@ public class JobManager {
                 job.run();
 
                 logger.info(
-                        "In " +
-                                LocalDateTime.ofInstant(Instant.now(),
-                                        ZoneId.systemDefault()) +
-                                " Task done");
+                        "In " + LocalDateTime.ofInstant(Instant.now(),
+                                ZoneId.systemDefault()) + " Task done");
             }
         };
         LocalDateTime locateDate =
-                LocalDateTime.parse(
-                        stringDate,
+                LocalDateTime.parse(stringDate,
                         DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 
-        Date date = Date.from(
-                locateDate.atZone(ZoneId.systemDefault())
-                        .toInstant());
+        Date date = Date.from(locateDate.atZone(ZoneId.systemDefault()).toInstant());
 
         timer.schedule(timerTask, date);
     }
