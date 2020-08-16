@@ -119,7 +119,6 @@ public class NotifyServiceTest {
 
     /**
      * Тестируется отправка сообщения через Telegram-сервис.
-     *
      */
     @Test
     public void testBotNotification() {

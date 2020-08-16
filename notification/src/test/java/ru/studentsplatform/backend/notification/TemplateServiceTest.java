@@ -25,6 +25,30 @@ public class TemplateServiceTest {
     }
 
     /**
+     * Тест на получение шаблона.
+     */
+    @Test
+    public void getTemplate() {
+
+        Assert.assertEquals(
+                "У Вас новая оценка!\n Test : Test",
+                templateService.getTemplate(
+                        MessageType.MARK_NOTIFICATION,
+                        NotificationType.Telegram,
+                        "Test", "Test" )
+        );
+
+        Assert.assertEquals(
+                "Custom template",
+                templateService.getTemplate(
+                        MessageType.CUSTOM,
+                        NotificationType.Telegram,
+                        "Custom template")
+        );
+
+    }
+
+    /**
      * Тест на получении ошибки при неправильном количестве аргументов.
      */
     @Test
