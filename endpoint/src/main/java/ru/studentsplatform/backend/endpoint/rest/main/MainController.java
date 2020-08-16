@@ -12,8 +12,10 @@ import static ru.studentsplatform.backend.system.helper.ControllerUtils.handleEx
 @Profiled
 @RestController("/")
 public class MainController {
+
 	@GetMapping
 	public ResponseEntity<String> getMain() throws Fault {
 		return handleExceptions(() -> ResponseEntity.ok("Hello world"));
 	}
+
 }

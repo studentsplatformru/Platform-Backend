@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.telegram.telegrambots.ApiContextInitializer;
 
 //  Добавить параметры к аннотации, если планируется использовать прокси
@@ -14,6 +15,7 @@ import org.telegram.telegrambots.ApiContextInitializer;
 @ComponentScan(basePackages = {"ru.studentsplatform.backend.*"})
 @EntityScan(basePackages = {"ru.studentsplatform.backend.*"})
 @EnableJpaRepositories(basePackages = "ru.studentsplatform.backend.domain.repository")
+@EnableAsync
 public class EndpointApplication {
 	public static void main(String[] args) {
 		ApiContextInitializer.init();

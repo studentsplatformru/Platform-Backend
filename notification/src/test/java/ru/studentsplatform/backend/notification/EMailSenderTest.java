@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.service;
+package ru.studentsplatform.backend.notification;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,9 +10,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.util.ReflectionTestUtils;
-import ru.studentsplatform.backend.service.email.EMailSender;
-import ru.studentsplatform.backend.service.email.EMailSenderImpl;
-import ru.studentsplatform.backend.system.helper.TestUtils;
+import ru.studentsplatform.backend.notification.email.EMailSenderImpl;
+
 
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;

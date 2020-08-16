@@ -1,5 +1,7 @@
-package ru.studentsplatform.backend.service.email;
+package ru.studentsplatform.backend.notification.email;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.lang.NonNull;
@@ -7,18 +9,17 @@ import org.springframework.lang.Nullable;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
+import ru.studentsplatform.backend.notification.EMailSender;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
 
 
 /**
@@ -28,8 +29,10 @@ import java.util.Scanner;
  * @author Danila K (karnacevich5323537@gmail.com) (10.07.2020).
  */
 @Service
-@Profiled
+
 public class EMailSenderImpl implements EMailSender {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private final JavaMailSender javaMailSender;
 	/**
@@ -40,7 +43,7 @@ public class EMailSenderImpl implements EMailSender {
 
 	/**
 	 * @param javaMailSender утлилитный сприноговая реализация,
-	 *                       которая обеспечивает логику отправки сообщения на более низком уровне.
+	 * которая обеспечивает логику отправки сообщения на более низком уровне.
 	 */
 	public EMailSenderImpl(JavaMailSender javaMailSender) {
 		this.javaMailSender = javaMailSender;
@@ -49,6 +52,7 @@ public class EMailSenderImpl implements EMailSender {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Async
 	@Override
 	public void send(@NonNull String to, String subject, String body) {
 
@@ -65,6 +69,7 @@ public class EMailSenderImpl implements EMailSender {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Async
 	@Override
 	public void send(@NonNull String to,
 					 String subject,
@@ -93,13 +98,15 @@ public class EMailSenderImpl implements EMailSender {
 
 		} catch (MessagingException e) {
 
-			e.printStackTrace();
+			logger.error(e.toString());
+
 		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
+	@Async
 	@Override
 	public void send(@NonNull String to,
 					 String subject,
@@ -130,17 +137,19 @@ public class EMailSenderImpl implements EMailSender {
 
 		} catch (MessagingException e) {
 
-			e.printStackTrace();
+			logger.error(e.toString());
+
 		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
+	@Async
 	@Override
 	public void sendHtml(@NonNull String to,
 						 String subject,
-						 String htmlPath,
+						 String html,
 						 @Nullable List<String> contentPaths) throws IOException {
 
 		MimeMessage message = javaMailSender.createMimeMessage();
@@ -148,13 +157,6 @@ public class EMailSenderImpl implements EMailSender {
 		try {
 
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-			Scanner scanner = new Scanner(
-					Paths.get(htmlPath),
-					StandardCharsets.UTF_8.name());
-			//здесь мы можем использовать разделитель, например: "\\A", "\\Z" или "\\z"
-			String html = scanner.useDelimiter("\\A").next();
-			scanner.close();
 
 			message.setSubject(subject, "UTF-8");
 			message.setContent(html, "text/html; charset=UTF-8");
@@ -177,7 +179,8 @@ public class EMailSenderImpl implements EMailSender {
 
 		} catch (MessagingException e) {
 
-			e.printStackTrace();
+			logger.error(e.toString());
+
 		}
 	}
 

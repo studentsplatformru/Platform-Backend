@@ -1,22 +1,24 @@
 package ru.studentsplatform.backend.entities.model.user;
 
 import ru.studentsplatform.backend.entities.model.BaseEntity;
+import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.enums.UniversityRoleEnum;
 import ru.studentsplatform.backend.entities.model.university.Discipline;
 import ru.studentsplatform.backend.entities.model.university.PlaceStudy;
 import ru.studentsplatform.backend.entities.model.university.Team;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+
 import java.util.List;
 
 /**
@@ -33,6 +35,18 @@ public class User extends BaseEntity {
 
 	@Column(name = "password", nullable = false)
 	private String password;
+
+	@Column(name = "telegram_id")
+	private String telegramId;
+
+	@Column(name = "vk_id")
+	private String vkId;
+
+	@Column(name = "notification_type",
+			columnDefinition = "varchar(255) default 'Email'"
+	)
+	@Enumerated(EnumType.STRING)
+	private NotificationType notificationType;
 
 	@Column(name = "university_role")
 	@Enumerated(EnumType.STRING)
@@ -103,4 +117,30 @@ public class User extends BaseEntity {
 	public void setDisciplines(List<Discipline> disciplines) {
 		this.disciplines = disciplines;
 	}
+
+	public String getTelegramId() {
+		return telegramId;
+	}
+
+	public void setTelegramId(String telegramId) {
+		this.telegramId = telegramId;
+	}
+
+	public String getVkId() {
+		return vkId;
+	}
+
+	public void setVkId(String vkId) {
+		this.vkId = vkId;
+	}
+
+	public NotificationType getNotificationType() {
+		return notificationType;
+	}
+
+	public void setNotificationType(NotificationType notificationType) {
+		this.notificationType = notificationType;
+
+	}
+
 }

@@ -1,0 +1,65 @@
+package ru.studentsplatform.backend.notification.enumerated;
+
+/**
+ * Enum для описания типа сообщения.
+ *
+ * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
+ */
+public enum MessageType {
+    //    TASK_ASSIGMENT,
+    //    REGISTRATION,
+    //    WELCOME,
+    /**
+     * Параметры:
+     * 1-й : Предмет получения оценки.
+     * 2-й : Оценка по предмету.
+     */
+    MARK_NOTIFICATION(
+            "notification/src/main/resources/templates/mark_notification.html",
+            2,
+            "У Вас новая оценка!\n %s : %s"),
+    /**
+     * Параметры:
+     * 1-й : Ссылка на подтверждение email.
+     */
+    EMAIL_CONFIRMATION(
+            "notification/src/main/resources/templates/email_confirmation.html",
+            1,
+            "Пожалуйста, поддтвердите свой email:\n %s"),
+
+    /**
+     * Параметры:
+     * 1-й : Свободное сообщение передаётся в качестве аргумента.
+     */
+    CUSTOM(
+            "-",
+            1,
+            "-");
+
+    private final String path;
+    private final String botPattern;
+    private final int parameterCount;
+
+    /**
+     * @param path               Путь к шаблону.
+     * @param parameterCount     Количество вставляемых параметров.
+     * @param botPattern         шаблон в фрмате строки для сообщений через бота.
+     */
+    MessageType(String path, int parameterCount, String botPattern) {
+        this.path = path;
+        this.parameterCount = parameterCount;
+        this.botPattern = botPattern;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public int getParameterCount() {
+        return parameterCount;
+    }
+
+    public String getBotPattern() {
+        return botPattern;
+    }
+}
