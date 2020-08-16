@@ -42,7 +42,7 @@ public class TemplateServiceImpl implements TemplateService {
         }
 
         // выдаёт сообщение для отправки через ботов
-        if (notificationType == NotificationType.Telegram || notificationType == NotificationType.VK ) {
+        if (notificationType == NotificationType.Telegram || notificationType == NotificationType.VK) {
             return String.format(type.getBotPattern(), args);
         }
 
