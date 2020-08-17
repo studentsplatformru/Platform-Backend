@@ -31,7 +31,7 @@ public class SpbuEventCacheLoaderConfig {
 	@Bean("SpbuEventCacheLoader")
 	public LoadingCache<String, List<SpbuEvent>> eventCache() {
 		return CacheBuilder.newBuilder()
-				.expireAfterWrite(1, TimeUnit.DAYS)
+				.expireAfterWrite(7, TimeUnit.DAYS)
 				.build(new CacheLoader<>() {
 					@Override
 					public List<SpbuEvent> load(String teamName) {

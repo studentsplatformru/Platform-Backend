@@ -3,6 +3,7 @@ package ru.studentsplatform.backend.endpoint.rest.spbu;
 import com.google.common.cache.LoadingCache;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
@@ -149,5 +150,10 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 			throw new Fault(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+	}
+
+	@Scheduled(cron = "0 0 0 ? * 2")
+	private void dropCacheWeekly() {
+		cacheLoader.invalidateAll();
 	}
 }
