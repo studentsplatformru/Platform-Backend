@@ -3,10 +3,13 @@ package ru.studentsplatform.backend.endpoint.rest.spbu;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuTeamDTO;
+import ru.studentsplatform.backend.entities.model.spbu.SpbuEvent;
+import ru.studentsplatform.backend.system.exception.core.Fault;
 
 import java.util.List;
 
@@ -95,5 +98,14 @@ public interface SpbuDataController {
 	 */
 	@GetMapping("division/{alias}/saveAllGroups")
 	ResponseEntity<String> saveAllGroupsToDB(@PathVariable(name = "alias") String alias);
+
+	/**
+	 * Возвращает список занятий на следующую неделю для выбраной группы.
+	 * @param groupName имя студенческой группы
+	 * @return список заний на следующую неделю
+	 * @throws Fault непредвиденная ошибка
+	 */
+	@GetMapping("getEvents")
+	ResponseEntity<List<SpbuEvent>> getNextWeekEvents(@RequestParam(name = "groupName") String groupName) throws Fault;
 
 }

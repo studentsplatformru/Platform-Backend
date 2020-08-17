@@ -7,12 +7,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "spbu_team")
+
 public class SpbuTeam {
 
 	@Id
 	private Long id;
 
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, unique = true)
 	private String name;
 
 	@Column(name = "alias", nullable = false)

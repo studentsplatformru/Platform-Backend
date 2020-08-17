@@ -150,6 +150,7 @@
                 <version>${springfox-swagger2.version}</version>
             </dependency>
 
+            <!-- Mapper -->
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
@@ -202,6 +203,14 @@
                 <artifactId>log4j-core</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+
+            <!-- guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>29.0-jre</version>
+            </dependency>
+
 
         </dependencies>
     </dependencyManagement>

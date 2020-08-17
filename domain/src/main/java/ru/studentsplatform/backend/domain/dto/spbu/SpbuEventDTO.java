@@ -9,6 +9,8 @@ import java.sql.Timestamp;
 @Data
 public class SpbuEventDTO {
 
+	private Long id;
+
 	@JsonProperty("Subject")
 	private String subject;
 
@@ -31,5 +33,7 @@ public class SpbuEventDTO {
 	@JsonProperty("End")
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Timestamp endTime;
+
+	private String spbuTeamName;
 
 }
