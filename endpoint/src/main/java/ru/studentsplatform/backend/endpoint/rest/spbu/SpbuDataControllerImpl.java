@@ -37,6 +37,12 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 
 	private final LoadingCache<String, List<SpbuEvent>> cacheLoader;
 
+	/**
+	 * Конструктор.
+	 * @param teamService Сервис SpbuTeam
+	 * @param unwrapService Сервис для разворачивания классов-обёрток данных SPBU
+ 	 * @param cacheLoader Загрузчик кэша SpvuEvent
+	 */
 	public SpbuDataControllerImpl(SpbuTeamService teamService,
 								  SpbuUnwrapService unwrapService,
 								  LoadingCache<String, List<SpbuEvent>> cacheLoader) {

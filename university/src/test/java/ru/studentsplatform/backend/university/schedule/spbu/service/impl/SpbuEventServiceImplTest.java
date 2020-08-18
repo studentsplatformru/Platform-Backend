@@ -17,6 +17,11 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
+/**
+ * Тесты методов класса SpbuEventService.
+ *
+ * @author Archie-Vian (sas-artamonov@yandex.ru) 17.08.2020
+ */
 @ExtendWith(MockitoExtension.class)
 public class SpbuEventServiceImplTest {
 

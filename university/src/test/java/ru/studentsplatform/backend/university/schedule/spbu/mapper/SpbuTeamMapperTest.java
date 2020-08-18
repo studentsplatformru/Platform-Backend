@@ -10,6 +10,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+/**
+ * Тесты методов класса SpbuTeamMapper.
+ */
 public class SpbuTeamMapperTest {
 
 	private SpbuTeamMapperImpl mapper = new SpbuTeamMapperImpl();

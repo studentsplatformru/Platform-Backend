@@ -13,6 +13,11 @@ import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuUnwrapSe
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Имплементация сервиса для разворачиваня классов обёрток данных СПБГУ.
+ *
+ * @author Archie-Vian (sas-artamonov@yandex.ru) 16.08.2020
+ */
 @Slf4j
 @Service
 @Profiled

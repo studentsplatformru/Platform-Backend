@@ -11,6 +11,12 @@ import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+/**
+ * Тесты методов класса SpbuUnwrapperService.
+ *
+ * @author Archie-Vian (sas-artamonov@yandex.ru) 17.08.2020
+ */
 public class SpbuUnwrapperServiceImplTest {
 
 	SpbuUnwrapServiceImpl unwrapperService = new SpbuUnwrapServiceImpl();

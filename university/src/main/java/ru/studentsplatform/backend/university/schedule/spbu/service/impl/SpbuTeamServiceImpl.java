@@ -14,6 +14,11 @@ import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuUnwrapSe
 
 import java.util.List;
 
+/**
+ * Имплементация CRUD сервиса SpbuTeam.
+ *
+ * @author Archie-Vian (sas-artamonov@yandex.ru) 16.08.2020
+ */
 @Slf4j
 @Service
 @Profiled

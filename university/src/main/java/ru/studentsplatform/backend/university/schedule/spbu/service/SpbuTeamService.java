@@ -4,6 +4,11 @@ import ru.studentsplatform.backend.entities.model.spbu.SpbuTeam;
 
 import java.util.List;
 
+/**
+ * CRUD сервис SpbuTeam.
+ *
+ * @author Archie-Vian (sas-artamonov@yandex.ru) 16.08.2020
+ */
 public interface SpbuTeamService {
 
 	/**
