@@ -54,6 +54,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public ResponseEntity<List<SpbuDivisionDTO>> getDivisions() {
 		return ResponseEntity.ok(FeignConfig.getSpbuProxy().getDivisions());
 	}
@@ -61,6 +62,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public ResponseEntity<List<SpbuStudyProgramDTO>> getStudyPrograms(String alias) {
 		try {
 			return ResponseEntity.ok(unwrapService
@@ -73,6 +75,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public ResponseEntity<List<SpbuTeamDTO>> getGroups(String id) {
 		try {
 			return ResponseEntity.ok(FeignConfig.getSpbuProxy().getGroups(id).getGroups());
@@ -84,36 +87,13 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	/**
 	 * {@inheritDoc}
 	 */
-	public ResponseEntity<List<SpbuEventDTO>> getNextWeekEventsById(String id) {
-		try {
-			return ResponseEntity.ok(unwrapService.eventUnwrap(FeignConfig.getSpbuProxy().getDays(id).getDays()));
-		} catch (NullPointerException e) {
-			return ResponseEntity.ok(new LinkedList<>());
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
 	public ResponseEntity<List<SpbuEventDTO>> getEventsByIdForTimeInterval(String id,
 																		   String startTime,
 																		   String endTime) {
 		try {
 			return ResponseEntity.ok(unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
 					.getDays(id, startTime, endTime).getDays()));
-		} catch (NullPointerException e) {
-			return ResponseEntity.ok(new LinkedList<>());
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<SpbuEventDTO>> getNextWeekEventsByName(String name) {
-		try {
-			var id = teamService.getByName(name).getId().toString();
-			return ResponseEntity.ok(unwrapService.eventUnwrap(FeignConfig.getSpbuProxy().getDays(id).getDays()));
 		} catch (NullPointerException e) {
 			return ResponseEntity.ok(new LinkedList<>());
 		}
@@ -156,6 +136,19 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 			throw new Fault(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResponseEntity<List<SpbuEvent>> refreshEvents(String groupName) throws Fault {
+		cacheLoader.refresh(groupName);
+		try {
+			return ResponseEntity.ok(cacheLoader.get(groupName));
+		} catch (ExecutionException e) {
+			throw new Fault(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**
