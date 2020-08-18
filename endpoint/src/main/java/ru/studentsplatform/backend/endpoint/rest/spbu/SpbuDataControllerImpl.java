@@ -153,6 +153,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 
 	/**
 	 * Очищает кэш каждую полночь с воскресенья на понедельник.
+	 * (0 sec, 0 min, 0 hrs, any day of month, every month, 2nd day of week)
 	 */
 	@Scheduled(cron = "0 0 0 ? * 2")
 	private void dropCacheWeekly() {
