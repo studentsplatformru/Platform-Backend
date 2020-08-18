@@ -4,6 +4,7 @@ import feign.Feign;
 import feign.Request;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import org.springframework.cloud.openfeign.support.SpringMvcContract;
 
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Класс-билдер для feign http client.
  */
+@Slf4j
 public class FeignConfig {
 
 	private static SpbuProxy spbuProxy;
@@ -45,7 +47,9 @@ public class FeignConfig {
 	 * Устанавливает новый feign client с прокси сервером, находящимся следущим в Proxies Enum.
 	 */
 	public static void changeProxy() {
+		log.warn("Current proxy is forbidden, changing proxy...");
 		instantiateFeignHttpClient(Proxies.next());
+		log.info("Switching to IP " + Proxies.current().getIp() + ", port " + Proxies.current().getPort());
 	}
 
 	/**

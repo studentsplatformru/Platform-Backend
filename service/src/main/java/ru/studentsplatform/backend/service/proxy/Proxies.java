@@ -2,7 +2,7 @@ package ru.studentsplatform.backend.service.proxy;
 
 public enum Proxies {
 
-	P1("166.98.140.51", 3128), P2("5.249.152.109", 5836);
+	P1("81.201.60.130", 80), P2("103.216.51.210", 8191);
 
 	private static int counter = 0;
 	private static Proxies[] proxyArray = values();

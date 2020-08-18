@@ -7,6 +7,8 @@ import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuTeamDTO;
+import ru.studentsplatform.backend.entities.model.spbu.SpbuEvent;
+import ru.studentsplatform.backend.system.exception.core.Fault;
 
 import java.util.List;
 
@@ -44,16 +46,7 @@ public interface SpbuDataController {
 	ResponseEntity<List<SpbuTeamDTO>> getGroups(@PathVariable(name = "id") String id);
 
 	/**
-	 * Получение занятий на следующую неделю.
-	 *
-	 * @param id Id студенческой группы
-	 * @return список занятий
-	 */
-	@GetMapping("group/{id}/events")
-	ResponseEntity<List<SpbuEventDTO>> getNextWeekEventsById(@PathVariable(name = "id") String id);
-
-	/**
-	 * Получение списка занятий за определенный период.
+	 * Получение списка занятий за определенный период по Id группы.
 	 *
 	 * @param id        Id студенческой группы
 	 * @param startTime начало периода
@@ -66,16 +59,7 @@ public interface SpbuDataController {
 																	@PathVariable(name = "end") String endTime);
 
 	/**
-	 * Получение заниятий на следующую неделю.
-	 *
-	 * @param name имя студенческой группы
-	 * @return список занятий
-	 */
-	@GetMapping("group/name/{name}/events")
-	ResponseEntity<List<SpbuEventDTO>> getNextWeekEventsByName(@PathVariable(name = "name") String name);
-
-	/**
-	 * Получение списка занятий за определенный период.
+	 * Получение списка занятий за определенный период по имени группы.
 	 *
 	 * @param name      имя студенческой группы
 	 * @param startTime начало периода
@@ -91,9 +75,27 @@ public interface SpbuDataController {
 	 * Сохраняет в БД все группы для выбранного направления.
 	 *
 	 * @param alias Сокращённое наименование подготовки
-	 * @return Ответ с кодом 200 и сообщением о результате сохранения
+	 * @return 		Ответ с кодом 200 и сообщением о результате сохранения
 	 */
 	@GetMapping("division/{alias}/saveAllGroups")
 	ResponseEntity<String> saveAllGroupsToDB(@PathVariable(name = "alias") String alias);
+
+	/**
+	 * Возвращает список занятий на следующую неделю для выбраной группы.
+	 * @param groupName имя студенческой группы
+	 * @return список заний на следующую неделю
+	 * @throws Fault непредвиденная ошибка
+	 */
+	@GetMapping("getEvents/{groupName}")
+	ResponseEntity<List<SpbuEvent>> getNextWeekEvents(@PathVariable(name = "groupName") String groupName) throws Fault;
+
+	/**
+	 * Обновляет кэш для конкретной группы и возвращает обновленные данные.
+	 * @param groupName Имя студенческой группы СПБГУ
+	 * @return Ответ с кодом 200 и списком обновленных данных о расписании группы на неделю
+	 * @throws Fault непредвиденная ошибка
+	 */
+	@GetMapping("refreshEvents/{groupName}")
+	ResponseEntity<List<SpbuEvent>> refreshEvents(@PathVariable(name = "groupName") String groupName) throws Fault;
 
 }

@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.telegram.telegrambots.ApiContextInitializer;
 
-//  Добавить параметры к аннотации, если планируется использовать прокси
 @EnableFeignClients(basePackages = "ru.studentsplatform.backend.service")
 @SpringBootApplication
 @ComponentScan(basePackages = {"ru.studentsplatform.backend.*"})
