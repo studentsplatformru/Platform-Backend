@@ -1,6 +1,9 @@
 package ru.studentsplatform.backend.university.schedule.spbu.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.domain.repository.spbu.SpbuEventRepository;
 import ru.studentsplatform.backend.entities.model.spbu.SpbuEvent;
@@ -11,6 +14,7 @@ import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuEventSer
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuTeamService;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuUnwrapService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -33,10 +37,10 @@ public class SpbuEventServiceImpl implements SpbuEventService {
 
 	/**
 	 * Конструктор.
-	 * @param repository репозиторий SpbuEvent
-	 * @param mapper маппер SpbuEvent
-	 * @param unwrapService сервис по разворачиванию классов обёрток СПБГУ
-	 * @param teamService сервис SpbuTeam
+	 * @param repository 	Репозиторий SpbuEvent
+	 * @param mapper	 	Маппер SpbuEvent
+	 * @param unwrapService Сервис по разворачиванию классов обёрток СПБГУ
+	 * @param teamService 	Сервис SpbuTeam
 	 */
 	public SpbuEventServiceImpl(SpbuEventRepository repository, SpbuEventMapper mapper,
 								SpbuUnwrapService unwrapService, SpbuTeamService teamService) {
@@ -51,7 +55,8 @@ public class SpbuEventServiceImpl implements SpbuEventService {
 	 */
 	@Override
 	public SpbuEvent create(SpbuEvent entity) {
-		log.info("saving event: {}\n {}", entity.getSubject(), entity.getDayWithTimeInterval());
+		log.info("saving event: {}, {}", entity.getSubject(), entity.getDayWithTimeInterval());
+		entity.setTeam(teamService.getByName(entity.getTeam().getName()));
 		return repository.save(entity);
 	}
 
@@ -67,13 +72,63 @@ public class SpbuEventServiceImpl implements SpbuEventService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<SpbuEvent> getWeekEvents(String teamName) throws feign.RetryableException {
+	@Cacheable("DayEvents")
+	public List<SpbuEvent> getEvents(String teamName, LocalDate day) {
+		String dayStart = String.format("%d-%d-%d", day.getDayOfMonth(), day.getMonth().getValue(), day.getYear());
+		day = day.plusDays(1);
+		String dayEnd = String.format("%d-%d-%d", day.getDayOfMonth(), day.getMonth().getValue(), day.getYear());
+
+		String id = teamService.getByName(teamName).getId().toString();
+
+		var eventDTOList = unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
+				.getDays(id, dayStart, dayEnd).getDays());
+
+		eventDTOList.forEach((event) -> event.setSpbuTeamName(teamName));
+		var eventList = mapper.listSpbuEventDTOToSpbuEvent(eventDTOList);
+		eventList.forEach(this::create);
+
+		return eventList;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@Cacheable("WeekEvents")
+	public List<SpbuEvent> getEvents(String teamName) {
 		var eventDTOList = unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
 				.getDays(teamService.getByName(teamName).getId().toString()).getDays());
 		eventDTOList.forEach((event) -> event.setSpbuTeamName(teamName));
 		var eventList = mapper.listSpbuEventDTOToSpbuEvent(eventDTOList);
 		eventList.forEach(this::create);
 		return eventList;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@Cacheable("DateEvents")
+	public List<SpbuEvent> getEvents(String teamName, String startDate, String endDate) {
+		String id = teamService.getByName(teamName).getId().toString();
+
+		var eventDTOList = unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
+				.getDays(id, startDate, endDate).getDays());
+
+		eventDTOList.forEach((event) -> event.setSpbuTeamName(teamName));
+		var eventList = mapper.listSpbuEventDTOToSpbuEvent(eventDTOList);
+		eventList.forEach(this::create);
+
+		return eventList;
+	}
+
+	/**
+	 * Очищает кэш для текущей недели каждую полночь с воскресенья на понедельник.
+	 */
+	@Scheduled(cron = "0 0 0 ? * 2")
+	@CacheEvict(value = "WeekEvents", allEntries = true)
+	public void clearWeekCache() {
+		log.info("Week cache evicted!");
 	}
 
 }

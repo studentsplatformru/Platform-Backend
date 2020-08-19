@@ -4,21 +4,27 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.sql.Timestamp;
+
+class SpbuEventId implements Serializable {
+	private String dayWithTimeInterval;
+	private String team;
+}
 
 @Entity
 @Table(name = "spbu_event")
+@IdClass(SpbuEventId.class)
 public class SpbuEvent {
-
-	@Id
-	private Long id;
 
 	@Column(name = "subject")
 	private String subject;
 
+	@Id
 	@Column(name = "dayWithTimeInterval")
 	private String dayWithTimeInterval;
 
@@ -37,17 +43,10 @@ public class SpbuEvent {
 	@Column(name = "endTime")
 	private Timestamp endTime;
 
+	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "team", referencedColumnName = "name")
+	@JoinColumn(name = "team")
 	private SpbuTeam team;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getSubject() {
 		return subject;

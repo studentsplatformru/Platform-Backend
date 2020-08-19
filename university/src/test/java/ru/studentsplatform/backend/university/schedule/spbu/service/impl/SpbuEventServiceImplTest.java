@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.studentsplatform.backend.domain.repository.spbu.SpbuEventRepository;
 import ru.studentsplatform.backend.entities.model.spbu.SpbuEvent;
+import ru.studentsplatform.backend.entities.model.spbu.SpbuTeam;
+import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuTeamService;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -28,6 +30,9 @@ public class SpbuEventServiceImplTest {
 	@Mock
 	SpbuEventRepository repository;
 
+	@Mock
+	SpbuTeamService teamService;
+
 	@InjectMocks
 	SpbuEventServiceImpl service;
 
@@ -44,7 +49,11 @@ public class SpbuEventServiceImplTest {
 	 */
 	@Test
 	void CreateTest() {
+		var team = mock(SpbuTeam.class);
 		doReturn(spbuEvent).when(repository).save(spbuEvent);
+		doReturn(team).when(teamService).getByName(anyString());
+		doReturn(team).when(spbuEvent).getTeam();
+		doReturn("test").when(team).getName();
 		assertEquals(service.create(spbuEvent), spbuEvent);
 	}
 
