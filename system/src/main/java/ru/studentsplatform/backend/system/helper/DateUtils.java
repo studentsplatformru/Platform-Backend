@@ -1,6 +1,10 @@
 package ru.studentsplatform.backend.system.helper;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * Класс хелпер для дат.
@@ -13,4 +17,21 @@ public class DateUtils {
 	private DateUtils() {
 	}
 
+	/**
+	 * @return LocalDateTime текущее время в своём часовом поясе.
+	 *
+	 * @author Danila K (karnacevich5323537@gmail.com) (15.08.2020).
+	 */
+	public static LocalDateTime getLocalDate(){
+		return LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
+	}
+
+	/**
+	 * @return Date текущую дату в своём часовом поясе.
+	 *
+	 * @author Danila K (karnacevich5323537@gmail.com) (15.08.2020).
+	 */
+	public static Date getDateFromLocalDateTime(LocalDateTime localDateTime){
+		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+	}
 }

@@ -3,10 +3,9 @@ package ru.studentsplatform.backend.system.manager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import ru.studentsplatform.backend.system.helper.DateUtils;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Timer;
@@ -41,8 +40,7 @@ public class JobManager {
                 job.run();
 
                 logger.info(
-                        "In " + LocalDateTime.ofInstant(Instant.now(),
-                                ZoneId.systemDefault()) + " Task done");
+                        "In " + DateUtils.getLocalDate() + " Task done");
             }
         };
 
@@ -50,7 +48,7 @@ public class JobManager {
     }
 
     /**
-     * Метод для обработки задачи в конктретное время.
+     * Метод для обработки задачи в конкретное время.
      *
      * @param job Задача для выполнения реализованная в {@link Runnable}.
      * @param stringDate Дата для выполнения задачи в формате dd.MM.yyyy HH:mm:ss
@@ -63,15 +61,15 @@ public class JobManager {
                 job.run();
 
                 logger.info(
-                        "In " + LocalDateTime.ofInstant(Instant.now(),
-                                ZoneId.systemDefault()) + " Task done");
+                        "In " + DateUtils.getLocalDate() + " Task done");
             }
         };
+
         LocalDateTime locateDate =
                 LocalDateTime.parse(stringDate,
                         DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 
-        Date date = Date.from(locateDate.atZone(ZoneId.systemDefault()).toInstant());
+        Date date = DateUtils.getDateFromLocalDateTime(locateDate);
 
         timer.schedule(timerTask, date);
     }
@@ -90,8 +88,7 @@ public class JobManager {
                 job.run();
 
                 logger.info(
-                        "In " + LocalDateTime.ofInstant(Instant.now(),
-                                ZoneId.systemDefault()) + " Task done");
+                        "In " + DateUtils.getLocalDate() + " Task done");
             }
         };
 

@@ -158,7 +158,7 @@ public class NotifyServiceImpl implements NotifyService {
      */
     @Override
     public void sendSpecificDayNotification(User user, MessageType messageType, Date date, String... args) {
-        jobManager.handle(()-> this.sendNotification(user, messageType, args), date);
+        jobManager.handle(() -> this.sendNotification(user, messageType, args), date);
     }
 
     /**
@@ -167,7 +167,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendSpecificDayNotification(User user, MessageType messageType,
                                             NotificationType notificationType, Date date, String... args) {
-        jobManager.handle(()-> this.sendNotification(user, messageType, notificationType, args), date);
+        jobManager.handle(() -> this.sendNotification(user, messageType, notificationType, args), date);
     }
 
     /**
@@ -176,7 +176,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendSpecificDayNotification(User user, List<NotificationType> notificationTypes,
                                             MessageType messageType, Date date, String... args) {
-        jobManager.handle(()-> this.sendNotification(user, notificationTypes, messageType, args), date);
+        jobManager.handle(() -> this.sendNotification(user, notificationTypes, messageType, args), date);
     }
 
     /**
@@ -185,7 +185,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendSpecificDayNotification(List<User> users, List<NotificationType> notificationTypes,
                                             MessageType messageType, Date date, String... args) {
-        jobManager.handle(()-> this.sendNotification(users, notificationTypes, messageType, args), date);
+        jobManager.handle(() -> this.sendNotification(users, notificationTypes, messageType, args), date);
     }
 
     /**
@@ -194,7 +194,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendSpecificDayNotification(List<User> users, NotificationType notificationType,
                                             MessageType messageType, Date date, String... args) {
-        jobManager.handle(()-> this.sendNotification(users, messageType, args), date);
+        jobManager.handle(() -> this.sendNotification(users, messageType, args), date);
     }
 
     /**
@@ -203,7 +203,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendSpecificDayNotification(List<User> users, MessageType messageType,
                                             Date date, String... args) {
-        jobManager.handle(()-> this.sendNotification(users, messageType, args), date);
+        jobManager.handle(() -> this.sendNotification(users, messageType, args), date);
     }
 
     // отправка сообщения через email
