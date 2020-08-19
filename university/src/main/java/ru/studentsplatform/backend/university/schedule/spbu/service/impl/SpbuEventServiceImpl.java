@@ -5,6 +5,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
+import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventTransfer;
 import ru.studentsplatform.backend.domain.repository.spbu.SpbuEventRepository;
 import ru.studentsplatform.backend.entities.model.spbu.SpbuEvent;
 import ru.studentsplatform.backend.service.proxy.FeignConfig;
@@ -15,6 +17,8 @@ import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuTeamServ
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuUnwrapService;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -55,7 +59,7 @@ public class SpbuEventServiceImpl implements SpbuEventService {
 	 */
 	@Override
 	public SpbuEvent create(SpbuEvent entity) {
-		log.info("saving event: {}, {}", entity.getSubject(), entity.getDayWithTimeInterval());
+		log.info("saving event: {}, {}", entity.getSubject(), entity.getStartTime());
 		entity.setTeam(teamService.getByName(entity.getTeam().getName()));
 		return repository.save(entity);
 	}
@@ -73,21 +77,17 @@ public class SpbuEventServiceImpl implements SpbuEventService {
 	 */
 	@Override
 	@Cacheable("DayEvents")
-	public List<SpbuEvent> getEvents(String teamName, LocalDate day) {
+	public List<SpbuEvent> getEventsByDay(String teamName, LocalDate day) {
 		String dayStart = String.format("%d-%d-%d", day.getDayOfMonth(), day.getMonth().getValue(), day.getYear());
 		day = day.plusDays(1);
 		String dayEnd = String.format("%d-%d-%d", day.getDayOfMonth(), day.getMonth().getValue(), day.getYear());
 
 		String id = teamService.getByName(teamName).getId().toString();
 
-		var eventDTOList = unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
+		var eventTransferList = unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
 				.getDays(id, dayStart, dayEnd).getDays());
 
-		eventDTOList.forEach((event) -> event.setSpbuTeamName(teamName));
-		var eventList = mapper.listSpbuEventDTOToSpbuEvent(eventDTOList);
-		eventList.forEach(this::create);
-
-		return eventList;
+		return transferAndSave(eventTransferList, teamName);
 	}
 
 	/**
@@ -95,13 +95,11 @@ public class SpbuEventServiceImpl implements SpbuEventService {
 	 */
 	@Override
 	@Cacheable("WeekEvents")
-	public List<SpbuEvent> getEvents(String teamName) {
-		var eventDTOList = unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
+	public List<SpbuEvent> getEventsByCurrentWeek(String teamName) {
+		var eventTransferList = unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
 				.getDays(teamService.getByName(teamName).getId().toString()).getDays());
-		eventDTOList.forEach((event) -> event.setSpbuTeamName(teamName));
-		var eventList = mapper.listSpbuEventDTOToSpbuEvent(eventDTOList);
-		eventList.forEach(this::create);
-		return eventList;
+
+		return transferAndSave(eventTransferList, teamName);
 	}
 
 	/**
@@ -109,13 +107,25 @@ public class SpbuEventServiceImpl implements SpbuEventService {
 	 */
 	@Override
 	@Cacheable("DateEvents")
-	public List<SpbuEvent> getEvents(String teamName, String startDate, String endDate) {
+	public List<SpbuEvent> getEventsByInterval(String teamName, String startDate, String endDate) {
 		String id = teamService.getByName(teamName).getId().toString();
 
-		var eventDTOList = unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
+		var eventTransferList = unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
 				.getDays(id, startDate, endDate).getDays());
 
-		eventDTOList.forEach((event) -> event.setSpbuTeamName(teamName));
+		return transferAndSave(eventTransferList, teamName);
+	}
+
+	/**
+	 * Подготавливает и сохраняет сущность SpbuEvent.
+	 * @param transfers Список объектов, полученных из БД СПБГУ
+	 * @param teamName 	Имя студенческой группы СПБГУ
+	 * @return 			Список сохраненных объектов
+	 */
+	private List<SpbuEvent> transferAndSave(List<SpbuEventTransfer> transfers, String teamName) {
+		List<SpbuEventDTO> eventDTOList = transferEvent(transfers);
+
+		eventDTOList.forEach((event) -> event.setTeamName(teamName));
 		var eventList = mapper.listSpbuEventDTOToSpbuEvent(eventDTOList);
 		eventList.forEach(this::create);
 
@@ -129,6 +139,33 @@ public class SpbuEventServiceImpl implements SpbuEventService {
 	@CacheEvict(value = "WeekEvents", allEntries = true)
 	public void clearWeekCache() {
 		log.info("Week cache evicted!");
+	}
+
+	/**
+	 * Преобразует данные СПБГУ для записи в базу данных.
+	 * @param spbuTransferList Список объектов, полученных из БД СПБГУ
+	 * @return Список объектов, которые могут быть преобразованы в сущность SpbuEvent
+	 */
+	private LinkedList<SpbuEventDTO> transferEvent(List<SpbuEventTransfer> spbuTransferList) {
+		LinkedList<SpbuEventDTO> events = new LinkedList<>();
+		for (SpbuEventTransfer to: spbuTransferList) {
+			SpbuEventDTO dto = new SpbuEventDTO();
+
+			dto.setTeamName(to.getSpbuTeamName());
+			dto.setSubject(to.getSubject());
+			dto.setEducator(to.getEducator());
+			dto.setLocation(to.getLocation());
+
+			LocalDate localDate = LocalDate.parse(to.getStartTime().substring(0, 10));
+			dto.setDate(localDate);
+
+			LocalTime dateTime = LocalTime.parse(to.getStartTime().substring(11));
+			dto.setStartTime(dateTime);
+			dateTime = LocalTime.parse(to.getEndTime().substring(11));
+			dto.setEndTime(dateTime);
+			events.add(dto);
+		}
+		return events;
 	}
 
 }

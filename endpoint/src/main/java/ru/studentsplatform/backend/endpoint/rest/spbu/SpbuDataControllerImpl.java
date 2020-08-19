@@ -90,13 +90,13 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 */
 	@Override
 	public ResponseEntity<List<SpbuEventDTO>> getEventsForWeek(String groupName) {
-		var dtos = mapper.listSpbuEventToSpbuEventDTO(eventService.getEvents(groupName));
+		var dtos = mapper.listSpbuEventToSpbuEventDTO(eventService.getEventsByCurrentWeek(groupName));
 		return ResponseEntity.ok(dtos);
 	}
 
 	@Override
 	public ResponseEntity<List<SpbuEventDTO>> getEventsByDay(String groupName, LocalDate day) {
-		var dtos = mapper.listSpbuEventToSpbuEventDTO(eventService.getEvents(groupName, day));
+		var dtos = mapper.listSpbuEventToSpbuEventDTO(eventService.getEventsByDay(groupName, day));
 		return ResponseEntity.ok(dtos);
 	}
 
@@ -107,7 +107,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	public ResponseEntity<List<SpbuEventDTO>> getEventsByInterval(String name,
 																  String startTime,
 																  String endTime) {
-		var result = mapper.listSpbuEventToSpbuEventDTO(eventService.getEvents(name, startTime, endTime));
+		var result = mapper.listSpbuEventToSpbuEventDTO(eventService.getEventsByInterval(name, startTime, endTime));
 		return ResponseEntity.ok(result);
 
 	}
@@ -116,9 +116,18 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<String> saveAllGroupsToDB(String alias) {
+	public ResponseEntity<String> saveAllGroupsForAlias(String alias) {
 		teamService.saveAllAliasGroups(alias);
 		return ResponseEntity.ok("Groups saving started for alias: " + alias);
+	}
+
+	@Override
+	public ResponseEntity<String> saveAllGroups() {
+		List<SpbuDivisionDTO> divisions = FeignConfig.getSpbuProxy().getDivisions();
+		for (SpbuDivisionDTO division: divisions) {
+			saveAllGroupsForAlias(division.getAlias());
+		}
+		return ResponseEntity.ok("Groups saving started!");
 	}
 
 }

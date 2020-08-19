@@ -32,7 +32,7 @@ public interface SpbuEventService {
 	 * @param day		 День, для которого будет произведен поиск расписания
 	 * @return			 Список занятий на выбраный день
 	 */
-	List<SpbuEvent> getEvents(String teamName, LocalDate day);
+	List<SpbuEvent> getEventsByDay(String teamName, LocalDate day);
 
 	/**
 	 * Возвращает кэшированное расписание, если на этой неделе уже были запросы к конкретной группе.
@@ -40,7 +40,7 @@ public interface SpbuEventService {
 	 * @param teamName	 Имя студенческой группы
 	 * @return			 Список дней с расписанием на текущую неделю
 	 */
-	List<SpbuEvent> getEvents(String teamName);
+	List<SpbuEvent> getEventsByCurrentWeek(String teamName);
 
 	/**
 	 * Возвранащет расписание в выбранных временных рамках.
@@ -49,6 +49,6 @@ public interface SpbuEventService {
 	 * @param endTime	 Конец временных рамок
 	 * @return			 Список занятий, найденых в выбранных временных рамках
 	 */
-	List<SpbuEvent> getEvents(String teamName, String startTime, String endTime);
+	List<SpbuEvent> getEventsByInterval(String teamName, String startTime, String endTime);
 
 }

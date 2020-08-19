@@ -9,11 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 class SpbuEventId implements Serializable {
-	private String dayWithTimeInterval;
 	private String team;
+	private LocalDate date;
+	private LocalTime startTime;
 }
 
 @Entity
@@ -21,15 +23,24 @@ class SpbuEventId implements Serializable {
 @IdClass(SpbuEventId.class)
 public class SpbuEvent {
 
-	@Column(name = "subject")
-	private String subject;
+	@Id
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "team")
+	private SpbuTeam team;
 
 	@Id
-	@Column(name = "dayWithTimeInterval")
-	private String dayWithTimeInterval;
+	@Column(name = "date")
+	private LocalDate date;
 
-	@Column(name = "timeInterval")
-	private String timeInterval;
+	@Id
+	@Column(name = "startTime")
+	private LocalTime startTime;
+
+	@Column(name = "endTime")
+	private LocalTime endTime;
+
+	@Column(name = "subject")
+	private String subject;
 
 	@Column(name = "location")
 	private String location;
@@ -37,16 +48,29 @@ public class SpbuEvent {
 	@Column(name = "educator")
 	private String educator;
 
-	@Column(name = "startTime")
-	private Timestamp startTime;
+	public SpbuTeam getTeam() {
+		return team;
+	}
 
-	@Column(name = "endTime")
-	private Timestamp endTime;
+	public void setTeam(SpbuTeam team) {
+		this.team = team;
+	}
 
-	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "team")
-	private SpbuTeam team;
+	public LocalTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(LocalTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public LocalTime getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(LocalTime endTime) {
+		this.endTime = endTime;
+	}
 
 	public String getSubject() {
 		return subject;
@@ -54,22 +78,6 @@ public class SpbuEvent {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
-	}
-
-	public String getDayWithTimeInterval() {
-		return dayWithTimeInterval;
-	}
-
-	public void setDayWithTimeInterval(String dayWithTimeInterval) {
-		this.dayWithTimeInterval = dayWithTimeInterval;
-	}
-
-	public String getTimeInterval() {
-		return timeInterval;
-	}
-
-	public void setTimeInterval(String timeInterval) {
-		this.timeInterval = timeInterval;
 	}
 
 	public String getLocation() {
@@ -88,27 +96,11 @@ public class SpbuEvent {
 		this.educator = educator;
 	}
 
-	public Timestamp getStartTime() {
-		return startTime;
+	public LocalDate getDate() {
+		return date;
 	}
 
-	public void setStartTime(Timestamp startTime) {
-		this.startTime = startTime;
-	}
-
-	public Timestamp getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Timestamp endTime) {
-		this.endTime = endTime;
-	}
-
-	public SpbuTeam getTeam() {
-		return team;
-	}
-
-	public void setTeam(SpbuTeam team) {
-		this.team = team;
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 }

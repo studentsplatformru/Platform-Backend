@@ -68,15 +68,8 @@ public class SpbuTeamServiceImpl implements SpbuTeamService {
 	public void saveAllAliasGroups(String alias) {
 		log.info("Initiating groups saving for alias: {}", alias);
 		new Thread(() -> {
-			try {
 				iteratePrograms(alias);
 				log.info("Finished groups saving for alias: {}!", alias);
-
-			} catch (NullPointerException | feign.RetryableException e) {
-				FeignConfig.changeProxy();
-				log.warn("Reattempting to save groups for alias: {}...", alias);
-				saveAllAliasGroups(alias);
-			}
 		}).start();
 	}
 

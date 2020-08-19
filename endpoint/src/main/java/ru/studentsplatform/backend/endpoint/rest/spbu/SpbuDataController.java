@@ -63,7 +63,7 @@ public interface SpbuDataController {
 	 */
 	@GetMapping("group/{groupName}/events/{day}")
 	ResponseEntity<List<SpbuEventDTO>> getEventsByDay(@PathVariable(name = "groupName") String groupName,
-													  @PathVariable(name = "day")
+														   @PathVariable(name = "day")
 													  @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate day);
 
 	/**
@@ -76,8 +76,8 @@ public interface SpbuDataController {
 	 */
 	@GetMapping("group/{name}/events/{start}/{end}")
 	ResponseEntity<List<SpbuEventDTO>> getEventsByInterval(@PathVariable(name = "name") String name,
-																	  @PathVariable(name = "start") String startTime,
-																	  @PathVariable(name = "end") String endTime);
+																@PathVariable(name = "start") String startTime,
+																@PathVariable(name = "end") String endTime);
 
 	/**
 	 * Сохраняет в БД все группы для выбранного направления.
@@ -86,6 +86,8 @@ public interface SpbuDataController {
 	 * @return 		Ответ с кодом 200 и сообщением о результате сохранения
 	 */
 	@GetMapping("division/{alias}/saveAllGroups")
-	ResponseEntity<String> saveAllGroupsToDB(@PathVariable(name = "alias") String alias);
+	ResponseEntity<String> saveAllGroupsForAlias(@PathVariable(name = "alias") String alias);
 
+	@GetMapping("saveAlGroups")
+	ResponseEntity<String> saveAllGroups();
 }

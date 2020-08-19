@@ -29,7 +29,7 @@ public class SpbuEventMapperTest {
 	void Preparation() {
 		dto = new SpbuEventDTO();
 		dto.setSubject("test");
-		dto.setSpbuTeamName("TEST");
+		dto.setTeamName("TEST");
 
 		SpbuTeam team = new SpbuTeam();
 		entity = new SpbuEvent();
@@ -45,7 +45,7 @@ public class SpbuEventMapperTest {
 	void SpbuEventDTOToEventTest() {
 		SpbuEvent entity = mapper.spbuEventDTOToSpbuEvent(dto);
 		assertEquals(dto.getSubject(), entity.getSubject());
-		assertEquals(dto.getSpbuTeamName(), entity.getTeam().getName());
+		assertEquals(dto.getTeamName(), entity.getTeam().getName());
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class SpbuEventMapperTest {
 
 		SpbuEventDTO dto = mapper.spbuEventToSpbuEventDTO(entity);
 		assertEquals(dto.getSubject(), entity.getSubject());
-		assertEquals(dto.getSpbuTeamName(), entity.getTeam().getName());
+		assertEquals(dto.getTeamName(), entity.getTeam().getName());
 	}
 
 	/**
