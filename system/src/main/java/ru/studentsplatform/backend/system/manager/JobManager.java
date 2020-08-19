@@ -30,8 +30,7 @@ public class JobManager {
     /**
      * Метод для обработки задачи с задержкой.
      *
-     * @param job Задача для выполнения
-     *            реализованная в {@link Runnable}.
+     * @param job Задача для выполнения реализованная в {@link Runnable}.
      * @param delay Задержка задачи в миллисекундах.
      */
     public void handle(Runnable job, long delay) {
@@ -53,10 +52,8 @@ public class JobManager {
     /**
      * Метод для обработки задачи в конктретное время.
      *
-     * @param job Задача для выполнения
-     *            реализованная в {@link Runnable}.
-     * @param stringDate Дата для выполнения задачи
-     *                   в формате dd.MM.yyyy HH:mm:ss
+     * @param job Задача для выполнения реализованная в {@link Runnable}.
+     * @param stringDate Дата для выполнения задачи в формате dd.MM.yyyy HH:mm:ss
      */
     public void handle(Runnable job, String stringDate) {
 
@@ -75,6 +72,28 @@ public class JobManager {
                         DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 
         Date date = Date.from(locateDate.atZone(ZoneId.systemDefault()).toInstant());
+
+        timer.schedule(timerTask, date);
+    }
+
+    /**
+     * Метод для обработки задачи в конкретное время.
+     *
+     * @param job Задача для выполнения реализованная в {@link Runnable}.
+     * @param date Дата для выполнения задачи в формате  {@link Date}.
+     */
+    public void handle(Runnable job, Date date) {
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                job.run();
+
+                logger.info(
+                        "In " + LocalDateTime.ofInstant(Instant.now(),
+                                ZoneId.systemDefault()) + " Task done");
+            }
+        };
 
         timer.schedule(timerTask, date);
     }
