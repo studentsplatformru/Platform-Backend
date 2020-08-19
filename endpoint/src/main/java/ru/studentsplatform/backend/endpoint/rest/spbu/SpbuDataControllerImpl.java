@@ -1,25 +1,22 @@
 package ru.studentsplatform.backend.endpoint.rest.spbu;
 
-import com.google.common.cache.LoadingCache;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuTeamDTO;
-import ru.studentsplatform.backend.entities.model.spbu.SpbuEvent;
 import ru.studentsplatform.backend.service.proxy.FeignConfig;
-import ru.studentsplatform.backend.system.exception.core.Fault;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
+import ru.studentsplatform.backend.university.schedule.spbu.mapper.SpbuEventMapper;
+import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuEventService;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuTeamService;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuUnwrapService;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Класс контроллера для получения сведений из API СПБГУ.
@@ -35,20 +32,24 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 
 	private final SpbuUnwrapService unwrapService;
 
-	private final LoadingCache<String, List<SpbuEvent>> cacheLoader;
+	private final SpbuEventService eventService;
 
+	private final SpbuEventMapper mapper;
 	/**
 	 * Конструктор.
-	 * @param teamService Сервис SpbuTeam
+	 * @param teamService 	Сервис SpbuTeam
 	 * @param unwrapService Сервис для разворачивания классов-обёрток данных SPBU
- 	 * @param cacheLoader Загрузчик кэша SpvuEvent
+ 	 * @param eventService 	Сервис SpbuEvent
+	 * @param mapper		Маппер SpbuEvent
 	 */
 	public SpbuDataControllerImpl(SpbuTeamService teamService,
 								  SpbuUnwrapService unwrapService,
-								  LoadingCache<String, List<SpbuEvent>> cacheLoader) {
+								  SpbuEventService eventService,
+								  SpbuEventMapper mapper) {
 		this.teamService = teamService;
 		this.unwrapService = unwrapService;
-		this.cacheLoader = cacheLoader;
+		this.eventService = eventService;
+		this.mapper = mapper;
 	}
 
 	/**
@@ -88,32 +89,27 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<SpbuEventDTO>> getEventsByIdForTimeInterval(String id,
-																		   String startTime,
-																		   String endTime) {
-		try {
-			return ResponseEntity.ok(unwrapService.eventUnwrap(FeignConfig.getSpbuProxy()
-					.getDays(id, startTime, endTime).getDays()));
-		} catch (NullPointerException e) {
-			return ResponseEntity.ok(new LinkedList<>());
-		}
+	public ResponseEntity<List<SpbuEventDTO>> getEventsForWeek(String groupName) {
+		var dtos = mapper.listSpbuEventToSpbuEventDTO(eventService.getEvents(groupName));
+		return ResponseEntity.ok(dtos);
+	}
+
+	@Override
+	public ResponseEntity<List<SpbuEventDTO>> getEventsByDay(String groupName, LocalDate day) {
+		var dtos = mapper.listSpbuEventToSpbuEventDTO(eventService.getEvents(groupName, day));
+		return ResponseEntity.ok(dtos);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ResponseEntity<List<SpbuEventDTO>> getEventsByNameForTimeInterval(String name,
-																			 String startTime,
-																			 String endTime) {
-		try {
-			var id = teamService.getByName(name).getId().toString();
-			return ResponseEntity
-					.ok(unwrapService
-							.eventUnwrap(FeignConfig.getSpbuProxy().getDays(id, startTime, endTime).getDays()));
-		} catch (NullPointerException e) {
-			return ResponseEntity.ok(new LinkedList<>());
-		}
+	public ResponseEntity<List<SpbuEventDTO>> getEventsByInterval(String name,
+																  String startTime,
+																  String endTime) {
+		var result = mapper.listSpbuEventToSpbuEventDTO(eventService.getEvents(name, startTime, endTime));
+		return ResponseEntity.ok(result);
+
 	}
 
 	/**
@@ -125,38 +121,4 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 		return ResponseEntity.ok("Groups saving started for alias: " + alias);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<SpbuEvent>> getNextWeekEvents(String groupName) throws Fault {
-		try {
-			return ResponseEntity.ok(cacheLoader.get(groupName));
-		} catch (ExecutionException e) {
-			throw new Fault(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResponseEntity<List<SpbuEvent>> refreshEvents(String groupName) throws Fault {
-		cacheLoader.refresh(groupName);
-		try {
-			return ResponseEntity.ok(cacheLoader.get(groupName));
-		} catch (ExecutionException e) {
-			throw new Fault(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * Очищает кэш каждую полночь с воскресенья на понедельник.
-	 * (0 sec, 0 min, 0 hrs, any day of month, every month, 2nd day of week)
-	 */
-	@Scheduled(cron = "0 0 0 ? * 2")
-	private void dropCacheWeekly() {
-		cacheLoader.invalidateAll();
-	}
 }

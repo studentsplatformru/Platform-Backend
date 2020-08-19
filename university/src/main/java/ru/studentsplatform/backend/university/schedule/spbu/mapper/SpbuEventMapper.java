@@ -18,7 +18,6 @@ public interface SpbuEventMapper {
 	 * @return DTO студенческого занятия СПБГУ
 	 */
 	@Mappings({
-			@Mapping(target = "id", source = "entity.id"),
 			@Mapping(target = "subject", source = "entity.subject"),
 			@Mapping(target = "dayWithTimeInterval", source = "entity.dayWithTimeInterval"),
 			@Mapping(target = "timeInterval", source = "entity.timeInterval"),
@@ -37,7 +36,6 @@ public interface SpbuEventMapper {
 	 * @return объект студенческого занятия
 	 */
 	@Mappings({
-			@Mapping(target = "id", source = "dto.id"),
 			@Mapping(target = "subject", source = "dto.subject"),
 			@Mapping(target = "dayWithTimeInterval", source = "dto.dayWithTimeInterval"),
 			@Mapping(target = "timeInterval", source = "dto.timeInterval"),

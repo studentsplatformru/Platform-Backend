@@ -9,8 +9,6 @@ import java.sql.Timestamp;
 @Data
 public class SpbuEventDTO {
 
-	private Long id;
-
 	@JsonProperty("Subject")
 	private String subject;
 
