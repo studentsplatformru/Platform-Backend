@@ -22,16 +22,15 @@ public class DateUtils {
 	 *
 	 * @author Danila K (karnacevich5323537@gmail.com) (15.08.2020).
 	 */
-	public static LocalDateTime getLocalDate(){
+	public static LocalDateTime getLocalDate() {
 		return LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
 	}
 
 	/**
+	 * @param localDateTime значение даты в виде {@link LocalDateTime}
 	 * @return Date текущую дату в своём часовом поясе.
-	 *
-	 * @author Danila K (karnacevich5323537@gmail.com) (15.08.2020).
 	 */
-	public static Date getDateFromLocalDateTime(LocalDateTime localDateTime){
+	public static Date getDateFromLocalDateTime(LocalDateTime localDateTime) {
 		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 	}
 }
