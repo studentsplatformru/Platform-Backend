@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.enums.NotificationType;
+import ru.studentsplatform.backend.notification.Template;
 import ru.studentsplatform.backend.notification.TemplateService;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
 
@@ -36,33 +37,14 @@ public class TemplateServiceImpl implements TemplateService {
             throw new IllegalArgumentException("Неправильное количество элементов");
         }
 
-        // выдаёт сообщение из аргумента в случае произвольного шаблона
-        if (type == MessageType.CUSTOM) {
-            return (String) args[0];
-        }
+        Template template = type.getTemplateClass();
 
         // выдаёт сообщение для отправки через ботов
         if (notificationType == NotificationType.Telegram || notificationType == NotificationType.VK) {
-            return String.format(type.getBotPattern(), args);
+            return template.getBotTemplate(args);
         }
 
-        // обрабатывает и выдаёт сообщение для отправки через email
-        try (Scanner scanner = new Scanner(Paths.get(type.getPath()),
-                StandardCharsets.UTF_8.name())) {
+        return template.getHtmlTemplate(args);
 
-            //здесь мы можем использовать разделитель, например: "\\A", "\\Z" или "\\z"
-            // Реализован своеобразный костыль, т.к. нет возможности использовать String.format();
-            String html = scanner.useDelimiter("\\A").next().replaceAll("0%", "&&");
-
-            return String.format(html, args).replaceAll("&&", "0%");
-
-        } catch (IOException e) {
-
-            logger.error("Неверно указан путь к шаблону сообщения");
-            logger.error(Arrays.toString(e.getStackTrace()));
-
-        }
-
-        return null;
     }
 }
