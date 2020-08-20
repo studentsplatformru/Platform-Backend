@@ -1,6 +1,10 @@
 package ru.studentsplatform.backend.system.helper;
 
-import java.time.*;
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -36,8 +40,8 @@ public class DateUtils {
 	 * @param dayOfWeek значение дня недели в виде {@link DayOfWeek}
 	 * @return перевод значения текущего дня недели.
 	 */
-	public static String translateWeekDay(DayOfWeek dayOfWeek){
-		switch (dayOfWeek){
+	public static String translateWeekDay(DayOfWeek dayOfWeek) {
+		switch (dayOfWeek) {
 			case MONDAY:
 				return "Понедельник";
 			case TUESDAY:
@@ -52,8 +56,8 @@ public class DateUtils {
 				return "Суббота";
 			case SUNDAY:
 				return "Воскресенье";
+			default: return "";
 		}
-		return "";
 	}
 
 	/**
@@ -61,7 +65,7 @@ public class DateUtils {
 	 * @return перевод значения месяца.
 	 */
 	public static String translateMonth(Month month){
-		switch (month){
+		switch (month) {
 			case JANUARY:
 				return "Январь";
 			case FEBRUARY:
@@ -86,7 +90,7 @@ public class DateUtils {
 				return "Ноябрь";
 			case DECEMBER:
 				return "Декабрь";
+			default: return "";
 		}
-		return "";
 	}
 }
