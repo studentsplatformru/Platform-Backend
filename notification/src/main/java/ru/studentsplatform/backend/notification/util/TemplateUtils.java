@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class TemplateUtils {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(TemplateUtils.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TemplateUtils.class);
 
     /**
      * Костыльная обработка шаблона).
