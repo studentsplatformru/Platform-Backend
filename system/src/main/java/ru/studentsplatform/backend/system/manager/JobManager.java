@@ -39,8 +39,7 @@ public class JobManager {
             public void run() {
                 job.run();
 
-                logger.info(
-                        "In " + DateUtils.getLocalDate() + " Task done");
+                logger.info("In " + DateUtils.getLocalDate() + " Task done");
             }
         };
 
@@ -55,23 +54,13 @@ public class JobManager {
      */
     public void handle(Runnable job, String stringDate) {
 
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                job.run();
-
-                logger.info(
-                        "In " + DateUtils.getLocalDate() + " Task done");
-            }
-        };
-
         LocalDateTime locateDate =
                 LocalDateTime.parse(stringDate,
                         DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 
         Date date = DateUtils.getDateFromLocalDateTime(locateDate);
 
-        timer.schedule(timerTask, date);
+        this.handle(job, date);
     }
 
     /**
@@ -87,8 +76,7 @@ public class JobManager {
             public void run() {
                 job.run();
 
-                logger.info(
-                        "In " + DateUtils.getLocalDate() + " Task done");
+                logger.info("In " + DateUtils.getLocalDate() + " Task done");
             }
         };
 

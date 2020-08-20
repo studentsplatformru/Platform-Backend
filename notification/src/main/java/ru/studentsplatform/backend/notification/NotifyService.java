@@ -21,7 +21,7 @@ public interface NotifyService {
      * @param messageType устанавливается необходимый {@link MessageType}.
      * @param args необходимые для подстановки в шаблон значения.
      */
-    void sendNotification(User user, MessageType messageType, String... args);
+    void sendNotification(User user, MessageType messageType, Object... args);
 
     /**
      * Метод c определённый типом отправки уведомлений.
@@ -33,7 +33,7 @@ public interface NotifyService {
      */
     void sendNotification(User user, MessageType messageType,
                           NotificationType notificationType,
-                          String... args);
+                          Object... args);
     /**
      * Метод для для отправки уведомлений пользователям.
      *
@@ -44,7 +44,7 @@ public interface NotifyService {
      * @param args необходимые для подстановки в шаблон значения.
      */
     void sendNotification(User user, List<NotificationType> notificationTypes,
-                          MessageType messageType, String... args);
+                          MessageType messageType, Object... args);
 
     /**
      * Метод для для отправки уведомлений пользователям.
@@ -56,7 +56,7 @@ public interface NotifyService {
      * @param args необходимые для подстановки в шаблон значения.
      */
     void sendNotification(List<User> users, List<NotificationType> notificationTypes,
-                          MessageType messageType, String... args);
+                          MessageType messageType, Object... args);
 
     /**
      * Метод для для отправки уведомлений пользователям.
@@ -67,7 +67,7 @@ public interface NotifyService {
      * @param args необходимые для подстановки в шаблон значения.
      */
     void sendNotification(List<User> users, NotificationType notificationType,
-                          MessageType messageType, String... args);
+                          MessageType messageType, Object... args);
 
     /**
      * Метод для для отправки уведомлений пользователям.
@@ -76,7 +76,7 @@ public interface NotifyService {
      * @param messageType тип сообщения в виде {@link MessageType}.
      * @param args необходимые для подстановки в шаблон значения.
      */
-    void sendNotification(List<User> users, MessageType messageType, String... args);
+    void sendNotification(List<User> users, MessageType messageType, Object... args);
 
 
     /**
@@ -87,7 +87,7 @@ public interface NotifyService {
      * @param date точная дата отправки сообщения.
      * @param args необходимые для подстановки в шаблон значения.
      */
-    void sendSpecificDayNotification(User user, MessageType messageType, Date date, String... args);
+    void sendSpecificDayNotification(User user, MessageType messageType, Date date, Object... args);
 
     /**
      * Метод c определённый типом отправки уведомлений.
@@ -100,7 +100,7 @@ public interface NotifyService {
      */
     void sendSpecificDayNotification(User user, MessageType messageType,
                                      NotificationType notificationType, Date date,
-                                     String... args);
+                                     Object... args);
     /**
      * Метод для для отправки уведомлений пользователям.
      *
@@ -112,7 +112,7 @@ public interface NotifyService {
      * @param args необходимые для подстановки в шаблон значения.
      */
     void sendSpecificDayNotification(User user, List<NotificationType> notificationTypes,
-                                     MessageType messageType, Date date, String... args);
+                                     MessageType messageType, Date date, Object... args);
 
     /**
      * Метод для для отправки уведомлений пользователям.
@@ -125,7 +125,7 @@ public interface NotifyService {
      * @param args необходимые для подстановки в шаблон значения.
      */
     void sendSpecificDayNotification(List<User> users, List<NotificationType> notificationTypes,
-                                     MessageType messageType, Date date, String... args);
+                                     MessageType messageType, Date date, Object... args);
 
     /**
      * Метод для для отправки уведомлений пользователям.
@@ -137,7 +137,7 @@ public interface NotifyService {
      * @param args необходимые для подстановки в шаблон значения.
      */
     void sendSpecificDayNotification(List<User> users, NotificationType notificationType,
-                                      MessageType messageType, Date date, String... args);
+                                      MessageType messageType, Date date, Object... args);
 
     /**
      * Метод для для отправки уведомлений пользователям.
@@ -148,7 +148,7 @@ public interface NotifyService {
      * @param args необходимые для подстановки в шаблон значения.
      */
     void sendSpecificDayNotification(List<User> users, MessageType messageType,
-                                     Date date, String... args);
+                                     Date date, Object... args);
 
 
 

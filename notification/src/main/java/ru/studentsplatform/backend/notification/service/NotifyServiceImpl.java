@@ -56,7 +56,7 @@ public class NotifyServiceImpl implements NotifyService {
      * {@inheritDoc}
      */
     @Override
-    public void sendNotification(User user, MessageType messageType, String... args) {
+    public void sendNotification(User user, MessageType messageType, Object... args) {
         this.sendNotification(user, messageType, user.getNotificationType(), args);
     }
 
@@ -66,7 +66,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendNotification(User user, MessageType messageType,
                                  NotificationType notificationType,
-                                 String... args) {
+                                 Object... args) {
         this.sendNotification(Collections.singletonList(user),
                 Collections.singletonList(notificationType),
                 messageType, args);
@@ -78,7 +78,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendNotification(User user,
                                  List<NotificationType> notificationTypes,
-                                 MessageType messageType, String... args) {
+                                 MessageType messageType, Object... args) {
         this.sendNotification(Collections.singletonList(user), notificationTypes, messageType, args);
 
     }
@@ -89,7 +89,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendNotification(List<User> users,
                                  List<NotificationType> notificationTypes,
-                                 MessageType messageType, String... args) {
+                                 MessageType messageType, Object... args) {
 
         String message = templateService.getTemplate(messageType, NotificationType.Email, args);
         String botMessage = templateService.getTemplate(messageType, NotificationType.Telegram, args);
@@ -119,7 +119,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendNotification(List<User> users,
                                  NotificationType notificationType,
-                                 MessageType messageType, String... args) {
+                                 MessageType messageType, Object... args) {
 
         this.sendNotification(users, Collections.singletonList(notificationType), messageType, args);
     }
@@ -129,7 +129,7 @@ public class NotifyServiceImpl implements NotifyService {
      */
     @Override
     public void sendNotification(List<User> users,
-                                 MessageType messageType, String... args) {
+                                 MessageType messageType, Object... args) {
 
         String message = templateService.getTemplate(messageType, NotificationType.Email, args);
         String botMessage = templateService.getTemplate(messageType, NotificationType.Telegram, args);
@@ -157,7 +157,7 @@ public class NotifyServiceImpl implements NotifyService {
      * {@inheritDoc}
      */
     @Override
-    public void sendSpecificDayNotification(User user, MessageType messageType, Date date, String... args) {
+    public void sendSpecificDayNotification(User user, MessageType messageType, Date date, Object... args) {
         jobManager.handle(() -> this.sendNotification(user, messageType, args), date);
     }
 
@@ -166,7 +166,7 @@ public class NotifyServiceImpl implements NotifyService {
      */
     @Override
     public void sendSpecificDayNotification(User user, MessageType messageType,
-                                            NotificationType notificationType, Date date, String... args) {
+                                            NotificationType notificationType, Date date, Object... args) {
         jobManager.handle(() -> this.sendNotification(user, messageType, notificationType, args), date);
     }
 
@@ -175,7 +175,7 @@ public class NotifyServiceImpl implements NotifyService {
      */
     @Override
     public void sendSpecificDayNotification(User user, List<NotificationType> notificationTypes,
-                                            MessageType messageType, Date date, String... args) {
+                                            MessageType messageType, Date date, Object... args) {
         jobManager.handle(() -> this.sendNotification(user, notificationTypes, messageType, args), date);
     }
 
@@ -184,7 +184,7 @@ public class NotifyServiceImpl implements NotifyService {
      */
     @Override
     public void sendSpecificDayNotification(List<User> users, List<NotificationType> notificationTypes,
-                                            MessageType messageType, Date date, String... args) {
+                                            MessageType messageType, Date date, Object... args) {
         jobManager.handle(() -> this.sendNotification(users, notificationTypes, messageType, args), date);
     }
 
@@ -193,7 +193,7 @@ public class NotifyServiceImpl implements NotifyService {
      */
     @Override
     public void sendSpecificDayNotification(List<User> users, NotificationType notificationType,
-                                            MessageType messageType, Date date, String... args) {
+                                            MessageType messageType, Date date, Object... args) {
         jobManager.handle(() -> this.sendNotification(users, messageType, args), date);
     }
 
@@ -202,12 +202,12 @@ public class NotifyServiceImpl implements NotifyService {
      */
     @Override
     public void sendSpecificDayNotification(List<User> users, MessageType messageType,
-                                            Date date, String... args) {
+                                            Date date, Object... args) {
         jobManager.handle(() -> this.sendNotification(users, messageType, args), date);
     }
 
     // отправка сообщения через email
-    private void sendEmail(User user, String message, String... args) {
+    private void sendEmail(User user, String message, Object... args) {
 
         try {
             eMailSender.sendHtml(
@@ -222,7 +222,7 @@ public class NotifyServiceImpl implements NotifyService {
     }
 
     // отправка сообщения через vk-бота
-    private void sendVK(User user, String message, String... args) {
+    private void sendVK(User user, String message, Object... args) {
 
         // Получение адреса отправки user.getVkId()
         try {
@@ -235,7 +235,7 @@ public class NotifyServiceImpl implements NotifyService {
     }
 
     // отправка сообщения через telegram-бота
-    private void sendTelegram(User user, String message, String... args) {
+    private void sendTelegram(User user, String message, Object... args) {
 
         // Получение адреса отправки user.getTelegramId()
         try {

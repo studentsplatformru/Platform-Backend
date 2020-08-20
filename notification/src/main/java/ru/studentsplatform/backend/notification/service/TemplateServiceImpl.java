@@ -30,15 +30,15 @@ public class TemplateServiceImpl implements TemplateService {
      * {@inheritDoc}
      */
     @Override
-    public String getTemplate(MessageType type, NotificationType notificationType, String... args) {
+    public String getTemplate(MessageType type, NotificationType notificationType, Object... args) {
 
         if (type.getParameterCount() != args.length) {
-            throw new IllegalArgumentException("Неправильное количство элементов");
+            throw new IllegalArgumentException("Неправильное количество элементов");
         }
 
         // выдаёт сообщение из аргумента в случае произвольного шаблона
         if (type == MessageType.CUSTOM) {
-            return args[0];
+            return (String) args[0];
         }
 
         // выдаёт сообщение для отправки через ботов
@@ -46,13 +46,12 @@ public class TemplateServiceImpl implements TemplateService {
             return String.format(type.getBotPattern(), args);
         }
 
-        // обрабатывает и выдаёт сообшение для отправки через email
-        try (Scanner scanner = new Scanner(
-                Paths.get(type.getPath()),
+        // обрабатывает и выдаёт сообщение для отправки через email
+        try (Scanner scanner = new Scanner(Paths.get(type.getPath()),
                 StandardCharsets.UTF_8.name())) {
 
             //здесь мы можем использовать разделитель, например: "\\A", "\\Z" или "\\z"
-            // Реализован своебразный костыль, т.к. нет возможности использовать String.format();
+            // Реализован своеобразный костыль, т.к. нет возможности использовать String.format();
             String html = scanner.useDelimiter("\\A").next().replaceAll("0%", "&&");
 
             return String.format(html, args).replaceAll("&&", "0%");
