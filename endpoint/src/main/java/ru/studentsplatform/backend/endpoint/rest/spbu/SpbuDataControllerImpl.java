@@ -13,6 +13,7 @@ import ru.studentsplatform.backend.university.schedule.spbu.mapper.SpbuEventMapp
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuEventService;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuTeamService;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuUnwrapService;
+import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuUtilService;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -34,21 +35,26 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 
 	private final SpbuEventService eventService;
 
+	private final SpbuUtilService utilService;
+
 	private final SpbuEventMapper mapper;
 	/**
 	 * Конструктор.
 	 * @param teamService 	Сервис SpbuTeam
 	 * @param unwrapService Сервис для разворачивания классов-обёрток данных SPBU
  	 * @param eventService 	Сервис SpbuEvent
+	 * @param utilService	Сервис SpbuUtil
 	 * @param mapper		Маппер SpbuEvent
 	 */
 	public SpbuDataControllerImpl(SpbuTeamService teamService,
 								  SpbuUnwrapService unwrapService,
 								  SpbuEventService eventService,
+								  SpbuUtilService utilService,
 								  SpbuEventMapper mapper) {
 		this.teamService = teamService;
 		this.unwrapService = unwrapService;
 		this.eventService = eventService;
+		this.utilService = utilService;
 		this.mapper = mapper;
 	}
 
@@ -130,4 +136,8 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 		return ResponseEntity.ok("Groups saving started!");
 	}
 
+	@Override
+	public ResponseEntity<Boolean> stressTest(int iterations) {
+		return ResponseEntity.ok(utilService.stressTest(iterations));
+	}
 }
