@@ -64,7 +64,7 @@ public class DateUtils {
 	 * @param month значение месяца в виде {@link Month}
 	 * @return перевод значения месяца.
 	 */
-	public static String translateMonth(Month month){
+	public static String translateMonth(Month month) {
 		switch (month) {
 			case JANUARY:
 				return "Январь";
