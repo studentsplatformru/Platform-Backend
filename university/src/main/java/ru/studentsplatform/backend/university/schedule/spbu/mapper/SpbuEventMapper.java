@@ -18,15 +18,13 @@ public interface SpbuEventMapper {
 	 * @return DTO студенческого занятия СПБГУ
 	 */
 	@Mappings({
-			@Mapping(target = "id", source = "entity.id"),
-			@Mapping(target = "subject", source = "entity.subject"),
-			@Mapping(target = "dayWithTimeInterval", source = "entity.dayWithTimeInterval"),
-			@Mapping(target = "timeInterval", source = "entity.timeInterval"),
-			@Mapping(target = "location", source = "entity.location"),
-			@Mapping(target = "educator", source = "entity.educator"),
+			@Mapping(target = "teamName", source = "entity.team.name"),
 			@Mapping(target = "startTime", source = "entity.startTime"),
 			@Mapping(target = "endTime", source = "entity.endTime"),
-			@Mapping(target = "spbuTeamName", source = "entity.team.name")
+			@Mapping(target = "date", source = "entity.date"),
+			@Mapping(target = "subject", source = "entity.subject"),
+			@Mapping(target = "location", source = "entity.location"),
+			@Mapping(target = "educator", source = "entity.educator")
 	})
 	SpbuEventDTO spbuEventToSpbuEventDTO(SpbuEvent entity);
 
@@ -37,15 +35,13 @@ public interface SpbuEventMapper {
 	 * @return объект студенческого занятия
 	 */
 	@Mappings({
-			@Mapping(target = "id", source = "dto.id"),
-			@Mapping(target = "subject", source = "dto.subject"),
-			@Mapping(target = "dayWithTimeInterval", source = "dto.dayWithTimeInterval"),
-			@Mapping(target = "timeInterval", source = "dto.timeInterval"),
-			@Mapping(target = "location", source = "dto.location"),
-			@Mapping(target = "educator", source = "dto.educator"),
+			@Mapping(target = "team.name", source = "dto.teamName"),
 			@Mapping(target = "startTime", source = "dto.startTime"),
 			@Mapping(target = "endTime", source = "dto.endTime"),
-			@Mapping(target = "team.name", source = "dto.spbuTeamName")
+			@Mapping(target = "date", source = "dto.date"),
+			@Mapping(target = "subject", source = "dto.subject"),
+			@Mapping(target = "location", source = "dto.location"),
+			@Mapping(target = "educator", source = "dto.educator")
 	})
 	SpbuEvent spbuEventDTOToSpbuEvent(SpbuEventDTO dto);
 

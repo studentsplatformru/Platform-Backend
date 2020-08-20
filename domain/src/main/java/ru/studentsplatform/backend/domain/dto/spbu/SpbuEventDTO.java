@@ -1,39 +1,25 @@
 package ru.studentsplatform.backend.domain.dto.spbu;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 public class SpbuEventDTO {
 
-	private Long id;
+	private String teamName;
 
-	@JsonProperty("Subject")
+	private LocalTime startTime;
+
+	private LocalTime endTime;
+
+	private LocalDate date;
+
 	private String subject;
 
-	@JsonProperty("DateWithTimeIntervalString")
-	private String dayWithTimeInterval;
-
-	@JsonProperty("TimeIntervalString")
-	private String timeInterval;
-
-	@JsonProperty("LocationsDisplayText")
 	private String location;
 
-	@JsonProperty("EducatorsDisplayText")
 	private String educator;
-
-	@JsonProperty("Start")
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private Timestamp startTime;
-
-	@JsonProperty("End")
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-	private Timestamp endTime;
-
-	private String spbuTeamName;
 
 }
