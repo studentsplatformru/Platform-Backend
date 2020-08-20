@@ -129,10 +129,7 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 
 	@Override
 	public ResponseEntity<String> saveAllGroups() {
-		List<SpbuDivisionDTO> divisions = FeignConfig.getSpbuProxy().getDivisions();
-		for (SpbuDivisionDTO division: divisions) {
-			saveAllGroupsForAlias(division.getAlias());
-		}
+		teamService.saveAllGroups();
 		return ResponseEntity.ok("Groups saving started!");
 	}
 

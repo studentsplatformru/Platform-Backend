@@ -2,6 +2,7 @@ package ru.studentsplatform.backend.university.schedule.spbu.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuTeamDTO;
 import ru.studentsplatform.backend.domain.repository.spbu.SpbuTeamRepository;
@@ -61,6 +62,14 @@ public class SpbuTeamServiceImpl implements SpbuTeamService {
 		return repository.findByName(name);
 	}
 
+	@Override
+	public void saveAllGroups() {
+		List<SpbuDivisionDTO> divisions = FeignConfig.getSpbuProxy().getDivisions();
+		for (SpbuDivisionDTO division: divisions) {
+			saveAllAliasGroups(division.getAlias());
+		}
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -78,7 +87,7 @@ public class SpbuTeamServiceImpl implements SpbuTeamService {
 	 *
 	 * @param alias Сокращённое наименования направления
 	 */
-	private void iteratePrograms(String alias) throws feign.RetryableException {
+	private synchronized void iteratePrograms(String alias) throws feign.RetryableException {
 		for (SpbuStudyProgramDTO program : unwrapService.studyProgramUnwrap(
 				FeignConfig.getSpbuProxy().getProgramLevels(alias))) {
 			try {
@@ -97,7 +106,7 @@ public class SpbuTeamServiceImpl implements SpbuTeamService {
 	 * @param alias  сокращённое наименование направления
 	 * @throws InterruptedException метод имеет задержку выполнения, требуется обработка
 	 */
-	private void saveGroupList(List<SpbuTeamDTO> groups, String alias) throws InterruptedException {
+	private synchronized void saveGroupList(List<SpbuTeamDTO> groups, String alias) throws InterruptedException {
 		for (SpbuTeamDTO group : groups) {
 			log.info("Saving group {}...", group.getName());
 			group.setAlias(alias);
