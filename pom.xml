@@ -30,6 +30,7 @@
         <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
         <feign.okHttp.version>10.2.0</feign.okHttp.version>
         <feign.jackson.version>11.0</feign.jackson.version>
+        <org.json.version>20200518</org.json.version>
     </properties>
 
     <modules>

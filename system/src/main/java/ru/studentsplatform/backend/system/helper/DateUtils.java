@@ -1,8 +1,6 @@
 package ru.studentsplatform.backend.system.helper;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -32,5 +30,63 @@ public class DateUtils {
 	 */
 	public static Date getDateFromLocalDateTime(LocalDateTime localDateTime) {
 		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+	/**
+	 * @param dayOfWeek значение дня недели в виде {@link DayOfWeek}
+	 * @return перевод значения текущего дня недели.
+	 */
+	public static String translateWeekDay(DayOfWeek dayOfWeek){
+		switch (dayOfWeek){
+			case MONDAY:
+				return "Понедельник";
+			case TUESDAY:
+				return "Вторник";
+			case WEDNESDAY:
+				return "Среда";
+			case THURSDAY:
+				return "Четверг";
+			case FRIDAY:
+				return "Пятница";
+			case SATURDAY:
+				return "Суббота";
+			case SUNDAY:
+				return "Воскресенье";
+		}
+		return "";
+	}
+
+	/**
+	 * @param month значение месяца в виде {@link Month}
+	 * @return перевод значения месяца.
+	 */
+	public static String translateMonth(Month month){
+		switch (month){
+			case JANUARY:
+				return "Январь";
+			case FEBRUARY:
+				return "Февраль";
+			case MARCH:
+				return "Март";
+			case APRIL:
+				return "Апрель";
+			case MAY:
+				return "Май";
+			case JUNE:
+				return "Июнь";
+			case JULY:
+				return "Июль";
+			case AUGUST:
+				return "Август";
+			case SEPTEMBER:
+				return "Сентябрь";
+			case OCTOBER:
+				return "Октябрь";
+			case NOVEMBER:
+				return "Ноябрь";
+			case DECEMBER:
+				return "Декабрь";
+		}
+		return "";
 	}
 }

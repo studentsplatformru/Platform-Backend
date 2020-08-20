@@ -150,6 +150,4 @@ public interface NotifyService {
     void sendSpecificDayNotification(List<User> users, MessageType messageType,
                                      Date date, Object... args);
 
-
-
 }

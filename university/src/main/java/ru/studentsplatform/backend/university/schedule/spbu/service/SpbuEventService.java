@@ -30,7 +30,7 @@ public interface SpbuEventService {
 	 * Позволяет найти расписание на текущий день.
 	 * @param teamName	 Имя студенческой группы СПБГУ
 	 * @param day		 День, для которого будет произведен поиск расписания
-	 * @return			 Список занятий на выбраный день
+	 * @return			 Список занятий на выбранный день
 	 */
 	List<SpbuEvent> getEventsByDay(String teamName, LocalDate day);
 
@@ -43,11 +43,11 @@ public interface SpbuEventService {
 	List<SpbuEvent> getEventsByCurrentWeek(String teamName);
 
 	/**
-	 * Возвранащет расписание в выбранных временных рамках.
+	 * Возвращает расписание в выбранных временных рамках.
 	 * @param teamName	 Имя студенческой группы
 	 * @param startTime	 Начало временных рамок
 	 * @param endTime	 Конец временных рамок
-	 * @return			 Список занятий, найденых в выбранных временных рамках
+	 * @return			 Список занятий, найденных в выбранных временных рамках
 	 */
 	List<SpbuEvent> getEventsByInterval(String teamName, String startTime, String endTime);
 

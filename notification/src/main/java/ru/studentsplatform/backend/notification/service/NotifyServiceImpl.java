@@ -7,6 +7,7 @@ import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.notification.EMailSender;
 import ru.studentsplatform.backend.notification.NotifyService;
+import ru.studentsplatform.backend.notification.TelegramSender;
 import ru.studentsplatform.backend.notification.TemplateService;
 
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
@@ -37,19 +38,24 @@ public class NotifyServiceImpl implements NotifyService {
 
     private final JobManager jobManager;
 
+    private final TelegramSender telegramSender;
+
 
     /**
      * @param eMailSender сервис для отправки email сообщений.
      * @param templateService сервис для обработки шаблона уведомлений.
      * @param jobManager компонент для задержки отправки уведомления.
+     * @param telegramSender сервис для отправки сообщений через Telegram
      */
     public NotifyServiceImpl(
             EMailSender eMailSender,
             TemplateService templateService,
-            JobManager jobManager) {
+            JobManager jobManager,
+            TelegramSender telegramSender) {
         this.eMailSender = eMailSender;
         this.templateService = templateService;
         this.jobManager = jobManager;
+        this.telegramSender = telegramSender;
     }
 
     /**
@@ -98,16 +104,16 @@ public class NotifyServiceImpl implements NotifyService {
 
             if (notificationTypes.contains(NotificationType.Email)) {
 
-                this.sendEmail(user, message, args);
+                this.sendEmail(user, message);
             }
             if (notificationTypes.contains(NotificationType.Telegram)) {
 
-                this.sendTelegram(user, botMessage, args);
+                this.sendTelegram(user, botMessage);
 
             }
             if (notificationTypes.contains(NotificationType.VK)) {
 
-                this.sendVK(user, botMessage, args);
+                this.sendVK(user, botMessage);
 
             }
         }
@@ -138,16 +144,16 @@ public class NotifyServiceImpl implements NotifyService {
 
             if (user.getNotificationType() == NotificationType.Email) {
 
-                this.sendEmail(user, message, args);
+                this.sendEmail(user, message);
             }
             if (user.getNotificationType() == NotificationType.Telegram) {
 
-                this.sendTelegram(user, botMessage, args);
+                this.sendTelegram(user, botMessage);
 
             }
             if (user.getNotificationType() == NotificationType.VK) {
 
-                this.sendVK(user, botMessage, args);
+                this.sendVK(user, botMessage);
 
             }
         }
@@ -207,7 +213,7 @@ public class NotifyServiceImpl implements NotifyService {
     }
 
     // отправка сообщения через email
-    private void sendEmail(User user, String message, Object... args) {
+    private void sendEmail(User user, String message) {
 
         try {
             eMailSender.sendHtml(
@@ -222,7 +228,7 @@ public class NotifyServiceImpl implements NotifyService {
     }
 
     // отправка сообщения через vk-бота
-    private void sendVK(User user, String message, Object... args) {
+    private void sendVK(User user, String message) {
 
         // Получение адреса отправки user.getVkId()
         try {
@@ -235,16 +241,10 @@ public class NotifyServiceImpl implements NotifyService {
     }
 
     // отправка сообщения через telegram-бота
-    private void sendTelegram(User user, String message, Object... args) {
+    private void sendTelegram(User user, String message) {
 
-        // Получение адреса отправки user.getTelegramId()
-        try {
+        telegramSender.sendMessage(user.getTelegramId(), message);
 
-            // telegramSender.sendMessage(user.getTelegramId(), message, args);
-            throw new NoSuchMethodException();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
     }
 
 }

@@ -62,3 +62,7 @@ logging:
   file:
     name: "log"
   config: "classpath:logback-spring.xml"
+
+#telegram bot url
+telegrambot:
+  url : "http://localhost:8000"
