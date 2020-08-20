@@ -2,7 +2,6 @@ package ru.studentsplatform.backend.notification.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.studentsplatform.backend.notification.TemplateService;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -16,16 +15,15 @@ import java.util.Scanner;
  */
 public class TemplateUtils {
 
-    private final static Logger logger = LoggerFactory.getLogger(TemplateUtils.class);
-
+    private final static Logger LOGGER = LoggerFactory.getLogger(TemplateUtils.class);
 
     /**
-     * Костыльная обработка шаблона)
+     * Костыльная обработка шаблона).
      * @param path путь к файлу.
      * @param args аргументы для вставки.
      * @return готовое для отправки сообщение.
      */
-    public static String getHtmlTemplateFromPath(String path, Object... args){
+    public static String getHtmlTemplateFromPath(String path, Object... args) {
         // обрабатывает и выдаёт сообщение для отправки через email
         try (Scanner scanner = new Scanner(Paths.get(path),
                 StandardCharsets.UTF_8.name())) {
@@ -38,8 +36,8 @@ public class TemplateUtils {
 
         } catch (IOException e) {
 
-            logger.error("Неверно указан путь к шаблону сообщения");
-            logger.error(e.fillInStackTrace().getMessage());
+            LOGGER.error("Неверно указан путь к шаблону сообщения");
+            LOGGER.error(e.fillInStackTrace().getMessage());
 
         }
         return null;

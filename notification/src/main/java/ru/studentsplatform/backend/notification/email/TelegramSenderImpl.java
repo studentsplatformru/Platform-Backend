@@ -28,7 +28,7 @@ public class TelegramSenderImpl implements TelegramSender {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * URL-путь к серверу телеграм-бота
+     * URL-путь к серверу телеграм-бота.
      */
     @Value("${telegrambot.url}")
     private String url;
@@ -53,7 +53,7 @@ public class TelegramSenderImpl implements TelegramSender {
         HttpEntity<String> request = new HttpEntity<>(object.toString(), headers);
 
         ResponseEntity<String> responseEntityStr = restTemplate
-                .postForEntity(url  + "/bot/send", request, String.class);
+                .postForEntity(url + "/bot/send", request, String.class);
 
         if (responseEntityStr.getStatusCode().is2xxSuccessful()) {
             logger.info("Telegram message to " + userId + " send.");

@@ -1,10 +1,7 @@
 package ru.studentsplatform.backend.notification;
 
-import ru.studentsplatform.backend.notification.enumerated.MessageType;
-
 /**
  * Интерфейс для обработки шаблонов с определённой логикой.
- * Помещается в необходимый {@link MessageType}
  *
  * @author Danila K (karnacevich5323537@gmail.com) (20.08.2020).
  */

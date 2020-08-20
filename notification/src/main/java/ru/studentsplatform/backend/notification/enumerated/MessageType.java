@@ -16,7 +16,7 @@ public enum MessageType {
     //    WELCOME,
     /**
      * Параметры для вставки:
-     * 1-й : Список занятий в виде {@code List<SpbuEvent>}
+     * 1-й : Список занятий в виде {@code List<SpbuEvent>}.
      */
     EVENTS_DAY_NOTIFICATION(
             1, new EventsDayTemplate(
@@ -54,9 +54,8 @@ public enum MessageType {
     private final Template template;
 
     /**
-     //     * @param path               Путь к шаблону.
-     * @param parameterCount     Количество вставляемых параметров.
-    //     * @param botPattern         шаблон в формате строки для сообщений через бота.
+     * @param parameterCount количество вставляемых параметров.
+     * @param template класс для обработки шаблона.
      */
     MessageType(int parameterCount, Template template) {
         this.parameterCount = parameterCount;

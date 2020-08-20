@@ -1,7 +1,6 @@
 package ru.studentsplatform.backend.notification.templates;
 
 import ru.studentsplatform.backend.entities.model.spbu.SpbuEvent;
-import ru.studentsplatform.backend.notification.Template;
 import ru.studentsplatform.backend.notification.util.TemplateUtils;
 
 import java.time.LocalDate;
@@ -11,11 +10,11 @@ import static ru.studentsplatform.backend.system.helper.DateUtils.translateMonth
 import static ru.studentsplatform.backend.system.helper.DateUtils.translateWeekDay;
 
 /**
- * Реализация {@link Template} для обработки расписания за день.
+ * Расширение {@link AbstractTemplate} для обработки расписания за день.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (20.08.2020).
  */
-public class EventsDayTemplate extends AbstractTemplate{
+public class EventsDayTemplate extends AbstractTemplate {
 
     /**
      * @param path путь к html шаблону.
@@ -43,7 +42,7 @@ public class EventsDayTemplate extends AbstractTemplate{
 
         StringBuilder builder = new StringBuilder();
 
-        for (SpbuEvent event: events){
+        for (SpbuEvent event: events) {
             builder
                     .append("<li><h4>")
                     .append(event.getStartTime())
@@ -53,7 +52,7 @@ public class EventsDayTemplate extends AbstractTemplate{
         }
 
         return TemplateUtils.getHtmlTemplateFromPath(
-                this.getPath(),dateString , builder.toString());
+                this.getPath(), dateString, builder.toString());
     }
 
     /**
@@ -77,7 +76,7 @@ public class EventsDayTemplate extends AbstractTemplate{
                 .append(translateMonth(date.getMonth()));
         builder.append("\n\n");
 
-        for (SpbuEvent event: events){
+        for (SpbuEvent event: events) {
             builder
                     .append(event.getStartTime())
                     .append(": ")
