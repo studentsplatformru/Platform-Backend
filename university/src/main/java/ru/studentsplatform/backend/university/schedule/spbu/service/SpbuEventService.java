@@ -2,6 +2,7 @@ package ru.studentsplatform.backend.university.schedule.spbu.service;
 
 import ru.studentsplatform.backend.entities.model.spbu.SpbuEvent;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -13,24 +14,41 @@ public interface SpbuEventService {
 
 	/**
 	 * Сохраняет занятие в БД.
-	 * @param entity занятие студенческой группы
-	 * @return Сохраненная сущность занятия
+	 * @param entity Занятие студенческой группы
+	 * @return		 Сохраненная сущность занятия
 	 */
 	SpbuEvent create(SpbuEvent entity);
 
 	/**
 	 * Возвращает всё сохраненное расписание для конкретной группы.
-	 * @param groupName имя студенческой группы
-	 * @return Сущность расписания.
+	 * @param groupName	 Имя студенческой группы
+	 * @return			 Сущность расписания.
 	 */
 	List<SpbuEvent> getByGroupName(String groupName);
 
 	/**
+	 * Позволяет найти расписание на текущий день.
+	 * @param teamName	 Имя студенческой группы СПБГУ
+	 * @param day		 День, для которого будет произведен поиск расписания
+	 * @return			 Список занятий на выбраный день
+	 */
+	List<SpbuEvent> getEventsByDay(String teamName, LocalDate day);
+
+	/**
 	 * Возвращает кэшированное расписание, если на этой неделе уже были запросы к конкретной группе.
 	 * В противном случае обращается к БД СПБГУ.
-	 * @param teamName имя студенческой группы
-	 * @return список дней с расписанием
+	 * @param teamName	 Имя студенческой группы
+	 * @return			 Список дней с расписанием на текущую неделю
 	 */
-	List<SpbuEvent> getWeekEvents(String teamName) throws feign.RetryableException;
+	List<SpbuEvent> getEventsByCurrentWeek(String teamName);
+
+	/**
+	 * Возвранащет расписание в выбранных временных рамках.
+	 * @param teamName	 Имя студенческой группы
+	 * @param startTime	 Начало временных рамок
+	 * @param endTime	 Конец временных рамок
+	 * @return			 Список занятий, найденых в выбранных временных рамках
+	 */
+	List<SpbuEvent> getEventsByInterval(String teamName, String startTime, String endTime);
 
 }

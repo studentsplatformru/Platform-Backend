@@ -16,6 +16,6 @@ public class SpbuScheduleDayDTO {
 	private Date dayDate;
 
 	@JsonProperty("DayStudyEvents")
-	private List<SpbuEventDTO> events;
+	private List<SpbuEventTransfer> events;
 
 }

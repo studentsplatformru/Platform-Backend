@@ -1,7 +1,7 @@
 package ru.studentsplatform.backend.university.schedule.spbu.service.impl;
 
 import org.junit.jupiter.api.Test;
-import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
+import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventTransfer;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramCombinationDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramLevelDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuScheduleDayDTO;
@@ -47,8 +47,8 @@ public class SpbuUnwrapperServiceImplTest {
 	 */
 	@Test
 	void eventUnwrapTest() {
-		var events = new LinkedList<SpbuEventDTO>();
-		events.add(new SpbuEventDTO());
+		var events = new LinkedList<SpbuEventTransfer>();
+		events.add(new SpbuEventTransfer());
 		events.get(0).setSubject("test");
 
 		var days = new LinkedList<SpbuScheduleDayDTO>();

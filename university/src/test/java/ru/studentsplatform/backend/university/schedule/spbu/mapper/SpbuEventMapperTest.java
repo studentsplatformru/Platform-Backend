@@ -28,13 +28,11 @@ public class SpbuEventMapperTest {
 	@BeforeEach
 	void Preparation() {
 		dto = new SpbuEventDTO();
-		dto.setId(1L);
 		dto.setSubject("test");
-		dto.setSpbuTeamName("TEST");
+		dto.setTeamName("TEST");
 
 		SpbuTeam team = new SpbuTeam();
 		entity = new SpbuEvent();
-		entity.setId(1L);
 		entity.setSubject("test");
 		entity.setTeam(team);
 		entity.getTeam().setName("TEST");
@@ -46,9 +44,8 @@ public class SpbuEventMapperTest {
 	@Test
 	void SpbuEventDTOToEventTest() {
 		SpbuEvent entity = mapper.spbuEventDTOToSpbuEvent(dto);
-		assertEquals(dto.getId(), entity.getId());
 		assertEquals(dto.getSubject(), entity.getSubject());
-		assertEquals(dto.getSpbuTeamName(), entity.getTeam().getName());
+		assertEquals(dto.getTeamName(), entity.getTeam().getName());
 	}
 
 	/**
@@ -58,9 +55,8 @@ public class SpbuEventMapperTest {
 	void SpbuEventToEventDTOTest() {
 
 		SpbuEventDTO dto = mapper.spbuEventToSpbuEventDTO(entity);
-		assertEquals(dto.getId(), entity.getId());
 		assertEquals(dto.getSubject(), entity.getSubject());
-		assertEquals(dto.getSpbuTeamName(), entity.getTeam().getName());
+		assertEquals(dto.getTeamName(), entity.getTeam().getName());
 	}
 
 	/**
@@ -72,8 +68,6 @@ public class SpbuEventMapperTest {
 		spbuEventDTOS.add(dto);
 		spbuEventDTOS.add(dto);
 		List<SpbuEvent> spbuEvents = mapper.listSpbuEventDTOToSpbuEvent(spbuEventDTOS);
-		assertEquals(1L, spbuEvents.get(0).getId());
-		assertEquals(1L, spbuEvents.get(1).getId());
 		assertEquals("test", spbuEvents.get(0).getSubject());
 		assertEquals("test", spbuEvents.get(1).getSubject());
 		assertEquals("TEST", spbuEvents.get(0).getTeam().getName());
@@ -89,8 +83,6 @@ public class SpbuEventMapperTest {
 		spbuEvents.add(entity);
 		spbuEvents.add(entity);
 		List<SpbuEventDTO> spbuEventDTOs = mapper.listSpbuEventToSpbuEventDTO(spbuEvents);
-		assertEquals(1L, spbuEvents.get(0).getId());
-		assertEquals(1L, spbuEvents.get(1).getId());
 		assertEquals("test", spbuEvents.get(0).getSubject());
 		assertEquals("test", spbuEvents.get(1).getSubject());
 		assertEquals("TEST", spbuEvents.get(0).getTeam().getName());

@@ -2,7 +2,7 @@ package ru.studentsplatform.backend.university.schedule.spbu.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
+import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventTransfer;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramCombinationDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramLevelDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuScheduleDayDTO;
@@ -41,10 +41,10 @@ public class SpbuUnwrapServiceImpl implements SpbuUnwrapService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<SpbuEventDTO> eventUnwrap(List<SpbuScheduleDayDTO> days) {
+	public List<SpbuEventTransfer> eventUnwrap(List<SpbuScheduleDayDTO> days) {
 		log.info("Unwrapping {} objects...", days.size());
 
-		var events = new LinkedList<SpbuEventDTO>();
+		var events = new LinkedList<SpbuEventTransfer>();
 		days.forEach(day -> events.addAll(day.getEvents()));
 
 		return events;

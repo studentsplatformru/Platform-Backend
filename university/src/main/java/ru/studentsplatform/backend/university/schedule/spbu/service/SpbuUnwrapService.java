@@ -1,6 +1,6 @@
 package ru.studentsplatform.backend.university.schedule.spbu.service;
 
-import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
+import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventTransfer;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuProgramLevelDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuScheduleDayDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
@@ -28,6 +28,6 @@ public interface SpbuUnwrapService {
 	 * @param days список дней
 	 * @return список занятий
 	 */
-	List<SpbuEventDTO> eventUnwrap(List<SpbuScheduleDayDTO> days);
+	List<SpbuEventTransfer> eventUnwrap(List<SpbuScheduleDayDTO> days);
 
 }
