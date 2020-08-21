@@ -88,6 +88,9 @@ public interface SpbuDataController {
 	@GetMapping("division/{alias}/saveAllGroups")
 	ResponseEntity<String> saveAllGroupsForAlias(@PathVariable(name = "alias") String alias);
 
-	@GetMapping("saveAlGroups")
+	@GetMapping("saveAllGroups")
 	ResponseEntity<String> saveAllGroups();
+
+	@GetMapping("stressTest/{iterations}")
+	ResponseEntity<Boolean> stressTest(@PathVariable(name = "iterations") int iterations);
 }
