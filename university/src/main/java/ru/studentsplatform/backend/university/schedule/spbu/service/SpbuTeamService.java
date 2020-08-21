@@ -34,10 +34,15 @@ public interface SpbuTeamService {
 	SpbuTeam getByName(String name);
 
 	/**
-	 * Запускает поток сохранения сех групп для определенного направления.
+	 * Запускает поток сохранения всех групп для определенного направления.
 	 *
 	 * @param alias сокращённое наименование направления
 	 */
 	void saveAllAliasGroups(String alias);
+
+	/**
+	 * Запускает потоки сохранения групп в БД для каждого направления.
+	 */
+	void saveAllGroups();
 
 }
