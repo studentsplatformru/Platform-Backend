@@ -1,16 +1,18 @@
 package ru.studentsplatform.backend.notification;
 
 /**
- * Утилитный класс для отправки сообщения через Telegram.
+ * Вспомогательный класс для отправки сообщения через Telegram.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (08.08.2020).
  */
 public interface TelegramSender {
+
     /**
-     * @param userId адрес отправки сообщения.
-     * @param message сообщение для отправки.
+     * Метод для отправки сообщения через Telegram.
      *
+     * @param userId адрес отправки сообщения.
+     * @param text сообщение для отправки.
      */
-    void sendMessage(String userId, String message);
+    void sendMessage(String userId, String text);
 
 }

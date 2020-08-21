@@ -6,19 +6,22 @@ import org.springframework.stereotype.Service;
 import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.notification.EMailSender;
-import ru.studentsplatform.backend.notification.TemplateService;
 import ru.studentsplatform.backend.notification.NotifyService;
+import ru.studentsplatform.backend.notification.TelegramSender;
+import ru.studentsplatform.backend.notification.TemplateService;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
+import ru.studentsplatform.backend.system.manager.JobManager;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
 /**
  * Реализация {@link NotifyService}.
  * Использует выбранный сервис исходя из приоритета пользователя.
- * Сообщение обрабатывается и отправляется согласно выбраному типу {@link MessageType}.
+ * Сообщение обрабатывается и отправляется согласно выбранному типу {@link MessageType}.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
  */
@@ -32,23 +35,33 @@ public class NotifyServiceImpl implements NotifyService {
 
     private final TemplateService templateService;
 
+    private final JobManager jobManager;
+
+    private final TelegramSender telegramSender;
+
 
     /**
      * @param eMailSender сервис для отправки email сообщений.
      * @param templateService сервис для обработки шаблона уведомлений.
+     * @param jobManager компонент для задержки отправки уведомления.
+     * @param telegramSender сервис для отправки сообщений через Telegram
      */
     public NotifyServiceImpl(
             EMailSender eMailSender,
-            TemplateService templateService) {
+            TemplateService templateService,
+            JobManager jobManager,
+            TelegramSender telegramSender) {
         this.eMailSender = eMailSender;
         this.templateService = templateService;
+        this.jobManager = jobManager;
+        this.telegramSender = telegramSender;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void sendNotification(User user, MessageType messageType, String... args) {
+    public void sendNotification(User user, MessageType messageType, Object... args) {
         this.sendNotification(user, messageType, user.getNotificationType(), args);
     }
 
@@ -58,7 +71,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendNotification(User user, MessageType messageType,
                                  NotificationType notificationType,
-                                 String... args) {
+                                 Object... args) {
         this.sendNotification(Collections.singletonList(user),
                 Collections.singletonList(notificationType),
                 messageType, args);
@@ -70,7 +83,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendNotification(User user,
                                  List<NotificationType> notificationTypes,
-                                 MessageType messageType, String... args) {
+                                 MessageType messageType, Object... args) {
         this.sendNotification(Collections.singletonList(user), notificationTypes, messageType, args);
 
     }
@@ -81,7 +94,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendNotification(List<User> users,
                                  List<NotificationType> notificationTypes,
-                                 MessageType messageType, String... args) {
+                                 MessageType messageType, Object... args) {
 
         String message = templateService.getTemplate(messageType, NotificationType.Email, args);
         String botMessage = templateService.getTemplate(messageType, NotificationType.Telegram, args);
@@ -90,16 +103,16 @@ public class NotifyServiceImpl implements NotifyService {
 
             if (notificationTypes.contains(NotificationType.Email)) {
 
-                this.sendEmail(user, message, args);
+                this.sendEmail(user, message);
             }
             if (notificationTypes.contains(NotificationType.Telegram)) {
 
-                this.sendTelegram(user, botMessage, args);
+                this.sendTelegram(user, botMessage);
 
             }
             if (notificationTypes.contains(NotificationType.VK)) {
 
-                this.sendVK(user, botMessage, args);
+                this.sendVK(user, botMessage);
 
             }
         }
@@ -111,7 +124,7 @@ public class NotifyServiceImpl implements NotifyService {
     @Override
     public void sendNotification(List<User> users,
                                  NotificationType notificationType,
-                                 MessageType messageType, String... args) {
+                                 MessageType messageType, Object... args) {
 
         this.sendNotification(users, Collections.singletonList(notificationType), messageType, args);
     }
@@ -121,7 +134,7 @@ public class NotifyServiceImpl implements NotifyService {
      */
     @Override
     public void sendNotification(List<User> users,
-                                 MessageType messageType, String... args) {
+                                 MessageType messageType, Object... args) {
 
         String message = templateService.getTemplate(messageType, NotificationType.Email, args);
         String botMessage = templateService.getTemplate(messageType, NotificationType.Telegram, args);
@@ -130,23 +143,85 @@ public class NotifyServiceImpl implements NotifyService {
 
             if (user.getNotificationType() == NotificationType.Email) {
 
-                this.sendEmail(user, message, args);
+                this.sendEmail(user, message);
             }
             if (user.getNotificationType() == NotificationType.Telegram) {
 
-                this.sendTelegram(user, botMessage, args);
+                this.sendTelegram(user, botMessage);
 
             }
             if (user.getNotificationType() == NotificationType.VK) {
 
-                this.sendVK(user, botMessage, args);
+                this.sendVK(user, botMessage);
 
             }
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendPlannedByDateNotification(User user, MessageType messageType,
+                                              LocalDateTime localDateTime, Object... args) {
+        jobManager.handle(() -> this.sendNotification(user, messageType, args), localDateTime);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendPlannedByDateNotification(User user, MessageType messageType,
+                                              NotificationType notificationType,
+                                              LocalDateTime localDateTime, Object... args) {
+        jobManager.handle(() -> this.sendNotification(user, messageType, notificationType, args),
+                localDateTime);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendPlannedByDateNotification(User user, List<NotificationType> notificationTypes,
+                                              MessageType messageType, LocalDateTime localDateTime,
+                                              Object... args) {
+        jobManager.handle(
+                () -> this.sendNotification(user, notificationTypes, messageType, args), localDateTime);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendPlannedByDateNotification(List<User> users, List<NotificationType> notificationTypes,
+                                              MessageType messageType, LocalDateTime localDateTime,
+                                              Object... args) {
+        jobManager.handle(
+                () -> this.sendNotification(users, notificationTypes, messageType, args), localDateTime);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendPlannedByDateNotification(List<User> users, NotificationType notificationType,
+                                              MessageType messageType, LocalDateTime localDateTime,
+                                              Object... args) {
+        jobManager.handle(
+                () -> this.sendNotification(users, messageType, args), localDateTime);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendPlannedByDateNotification(List<User> users, MessageType messageType,
+                                              LocalDateTime localDateTime, Object... args) {
+        jobManager.handle(() -> this.sendNotification(users, messageType, args), localDateTime);
+    }
+
     // отправка сообщения через email
-    private void sendEmail(User user, String message, String... args) {
+    private void sendEmail(User user, String message) {
 
         try {
             eMailSender.sendHtml(
@@ -161,7 +236,7 @@ public class NotifyServiceImpl implements NotifyService {
     }
 
     // отправка сообщения через vk-бота
-    private void sendVK(User user, String message, String... args) {
+    private void sendVK(User user, String message) {
 
         // Получение адреса отправки user.getVkId()
         try {
@@ -174,16 +249,10 @@ public class NotifyServiceImpl implements NotifyService {
     }
 
     // отправка сообщения через telegram-бота
-    private void sendTelegram(User user, String message, String... args) {
+    private void sendTelegram(User user, String message) {
 
-        // Получение адреса отправки user.getTelegramId()
-        try {
+        telegramSender.sendMessage(user.getTelegramId(), message);
 
-            // telegramSender.sendMessage(user.getTelegramId(), message, args);
-            throw new NoSuchMethodException();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
     }
 
 }

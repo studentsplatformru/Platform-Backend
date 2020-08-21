@@ -1,5 +1,10 @@
 package ru.studentsplatform.backend.notification.enumerated;
 
+import ru.studentsplatform.backend.notification.Template;
+import ru.studentsplatform.backend.notification.templates.CustomTemplate;
+import ru.studentsplatform.backend.notification.templates.EventsDayTemplate;
+import ru.studentsplatform.backend.notification.templates.StandardTemplate;
+
 /**
  * Enum для описания типа сообщения.
  *
@@ -10,56 +15,58 @@ public enum MessageType {
     //    REGISTRATION,
     //    WELCOME,
     /**
-     * Параметры:
+     * Параметры для вставки:
+     * 1-й : Список занятий в виде {@code List<SpbuEvent>}.
+     */
+    EVENTS_DAY_NOTIFICATION(
+            1, new EventsDayTemplate(
+            "notification/src/main/resources/templates/events_day_notification.html",
+            ""
+    )),
+    /**
+     * Параметры для вставки:
      * 1-й : Предмет получения оценки.
      * 2-й : Оценка по предмету.
      */
     MARK_NOTIFICATION(
+            2, new StandardTemplate(
             "notification/src/main/resources/templates/mark_notification.html",
-            2,
-            "У Вас новая оценка!\n %s : %s"),
+            "У Вас новая оценка!\n %s : %s"
+    )),
+
     /**
-     * Параметры:
+     * Параметры для вставки:
      * 1-й : Ссылка на подтверждение email.
      */
     EMAIL_CONFIRMATION(
+            1, new StandardTemplate(
             "notification/src/main/resources/templates/email_confirmation.html",
-            1,
-            "Пожалуйста, поддтвердите свой email:\n %s"),
+            "Пожалуйста, подтвердите свой email:\n %s"
+    )),
 
     /**
-     * Параметры:
+     * Параметры для вставки:
      * 1-й : Свободное сообщение передаётся в качестве аргумента.
      */
-    CUSTOM(
-            "-",
-            1,
-            "-");
+    CUSTOM(1, new CustomTemplate("-", "-"));
 
-    private final String path;
-    private final String botPattern;
     private final int parameterCount;
+    private final Template template;
 
     /**
-     * @param path               Путь к шаблону.
-     * @param parameterCount     Количество вставляемых параметров.
-     * @param botPattern         шаблон в фрмате строки для сообщений через бота.
+     * @param parameterCount количество вставляемых параметров.
+     * @param template класс для обработки шаблона.
      */
-    MessageType(String path, int parameterCount, String botPattern) {
-        this.path = path;
+    MessageType(int parameterCount, Template template) {
         this.parameterCount = parameterCount;
-        this.botPattern = botPattern;
-    }
-
-    public String getPath() {
-        return path;
+        this.template = template;
     }
 
     public int getParameterCount() {
         return parameterCount;
     }
 
-    public String getBotPattern() {
-        return botPattern;
+    public Template getTemplateClass() {
+        return template;
     }
 }

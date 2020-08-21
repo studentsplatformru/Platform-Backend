@@ -33,6 +33,9 @@ public class NotifyServiceTest {
     @Mock
     private TemplateService templateService;
 
+    @Mock
+    private TelegramSender telegramSender;
+
     @InjectMocks
     private NotifyServiceImpl notifyService;
 
@@ -82,6 +85,7 @@ public class NotifyServiceTest {
             User user = new User();
             user.setNotificationType(NotificationType.Email);
             user.setEmail("someemail@email.com");
+            user.setTelegramId("someId");
             users.add(user);
         }
 
@@ -93,6 +97,11 @@ public class NotifyServiceTest {
         doReturn("content path")
                 .when(templateService)
                 .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Email,
+                        "some test");
+
+        doReturn("some test")
+                .when(templateService)
+                .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Telegram,
                         "some test");
 
         notifyService.sendNotification(users, types, MessageType.EMAIL_CONFIRMATION, "some test");
@@ -113,8 +122,11 @@ public class NotifyServiceTest {
                         eq(null)
                 );
 
-        // will throw NoSuchMethodException
-        // + add telegram realization
+        verify(telegramSender, Mockito.times(10))
+                .sendMessage(
+                        eq("someId"),
+                        eq("some test")
+                );
     }
 
     /**
@@ -124,7 +136,16 @@ public class NotifyServiceTest {
     public void testBotNotification() {
         User user = new User();
         user.setNotificationType(NotificationType.Telegram);
-        user.setTelegramId("/someid");
+        user.setTelegramId("/someId");
+
+        doReturn("some test")
+                .when(templateService)
+                .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Telegram,
+                        "some test");
+        doReturn("some test")
+                .when(templateService)
+                .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Email,
+                        "some test");
 
         notifyService.sendNotification(user, MessageType.EMAIL_CONFIRMATION, "some test");
 
@@ -132,8 +153,12 @@ public class NotifyServiceTest {
                 .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Telegram,
                         "some test");
 
-        // will throw NoSuchMethodException
-        // + add telegram realization
+        verify(telegramSender, Mockito.times(1))
+                .sendMessage(
+                        eq("/someId"),
+                        eq("some test")
+                );
+
     }
 
 }

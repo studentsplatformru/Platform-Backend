@@ -12,16 +12,15 @@ import ru.studentsplatform.backend.notification.enumerated.MessageType;
 public interface TemplateService {
 
     /**
-     * Обрабатывает аргументы и по типу сообщения и
-     * возвращает необходимый шаблон.
+     * Обрабатывает аргументы и по типу сообщения и возвращает необходимый шаблон.
      *
-     * @param type Получает {@link MessageType} для отпределения типа шаблона.
+     * @param type Получает {@link MessageType} для определения типа шаблона.
      * @param args Получает на вход необходимые данные для замены в шаблоне.
      * @param notificationType тип уведомления в виде {@link NotificationType}.
-     * @return Сообщение для оптравки через почту.
+     * @return Сообщение для отправки через почту.
      *
      * @author Danila K (karnacevich5323537@gmail.com) (07.08.2020).
      */
-    String getTemplate(MessageType type, NotificationType notificationType, String... args);
+    String getTemplate(MessageType type, NotificationType notificationType, Object... args);
 
 }

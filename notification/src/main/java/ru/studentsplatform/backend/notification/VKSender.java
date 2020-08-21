@@ -1,7 +1,7 @@
 package ru.studentsplatform.backend.notification;
 
 /**
- * Утилитный класс для отправки сообщения через VK.
+ * Вспомогательный класс для отправки сообщения через VK.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (08.08.2020).
  */
