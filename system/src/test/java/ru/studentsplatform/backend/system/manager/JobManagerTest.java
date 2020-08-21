@@ -5,12 +5,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ru.studentsplatform.backend.system.helper.DateUtils;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalUnit;
 import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static ru.studentsplatform.backend.system.helper.DateUtils.getDateFromLocalDateTime;
-import static ru.studentsplatform.backend.system.helper.DateUtils.getLocalDate;
+import static ru.studentsplatform.backend.system.helper.DateUtils.getLocalDateTime;
 
 
 /**
@@ -37,11 +41,11 @@ public class JobManagerTest {
 
         long expectedDelay = 1000L;
 
-        AtomicLong time = new AtomicLong(getDateFromLocalDateTime(getLocalDate()).getTime());
+        AtomicLong time = new AtomicLong(getDateFromLocalDateTime(getLocalDateTime()).getTime());
 
         jobManager.handle(() -> {
 
-            time.addAndGet(-getDateFromLocalDateTime(getLocalDate()).getTime());
+            time.addAndGet(-getDateFromLocalDateTime(getLocalDateTime()).getTime());
 
         }, expectedDelay);
 
@@ -50,8 +54,6 @@ public class JobManagerTest {
         System.out.println(Math.abs(time.get()));
         // не раньше времени задержки
         Assert.assertTrue(Math.abs(time.get()) >= expectedDelay);
-        // не дольше времени задержки с погрешностью в 100 мл
-        Assert.assertTrue(Math.abs(time.get()) < expectedDelay + 100);
     }
 
     /**
@@ -62,25 +64,22 @@ public class JobManagerTest {
 
         int expectedDelay = 1000;
 
-        Calendar calendar = Calendar.getInstance();
 
-        AtomicLong time = new AtomicLong(calendar.getTime().getTime());
+        LocalDateTime localDateTime = getLocalDateTime();
 
-        calendar.add(Calendar.MILLISECOND, expectedDelay);
+        AtomicLong time = new AtomicLong(DateUtils.getDateFromLocalDateTime(localDateTime).getTime());
 
         jobManager.handle(() -> {
 
-            time.addAndGet(-getDateFromLocalDateTime(getLocalDate()).getTime());
+            time.addAndGet(-getDateFromLocalDateTime(getLocalDateTime()).getTime());
 
-        }, calendar.getTime());
+        }, localDateTime.plusSeconds(1));
 
         Thread.sleep(1500L);
 
         System.out.println(Math.abs(time.get()));
         // не раньше времени задержки
         Assert.assertTrue(Math.abs(time.get()) >= expectedDelay);
-        // не дольше времени задержки с погрешностью в 100 мл
-        Assert.assertTrue(Math.abs(time.get()) < expectedDelay + 100);
     }
 
 }

@@ -4,7 +4,7 @@ import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -80,74 +80,74 @@ public interface NotifyService {
 
 
     /**
-     * Метод для для отправки уведомлений пользователям.
+     * Метод для для отправки уведомлений пользователям на определённое время.
      *
      * @param user пользователь для отправки.
      * @param messageType устанавливается необходимый {@link MessageType}.
-     * @param date точная дата отправки сообщения.
+     * @param localDateTime точная дата отправки сообщения.
      * @param args необходимые для подстановки в шаблон значения.
      */
-    void sendSpecificDayNotification(User user, MessageType messageType, Date date, Object... args);
+    void sendPlannedByDateNotification(User user, MessageType messageType, LocalDateTime localDateTime, Object... args);
 
     /**
-     * Метод c определённый типом отправки уведомлений.
+     * Метод для для отправки уведомлений пользователям на определённое время.
      *
      * @param user пользователь для отправки.
      * @param messageType устанавливается необходимый {@link MessageType}.
      * @param notificationType устанавливается необходимый способ отправки уведомления.
-     * @param date точная дата отправки сообщения.
+     * @param localDateTime точная дата отправки сообщения.
      * @param args необходимые для подстановки в шаблон значения.
      */
-    void sendSpecificDayNotification(User user, MessageType messageType,
-                                     NotificationType notificationType, Date date,
+    void sendPlannedByDateNotification(User user, MessageType messageType,
+                                     NotificationType notificationType, LocalDateTime localDateTime,
                                      Object... args);
     /**
-     * Метод для для отправки уведомлений пользователям.
+     * Метод для для отправки уведомлений пользователям на определённое время.
      *
      * @param user пользователь для отправки.
      * @param notificationTypes получаются необходимые способы
      * отправки уведомления.
      * @param messageType тип сообщения в виде {@link MessageType}.
-     * @param date точная дата отправки сообщения.
+     * @param localDateTime точная дата отправки сообщения.
      * @param args необходимые для подстановки в шаблон значения.
      */
-    void sendSpecificDayNotification(User user, List<NotificationType> notificationTypes,
-                                     MessageType messageType, Date date, Object... args);
+    void sendPlannedByDateNotification(User user, List<NotificationType> notificationTypes,
+                                     MessageType messageType, LocalDateTime localDateTime, Object... args);
 
     /**
-     * Метод для для отправки уведомлений пользователям.
+     * Метод для для отправки уведомлений пользователям на определённое время.
      *
      * @param users пользователи для отправки.
      * @param notificationTypes получаются необходимые способы
      * отправки уведомления.
      * @param messageType тип сообщения в виде {@link MessageType}.
-     * @param date точная дата отправки сообщения.
+     * @param localDateTime точная дата отправки сообщения.
      * @param args необходимые для подстановки в шаблон значения.
      */
-    void sendSpecificDayNotification(List<User> users, List<NotificationType> notificationTypes,
-                                     MessageType messageType, Date date, Object... args);
+    void sendPlannedByDateNotification(List<User> users, List<NotificationType> notificationTypes,
+                                     MessageType messageType, LocalDateTime localDateTime, Object... args);
 
     /**
-     * Метод для для отправки уведомлений пользователям.
+     * Метод для для отправки уведомлений пользователям на определённое время.
      *
      * @param users пользователи для отправки.
      * @param notificationType способ отправки уведомления.
      * @param messageType тип сообщения в виде {@link MessageType}.
-     * @param date точная дата отправки сообщения.
+     * @param localDateTime точная дата отправки сообщения.
      * @param args необходимые для подстановки в шаблон значения.
      */
-    void sendSpecificDayNotification(List<User> users, NotificationType notificationType,
-                                      MessageType messageType, Date date, Object... args);
+    void sendPlannedByDateNotification(List<User> users, NotificationType notificationType,
+                                      MessageType messageType, LocalDateTime localDateTime, Object... args);
 
     /**
-     * Метод для для отправки уведомлений пользователям.
+     * Метод для для отправки уведомлений пользователям на определённое время.
      *
      * @param users пользователи для отправки.
      * @param messageType тип сообщения в виде {@link MessageType}.
-     * @param date точная дата отправки сообщения.
+     * @param localDateTime точная дата отправки сообщения.
      * @param args необходимые для подстановки в шаблон значения.
      */
-    void sendSpecificDayNotification(List<User> users, MessageType messageType,
-                                     Date date, Object... args);
+    void sendPlannedByDateNotification(List<User> users, MessageType messageType,
+                                     LocalDateTime localDateTime, Object... args);
 
 }

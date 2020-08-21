@@ -2,6 +2,7 @@ package ru.studentsplatform.backend.notification.templates;
 
 import ru.studentsplatform.backend.entities.model.spbu.SpbuEvent;
 import ru.studentsplatform.backend.notification.util.TemplateUtils;
+import ru.studentsplatform.backend.system.helper.CollectionUtils;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -62,7 +63,7 @@ public class EventsDayTemplate extends AbstractTemplate {
     public String getBotTemplate(Object... args) {
         List<SpbuEvent> events = (List<SpbuEvent>) args[0];
 
-        if (events == null || events.size() == 0) {
+        if (CollectionUtils.empty(events)) {
             throw new IllegalArgumentException("Список с расписанием пустой!");
         }
 

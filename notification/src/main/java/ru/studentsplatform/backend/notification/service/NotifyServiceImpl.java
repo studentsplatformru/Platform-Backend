@@ -9,14 +9,13 @@ import ru.studentsplatform.backend.notification.EMailSender;
 import ru.studentsplatform.backend.notification.NotifyService;
 import ru.studentsplatform.backend.notification.TelegramSender;
 import ru.studentsplatform.backend.notification.TemplateService;
-
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import ru.studentsplatform.backend.system.manager.JobManager;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -163,53 +162,62 @@ public class NotifyServiceImpl implements NotifyService {
      * {@inheritDoc}
      */
     @Override
-    public void sendSpecificDayNotification(User user, MessageType messageType, Date date, Object... args) {
-        jobManager.handle(() -> this.sendNotification(user, messageType, args), date);
+    public void sendPlannedByDateNotification(User user, MessageType messageType,
+                                              LocalDateTime localDateTime, Object... args) {
+        jobManager.handle(() -> this.sendNotification(user, messageType, args), localDateTime);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void sendSpecificDayNotification(User user, MessageType messageType,
-                                            NotificationType notificationType, Date date, Object... args) {
-        jobManager.handle(() -> this.sendNotification(user, messageType, notificationType, args), date);
+    public void sendPlannedByDateNotification(User user, MessageType messageType,
+                                              NotificationType notificationType,
+                                              LocalDateTime localDateTime, Object... args) {
+        jobManager.handle(() -> this.sendNotification(user, messageType, notificationType, args),
+                localDateTime);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void sendSpecificDayNotification(User user, List<NotificationType> notificationTypes,
-                                            MessageType messageType, Date date, Object... args) {
-        jobManager.handle(() -> this.sendNotification(user, notificationTypes, messageType, args), date);
+    public void sendPlannedByDateNotification(User user, List<NotificationType> notificationTypes,
+                                              MessageType messageType, LocalDateTime localDateTime,
+                                              Object... args) {
+        jobManager.handle(
+                () -> this.sendNotification(user, notificationTypes, messageType, args), localDateTime);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void sendSpecificDayNotification(List<User> users, List<NotificationType> notificationTypes,
-                                            MessageType messageType, Date date, Object... args) {
-        jobManager.handle(() -> this.sendNotification(users, notificationTypes, messageType, args), date);
+    public void sendPlannedByDateNotification(List<User> users, List<NotificationType> notificationTypes,
+                                              MessageType messageType, LocalDateTime localDateTime,
+                                              Object... args) {
+        jobManager.handle(
+                () -> this.sendNotification(users, notificationTypes, messageType, args), localDateTime);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void sendSpecificDayNotification(List<User> users, NotificationType notificationType,
-                                            MessageType messageType, Date date, Object... args) {
-        jobManager.handle(() -> this.sendNotification(users, messageType, args), date);
+    public void sendPlannedByDateNotification(List<User> users, NotificationType notificationType,
+                                              MessageType messageType, LocalDateTime localDateTime,
+                                              Object... args) {
+        jobManager.handle(
+                () -> this.sendNotification(users, messageType, args), localDateTime);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void sendSpecificDayNotification(List<User> users, MessageType messageType,
-                                            Date date, Object... args) {
-        jobManager.handle(() -> this.sendNotification(users, messageType, args), date);
+    public void sendPlannedByDateNotification(List<User> users, MessageType messageType,
+                                              LocalDateTime localDateTime, Object... args) {
+        jobManager.handle(() -> this.sendNotification(users, messageType, args), localDateTime);
     }
 
     // отправка сообщения через email

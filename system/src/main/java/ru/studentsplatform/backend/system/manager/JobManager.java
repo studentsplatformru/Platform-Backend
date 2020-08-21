@@ -7,7 +7,6 @@ import ru.studentsplatform.backend.system.helper.DateUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,7 +38,7 @@ public class JobManager {
             public void run() {
                 job.run();
 
-                logger.info("In " + DateUtils.getLocalDate() + " Task done");
+                logger.info("In " + DateUtils.getLocalDateTime() + " Task done");
             }
         };
 
@@ -54,32 +53,30 @@ public class JobManager {
      */
     public void handle(Runnable job, String stringDate) {
 
-        LocalDateTime locateDate =
+        LocalDateTime localDateTime =
                 LocalDateTime.parse(stringDate,
                         DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 
-        Date date = DateUtils.getDateFromLocalDateTime(locateDate);
-
-        this.handle(job, date);
+        this.handle(job, localDateTime);
     }
 
     /**
      * Метод для обработки задачи в конкретное время.
      *
      * @param job Задача для выполнения реализованная в {@link Runnable}.
-     * @param date Дата для выполнения задачи в формате  {@link Date}.
+     * @param localDateTime Дата для выполнения задачи в формате  {@link LocalDateTime}.
      */
-    public void handle(Runnable job, Date date) {
+    public void handle(Runnable job, LocalDateTime localDateTime) {
 
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
                 job.run();
 
-                logger.info("In " + DateUtils.getLocalDate() + " Task done");
+                logger.info("In " + DateUtils.getLocalDateTime() + " Task done");
             }
         };
 
-        timer.schedule(timerTask, date);
+        timer.schedule(timerTask, DateUtils.getDateFromLocalDateTime(localDateTime));
     }
 }

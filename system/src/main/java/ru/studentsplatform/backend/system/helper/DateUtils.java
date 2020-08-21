@@ -1,11 +1,12 @@
 package ru.studentsplatform.backend.system.helper;
 
-import java.time.DayOfWeek;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.DayOfWeek;
+import java.time.Month;
 import java.util.Date;
 
 /**
@@ -24,7 +25,7 @@ public class DateUtils {
 	 *
 	 * @author Danila K (karnacevich5323537@gmail.com) (15.08.2020).
 	 */
-	public static LocalDateTime getLocalDate() {
+	public static LocalDateTime getLocalDateTime() {
 		return LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault());
 	}
 
@@ -34,6 +35,14 @@ public class DateUtils {
 	 */
 	public static Date getDateFromLocalDateTime(LocalDateTime localDateTime) {
 		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+	/**
+	 * @param localDate значение даты в виде {@link LocalDate}
+	 * @return Date текущую дату в своём часовом поясе.
+	 */
+	public static Date getDateFromLocalDate(LocalDate localDate) {
+		return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 	}
 
 	/**
