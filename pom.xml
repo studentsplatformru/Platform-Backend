@@ -357,7 +357,7 @@
     <repositories>
         <repository>
             <id>system-mvn-repo</id>
-            <url>https://raw.github.com/studentsplatformru/</url>
+            <url>https://raw.github.com/studentsplatformru/system</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
