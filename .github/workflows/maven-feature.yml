@@ -1,12 +1,10 @@
 name: Feature Branch
 
 on:
-  push:
-    branches:
-      - 1.0.0
-    branches-ignore:
-      - 'release*'
   pull_request:
+    branches:
+      - '*'
+  push:
     branches:
       - 1.0.0
 
