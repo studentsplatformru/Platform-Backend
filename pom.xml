@@ -31,6 +31,7 @@
         <feign.okHttp.version>10.2.0</feign.okHttp.version>
         <feign.jackson.version>11.0</feign.jackson.version>
         <org.json.version>20200518</org.json.version>
+        <systemapp.version>1.0.0</systemapp.version>
     </properties>
 
     <modules>
@@ -54,6 +55,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>ru.studentsplatform</groupId>
+                <artifactId>system</artifactId>
+                <version>${systemapp.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
@@ -346,4 +353,15 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <repositories>
+        <repository>
+            <id>system-mvn-repo</id>
+            <url>https://raw.github.com/studentsplatformru/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>
