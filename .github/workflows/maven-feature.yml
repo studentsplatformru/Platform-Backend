@@ -3,10 +3,10 @@ name: Feature Branch
 on:
   pull_request:
     branches:
-      - *
+      - '*'
   push:
     branches:
-      - *
+      - '*'
 
 jobs:
   build:
