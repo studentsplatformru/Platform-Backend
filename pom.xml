@@ -359,7 +359,7 @@
         </repository>
         <repository>
             <id>repsy</id>
-            <name>My Private Maven Repositoty on Repsy</name>
+            <name>My public Maven Repositoty on Repsy</name>
             <url>https://repo.repsy.io/mvn/ksergey/studentsplatformru</url>
         </repository>
     </repositories>
@@ -370,7 +370,12 @@
             <properties>
                 <sonar.sources>.</sonar.sources>
                 <sonar.inclusions>src/main/java/**,src/main/resources/**</sonar.inclusions>
-                <sonar.projectKey>studentsplatformru_Platform-Backend</sonar.projectKey>
+                <sonar.projectKey>
+                    studentsplatformru_Platform-Backend
+                </sonar.projectKey>
+                <sonar.moduleKey>
+                    ${project.groupId}:${project.artifactId}
+                </sonar.moduleKey>
                 <sonar.organization>studentsplatformru</sonar.organization>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
             </properties>
