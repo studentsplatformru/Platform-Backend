@@ -354,14 +354,22 @@
         </plugins>
     </reporting>
 
+
     <repositories>
         <repository>
-            <id>system-mvn-repo</id>
-            <url>https://maven.pkg.github.com/studentsplatformru/system</url>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
             <snapshots>
                 <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
             </snapshots>
+        </repository>
+        <repository>
+            <id>github</id>
+            <name>GitHub krylovsergey1999</name>
+            <url>https://maven.pkg.github.com/studentsplatformru/system</url>
         </repository>
     </repositories>
 </project>
