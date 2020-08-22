@@ -23,4 +23,4 @@ jobs:
           repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/studentsplatformru/system" }]'
           servers: '[{ "id": "github", "username": "krylovsergey1999", "password": "${{ secrets.SYSTEM_TOKEN }}" }]'
       - name: Maven Package
-        run: mvn -B clean package -DskipTests
+        run: mvn -e -B clean package -DskipTests
