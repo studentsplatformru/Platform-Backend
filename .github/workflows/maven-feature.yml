@@ -1,9 +1,13 @@
 name: Feature Branch
 
 on:
+  pull_request:
+    branches:
+      - '*'
   push:
-    branches-ignore:
+    branches:
       - '1.0.0'
+    branches-ignore:
       - 'release*'
 
 jobs:
