@@ -31,7 +31,7 @@
         <feign.okHttp.version>10.2.0</feign.okHttp.version>
         <feign.jackson.version>11.0</feign.jackson.version>
         <org.json.version>20200518</org.json.version>
-        <systemapp.version>1.0.0</systemapp.version>
+        <systemapp.version>1.0.1</systemapp.version>
         <code.coverage.exclusions>
             **/ru/studentsplatform/backend/**
         </code.coverage.exclusions>
@@ -358,9 +358,9 @@
             </snapshots>
         </repository>
         <repository>
-            <id>github</id>
-            <name>GitHub krylovsergey1999</name>
-            <url>https://maven.pkg.github.com/studentsplatformru/system</url>
+            <id>repsy</id>
+            <name>My Private Maven Repositoty on Repsy</name>
+            <url>https://repo.repsy.io/mvn/ksergey/studentsplatformru</url>
         </repository>
     </repositories>
 
