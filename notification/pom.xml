@@ -21,7 +21,6 @@
         <dependency>
             <groupId>ru.studentsplatform</groupId>
             <artifactId>system</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <!-- Spring Email -->
         <dependency>
