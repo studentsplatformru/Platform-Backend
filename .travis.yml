@@ -1,6 +1,5 @@
 language: java
 before_install:
   - echo "${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com --username krylovsergey1999 --password-stdin
-
 after_success:
   - bash <(curl -s https://codecov.io/bash)
