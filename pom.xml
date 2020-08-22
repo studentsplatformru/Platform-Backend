@@ -358,9 +358,9 @@
             </snapshots>
         </repository>
         <repository>
-            <id>github</id>
-            <name>GitHub krylovsergey1999</name>
-            <url>https://maven.pkg.github.com/studentsplatformru/system</url>
+            <id>repsy</id>
+            <name>My Private Maven Repositoty on Repsy</name>
+            <url>https://repo.repsy.io/mvn/ksergey/studentsplatformru</url>
         </repository>
     </repositories>
 
