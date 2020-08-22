@@ -371,11 +371,8 @@
                 <sonar.sources>.</sonar.sources>
                 <sonar.inclusions>src/main/java/**,src/main/resources/**</sonar.inclusions>
                 <sonar.projectKey>
-                    studentsplatformru_Platform-Backend
+                    studentsplatformru_Platform-Backend-${project.groupId}:${project.artifactId}
                 </sonar.projectKey>
-                <sonar.moduleKey>
-                    ${project.groupId}:${project.artifactId}
-                </sonar.moduleKey>
                 <sonar.organization>studentsplatformru</sonar.organization>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
             </properties>
