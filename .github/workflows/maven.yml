@@ -28,7 +28,7 @@ jobs:
         uses: whelk-io/maven-settings-xml-action@v11
         with:
           repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/studentsplatformru/system" }]'
-          servers: '[{ "id": "github", "username": "krylovsergey1999", "password": ${{ secrets.SYSTEM_TOKEN }}" }]'
+          servers: '[{ "id": "github", "username": "krylovsergey1999", "password": "${{ secrets.SYSTEM_TOKEN }}" }]'
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
