@@ -3,33 +3,12 @@ name: Feature Branch
 on:
   pull_request:
     branches:
-      - '*'
+      - *
   push:
     branches:
       - 1.0.0
 
 jobs:
-  test:
-    name: Unit Test
-    runs-on: ubuntu-18.04
-
-    steps:
-      - uses: actions/checkout@v1
-      - name: Set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11.0.4
-      - name: maven-settings-xml-action
-        uses: whelk-io/maven-settings-xml-action@v11
-        with:
-          repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/studentsplatformru/system" }]'
-          servers: '[{ "id": "github", "username": "krylovsergey1999", "password": "${{ secrets.SYSTEM_TOKEN }}" }]'
-      - name: Maven Package
-        run: mvn -B clean package -DskipTests
-      - name: Maven Verify
-        run: mvn -B clean verify
-      - name: Build with Maven
-          run: mvn -B clean install --file pom.xml
   build:
     name: Build
     runs-on: ubuntu-18.04
@@ -40,5 +19,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.11
+      - name: maven-settings-xml-action
+          uses: whelk-io/maven-settings-xml-action@v11
+          with:
+            repositories: '[{ "id": "github", "url": "https://maven.pkg.github.com/studentsplatformru/system" }]'
+            servers: '[{ "id": "github", "username": "krylovsergey1999", "password": "${{ secrets.SYSTEM_TOKEN }}" }]'
       - name: Maven Package
         run: mvn -B clean package -DskipTests
