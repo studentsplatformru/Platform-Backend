@@ -31,11 +31,11 @@
         <feign.okHttp.version>10.2.0</feign.okHttp.version>
         <feign.jackson.version>11.0</feign.jackson.version>
         <org.json.version>20200518</org.json.version>
+        <systemapp.version>1.0.0</systemapp.version>
     </properties>
 
     <modules>
         <module>endpoint</module>
-        <module>system</module>
         <module>telegram-bot</module>
         <module>entities</module>
         <module>university</module>
@@ -55,6 +55,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>ru.studentsplatform</groupId>
+                <artifactId>system</artifactId>
+                <version>${systemapp.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
@@ -347,4 +353,23 @@
             </plugin>
         </plugins>
     </reporting>
+
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>github</id>
+            <name>GitHub krylovsergey1999</name>
+            <url>https://maven.pkg.github.com/studentsplatformru/system</url>
+        </repository>
+    </repositories>
 </project>
