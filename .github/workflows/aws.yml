@@ -50,6 +50,9 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+        # Логинимся на DockerHub
+      - name: Login to Github Packages
+        run: echo "${{ secrets.SYSTEM_TOKEN }}" | docker login docker.pkg.github.com --username krylovsergey1999 --password-stdin
       # Логинимся на DockerHub
       - name: Login to DockerHub
         run: echo "${{ secrets.DOCKERHUBPLATFORMBACKEND }}" | docker login -u ksergey1999 --password-stdin
