@@ -39,7 +39,6 @@
 
     <modules>
         <module>endpoint</module>
-        <module>telegram-bot</module>
         <module>entities</module>
         <module>university</module>
         <module>vk-bot</module>
@@ -371,7 +370,7 @@
             <properties>
                 <sonar.sources>.</sonar.sources>
                 <sonar.inclusions>src/main/java/**,src/main/resources/**</sonar.inclusions>
-                <sonar.projectKey>studentsplatformru_System</sonar.projectKey>
+                <sonar.projectKey>studentsplatformru_Platform-Backend</sonar.projectKey>
                 <sonar.organization>studentsplatformru</sonar.organization>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
             </properties>
