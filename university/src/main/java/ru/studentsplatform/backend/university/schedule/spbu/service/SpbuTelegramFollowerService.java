@@ -20,6 +20,11 @@ public interface SpbuTelegramFollowerService {
     TelegramFollower create(Long id, SpbuTeam team);
 
     /**
+     * @param id параметр для поиска.
+     * @return искомая запись.
+     */
+    TelegramFollower getById(Long id);
+    /**
      * @param id уникальный идентификатор пользователя в Telegram.
      */
     void delete(Long id);

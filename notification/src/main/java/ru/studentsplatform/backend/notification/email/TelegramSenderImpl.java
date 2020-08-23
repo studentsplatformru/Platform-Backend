@@ -24,6 +24,8 @@ import java.util.List;
  * Отправляет POST запрос на контроллер в телеграм-боте
  * с сообщением и id пользователя. Используется Json-обёртка
  * и {@link RestTemplate} для отправки.
+ *
+ * @author Danila K (karnacevich5323537@gmail.com) (22.08.2020).
  */
 @Profiled
 @Component

@@ -7,6 +7,7 @@ import ru.studentsplatform.backend.entities.model.user.TelegramFollower;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuTelegramFollowerService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Реализация {@link SpbuTelegramFollowerService}.
@@ -36,6 +37,15 @@ public class SpbuTelegramFollowerServiceImpl implements SpbuTelegramFollowerServ
         follower.setTeam(team);
 
         return followerRepository.save(follower);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TelegramFollower getById(Long id) {
+        Optional<TelegramFollower> optional = followerRepository.findById(id);
+        return optional.orElse(null);
     }
 
     /**
