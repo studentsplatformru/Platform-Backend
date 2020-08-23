@@ -21,7 +21,7 @@ class SpbuEventId implements Serializable {
 @Entity
 @Table(name = "spbu_event")
 @IdClass(SpbuEventId.class)
-public class SpbuEvent {
+public class SpbuEvent implements Comparable<SpbuEvent>{
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -102,5 +102,10 @@ public class SpbuEvent {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
+	}
+
+	@Override
+	public int compareTo(SpbuEvent o) {
+		return this.startTime.compareTo(o.startTime);
 	}
 }

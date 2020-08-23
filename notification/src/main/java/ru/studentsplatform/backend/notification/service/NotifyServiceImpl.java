@@ -3,6 +3,7 @@ package ru.studentsplatform.backend.notification.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import ru.studentsplatform.backend.domain.dto.telegram.TelegramMessageDTO;
 import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.notification.EMailSender;
@@ -220,6 +221,14 @@ public class NotifyServiceImpl implements NotifyService {
         jobManager.handle(() -> this.sendNotification(users, messageType, args), localDateTime);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void sendListMessagesTelegram(List<TelegramMessageDTO> messages){
+        telegramSender.sendMessage(messages);
+    }
+
     // отправка сообщения через email
     private void sendEmail(User user, String message) {
 
@@ -251,7 +260,11 @@ public class NotifyServiceImpl implements NotifyService {
     // отправка сообщения через telegram-бота
     private void sendTelegram(User user, String message) {
 
-        telegramSender.sendMessage(user.getTelegramId(), message);
+        TelegramMessageDTO messageDTO = new TelegramMessageDTO();
+        messageDTO.setId(user.getTelegramId());
+        messageDTO.setText(message);
+
+        telegramSender.sendMessage(messageDTO);
 
     }
 

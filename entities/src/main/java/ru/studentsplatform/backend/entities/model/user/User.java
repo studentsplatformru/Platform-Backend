@@ -37,7 +37,7 @@ public class User extends BaseEntity {
 	private String password;
 
 	@Column(name = "telegram_id")
-	private String telegramId;
+	private Long telegramId;
 
 	@Column(name = "vk_id")
 	private String vkId;
@@ -118,11 +118,11 @@ public class User extends BaseEntity {
 		this.disciplines = disciplines;
 	}
 
-	public String getTelegramId() {
+	public Long getTelegramId() {
 		return telegramId;
 	}
 
-	public void setTelegramId(String telegramId) {
+	public void setTelegramId(Long telegramId) {
 		this.telegramId = telegramId;
 	}
 

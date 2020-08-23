@@ -1,5 +1,6 @@
 package ru.studentsplatform.backend.notification;
 
+import ru.studentsplatform.backend.domain.dto.telegram.TelegramMessageDTO;
 import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
@@ -150,4 +151,10 @@ public interface NotifyService {
     void sendPlannedByDateNotification(List<User> users, MessageType messageType,
                                      LocalDateTime localDateTime, Object... args);
 
+    /**
+     * Метод для отправки пакета сообщений telegram боту.
+     * Реализован для "будильника".
+     * @param messages список сообщений для Telegram.
+     */
+    void sendListMessagesTelegram(List<TelegramMessageDTO> messages);
 }
