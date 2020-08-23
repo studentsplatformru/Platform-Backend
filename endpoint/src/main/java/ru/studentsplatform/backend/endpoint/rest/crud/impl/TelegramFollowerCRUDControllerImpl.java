@@ -1,6 +1,5 @@
 package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,11 +9,15 @@ import ru.studentsplatform.backend.endpoint.mapper.TelegramFollowerMapper;
 import ru.studentsplatform.backend.endpoint.rest.crud.TelegramFollowerCRUDController;
 import ru.studentsplatform.backend.entities.model.spbu.SpbuTeam;
 import ru.studentsplatform.backend.entities.model.user.TelegramFollower;
+import ru.studentsplatform.backend.service.exception.ServiceExceptionReason;
+import ru.studentsplatform.backend.system.exception.core.BusinessException;
 import ru.studentsplatform.backend.system.exception.core.Fault;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import ru.studentsplatform.backend.university.schedule.spbu.service.SpbuTelegramFollowerService;
 
 import java.util.List;
+
+import static ru.studentsplatform.backend.system.helper.ControllerUtils.handleExceptions;
 
 /**
  * @author Danila K (karnacevich5323537@gmail.com) (22.08.2020).
@@ -58,11 +61,13 @@ public class TelegramFollowerCRUDControllerImpl implements TelegramFollowerCRUDC
      */
     @Override
     public ResponseEntity<TelegramFollowerDTO> getById(Long id) throws Fault {
-        TelegramFollower follower = telegramFollowerService.getById(id);
-        if (follower == null) {
-            throw new Fault( "Пользователя с id=" + id + " не существует", HttpStatus.NOT_FOUND);
-        }
-        return ResponseEntity.ok(mapper.telegramFollowerToTelegramFollowerDTO(follower));
+        return handleExceptions(() -> {
+            TelegramFollower follower = telegramFollowerService.getById(id);
+            if (follower == null) {
+                throw new BusinessException(ServiceExceptionReason.USER_NOT_FOUND, id);
+            }
+            return ResponseEntity.ok(mapper.telegramFollowerToTelegramFollowerDTO(follower));
+        });
     }
 
     /**

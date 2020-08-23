@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -84,7 +85,7 @@ public class AlarmController {
             }
 
             // сортируем расписание для выдачи в правильном порядке
-            Collections.sort(eventsByDay);
+            eventsByDay.sort(Comparator.comparing(SpbuEvent::getStartTime));
 
             // получение конкретной даты отправки
             LocalDateTime sendTime = eventsByDay.get(0)
@@ -125,3 +126,5 @@ public class AlarmController {
         return messages;
     }
 }
+
+
