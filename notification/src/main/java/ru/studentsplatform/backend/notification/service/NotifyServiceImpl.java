@@ -225,8 +225,8 @@ public class NotifyServiceImpl implements NotifyService {
      * {@inheritDoc}
      */
     @Override
-    public void sendListMessagesTelegram(List<TelegramMessageDTO> messages){
-        telegramSender.sendMessage(messages);
+    public void sendListMessagesTelegram(List<TelegramMessageDTO> messages, LocalDateTime sendTime){
+        jobManager.handle(() -> telegramSender.sendMessage(messages), sendTime);
     }
 
     // отправка сообщения через email

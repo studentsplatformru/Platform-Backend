@@ -1,18 +1,17 @@
-package ru.studentsplatform.backend.notification.email;
+package ru.studentsplatform.backend.notification.sender;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import ru.studentsplatform.backend.domain.dto.telegram.TelegramMessageDTO;
 import ru.studentsplatform.backend.notification.TelegramSender;
+import ru.studentsplatform.backend.notification.util.MessageWrapper;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 
 import java.util.Collections;
@@ -51,6 +50,7 @@ public class TelegramSenderImpl implements TelegramSender {
      * {@inheritDoc}
      */
     @Override
+    @Async
     public void sendMessage(List<TelegramMessageDTO> messages) {
 
         HttpHeaders headers = new HttpHeaders();
@@ -67,11 +67,4 @@ public class TelegramSenderImpl implements TelegramSender {
             logger.error("Telegram message not send.");
         }
     }
-}
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class MessageWrapper{
-    private List<TelegramMessageDTO> messages;
 }

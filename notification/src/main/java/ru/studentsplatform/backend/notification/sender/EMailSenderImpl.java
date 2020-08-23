@@ -1,4 +1,4 @@
-package ru.studentsplatform.backend.notification.email;
+package ru.studentsplatform.backend.notification.sender;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

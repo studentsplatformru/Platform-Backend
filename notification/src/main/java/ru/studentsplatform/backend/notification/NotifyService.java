@@ -155,6 +155,7 @@ public interface NotifyService {
      * Метод для отправки пакета сообщений telegram боту.
      * Реализован для "будильника".
      * @param messages список сообщений для Telegram.
+     * @param sendTime время запланированной отправки.
      */
-    void sendListMessagesTelegram(List<TelegramMessageDTO> messages);
+    void sendListMessagesTelegram(List<TelegramMessageDTO> messages, LocalDateTime sendTime);
 }
