@@ -1,7 +1,15 @@
 package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import ru.studentsplatform.backend.domain.dto.telegram.TelegramFollowerDTO;
 import ru.studentsplatform.backend.domain.repository.spbu.SpbuTeamRepository;
 import ru.studentsplatform.backend.endpoint.mapper.TelegramFollowerMapper;
@@ -19,7 +27,7 @@ import java.util.List;
 import static ru.studentsplatform.backend.system.helper.ControllerUtils.handleExceptions;
 
 /**
- * Реализация {@link TelegramFollowerCRUDController}
+ * Реализация {@link TelegramFollowerCRUDController}.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (23.08.2020).
  */

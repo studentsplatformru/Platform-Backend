@@ -6,7 +6,7 @@ import ru.studentsplatform.backend.entities.model.user.TelegramFollower;
 import java.util.List;
 
 /**
- * CRUD для {@link TelegramFollower}
+ * CRUD для {@link TelegramFollower}.
  *
  * @author Danila K (karnacevich5323537@gmail.com) (22.08.2020).
  */

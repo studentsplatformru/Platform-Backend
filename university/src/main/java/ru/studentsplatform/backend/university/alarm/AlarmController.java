@@ -54,20 +54,20 @@ public class AlarmController {
      * Запуск метода в 5 утра каждый день.
      */
     @Scheduled(cron = "0 0 5 * * *")
-    public void activateEventNotifyAlarm(){
+    public void activateEventNotifyAlarm() {
         List<TelegramFollower> followers = followerService.getAll();
         LocalDate date = LocalDate.now();
         String template;
 
-        while (!followers.isEmpty()){
+        while (!followers.isEmpty()) {
             // получение названия группы
             SpbuTeam team = followers.get(0).getTeam();
 
             List<TelegramFollower> followerToSend = new ArrayList<>();
 
             // получение подписчиков с одинаковой группой
-            for (TelegramFollower f : followers){
-                if (f.getTeam().equals(team)){
+            for (TelegramFollower f : followers) {
+                if (f.getTeam().equals(team)) {
                     followerToSend.add(f);
                 }
             }
@@ -111,7 +111,7 @@ public class AlarmController {
      * @param template сообщение для отправки.
      * @return пакет сообщений для отправки через Telegram.
      */
-    private List<TelegramMessageDTO> mappedIntoDTO(List<TelegramFollower> followers, String template){
+    private List<TelegramMessageDTO> mappedIntoDTO(List<TelegramFollower> followers, String template) {
         List<TelegramMessageDTO> messages = new ArrayList<>();
 
         for (TelegramFollower follower : followers) {
