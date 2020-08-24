@@ -1,8 +1,7 @@
 package ru.studentsplatform.backend.endpoint.rest.crud.impl;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.studentsplatform.backend.domain.dto.telegram.TelegramFollowerDTO;
 import ru.studentsplatform.backend.domain.repository.spbu.SpbuTeamRepository;
 import ru.studentsplatform.backend.endpoint.mapper.TelegramFollowerMapper;
@@ -20,7 +19,9 @@ import java.util.List;
 import static ru.studentsplatform.backend.system.helper.ControllerUtils.handleExceptions;
 
 /**
- * @author Danila K (karnacevich5323537@gmail.com) (22.08.2020).
+ * Реализация {@link TelegramFollowerCRUDController}
+ *
+ * @author Danila K (karnacevich5323537@gmail.com) (23.08.2020).
  */
 @Profiled
 @RestController
@@ -49,8 +50,9 @@ public class TelegramFollowerCRUDControllerImpl implements TelegramFollowerCRUDC
     /**
      * {@inheritDoc}
      */
+    @PostMapping("/create")
     @Override
-    public ResponseEntity<TelegramFollowerDTO> create(TelegramFollowerDTO telegramFollowerDTO) {
+    public ResponseEntity<TelegramFollowerDTO> create(@RequestBody TelegramFollowerDTO telegramFollowerDTO) {
         SpbuTeam spbuTeam = teamRepository.findByName(telegramFollowerDTO.getTeamName());
         TelegramFollower follower = telegramFollowerService.create(telegramFollowerDTO.getId(), spbuTeam);
         return ResponseEntity.ok(mapper.telegramFollowerToTelegramFollowerDTO(follower));
@@ -59,8 +61,9 @@ public class TelegramFollowerCRUDControllerImpl implements TelegramFollowerCRUDC
     /**
      * {@inheritDoc}
      */
+    @GetMapping("/{id}")
     @Override
-    public ResponseEntity<TelegramFollowerDTO> getById(Long id) throws Fault {
+    public ResponseEntity<TelegramFollowerDTO> getById(@PathVariable Long id) throws Fault {
         return handleExceptions(() -> {
             TelegramFollower follower = telegramFollowerService.getById(id);
             if (follower == null) {
@@ -73,6 +76,7 @@ public class TelegramFollowerCRUDControllerImpl implements TelegramFollowerCRUDC
     /**
      * {@inheritDoc}
      */
+    @GetMapping
     @Override
     public ResponseEntity<List<TelegramFollowerDTO>> getAll() {
         return ResponseEntity.ok(
@@ -83,7 +87,9 @@ public class TelegramFollowerCRUDControllerImpl implements TelegramFollowerCRUDC
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<TelegramFollowerDTO> update(TelegramFollowerDTO telegramFollowerDTO, Long id) {
+    @PutMapping("/{id}")
+    public ResponseEntity<TelegramFollowerDTO> update(@RequestBody TelegramFollowerDTO telegramFollowerDTO,
+                                                      @PathVariable Long id) {
         telegramFollowerService.delete(id);
         return this.create(telegramFollowerDTO);
     }
@@ -92,7 +98,8 @@ public class TelegramFollowerCRUDControllerImpl implements TelegramFollowerCRUDC
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<Boolean> delete(Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable Long id) {
         telegramFollowerService.delete(id);
         return ResponseEntity.ok(true);
     }

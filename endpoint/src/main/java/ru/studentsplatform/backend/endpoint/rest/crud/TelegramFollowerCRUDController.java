@@ -6,6 +6,11 @@ import ru.studentsplatform.backend.system.exception.core.Fault;
 
 import java.util.List;
 
+/**
+ * Контроллер предоставляющий API Telegram Follower.
+ *
+ * @author Danila K (karnacevich5323537@gmail.com) (23.08.2020).
+ */
 public interface TelegramFollowerCRUDController extends AbstractCRUDController<TelegramFollowerDTO> {
 
     String BASE_URL = AbstractCRUDController.BASE_URL + "/telegram/follower";

@@ -26,12 +26,12 @@
     
     -GET
     - **http://localhost:8080/api/schedule_user_cell/getFiltered** - *Получить сведения о scheduleUserCell по заданным фильтрам*
-    - **http://localhost:8080/api/schedule_user_cell/filteredPercentage** - *Получить сведения о процентноим отношении посещенных занятий по заданным фильрам*
+    - **http://localhost:8080/api/schedule_user_cell/filteredPercentage** - *Получить сведения о процентном отношении посещенных занятий по заданным фильтрам*
     
 - SPBU API
     -GET
     - **http://localhost:8080/spbu/divisions** - *Получить список направлений подготовки*
-    - **http://localhost:8080/spbu/division/MATH/programs** - *Получить список програм обучения для направления MATH*
+    - **http://localhost:8080/spbu/division/MATH/programs** - *Получить список программ обучения для направления MATH*
     - **http://localhost:8080/spbu/program/10035/groups** - *Получить список студенческих групп для программы обучения с Id 10035*
     - **http://localhost:8080/spbu/group/17.Б09-ю/events** - *Получить сведения о занятиях на текущую неделю для группы 17.Б09-ю*
     - **http://localhost:8080/spbu/group/18.М02-х/events/25-03-2020** - *Получить сведения о занятиях группы 18.М02-х за 25-03-2020*
@@ -39,8 +39,18 @@
     - **http://localhost:8080/spbu/division/MATH/saveAllGroups** - *Записать все группы направления MATH в БД*
     - **http://localhost:8080/spbu/saveAllGroups** - *Записать все группы в БД*
     - **http://localhost:8080/spbu/stressTest/100** - *Произвести стресс-тест соединения к БД СПБГУ на 100 запросов*
-
-   
     
+- Telegram Follower API
+ - GET
+ - **http://localhost:8080/api/telegram/follower** - *Получить список всех подписчиков*
+ - **http://localhost:8080/api/telegram/follower/{id}** - *Получить подписчика по id*
+ - POST
+ - **http://localhost:8080/api/telegram/follower/create** - *Создать сущность подписчика. Тело вызова принимается 
+ в виде сущности TelegramFollowerDTO*
+ - PUT
+ - **http://localhost:8080/api/telegram/follower/id** - *Заменить поля в сущности подписчика с определённым id.
+ Тело вызова принимается в виде сущности TelegramFollowerDTO*
+ -DELETE
+ - **http://localhost:8080/api/telegram/follower/id** - *Удаляет запись с id.
 
     
