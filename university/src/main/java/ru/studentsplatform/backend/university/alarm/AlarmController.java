@@ -98,7 +98,7 @@ public class AlarmController {
                             eventsByDay);
 
             // преобразование в сущность для отправки
-            List<TelegramMessageDTO> telegramMessageDTOS = this.mappedIntoDTO(followerToSend, template);
+            List<TelegramMessageDTO> telegramMessageDTOS = mappedIntoDTO(followerToSend, template);
 
             // отправка
             notifyService.sendListMessagesTelegram(telegramMessageDTOS, sendTime);
@@ -111,7 +111,7 @@ public class AlarmController {
      * @param template сообщение для отправки.
      * @return пакет сообщений для отправки через Telegram.
      */
-    private List<TelegramMessageDTO> mappedIntoDTO(List<TelegramFollower> followers, String template) {
+    private static List<TelegramMessageDTO> mappedIntoDTO(List<TelegramFollower> followers, String template) {
         List<TelegramMessageDTO> messages = new ArrayList<>();
 
         for (TelegramFollower follower : followers) {
