@@ -31,12 +31,14 @@
         <feign.okHttp.version>10.2.0</feign.okHttp.version>
         <feign.jackson.version>11.0</feign.jackson.version>
         <org.json.version>20200518</org.json.version>
+        <systemapp.version>1.0.1</systemapp.version>
+        <code.coverage.exclusions>
+            **/ru/studentsplatform/backend/**
+        </code.coverage.exclusions>
     </properties>
 
     <modules>
         <module>endpoint</module>
-        <module>system</module>
-        <module>telegram-bot</module>
         <module>entities</module>
         <module>university</module>
         <module>vk-bot</module>
@@ -55,6 +57,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>ru.studentsplatform</groupId>
+                <artifactId>system</artifactId>
+                <version>${systemapp.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
@@ -277,28 +285,6 @@
 
             </plugin>
 
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <goals>
-                            <goal>report-aggregate</goal>
-                        </goals>
-                        <phase>test</phase>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- Плагин для добавления просмотра ревизии сборки-->
             <plugin>
                 <groupId>pl.project13.maven</groupId>
@@ -321,21 +307,32 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
     <reporting>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.9</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -347,4 +344,61 @@
             </plugin>
         </plugins>
     </reporting>
+
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>repsy</id>
+            <name>My public Maven Repositoty on Repsy</name>
+            <url>https://repo.repsy.io/mvn/ksergey/studentsplatformru</url>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <properties>
+                <sonar.sources>.</sonar.sources>
+                <sonar.inclusions>src/main/java/**,src/main/resources/**</sonar.inclusions>
+                <sonar.moduleKey>
+                    ${project.groupId}:${project.artifactId}
+                </sonar.moduleKey>
+                <sonar.projectKey>
+                    studentsplatformru_Platform-Backend-${project.groupId}:${project.artifactId}
+                </sonar.projectKey>
+                <sonar.organization>studentsplatformru</sonar.organization>
+                <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+            </properties>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                        <version>3.7.0.1746</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sonar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
