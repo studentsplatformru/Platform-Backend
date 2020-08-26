@@ -76,10 +76,8 @@ public class SpbuTeamServiceImpl implements SpbuTeamService {
 	@Override
 	public void saveAllAliasGroups(String alias) {
 		log.info("Initiating groups saving for alias: {}", alias);
-		new Thread(() -> {
-				iteratePrograms(alias);
-				log.info("Finished groups saving for alias: {}!", alias);
-		}).start();
+		iteratePrograms(alias);
+		log.info("Finished groups saving for alias: {}!", alias);
 	}
 
 	/**
@@ -87,13 +85,13 @@ public class SpbuTeamServiceImpl implements SpbuTeamService {
 	 *
 	 * @param alias Сокращённое наименования направления
 	 */
-	private synchronized void iteratePrograms(String alias) throws feign.RetryableException {
+	private void iteratePrograms(String alias) throws feign.RetryableException {
 		for (SpbuStudyProgramDTO program : unwrapService.studyProgramUnwrap(
 				FeignConfig.getSpbuProxy().getProgramLevels(alias))) {
 			try {
 				saveGroupList(FeignConfig.getSpbuProxy()
 						.getGroups(program.getProgramId().toString()).getGroups(), alias);
-			} catch (NullPointerException | InterruptedException ignored) {
+			} catch (NullPointerException e) {
 				log.error("Error occurred while group saving!");
 			}
 		}
@@ -104,15 +102,12 @@ public class SpbuTeamServiceImpl implements SpbuTeamService {
 	 *
 	 * @param groups список групп для сохранения
 	 * @param alias  сокращённое наименование направления
-	 * @throws InterruptedException метод имеет задержку выполнения, требуется обработка
 	 */
-	private synchronized void saveGroupList(List<SpbuTeamDTO> groups, String alias) throws InterruptedException {
+	private void saveGroupList(List<SpbuTeamDTO> groups, String alias) {
 		for (SpbuTeamDTO group : groups) {
 			log.info("Saving group {}...", group.getName());
 			group.setAlias(alias);
 			create(mapper.spbuTeamDTOToSpbuTeam(group));
-
-			Thread.sleep(100);
 		}
 	}
 
