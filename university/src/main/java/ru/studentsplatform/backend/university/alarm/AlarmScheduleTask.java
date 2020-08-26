@@ -26,7 +26,7 @@ import java.util.List;
  * @author Danila K (karnacevich5323537@gmail.com) (23.08.2020).
  */
 @Controller
-public class AlarmController {
+public class AlarmScheduleTask {
 
     private final SpbuTelegramFollowerService followerService;
 
@@ -42,8 +42,8 @@ public class AlarmController {
      * @param templateService сервис для получения сообщения.
      * @param eventRepository сервис для получения занятий.
      */
-    public AlarmController(NotifyService notifyService, SpbuTelegramFollowerService followerService,
-                           TemplateService templateService, SpbuEventRepository eventRepository) {
+    public AlarmScheduleTask(NotifyService notifyService, SpbuTelegramFollowerService followerService,
+                             TemplateService templateService, SpbuEventRepository eventRepository) {
         this.notifyService = notifyService;
         this.followerService = followerService;
         this.templateService = templateService;
