@@ -7,6 +7,8 @@ import ru.studentsplatform.backend.domain.dto.spbu.SpbuDivisionDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuEventDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuStudyProgramDTO;
 import ru.studentsplatform.backend.domain.dto.spbu.SpbuTeamDTO;
+import ru.studentsplatform.backend.domain.repository.spbu.SpbuEventRepository;
+import ru.studentsplatform.backend.entities.model.spbu.SpbuTeam;
 import ru.studentsplatform.backend.service.proxy.FeignConfig;
 import ru.studentsplatform.backend.system.log.tree.annotation.Profiled;
 import ru.studentsplatform.backend.university.schedule.spbu.mapper.SpbuEventMapper;
@@ -29,6 +31,8 @@ import java.util.List;
 @RequestMapping("/spbu")
 public class SpbuDataControllerImpl implements SpbuDataController {
 
+	private final SpbuEventRepository repository;
+
 	private final SpbuTeamService teamService;
 
 	private final SpbuUnwrapService unwrapService;
@@ -46,11 +50,13 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 	 * @param utilService	Сервис SpbuUtil
 	 * @param mapper		Маппер SpbuEvent
 	 */
-	public SpbuDataControllerImpl(SpbuTeamService teamService,
+	public SpbuDataControllerImpl(SpbuEventRepository repository,
+								  SpbuTeamService teamService,
 								  SpbuUnwrapService unwrapService,
 								  SpbuEventService eventService,
 								  SpbuUtilService utilService,
 								  SpbuEventMapper mapper) {
+		this.repository = repository;
 		this.teamService = teamService;
 		this.unwrapService = unwrapService;
 		this.eventService = eventService;
@@ -102,7 +108,8 @@ public class SpbuDataControllerImpl implements SpbuDataController {
 
 	@Override
 	public ResponseEntity<List<SpbuEventDTO>> getEventsByDay(String groupName, LocalDate day) {
-		var dtos = mapper.listSpbuEventToSpbuEventDTO(eventService.getEventsByDay(groupName, day));
+		SpbuTeam team = teamService.getByName(groupName);
+		var dtos = mapper.listSpbuEventToSpbuEventDTO(repository.findByDateAndTeam(day, team));
 		return ResponseEntity.ok(dtos);
 	}
 
