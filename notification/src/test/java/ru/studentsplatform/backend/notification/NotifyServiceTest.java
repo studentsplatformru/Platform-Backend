@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import ru.studentsplatform.backend.domain.dto.telegram.TelegramMessageDTO;
 import ru.studentsplatform.backend.entities.model.enums.NotificationType;
 import ru.studentsplatform.backend.entities.model.user.User;
 import ru.studentsplatform.backend.notification.enumerated.MessageType;
@@ -13,9 +14,10 @@ import ru.studentsplatform.backend.notification.service.NotifyServiceImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -85,7 +87,7 @@ public class NotifyServiceTest {
             User user = new User();
             user.setNotificationType(NotificationType.Email);
             user.setEmail("someemail@email.com");
-            user.setTelegramId("someId");
+            user.setTelegramId(123L);
             users.add(user);
         }
 
@@ -122,11 +124,12 @@ public class NotifyServiceTest {
                         eq(null)
                 );
 
+        TelegramMessageDTO dto = new TelegramMessageDTO();
+        dto.setId(123L);
+        dto.setText("some test");
+
         verify(telegramSender, Mockito.times(10))
-                .sendMessage(
-                        eq("someId"),
-                        eq("some test")
-                );
+                .sendMessage(dto);
     }
 
     /**
@@ -136,7 +139,7 @@ public class NotifyServiceTest {
     public void testBotNotification() {
         User user = new User();
         user.setNotificationType(NotificationType.Telegram);
-        user.setTelegramId("/someId");
+        user.setTelegramId(123L);
 
         doReturn("some test")
                 .when(templateService)
@@ -153,11 +156,12 @@ public class NotifyServiceTest {
                 .getTemplate(MessageType.EMAIL_CONFIRMATION, NotificationType.Telegram,
                         "some test");
 
+        TelegramMessageDTO dto = new TelegramMessageDTO();
+        dto.setId(123L);
+        dto.setText("some test");
+
         verify(telegramSender, Mockito.times(1))
-                .sendMessage(
-                        eq("/someId"),
-                        eq("some test")
-                );
+                .sendMessage(dto);
 
     }
 

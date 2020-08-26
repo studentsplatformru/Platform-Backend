@@ -5,6 +5,7 @@ target/
 !**/src/test/**
 log
 *.log
+LOG_FILE_IS_UNDEFINED
 
 ### STS ###
 .apt_generated

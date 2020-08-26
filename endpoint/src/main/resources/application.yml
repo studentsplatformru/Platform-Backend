@@ -42,7 +42,7 @@ spring:
     username: studentplatform.no.reply@gmail.com
     port: 465
     protocol: smtps
-# зависимости для избедания блокировки потока
+# зависимости для избежания блокировки потока
     properties:
       mail:
         smtp:
@@ -53,6 +53,7 @@ spring:
 #must be false in production
 mail:
  debug: true
+
 feign:
   okhttp:
     enabled: true

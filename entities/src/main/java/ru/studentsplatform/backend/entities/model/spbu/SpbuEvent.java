@@ -103,4 +103,5 @@ public class SpbuEvent {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+
 }
