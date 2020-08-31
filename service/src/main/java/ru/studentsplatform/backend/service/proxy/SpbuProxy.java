@@ -23,7 +23,7 @@ public interface SpbuProxy {
 	 *
 	 * @return Список DTO програм обучения
 	 */
-	@GetMapping("study/divisions/")
+	@GetMapping("study/divisions")
 	List<SpbuDivisionDTO> getDivisions();
 
 	/**
