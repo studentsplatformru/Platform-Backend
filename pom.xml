@@ -329,6 +329,8 @@
                 </executions>
             </plugin>
         </plugins>
+
+        <!--Позволяет Maven манипулировать данными в ресурсах endpoint (root)-->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>

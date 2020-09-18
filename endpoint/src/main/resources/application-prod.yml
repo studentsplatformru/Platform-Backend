@@ -1,0 +1,70 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  endpoint:
+    health:
+      show-details: always
+
+spring:
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/mainDB
+    username: postgres
+    password: password256
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    generate-ddl: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: false
+  # для миграции
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+    baseline-version: 0
+
+  # для обработки 404
+  mvc:
+    throw-exception-if-no-handler-found: true
+  #properties form EMailSender
+  mail:
+    host: smtp.gmail.com
+    #    here must be application mail password
+    password: test789test
+    #    here must be application mail username
+    username: studentplatform.no.reply@gmail.com
+    port: 465
+    protocol: smtps
+    # зависимости для избежания блокировки потока
+    properties:
+      mail:
+        smtp:
+          timeout: 3000
+          writetimeout: 5000
+          connectiontimeout: 5000
+
+  profiles:
+    active: prod
+mail:
+  debug: true
+
+feign:
+  okhttp:
+    enabled: true
+
+
+logging:
+  file:
+    name: "log"
+  config: "classpath:logback-spring.xml"
+
+#telegram bot url
+telegrambot:
+  url : "http://localhost:8000"
