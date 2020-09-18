@@ -21,6 +21,8 @@ jobs:
           java-version: 11.0.4
       - name: Maven Package
         # Параметр -P с указанием профиля prod переключает активный профиль.
+        # -Pdev для использования профиля dev
+        # -Ptest для использования профиля test
         run: mvn -B clean package -Pprod -DskipTests
       - name: Maven Verify
         run: mvn -B clean verify

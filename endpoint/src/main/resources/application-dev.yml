@@ -12,8 +12,8 @@ spring:
   datasource:
     platform: postgres
     url: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/devDB
-    username: postgres
-    password: password256
+    username: devAdmin
+    password: ${ }
     driver-class-name: org.postgresql.Driver
 
   jpa:

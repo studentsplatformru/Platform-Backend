@@ -330,13 +330,7 @@
             </plugin>
         </plugins>
 
-        <!--Позволяет Maven манипулировать данными в ресурсах endpoint (root)-->
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
+
     </build>
 
     <reporting>
@@ -377,7 +371,6 @@
             <id>test</id>
             <properties>
                 <spring.profiles.active>test</spring.profiles.active>
-                <spring.datasource.url>jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/testDB</spring.datasource.url>
             </properties>
         </profile>
 
@@ -388,7 +381,6 @@
             </activation>
             <properties>
                 <spring.profiles.active>dev</spring.profiles.active>
-                <spring.datasource.url>jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/devDB</spring.datasource.url>
             </properties>
         </profile>
 
@@ -396,7 +388,6 @@
             <id>prod</id>
             <properties>
                 <spring.profiles.active>prod</spring.profiles.active>
-                <spring.datasource.url>jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/mainDB</spring.datasource.url>
             </properties>
         </profile>
 
