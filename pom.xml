@@ -329,8 +329,14 @@
                 </executions>
             </plugin>
         </plugins>
-
-
+        <!--Позволяет Maven заменить плейсхолдер в application.yml (@spring.profiles.active@) на имя текущего профиля.
+        Не требует уточнения модуля, так как endpoint является корневым (root)-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <reporting>
