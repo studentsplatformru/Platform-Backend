@@ -13,7 +13,7 @@ spring:
     platform: postgres
     url: jdbc:postgresql://studplatform-database.ctzczhzrzupg.eu-west-2.rds.amazonaws.com/testDB
     username: testAdmin
-    password: ${{ secrets.DB_TEST_PASS }}
+    password: ArthurKnight
     driver-class-name: org.postgresql.Driver
 
   jpa:
