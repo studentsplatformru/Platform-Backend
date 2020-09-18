@@ -12,6 +12,7 @@ jobs:
     
     # Запускаем и unit + тесты интеграции
     # Поэтому в -Pintegration-test команду Maven CLI был добавлен параметр in mvn -B clean verify -Pintegration-test.
+    # В процессе сборки активный профиль проекта будет переключен в prod благодаря параметру -P.
     steps:
       - uses: actions/checkout@v1
       - name: Set up JDK 11
@@ -19,7 +20,10 @@ jobs:
         with:
           java-version: 11.0.4
       - name: Maven Package
-        run: mvn -B clean package -DskipTests
+        # Параметр -P с указанием профиля prod переключает активный профиль.
+        # -Pdev для использования профиля dev
+        # -Ptest для использования профиля test
+        run: mvn -B clean package -Pprod -DskipTests
       - name: Maven Verify
         run: mvn -B clean verify
 
