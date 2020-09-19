@@ -11,11 +11,31 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 
 class SpbuEventId implements Serializable {
 	private String team;
 	private LocalDate date;
 	private LocalTime startTime;
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		SpbuEventId that = (SpbuEventId) o;
+		return Objects.equals(team, that.team)
+				&& Objects.equals(date, that.date)
+				&& Objects.equals(startTime, that.startTime);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(team, date, startTime);
+	}
 }
 
 @Entity
