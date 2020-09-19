@@ -1,5 +1,8 @@
 spring:
+  application:
+    name: StudentPlatform
+  jpa:
+    open-in-view: false
   profiles:
 #   PlaceHolder для имени активного профиля. Транслируется из главного POM. Позволяет выбрать активный application.yml
     active: @spring.profiles.active@
-
